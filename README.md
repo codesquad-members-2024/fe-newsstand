@@ -1,1 +1,1 @@
-# fe-newsstand
+# fe-newsstand (frontend)
