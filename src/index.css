@@ -5,6 +5,10 @@ body {
     padding: 0;
 }
 
+a.news-stand-box:hover {
+    cursor: pointer;
+}
+
 .main {
     display: flex;
     flex-direction: column;

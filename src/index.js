@@ -37,9 +37,15 @@ function NewsStand() {
         `
     };
 
+    const setEventHandler = () => {
+        const newStandMainLogo = document.querySelector(".news-stand-box");
+        newStandMainLogo.addEventListener("click", () => location.reload())
+    }
+
     const main = () => {
         renderCompanyLogo();
         renderCurrentDate();
+        setEventHandler()
     };
     return { main, renderCurrentDate };
 }
