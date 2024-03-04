@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>뉴스스탠드</title>
     <link rel="stylesheet" href="src/index.css">
 </head>
+
 <body>
-    <script src="src/index.js"></script>
+    <div class="main">
+        <header class="header-box">
+            <div class="news-stand-box">
+                <img class="newspaper" src="/static/imoge/newspaper.png">
+                <div class="news-stand-message">뉴스스탠드</div>
+            </div>
+            <div class="date">2024. 03. 04. 월요일</div>
+        </header>
+        <div class="top-news-box">
+            <div class="first-top-news">
+                <div class="company-name">연합뉴스</div>
+                <div class="detail">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
+            </div>
+            <div class="second-top-news">
+                <div class="company-name">연합뉴스</div>
+                <div class="detail">[속보] 與최고위원 본경선, 김병민·김용태·김재원·민영삼</div>
+            </div>
+        </div>
+        <nav>
+            <div>
+                <div class="all-company">전체 언론사</div>
+                <div class="subscribe-company">내가 구독한 언론사</div>
+            </div>
+            <div>
+                <img src="/static/imoge/Symbol.png">
+                <img src="/static/imoge/grid-view.png">
+            </div>
+        </nav>
+        <main class="company-list-box">
+            <ul class="company-display">
+            </ul>
+        </main>
+    </div>
+    <script src="src/index.js" type="module"></script>
 </body>
+
 </html>

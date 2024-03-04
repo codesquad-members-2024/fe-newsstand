@@ -1,0 +1,136 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin: 0 auto;
+    width: 930px;
+}
+
+.header-box {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.news-stand-message {
+    width: 104px;
+    height: 29px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.all-company {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.date {
+    width: 140px;
+    height: 22px;
+}
+
+.top-news-box {
+    margin-bottom: 20px;
+    width: 930px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.company-name {
+    width: 60px;
+    height: 17px;
+    font-weight: bold;
+}
+
+.detail {
+    width: 364px;
+    height: 17px;
+    text-align: left;
+}
+
+.first-top-news,
+.second-top-news {
+    display: flex;
+    width: 461px;
+    padding: 16px;
+    border: 1px;
+    background: #F5F7F9;
+    margin-left: 10px;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+li {
+    list-style-type: none;
+}
+
+ul {
+    padding: 0;
+}
+
+nav {
+    width: 930px;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav>div {
+    display: flex;
+}
+
+.company-list-box>ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 96px 96px 96px 96px;
+}
+
+.company-list-box>ul>li {
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+
+.list-0,
+.list-1,
+.list-2,
+.list-3,
+.list-4,
+.list-5 {
+    border-top: 1px solid gray;
+}
+
+.list-0,
+.list-6,
+.list-12,
+.list-18 {
+    border-left: 1px solid gray;
+}
+
+.newspaper {
+    width: 24px;
+    height: 24px;
+}
+
+.news-stand-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.date,
+.detail,
+.subscribe-company {
+    opacity: 0.5
+
+}
