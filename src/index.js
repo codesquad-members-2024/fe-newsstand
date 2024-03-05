@@ -1,20 +1,20 @@
+import { GetRandomCompany } from "./companysDisplayForm.js";
 function NewsStand() {
+    const getRandomCompany = new GetRandomCompany()
     // 다음페이지를 누르면 24씩++ 해 보여주려는 변수
-    let newsListCount = 0;
     const DAY = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
-    const getLogoTemplat = () => {
-        const logoTemplate = [];
-        for (let i = newsListCount; i < newsListCount + 24; i++) {
-            logoTemplate.push(`
-            <li class="list-${i}">
-            <img src = "static/company-logo/grid-${i}.png">
+    const getLogoTemplat = (curPage) => {
+        const logoTemplate = curPage.map((cur, idx) => {
+            return `
+            <li class="list-${idx}">
+            <img src = "static/company-logo/grid-${cur}.png">
             </li>
-            `);
-        }
+            `
+        })
         return logoTemplate.join("");
     };
-    const renderCompanyLogo = () => {
-        const logoTemplate = getLogoTemplat();
+    const renderCompanyLogo = (pageData) => {
+        const logoTemplate = getLogoTemplat(pageData);
         const companyDisplayBox = document.querySelector(".company-display");
         companyDisplayBox.innerHTML = logoTemplate;
     };
@@ -37,13 +37,22 @@ function NewsStand() {
         `
     };
 
+    const typeCheckLocation = (event) => {
+        const updatePageData = getRandomCompany.updatePageNum(event.target.className)
+        renderCompanyLogo(updatePageData)
+    }
+
     const setEventHandler = () => {
         const newStandMainLogo = document.querySelector(".news-stand-box");
         newStandMainLogo.addEventListener("click", () => location.reload())
+
+        const updatePageBtn = document.querySelector(".company-list-box");
+        updatePageBtn.addEventListener("click", typeCheckLocation)
     }
 
     const main = () => {
-        renderCompanyLogo();
+        const initPageNum = getRandomCompany.main()
+        renderCompanyLogo(initPageNum);
         renderCurrentDate();
         setEventHandler()
     };

@@ -5,7 +5,7 @@ body {
     padding: 0;
 }
 
-a.news-stand-box:hover {
+a.news-stand-box, a.left-btn, a.light-btn:hover {
     cursor: pointer;
 }
 
@@ -93,6 +93,10 @@ nav {
 nav>div {
     display: flex;
 }
+.company-list-box {
+    display: flex;
+    align-items: center;
+}
 
 .company-list-box>ul {
     display: grid;
@@ -136,5 +140,13 @@ nav>div {
 .detail,
 .subscribe-company {
     opacity: 0.5
+}
 
+a > img {
+    width: 24px;
+    height: 24px;
+}
+
+.left-btn, .light-btn {
+    margin: 0 20px;
 }
