@@ -1,3 +1,5 @@
+const WEEK = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+
 const leftArrowButton = document.querySelector(".left-arrow-button");
 const rightArrowButton = document.querySelector(".right-arrow-button");
 
@@ -26,6 +28,18 @@ const renderPressTable = async () => {
   });
 }
 
+const renderCurrentDate = () => {
+  const currentDateTag = document.querySelector(".currentDate");
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth() + 1;
+  const date = currentDate.getDate();
+  const day = WEEK[currentDate.getDay()];
+
+  currentDateTag.innerHTML = `${year}. ${month.toString().padStart(2, "0")}. ${date.toString().padStart(2, "0")}. ${day}`;
+}
+
+renderCurrentDate();
 renderPressTable();
 leftArrowButton.addEventListener('click', () => {
   if ( pressLogoTableIndex > 0 ) decreaseIndex();
