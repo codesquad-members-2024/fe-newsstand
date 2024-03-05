@@ -120,13 +120,13 @@ body {
   height: 40px;
 }
 
-.left-button {
+.left-arrow-button {
   position: absolute;
   top: 430px;
   left: 12%;
 }
 
-.right-button {
+.right-arrow-button {
   position: absolute;
   top: 430px;
   right: 12%;
