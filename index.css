@@ -31,7 +31,7 @@ body {
   margin-left: 8px;
 }
 
-.date {
+.currentDate {
   font-size: 16px;
   color: #5F6E76;
   position: relative;
@@ -104,14 +104,14 @@ body {
   margin-left: 8px;
 }
 
-.table {
+.press-table {
   height: 388px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   border: 1px solid #D2DAE0;
 }
 
-.table > div {
+.press-table > img {
   border: 1px solid #D2DAE0;
 }
 
