@@ -12,7 +12,7 @@ export class GetRandomCompany {
 
     main() {
         this.splitIntoChunks();
-        return this.#companyData[this.currenPageNum];
+        return this.currenPageNum
     }
 
     splitIntoChunks() {
@@ -22,7 +22,6 @@ export class GetRandomCompany {
     }
 
     updatePageNum(targetName) {
-        // if (this.currenPageNum === 0 || this.currenPageNum === 3) 
         switch (targetName) {
             case "left-btn":
                 this.currenPageNum--;
@@ -33,6 +32,17 @@ export class GetRandomCompany {
             default:
                 break;
         }
-        return this.#companyData[this.currenPageNum]
+        return this.currenPageNum
     }
+
+    getLogoTemplat = () => {
+        const logoTemplate = this.#companyData[this.currenPageNum].map((cur, idx) => {
+            return `
+            <li class="list-${idx}">
+            <img src = "static/company-logo/grid-${cur}.png">
+            </li>
+            `;
+        });
+        return logoTemplate.join("");
+    };
 }

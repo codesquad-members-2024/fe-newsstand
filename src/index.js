@@ -1,62 +1,62 @@
 import { GetRandomCompany } from "./companysDisplayForm.js";
+import { DateCalculator } from "./DateCalculator.js";
 function NewsStand() {
-    const getRandomCompany = new GetRandomCompany()
-    // 다음페이지를 누르면 24씩++ 해 보여주려는 변수
-    const DAY = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
-    const getLogoTemplat = (curPage) => {
-        const logoTemplate = curPage.map((cur, idx) => {
-            return `
-            <li class="list-${idx}">
-            <img src = "static/company-logo/grid-${cur}.png">
-            </li>
-            `
-        })
-        return logoTemplate.join("");
-    };
-    const renderCompanyLogo = (pageData) => {
-        const logoTemplate = getLogoTemplat(pageData);
+    const getRandomCompany = new GetRandomCompany();
+    
+    const renderCompanyLogo = () => {
+        const logoTemplate = getRandomCompany.getLogoTemplat();
         const companyDisplayBox = document.querySelector(".company-display");
         companyDisplayBox.innerHTML = logoTemplate;
     };
 
-    const getCurrentDate = () => {
-        const date = new Date();
-        return [
-            date.getFullYear(),
-            date.getMonth() + 1,
-            date.getDate(),
-            DAY[date.getDay()],
-        ];
-    };
-
     const renderCurrentDate = () => {
-        const dateHtmlBox = document.querySelector(".date")
-        const [year, month, date, DAY] = getCurrentDate();
+        const dateCalculator = new DateCalculator()
+        const [year, month, date, day] = dateCalculator.getCurrentDate();
+        const dateHtmlBox = document.querySelector(".date");
         dateHtmlBox.innerHTML = `
-        ${year}. ${month}. ${date}. ${DAY}
-        `
+        ${year}. ${month}. ${date}. ${day}
+        `;
     };
 
-    const typeCheckLocation = (event) => {
-        const updatePageData = getRandomCompany.updatePageNum(event.target.className)
-        renderCompanyLogo(updatePageData)
-    }
+    const pageDisabled = (curPageNum) => {
+        const leftBtnBox = document.querySelector(".left-btn");
+        const lightBtnBox = document.querySelector(".light-btn");
+        switch (curPageNum) {
+            case 0:
+                leftBtnBox.style.display = "none";
+                break;
+            case 3:
+                lightBtnBox.style.display = "none";
+                break;
+            default:
+                leftBtnBox.style.display = "flex";
+                lightBtnBox.style.display = "flex";
+                break;
+        }
+    };
+
+    const checkLocationType = (event) => {
+        const curPageNum = getRandomCompany.updatePageNum(event.target.className);
+        renderCompanyLogo();
+        pageDisabled(curPageNum);
+    };
 
     const setEventHandler = () => {
         const newStandMainLogo = document.querySelector(".news-stand-box");
-        newStandMainLogo.addEventListener("click", () => location.reload())
+        newStandMainLogo.addEventListener("click", () => location.reload());
 
         const updatePageBtn = document.querySelector(".company-list-box");
-        updatePageBtn.addEventListener("click", typeCheckLocation)
-    }
+        updatePageBtn.addEventListener("click", checkLocationType);
+    };
 
     const main = () => {
-        const initPageNum = getRandomCompany.main()
-        renderCompanyLogo(initPageNum);
+        const curPageNum = getRandomCompany.main();
+        renderCompanyLogo();
+        pageDisabled(curPageNum);
         renderCurrentDate();
-        setEventHandler()
+        setEventHandler();
     };
-    return { main, renderCurrentDate };
+    return { main };
 }
 
 const newsStand = NewsStand();
