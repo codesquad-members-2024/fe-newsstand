@@ -8,6 +8,20 @@ let pressLogoTableIndex = 0;
 const increaseIndex = () => {pressLogoTableIndex++;};
 const decreaseIndex = () => {pressLogoTableIndex--;};
 
+const setVisibilityOfArrowButtons = () => {
+  if ( pressLogoTableIndex === 0 ) {
+    leftArrowButton.style.visibility = "hidden";
+    return;
+  }
+  if ( pressLogoTableIndex === 3 ) {
+    rightArrowButton.style.visibility = "hidden";
+    return;
+  }
+
+  leftArrowButton.style.visibility = "visible";
+  rightArrowButton.style.visibility = "visible";
+}
+
 const renderPressTable = async () => {
   const pressTable = document.querySelector(".press-table");
   const imagePath = "img/PressLogo.png";
@@ -26,6 +40,8 @@ const renderPressTable = async () => {
     newImageTag.style.background = `url(${imagePath}) ${cell.left}px ${cell.top}px`;
     pressTable.appendChild(newImageTag);
   });
+
+  setVisibilityOfArrowButtons();
 }
 
 const renderCurrentDate = () => {
