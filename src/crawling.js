@@ -1,10 +1,10 @@
 import axios from "axios";
 import cheerio from "cheerio";
+import fs from "fs";
 
 export class NewsCrawlingData {
     #topNewsData;
     constructor() {
-        this.#topNewsData = this.parsing("뉴스");
         // contrastEconomy
         // broadcastCommunication
         // IT
@@ -14,7 +14,13 @@ export class NewsCrawlingData {
         // area
     }
 
-    async getHTML (keyword) {
+    async main() {
+        await this.parsing("뉴스");
+        this.creatJson("topNews", this.#topNewsData);
+    }
+    
+
+    async getHTML(keyword) {
         try {
             return await axios.get(
                 "https://search.naver.com/search.naver?where=news&ie=UTF-8&query=" +
@@ -23,14 +29,14 @@ export class NewsCrawlingData {
         } catch (err) {
             console.log(err);
         }
-    };
+    }
 
-    async parsing (keyword) {
-        const html = await this.getHTML(keyword); // 수정된 부분
+    async parsing(keyword) {
+        const html = await this.getHTML(keyword);
         const $ = cheerio.load(html.data);
         const $titlist = $(".news_area");
-    
-        let informations = [];
+
+        const informations = [];
         $titlist.each((idx, node) => {
             informations.push({
                 link: $(node).find(".news_contents a").attr("href"),
@@ -39,8 +45,15 @@ export class NewsCrawlingData {
                 time: $(node).find(".info_group > span").text(),
                 contents: $(node).find(".dsc_wrap").text(),
             });
-            console.log(informations);
+            this.#topNewsData = informations;
         });
-    };
+    }
+
+    creatJson(tableName, data) {
+        fs.writeFile( `${tableName}.json`, JSON.stringify(data), function(err) {
+            console.log( 'FM 매치엔진 json파일 생성완료' );
+        });
+    }
 }
-const newsDataCrawling = new NewsCrawlingData()
+const newsDataCrawling = new NewsCrawlingData();
+await newsDataCrawling.main();
