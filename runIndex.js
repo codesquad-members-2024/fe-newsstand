@@ -1,16 +1,10 @@
-const increase = (index) => ++index;
-const decrease = (index) => --index;
+const leftArrowButton = document.querySelector(".left-arrow-button");
+const rightArrowButton = document.querySelector(".right-arrow-button");
 
-const changeTableIndex = (counterFn) => {
-  let index = 0;
+let pressLogoTableIndex = 0;
 
-  return () => {
-    index = counterFn(index);
-    return index;
-  }
-}
-
-const getTableIndex = () => changeTableIndex((index) => index)();
+const increaseIndex = () => {pressLogoTableIndex++;};
+const decreaseIndex = () => {pressLogoTableIndex--;};
 
 const renderPressTable = async () => {
   const pressTable = document.querySelector(".press-table");
@@ -22,7 +16,7 @@ const renderPressTable = async () => {
   pressTable.innerHTML = '';
   Array.from({ length: settings.cellCountPerPage }).forEach((_, index) => {
     const newImageTag = document.createElement("img");
-    const cellIndex = getTableIndex() * settings.cellCountPerPage + index;
+    const cellIndex = pressLogoTableIndex * settings.cellCountPerPage + index;
     const cell = settings.cells[cellIndex];
 
     newImageTag.style.width = `${cell.width}px`;
@@ -33,3 +27,11 @@ const renderPressTable = async () => {
 }
 
 renderPressTable();
+leftArrowButton.addEventListener('click', () => {
+  if ( pressLogoTableIndex > 0 ) decreaseIndex();
+  renderPressTable();
+});
+rightArrowButton.addEventListener('click', () => {
+  if ( pressLogoTableIndex < 3 ) increaseIndex();
+  renderPressTable();
+});
