@@ -11,56 +11,213 @@
     <div class="header">
       <div class="newsstand">뉴스스탠드</div>
         <div id="date">
-          <script>
-          const daysOfWeek = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
-          const date = new Date();
-          const dayName = daysOfWeek[date.getDay()];
-          document.getElementById("date").innerHTML = `${date.toLocaleDateString()} ${dayName}`;
-          </script>
+          <script src="date.js"></script>
         </div>
     </div>
     <div class="rollingnews">
-      <div class="recentnews">1</div>
-      <div class="recentnews">2</div>
+      <div class="recentnews"></div>
+      <div class="recentnews"></div>
     </div>
-    <strong>전체 언론사</strong>
+    <div>
+      <strong>전체 언론사</strong>
+      <span>내가 구독한 언론사</span>
+    </div>    
     <div class ="newsgroup">
+      <button class="button">&gt</button>
       <div class="news_logo">
         <a href="#">
-          <img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/930.png">
+          <img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/930.png">   
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
         </a>
       </div>
       <div class="news_logo">
         <a href="#">
           <img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/057.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
         </a>
       </div>
-      <div class="news_logo">3</div>  
-      <div class="news_logo">4</div>
-      <div class="news_logo">5</div>
-      <div class="news_logo">6</div>  
-      <div class="news_logo">7</div>
-      <div class="news_logo">8</div>
-      <div class="news_logo">9</div> 
-      <div class="news_logo">10</div>
-      <div class="news_logo">11</div>
-      <div class="news_logo">12</div>
-      <div class="news_logo">13</div>  
-      <div class="news_logo">14</div>
-      <div class="news_logo">15</div>
-      <div class="news_logo">16</div>  
-      <div class="news_logo">17</div>
-      <div class="news_logo">18</div>
-      <div class="news_logo">19</div> 
-      <div class="news_logo">20</div>
-      <div class="news_logo">21</div>
-      <div class="news_logo">22</div>
-      <div class="news_logo">23</div>  
-      <div class="news_logo">24</div>
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/056.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>  
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/422.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2020/logo/light/0604/055.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>  
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div> 
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>  
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>  
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div> 
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>  
+      <div class="news_logo">
+        <a href="#">
+          <img src="https://s.pstatic.net/static/newsstand/2019/logo/011.png">
+          <span>
+            <button class="subscribe">+ 구독하기</button>
+          </span>
+        </a>
+      </div>
     </div>
   </div>
-  
-
 </body>
 </html>
 
