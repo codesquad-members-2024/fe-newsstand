@@ -2,7 +2,6 @@ import { GetRandomCompany } from "./companysDisplayForm.js";
 import { DateCalculator } from "./DateCalculator.js";
 function NewsStand() {
     const getRandomCompany = new GetRandomCompany();
-    
     const renderCompanyLogo = () => {
         const logoTemplate = getRandomCompany.getLogoTemplat();
         const companyDisplayBox = document.querySelector(".company-display");
@@ -10,7 +9,7 @@ function NewsStand() {
     };
 
     const renderCurrentDate = () => {
-        const dateCalculator = new DateCalculator()
+        const dateCalculator = new DateCalculator();
         const [year, month, date, day] = dateCalculator.getCurrentDate();
         const dateHtmlBox = document.querySelector(".date");
         dateHtmlBox.innerHTML = `
@@ -36,7 +35,9 @@ function NewsStand() {
     };
 
     const checkLocationType = (event) => {
-        const curPageNum = getRandomCompany.updatePageNum(event.target.className);
+        const curPageNum = getRandomCompany.updatePageNum(
+            event.target.className
+        );
         renderCompanyLogo();
         pageDisabled(curPageNum);
     };
@@ -55,6 +56,7 @@ function NewsStand() {
         pageDisabled(curPageNum);
         renderCurrentDate();
         setEventHandler();
+
     };
     return { main };
 }

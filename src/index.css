@@ -5,7 +5,9 @@ body {
     padding: 0;
 }
 
-a.news-stand-box, a.left-btn, a.light-btn:hover {
+a.news-stand-box,
+a.left-btn,
+a.light-btn:hover {
     cursor: pointer;
 }
 
@@ -15,11 +17,11 @@ a.news-stand-box, a.left-btn, a.light-btn:hover {
     justify-content: center;
     height: 100%;
     margin: 0 auto;
-    width: 930px;
+    width: 1000px;
 }
 
 .header-box {
-    margin-bottom: 30px;
+    margin: 0 20px 30px 20px;
     display: flex;
     justify-content: space-between;
 }
@@ -32,19 +34,21 @@ a.news-stand-box, a.left-btn, a.light-btn:hover {
     margin-left: 10px;
 }
 
+.date {
+    width: 140px;
+    height: 22px;
+    text-align: right;
+}
+
 .all-company {
     font-weight: bold;
     margin-right: 10px;
 }
 
-.date {
-    width: 140px;
-    height: 22px;
-}
 
 .top-news-box {
     margin-bottom: 20px;
-    width: 930px;
+    margin: 0 20px 30px 20px;
     display: flex;
     justify-content: space-between;
 }
@@ -64,11 +68,14 @@ a.news-stand-box, a.left-btn, a.light-btn:hover {
 .first-top-news,
 .second-top-news {
     display: flex;
-    width: 461px;
+    width: 490px;
     padding: 16px;
     border: 1px;
     background: #F5F7F9;
-    margin-left: 10px;
+}
+
+.first-top-news {
+    margin-right: 10px;
 }
 
 img {
@@ -85,7 +92,7 @@ ul {
 }
 
 nav {
-    width: 930px;
+    margin: 0 20px;
     display: flex;
     justify-content: space-between;
 }
@@ -93,15 +100,21 @@ nav {
 nav>div {
     display: flex;
 }
+
 .company-list-box {
     display: flex;
     align-items: center;
+    margin: 0 auto;
+    position: relative;
+}
+
+.company-display {
+    width: 960px;
 }
 
 .company-list-box>ul {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 96px 96px 96px 96px;
+    grid-template-columns: repeat(6, 1fr);
 }
 
 .company-list-box>ul>li {
@@ -142,11 +155,17 @@ nav>div {
     opacity: 0.5
 }
 
-a > img {
+a>img {
     width: 24px;
     height: 24px;
 }
 
-.left-btn, .light-btn {
-    margin: 0 20px;
+.left-btn {
+    position: absolute;
+    left: -55px;
+}
+
+.light-btn {
+    position: absolute;
+    margin-left: 20px;
 }
