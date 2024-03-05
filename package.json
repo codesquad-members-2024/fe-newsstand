@@ -2,9 +2,9 @@
   "name": "fe-newsstand",
   "version": "1.0.0",
   "description": "뉴스스탠드 기본화면",
-  "main": "src/initialize.js",
+  "main": "initialize.js",
   "scripts": {
-    "start": "node src/initialize.js"
+    "start": "node initialize.js"
   },
   "keywords": [],
   "author": "",
