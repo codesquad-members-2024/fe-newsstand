@@ -1,0 +1,126 @@
+.flexbox-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.center-alignment {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.top-area {
+  width: 930px;
+  height: 49px;
+}
+
+.date {
+  width: 140px;
+  height: 22px;
+  font-weight: 500;
+  font-size: 16px;
+  color: rgba(95, 110, 118, 1);
+}
+
+.auto-rolling-area {
+  width: 930px;
+  height: 49px;
+  padding: 16px;
+}
+
+.auto-rolling-news {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 461px;
+  height: 49px;
+  border: 1px solid rgba(210, 218, 224, 1);
+  background-color: rgba(245, 247, 249, 1);
+}
+
+.auto-rolling-news span {
+  margin: 16px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.auto-rolling-area a {
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(95, 110, 118, 1);
+  text-decoration: none;
+}
+
+.auto-rolling-area a:hover {
+  text-decoration: underline;
+}
+
+.tap-viewer-area {
+  width: 930px;
+  height: 24px;
+  margin-top: 30px;
+}
+
+.tap-viewer-area .tap {
+  width: 216px;
+  height: 22px;
+}
+
+.tap-viewer-area .tap .on {
+  font-weight: 700;
+  font-size: 16px;
+  color: rgba(20, 33, 43, 1);
+}
+
+.tap-viewer-area .tap .off {
+  font-weight: 500;
+  font-size: 16px;
+  color: rgba(135, 146, 152, 1);
+}
+
+main {
+  width: 930px;
+  height: 388px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin-top: 30px;
+  border-top: 1px solid rgba(210, 218, 224, 1);
+  border-left: 1px solid rgba(210, 218, 224, 1);
+  position: relative;
+}
+
+.press-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(210, 218, 224, 1);
+  border-right: 1px solid rgba(210, 218, 224, 1);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.right-button,
+.left-button {
+  position: absolute;
+  top: 180px;
+  font-size: 40px;
+  color: rgba(110, 128, 145, 1);
+}
+
+.right-button {
+  left: 103%;
+}
+
+.left-button {
+  right: 103%;
+}
+
+.right-button:hover,
+.left-button:hover {
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
