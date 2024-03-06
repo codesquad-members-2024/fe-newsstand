@@ -45,13 +45,17 @@ export class NewsCrawlingData {
                 time: $(node).find(".info_group > span").text(),
                 contents: $(node).find(".dsc_wrap").text(),
             });
-            this.#topNewsData = informations;
         });
+        const newsData = {
+            id: "topnNews", 
+            data: informations
+        };
+        this.#topNewsData = newsData;
     }
 
     creatJson(tableName, data) {
         fs.writeFile( `${tableName}.json`, JSON.stringify(data), function(err) {
-            console.log( 'FM 매치엔진 json파일 생성완료' );
+            console.log( 'json파일 생성완료' );
         });
     }
 }

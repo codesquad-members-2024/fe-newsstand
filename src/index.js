@@ -1,5 +1,7 @@
 import { GetRandomCompany } from "./companysDisplayForm.js";
 import { DateCalculator } from "./DateCalculator.js";
+import { jsonParser } from "./JsonParser.js";
+
 function NewsStand() {
     const getRandomCompany = new GetRandomCompany();
     const renderCompanyLogo = () => {
@@ -42,9 +44,11 @@ function NewsStand() {
         pageDisabled(curPageNum);
     };
 
+    const reloadPage = () => location.reload();
+
     const setEventHandler = () => {
         const newStandMainLogo = document.querySelector(".news-stand-box");
-        newStandMainLogo.addEventListener("click", () => location.reload());
+        newStandMainLogo.addEventListener("click", reloadPage);
 
         const updatePageBtn = document.querySelector(".company-list-box");
         updatePageBtn.addEventListener("click", checkLocationType);
@@ -56,7 +60,6 @@ function NewsStand() {
         pageDisabled(curPageNum);
         renderCurrentDate();
         setEventHandler();
-
     };
     return { main };
 }
