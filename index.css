@@ -47,13 +47,32 @@ body {
 .auto-rolling-textbox {
   width: 460px;
   height: 48px;
-  display: flex;
   border: 1px solid #D2DAE0;
   background-color: #F5F7F9;
   align-items: center;
+  overflow: hidden;
 }
 
-.auto-rolling-textbox > span {
+.auto-rolling-text {
+  position: relative;
+  display: flex;
+  top: -3px;
+}
+
+.auto-rolling-text.prev {
+  top: -20px;
+  transition: top 0.5s ease;
+}
+
+.auto-rolling-text.cur {
+  transition: top 0.5s ease;
+}
+
+.auto-rolling-text.next {
+  top: 20px;
+}
+
+.auto-rolling-text > span {
   margin-left: 16px;
   font-size: 14px;
 }
