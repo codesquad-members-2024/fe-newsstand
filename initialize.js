@@ -1,4 +1,6 @@
 import fs from "fs";
+import axios from "axios";
+import cheerio from "cheerio";
 
 const PRESS_LOGOS_WIDTH = 932;
 const PRESS_LOGOS_HEIGHT = 1554;
@@ -8,6 +10,10 @@ const CELL_COUNT_PER_PAGE = 24;
 
 const isEmpty = (json) => {
   return Object.keys(json).length === 0;
+};
+
+const parseStringFromDate = (date) => {
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 };
 
 const addWidthHeightSettings = (json) => {
@@ -26,8 +32,8 @@ const addCellsIntoTable = (json) => {
   rows.forEach((_, rowIndex) => {
     columns.forEach((_, columnIndex) => {
       cells.push({
-        top: - rowIndex * pressLogoHeight,
-        left: - columnIndex * pressLogoWidth,
+        top: -rowIndex * pressLogoHeight,
+        left: -columnIndex * pressLogoWidth,
         width: pressLogoWidth,
         height: pressLogoHeight,
       });
@@ -39,21 +45,55 @@ const addCellsIntoTable = (json) => {
 
 const initializePressTable = () => {
   const path = "data/pressLogoTable.json";
-  const pressLogoTableFile = fs.readFileSync(
-    path,
-    "utf-8"
-  );
+  const pressLogoTableFile = fs.readFileSync(path, "utf-8");
   const pressLogoTable =
     pressLogoTableFile === "" ? {} : JSON.parse(pressLogoTableFile);
 
   if (isEmpty(pressLogoTable)) {
     addWidthHeightSettings(pressLogoTable);
     addCellsIntoTable(pressLogoTable);
-  };
+  }
 
   fs.writeFileSync(path, JSON.stringify(pressLogoTable));
 };
 
-const initializeNews = () => {};
+const crawlNewsTitles = async (json) => {
+  const response = await axios.get(
+    "https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZxYUdjU0FtdHZHZ0pMVWlnQVAB?hl=ko&gl=KR&ceid=KR%3Ako",
+    {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
+      },
+    }
+  );
+  const doc = response.data;
+  let $ = cheerio.load(doc);
+  const titles = [];
+
+  $(".gPFEn").each((i, element) => {
+    titles.push($(element).text());
+  });
+
+  json.titles = titles;
+};
+
+const initializeNews = async () => {
+  const path = "data/news.json";
+  const newsFile = fs.readFileSync(path, "utf-8");
+  const newsTitles = newsFile === "" ? {} : JSON.parse(newsFile);
+  const currentDate = new Date();
+
+  if (
+    isEmpty(newsTitles) ||
+    newsTitles.date !== parseStringFromDate(currentDate)
+  ) {
+    newsTitles.date = parseStringFromDate(currentDate);
+    await crawlNewsTitles(newsTitles);
+  }
+
+  fs.writeFileSync(path, JSON.stringify(newsTitles));
+};
 
 initializePressTable();
+initializeNews();
