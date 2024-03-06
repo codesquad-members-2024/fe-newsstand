@@ -82,11 +82,27 @@ body {
 .right-btn {
   position: absolute;
   z-index: 1;
-  font-size: 2rem;
   border: 1px solid #fefefe;
   background-color: white;
-  right: -40px;
+  right: -60px;
   top: 50%;
+}
+
+.left-btn {
+  position: absolute;
+  z-index: 1;
+  border: 1px solid #fefefe;
+  background-color: white;
+  left: -60px;
+  top: 50%;
+}
+
+.right-btn img {
+  height: 40px;
+}
+
+.left-btn img {
+  height: 40px;
 }
 
 .news_logo {
