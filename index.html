@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <title>뉴스 스탠드</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="basic-display">
+    <div class="top-container">
+      <div class="title-container">
+        <img class="icon" src="img/newsStandLogo.svg" />
+        <span class="title">뉴스스탠드</span>
+      </div>
+      <div class="date-container">
+        <span class="currentDate"></span>
+      </div>
+    </div>
+    <div class="auto-rolling-container">
+      <div class="auto-rolling-textbox">
+        <div class="auto-rolling-text prev"></div>
+        <div class="auto-rolling-text cur"></div>
+        <div class="auto-rolling-text next"></div>
+      </div>
+      <div class="auto-rolling-textbox">
+        <div class="auto-rolling-text prev"></div>
+        <div class="auto-rolling-text cur"></div>
+        <div class="auto-rolling-text next"></div>
+      </div>
+    </div>
+    <div class="press-container">
+      <ul class="press-menu">
+        <li class="press-textbox">
+          <span id="all-press">전체 언론사</span>
+          <span id="subscribed-press">내가 구독한 언론사</span>
+        </li>
+        <li class="press-view-icon">
+          <img class="icon" src="img/list-view.svg" />
+          <img class="icon" src="img/grid-view.svg" />
+        </li>
+      </ul>
+      <div class="press-table"></div>
+    </div>
+    <img class="left-arrow-button" src="img/LeftButton.svg" />
+    <img class="right-arrow-button" src="img/RightButton.svg" />
+  </div>
+  <script src="runIndex.js"></script>
+</body>
+</html>
+

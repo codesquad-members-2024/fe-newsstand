@@ -1,0 +1,152 @@
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Pretendard-Regular';
+}
+
+.basic-display {
+  width: 930px;
+  margin: 0px auto;
+  margin-top: 5%;
+}
+
+.top-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+.currentDate {
+  font-size: 16px;
+  color: #5F6E76;
+  position: relative;
+  top: 50%;
+}
+
+.auto-rolling-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.auto-rolling-textbox {
+  width: 460px;
+  height: 48px;
+  border: 1px solid #D2DAE0;
+  background-color: #F5F7F9;
+  align-items: center;
+  overflow: hidden;
+}
+
+.auto-rolling-text {
+  position: relative;
+  display: flex;
+  top: -3px;
+}
+
+.auto-rolling-text.prev {
+  top: -20px;
+  transition: top 0.5s ease;
+}
+
+.auto-rolling-text.cur {
+  transition: top 0.5s ease;
+}
+
+.auto-rolling-text.next {
+  top: 20px;
+}
+
+.auto-rolling-text > span {
+  margin-left: 16px;
+  font-size: 14px;
+}
+
+.press-text {
+  font-weight: 700;
+  color: #14212B;
+}
+
+.news-title-text {
+  font-weight: 500;
+  color: #4B5966;
+}
+
+.press-menu {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 0px;
+  margin-top: 32px;
+}
+
+.press-textbox {
+  display: flex;
+  font-size: 16px;
+}
+
+.press-textbox > #all-press {
+  font-weight: 700;
+  color: #14212B;
+}
+
+.press-textbox > #subscribed-press {
+  font-weight: 500;
+  color: #879298;
+  margin-left: 24px;
+}
+
+.press-view-icon {
+  display: flex;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.icon + .icon {
+  margin-left: 8px;
+}
+
+.press-table {
+  height: 388px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border: 1px solid #D2DAE0;
+}
+
+.press-table > img {
+  border: 1px solid #D2DAE0;
+}
+
+.press-container > img {
+  width: 24px;
+  height: 40px;
+}
+
+.left-arrow-button {
+  position: absolute;
+  top: 430px;
+  left: 12%;
+}
+
+.right-arrow-button {
+  position: absolute;
+  top: 430px;
+  right: 12%;
+}
