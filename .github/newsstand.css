@@ -1,0 +1,151 @@
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.container {
+	min-height: 500px;
+	min-width: 500px;
+}
+
+.header {
+	display: flex;
+  width: 910px;
+  height: 84px;
+  padding: 10px;
+  position: relative;
+}
+
+.newsstand {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 40%;
+  font-size: 1.5rem;
+}
+
+.refresh-btn {
+  background: #ffffff;
+  border: 0px;
+  margin-right: 10px;
+}
+
+#date {
+  margin-left: auto;
+  align-self: flex-end;
+}
+
+.rollingnews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 910px;
+  height: 84px;
+  padding: 10px;
+}
+
+.recentnews {
+  background-color: #f6f7f9; 
+  margin: 10px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.mediacompany {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 양 옆에 정렬 */
+}
+
+.list-view-btn, .grid-view-btn {
+  background: #ffffff;
+  border: 0px;
+  margin-right: 10px;
+}
+
+.view-btn {
+  display: flex;
+  align-items: center;
+}
+
+.newsgroup {
+  border-top: 1px solid rgba(0, 0, 0, 0.8);
+  border-left: 1px solid rgba(0, 0, 0, 0.8);
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(4, auto);
+  width: 910px;
+  height: 368px;
+  position: relative;
+}
+
+.right-btn {
+  position: absolute;
+  z-index: 1;
+  border: 1px solid #fefefe;
+  background-color: white;
+  right: -60px;
+  top: 50%;
+}
+
+.left-btn {
+  position: absolute;
+  z-index: 1;
+  border: 1px solid #fefefe;
+  background-color: white;
+  left: -60px;
+  top: 50%;
+}
+
+.right-btn img {
+  height: 40px;
+}
+
+.left-btn img {
+  height: 40px;
+}
+
+.news_logo {
+  border-right: 1px solid rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.8); 
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+  background: white;
+  position: relative;
+}
+
+.news_logo img {
+  visibility: visible;
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+}
+
+.mediacompany {
+  padding: 10px;
+}
+
+.news_logo button.subscribe-btn {
+  display: none;
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  background: #ffffff;
+  border: 1px solid #6E8091;
+  border-radius: 50px;
+}
+
+.news_logo:hover {
+  background: #f6f7f9;
+}
+
+.news_logo:hover img {
+  visibility: hidden;
+}
+
+.news_logo:hover button.subscribe-btn {
+  display: block;
+}
