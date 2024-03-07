@@ -5,9 +5,9 @@ body {
     padding: 0;
 }
 
-a.news-stand-box,
-a.left-btn,
-a.light-btn:hover {
+a {
+    text-decoration: none;
+    color: black;
     cursor: pointer;
 }
 
@@ -73,6 +73,10 @@ a.light-btn:hover {
     text-overflow: ellipsis;
 }
 
+.detail:hover {
+    text-decoration: underline;
+}
+
 .first-top-news,
 .second-top-news {
     display: flex;
@@ -118,8 +122,12 @@ a.light-btn:hover {
     animation-delay: 2s;
 }
 
-.first-top-news {
-    margin-right: 10px;
+.first-top-news:hover{
+    animation-play-state: paused;
+}
+
+.second-top-news:hover{
+    animation-play-state: paused;
 }
 
 img {
@@ -220,4 +228,8 @@ a>img {
 
 .margin-right {
     margin-right: 10px;
+}
+
+.subscribe-container {
+    display: none;
 }

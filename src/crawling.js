@@ -39,6 +39,9 @@ export class NewsCrawlingData {
 
         const informations = [];
         $titlist.each((idx, node) => {
+            const a = node
+            console.log(a)
+            debugger
             informations.push({
                 link: $(node).find(".news_contents a").attr("href"),
                 title: $(node).find(".news_tit:eq(0)").text(),

@@ -1,6 +1,8 @@
 import { CompanysDisplayForm } from "./Components/CompanysDisplayForm.js";
 import { DateCalculator } from "./Components/DateCalculator.js";
 import { TopNewsForm } from "./Components/TopNewsForm.js";
+import { FIRST_PAGE_NUM, LAST_PAGE_NUM, TOP_NEWS_DELAY_TIME } from "./contants.js";
+
 function NewsStand() {
     const companysDisplayForm = new CompanysDisplayForm();
     const topNewsForm = new TopNewsForm()
@@ -23,10 +25,10 @@ function NewsStand() {
         const leftBtnBox = document.querySelector(".left-btn");
         const lightBtnBox = document.querySelector(".light-btn");
         switch (curPageNum) {
-            case 0:
+            case FIRST_PAGE_NUM:
                 leftBtnBox.style.display = "none";
                 break;
-            case 3:
+            case LAST_PAGE_NUM:
                 lightBtnBox.style.display = "none";
                 break;
             default:
@@ -67,7 +69,7 @@ function NewsStand() {
         renderCompanyLogo();
         setInterval(() => {
             renderTopNews(topNewsForm.getTopNewsTemplate())
-        }, 3500);
+        }, TOP_NEWS_DELAY_TIME);
     }
 
     const main = async() => {
