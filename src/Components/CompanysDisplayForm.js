@@ -1,4 +1,4 @@
-export class GetRandomCompany {
+export class CompanysDisplayForm {
     #randomNumber;
     #companyData;
     constructor() {

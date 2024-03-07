@@ -1,11 +1,11 @@
-import { GetRandomCompany } from "./companysDisplayForm.js";
-import { DateCalculator } from "./DateCalculator.js";
-import { GetTopNews } from "./getTopNews.js";
+import { CompanysDisplayForm } from "./Components/CompanysDisplayForm.js";
+import { DateCalculator } from "./Components/DateCalculator.js";
+import { TopNewsForm } from "./Components/TopNewsForm.js";
 function NewsStand() {
-    const getRandomCompany = new GetRandomCompany();
-    const getTopNews = new GetTopNews()
+    const companysDisplayForm = new CompanysDisplayForm();
+    const topNewsForm = new TopNewsForm()
     const renderCompanyLogo = () => {
-        const logoTemplate = getRandomCompany.getLogoTemplat();
+        const logoTemplate = companysDisplayForm.getLogoTemplat();
         const companyDisplayBox = document.querySelector(".company-display");
         companyDisplayBox.innerHTML = logoTemplate;
     };
@@ -37,7 +37,7 @@ function NewsStand() {
     };
 
     const checkLocationType = (event) => {
-        const curPageNum = getRandomCompany.updatePageNum(
+        const curPageNum = companysDisplayForm.updatePageNum(
             event.target.className
         );
         renderCompanyLogo();
@@ -66,15 +66,15 @@ function NewsStand() {
         renderCurrentDate();
         renderCompanyLogo();
         setInterval(() => {
-            renderTopNews(getTopNews.getTopNewsTemplate())
+            renderTopNews(topNewsForm.getTopNewsTemplate())
         }, 3500);
     }
 
     const main = async() => {
-        const curPageNum = getRandomCompany.main();
-        await getTopNews.initData()
+        const curPageNum = companysDisplayForm.main();
+        await topNewsForm.initData()
         pageDisabled(curPageNum);
-        renderTopNews(getTopNews.getTopNewsTemplate())
+        renderTopNews(topNewsForm.getTopNewsTemplate())
         renderComponent()
         setEventHandler();
     };

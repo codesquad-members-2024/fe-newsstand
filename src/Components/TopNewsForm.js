@@ -1,4 +1,4 @@
-export class GetTopNews {
+export class TopNewsForm {
     #firstTopNewsData;
     #secondTopNewsData;
     constructor() {
