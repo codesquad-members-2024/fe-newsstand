@@ -37,30 +37,45 @@ body {
 }
 
 .rollingnews {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   width: 910px;
-  height: 84px;
   padding: 10px;
+  margin: 0 auto;
 }
 
 .recentnews {
   background-color: #f6f7f9; 
-  margin: 10px;
+  margin: 10px 5px;
   font-size: 30px;
-  text-align: center;
+  padding-left: 10px; 
+  width: 450px;
+}
+
+.rollingnews-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.recentnews b {
+  font-size: 16px; 
+  margin-right: 10px; 
+  color: #111; 
+}
+.recentnews span {
+  font-size: 14px; 
+  color: #666; 
 }
 
 .mediacompany {
   display: flex;
   align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
   justify-content: space-between; /* 양 옆에 정렬 */
 }
 
 .list-view-btn, .grid-view-btn {
   background: #ffffff;
   border: 0px;
-  margin-right: 10px;
 }
 
 .view-btn {
@@ -74,7 +89,7 @@ body {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(4, auto);
-  width: 910px;
+  width: 930px;
   height: 368px;
   position: relative;
 }
@@ -123,11 +138,7 @@ body {
   transform: translate(-50%, -50%); 
 }
 
-.mediacompany {
-  padding: 10px;
-}
-
-.news_logo button.subscribe-btn {
+.news_logo .subscribe-btn {
   display: none;
   position: absolute; 
   top: 50%; 
@@ -146,6 +157,6 @@ body {
   visibility: hidden;
 }
 
-.news_logo:hover button.subscribe-btn {
+.news_logo:hover .subscribe-btn {
   display: block;
 }
