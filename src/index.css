@@ -81,27 +81,41 @@ a.light-btn:hover {
     border: 1px;
     background: #F5F7F9;
     position: relative;
-    animation: moveDown 2.5s infinite;
+    animation: firstMoveDown 2.5s infinite;
 }
 
-@keyframes moveDown {
+.second-top-news {
+    animation: secondMoveDown 2.4s infinite;
+}
+
+@keyframes firstMoveDown {
     0% {
         top: 0;
     }
 
     100% {
-        top: -50px;
+        top: -49px;
     }
 }
 
-/* .first-top-news:nth-of-type(1),
+@keyframes secondMoveDown {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: -55px;
+    }
+}
+
+.first-top-news:nth-of-type(1),
 .first-top-news:nth-of-type(2) {
     animation-delay: 1s;
-} */
+}
 
 .second-top-news:nth-of-type(1),
 .second-top-news:nth-of-type(2) {
-    animation-delay: 1s;
+    animation-delay: 2s;
 }
 
 .first-top-news {
