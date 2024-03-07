@@ -4,6 +4,7 @@ import fs from "fs";
 
 export class NewsCrawlingData {
     #topNewsData;
+    #newsData
     constructor() {
         // contrastEconomy
         // broadcastCommunication
@@ -46,11 +47,7 @@ export class NewsCrawlingData {
                 contents: $(node).find(".dsc_wrap").text(),
             });
         });
-        const newsData = {
-            id: "topnNews", 
-            data: informations
-        };
-        this.#topNewsData = newsData;
+        this.#topNewsData = informations;
     }
 
     creatJson(tableName, data) {

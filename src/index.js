@@ -1,9 +1,9 @@
 import { GetRandomCompany } from "./companysDisplayForm.js";
 import { DateCalculator } from "./DateCalculator.js";
-import { jsonParser } from "./JsonParser.js";
-
+import { GetTopNews } from "./getTopNews.js";
 function NewsStand() {
     const getRandomCompany = new GetRandomCompany();
+    const getTopNews = new GetTopNews()
     const renderCompanyLogo = () => {
         const logoTemplate = getRandomCompany.getLogoTemplat();
         const companyDisplayBox = document.querySelector(".company-display");
@@ -54,13 +54,33 @@ function NewsStand() {
         updatePageBtn.addEventListener("click", checkLocationType);
     };
 
-    const main = () => {
-        const curPageNum = getRandomCompany.main();
-        renderCompanyLogo();
-        pageDisabled(curPageNum);
+    const renderTopNews = (topNewsTemplate) => {
+        const [firstTemplate, secondTemplate] = topNewsTemplate
+        const topNewsContainer = document.querySelector(".top-news-box")
+        topNewsContainer.innerHTML = ""
+        topNewsContainer.innerHTML = firstTemplate + secondTemplate;
+        
+    }
+
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    const renderComponent = () => {
         renderCurrentDate();
+        renderCompanyLogo();
+        setInterval(() => {
+            renderTopNews(getTopNews.getTopNewsTemplate())
+        }, 2000);
+    }
+
+    const main = async() => {
+        const curPageNum = getRandomCompany.main();
+        await getTopNews.initData()
+        pageDisabled(curPageNum);
+        renderTopNews(getTopNews.getTopNewsTemplate())
+        renderComponent()
         setEventHandler();
     };
+
     return { main };
 }
 
