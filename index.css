@@ -131,16 +131,44 @@ body {
   height: 388px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  border: 1px solid #D2DAE0;
+  outline: 1px solid #D2DAE0;
 }
 
-.press-table > img {
-  border: 1px solid #D2DAE0;
+.logo-cell {
+  height: 97.13px;
+  outline: 1px solid #D2DAE0;
 }
 
-.press-container > img {
+.logo-cell:hover {
+  background-color: #F5F7F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subscribe-button {
+  width: 50%;
+  height: 30%;
+  background-color: #FFFFFF;
+  border: 1px solid #D2DAE0;
+  border-radius: 50px;
+  color: #879298;
+  display: none;
+}
+
+.logo-cell:hover > .subscribe-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-cell > img {
   width: 24px;
   height: 40px;
+}
+
+.logo-cell:hover > img {
+  display: none;
 }
 
 .left-arrow-button {

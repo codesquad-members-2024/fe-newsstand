@@ -41,6 +41,21 @@ const shuffle = (array) => {
 
 const isEmptyNode = (node) => node.childElementCount === NO_ELEMENT;
 
+const createSubscribeButton = () => {
+  const button = document.createElement("button");
+  const plusImage = document.createElement("img");
+  const subscribeText = document.createTextNode("구독하기");
+
+  plusImage.src = "img/PlusSymbol.svg";
+  plusImage.style.cssText = "width: 12px; height: 12px; margin-left: -4px; margin-right: 2px"
+  
+  button.classList.add("subscribe-button");
+  button.appendChild(plusImage);
+  button.appendChild(subscribeText);
+
+  return button;
+}
+
 const createNewNode = (className, titles) => {
   const newNode = document.createElement("div");
   const pressNameTag = document.createElement("span");
@@ -104,7 +119,9 @@ const addImagesIntoTable = (settings, table) => {
   shuffle(cells);
 
   Array.from({ length: settings.cellCountPerPage }).forEach((_, index) => {
+    const newDivTag = document.createElement("div");
     const newImageTag = document.createElement("img");
+    const subscribeButton = createSubscribeButton();
     const cellIndex = pressLogoTableIndex * settings.cellCountPerPage + index;
     const cell = cells[cellIndex];
 
@@ -113,7 +130,11 @@ const addImagesIntoTable = (settings, table) => {
       height:${cell.height}px;
       background:url(${LOGO_IMAGE_PATH}) ${cell.left}px ${cell.top}px;
     `;
-    table.appendChild(newImageTag);
+    newDivTag.classList.add("logo-cell");
+    newDivTag.appendChild(newImageTag);
+    newDivTag.appendChild(subscribeButton);
+
+    table.appendChild(newDivTag);
   });
 };
 
@@ -176,7 +197,7 @@ const renderPressTable = async () => {
 };
 
 renderCurrentDate();
-renderNewsTitles();
+//renderNewsTitles();
 renderPressTable();
 pageLogoIcon.addEventListener("click", pageReload);
 leftArrowButton.addEventListener("click", () => {
@@ -187,4 +208,4 @@ rightArrowButton.addEventListener("click", () => {
   if (pressLogoTableIndex < LAST_PAGE) pressLogoTableIndex++;
   renderPressTable();
 });
-setInterval(renderNewsTitles, ROLLING_DELAY);
+//setInterval(renderNewsTitles, ROLLING_DELAY);
