@@ -17,17 +17,27 @@ const NO_ELEMENT = 0;
 const ONE_SECOND = 1000;
 const ROLLING_DELAY = 5000;
 const CHAR_COUNT = 2;
+const RANDOM_SECTOR = 0.5;
 const PREVIOUS_CLASS_NAME = "auto-rolling-text prev";
 const CURRENT_CLASS_NAME = "auto-rolling-text cur";
 const NEXT_CLASS_NAME = "auto-rolling-text next";
 const PRESS_NAME_EXAMPLE = "연합뉴스";
 const LOGO_IMAGE_PATH = "img/PressLogo.png";
 
+const pageLogoIcon = document.querySelector(".title-container > .icon");
 const leftArrowButton = document.querySelector(".left-arrow-button");
 const rightArrowButton = document.querySelector(".right-arrow-button");
 
 let pressLogoTableIndex = INITIAL_PRESS_LOGO_INDEX;
 let newsTitleIndex = INITIAL_NEWS_TITLE_INDEX;
+
+const pageReload = () => {
+  location.reload();
+}
+
+const shuffle = (array) => {
+  array.sort(() => Math.random() - RANDOM_SECTOR);
+}
 
 const isEmptyNode = (node) => node.childElementCount === NO_ELEMENT;
 
@@ -90,10 +100,13 @@ const renderNewsTitle = async (tag, titles) => {
 };
 
 const addImagesIntoTable = (settings, table) => {
+  const cells = settings.cells;
+  shuffle(cells);
+
   Array.from({ length: settings.cellCountPerPage }).forEach((_, index) => {
     const newImageTag = document.createElement("img");
     const cellIndex = pressLogoTableIndex * settings.cellCountPerPage + index;
-    const cell = settings.cells[cellIndex];
+    const cell = cells[cellIndex];
 
     newImageTag.style.cssText = `
       width:${cell.width}px;
@@ -165,6 +178,7 @@ const renderPressTable = async () => {
 renderCurrentDate();
 renderNewsTitles();
 renderPressTable();
+pageLogoIcon.addEventListener("click", pageReload);
 leftArrowButton.addEventListener("click", () => {
   if (pressLogoTableIndex > FIRST_PAGE) pressLogoTableIndex--;
   renderPressTable();
