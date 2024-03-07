@@ -1,6 +1,4 @@
 const WEEK = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
-const PRESS_NAME_TEXT = '<span class="press-text">연합뉴스</span>';
-const NEWS_TITLE_TEXT = '<span class="news-title-text"></span>';
 const MAX_NEWS_TITLE_INDEX = 10;
 const PREVIOUS_CLASS_NAME = 'auto-rolling-text prev';
 const CURRENT_CLASS_NAME = 'auto-rolling-text cur';
@@ -12,13 +10,14 @@ const rightArrowButton = document.querySelector(".right-arrow-button");
 let pressLogoTableIndex = 0;
 let newsTitleIndex = 1;
 
-const increaseIndex = (index) => {index++;};
-const decreaseIndex = (index) => {index--;};
-
 const createNewNode = (className, titles) => {
   const newNode = document.createElement("div");
-  const pressNameTag = new DOMParser().parseFromString(PRESS_NAME_TEXT, "text/xml").documentElement;
-  const newsTitleTag = new DOMParser().parseFromString(NEWS_TITLE_TEXT, "text/xml").documentElement;
+  const pressNameTag = document.createElement("span");
+  const newsTitleTag = document.createElement("span");
+
+  pressNameTag.classList.add("press-text");
+  pressNameTag.textContent += '연합뉴스';
+  newsTitleTag.classList.add("news-title-text");
 
   newNode.classList.add(...className.split(" "));
   newNode.appendChild(pressNameTag);
@@ -30,16 +29,28 @@ const createNewNode = (className, titles) => {
   return newNode;
 }
 
-const renderNewsTitle = async (tag, titles) => {
-  const texts = tag.getElementsByClassName("auto-rolling-text");
-  const prev = texts[0].childElementCount === 0 ? createNewNode(PREVIOUS_CLASS_NAME, titles) : texts[0];
-  const current = texts[1].childElementCount === 0 ? createNewNode(CURRENT_CLASS_NAME, titles) : texts[1];
-  const next = texts[2].childElementCount === 0 ? createNewNode(NEXT_CLASS_NAME, titles) : texts[2];
-  const newNext = createNewNode(NEXT_CLASS_NAME, titles);
+const initializeAutoRollingNode = (tag, className, titles) => {
+  const cssSelector = className.split(" ").map((name) => `.${name}`).join("");
+  let node = tag.querySelector(cssSelector);
+  if (node === null) {
+    node = createNewNode(className, titles);
+    tag.appendChild(node);
+  }
 
-  if (texts[0].childElementCount === 0) tag.replaceChild(prev, texts[0]);
-  if (texts[1].childElementCount === 0) tag.replaceChild(current, texts[1]);
-  if (texts[2].childElementCount === 0) tag.replaceChild(next, texts[2]);
+  return node;
+}
+
+const initializeAutoRollingNodes = (tag, titles) => {
+  const prev = initializeAutoRollingNode(tag, PREVIOUS_CLASS_NAME, titles);
+  const current = initializeAutoRollingNode(tag, CURRENT_CLASS_NAME, titles);
+  const next = initializeAutoRollingNode(tag, NEXT_CLASS_NAME, titles);
+  const newNext = createNewNode(NEXT_CLASS_NAME, titles);
+  
+  return { prev: prev, current: current, next: next, newNext: newNext };
+}
+
+const renderNewsTitle = async (tag, titles) => {
+  const { prev, current, next, newNext } = initializeAutoRollingNodes(tag, titles);
 
   tag.removeChild(prev);
   current.classList.remove('cur');
@@ -76,13 +87,16 @@ const renderCurrentDate = () => {
 }
 
 const renderNewsTitles = async () => {
-  const textBoxes = document.querySelectorAll(".auto-rolling-textbox");
+  const textBoxes = Array.from(document.querySelectorAll(".auto-rolling-textbox"));
   const titlesPath = "data/news.json";
   const response = await fetch(titlesPath);
   const titles = await response.json().then((json) => json.titles);
 
-  textBoxes.forEach((textBox) => {
-    renderNewsTitle(textBox, titles);
+  if (textBoxes.some((textBox) => textBox.childElementCount === 0)) {
+    textBoxes.forEach((textBox) => {renderNewsTitle(textBox, titles)});
+  }
+  textBoxes.forEach((textBox, index) => {
+    setTimeout(() => renderNewsTitle(textBox, titles), index * 1000);
   });
 }
 
@@ -112,13 +126,11 @@ renderCurrentDate();
 renderNewsTitles();
 renderPressTable();
 leftArrowButton.addEventListener('click', () => {
-  if ( pressLogoTableIndex > 0 ) decreaseIndex(pressLogoTableIndex);
+  if ( pressLogoTableIndex > 0 ) pressLogoTableIndex--;
   renderPressTable();
 });
 rightArrowButton.addEventListener('click', () => {
-  if ( pressLogoTableIndex < 3 ) increaseIndex(pressLogoTableIndex);
+  if ( pressLogoTableIndex < 3 ) pressLogoTableIndex++;
   renderPressTable();
 });
-document.addEventListener('DOMContentLoaded', () => {
-  setInterval(renderNewsTitles, 4000); 
-});
+setInterval(renderNewsTitles, 5000);

@@ -72,19 +72,23 @@ body {
   top: 20px;
 }
 
-.auto-rolling-text > span {
+.press-text {
   margin-left: 16px;
   font-size: 14px;
-}
-
-.press-text {
   font-weight: 700;
   color: #14212B;
+  white-space: nowrap;
 }
 
 .news-title-text {
+  margin-left: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #4B5966;
+  margin-right: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .press-menu {
