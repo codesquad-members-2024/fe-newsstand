@@ -1,29 +1,9 @@
-const newsLogos = [
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
-  "https://s.pstatic.net/static/newsstand/2019/logo/011.png"
-];
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+
+const shuffleLogos = newsLogos.flat();
+shuffle(shuffleLogos);
 
 function createNewsLogo(logoURL) {
   const newsLogo = document.createElement("div");
@@ -61,7 +41,22 @@ function createNewsLogo(logoURL) {
   return newsLogo;
 }
 
-for (const logoURL of newsLogos) {
-  const newsLogo = createNewsLogo(logoURL);
-  document.querySelector('.newsgroup').appendChild(newsLogo);
+function showLogos(page) {
+  const logosPerPage = 24;
+  const startIndex = (page - 1) * logosPerPage;
+  const endIndex = startIndex + logosPerPage;
+  const logosToShow = shuffleLogos.slice(startIndex, endIndex);
+
+  const buttonsHTML = document.querySelector('.newsgroup .right-btn').outerHTML + document.querySelector('.newsgroup .left-btn').outerHTML;
+
+  // 버튼 요소들을 제외한 나머지로 빈 문자열로 설정
+  document.querySelector('.newsgroup').innerHTML = buttonsHTML;
+
+  logosToShow.forEach((logoURL) => {
+    const newsLogo = createNewsLogo(logoURL);
+    document.querySelector('.newsgroup').appendChild(newsLogo);
+  });
 }
+
+
+showLogos(1);
