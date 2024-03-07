@@ -7,13 +7,21 @@ const PRESS_LOGOS_HEIGHT = 1554;
 const ROW_COUNT = 16;
 const COLUMN_COUNT = 6;
 const CELL_COUNT_PER_PAGE = 24;
+const NO_ELEMENT = 0;
+const INCREMENT = 1;
+const URL =
+  "https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZxYUdjU0FtdHZHZ0pMVWlnQVAB?hl=ko&gl=KR&ceid=KR%3Ako";
+const USER_AGENT_CHROME =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3";
 
 const isEmpty = (json) => {
-  return Object.keys(json).length === 0;
+  return Object.keys(json).length === NO_ELEMENT;
 };
 
 const parseStringFromDate = (date) => {
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  return `${date.getFullYear()}-${
+    date.getMonth() + INCREMENT
+  }-${date.getDate()}`;
 };
 
 const addWidthHeightSettings = (json) => {
@@ -58,15 +66,11 @@ const initializePressTable = () => {
 };
 
 const crawlNewsTitles = async (json) => {
-  const response = await axios.get(
-    "https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZxYUdjU0FtdHZHZ0pMVWlnQVAB?hl=ko&gl=KR&ceid=KR%3Ako",
-    {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
-      },
-    }
-  );
+  const response = await axios.get(URL, {
+    headers: {
+      "User-Agent": USER_AGENT_CHROME,
+    },
+  });
   const doc = response.data;
   let $ = cheerio.load(doc);
   const titles = [];
