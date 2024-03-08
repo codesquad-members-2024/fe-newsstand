@@ -5,12 +5,6 @@ body {
     padding: 0;
 }
 
-a, button{
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
-}
-
 .main {
     display: flex;
     flex-direction: column;
@@ -20,44 +14,69 @@ a, button{
     width: 1000px;
 }
 
-.header-box {
-    margin: 0 20px 30px 20px;
+header {
+    margin: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.news-stand-message {
-    width: 104px;
-    height: 29px;
+.header__title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header__title-container__img {
+    width: 24px;
+    height: 24px;
+}
+
+.header__title-container__title {
     font-size: 24px;
     font-weight: bold;
     margin-left: 10px;
 }
 
-.date {
+.header__title-container__date {
     width: 140px;
-    height: 22px;
     text-align: right;
 }
 
-.show-all-company {
+.top-news-container {
+    margin: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    height: 45px;
+}
+
+.top-news-container__board {
+    overflow: hidden;
+    width: 475px;
+}
+
+nav {
+    margin: 15px 20px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+a, button{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.subscribe-mode-container__show-all-company {
     font-weight: bold;
     margin-right: 10px;
     font-size: 15px;
 }
 
-.show-all-company, .show-subscribe-company {
+.subscribe-mode-container__show-all-company,
+.subscribe-mode-container__show-subscribed-company {
     border: none;
     background-color: white;
-}
-
-.top-news-box {
-    margin-bottom: 20px;
-    margin: 0 20px 30px 20px;
-    display: flex;
-    justify-content: space-between;
-    height: 45px;
 }
 
 .company-name {
@@ -145,17 +164,13 @@ ul {
     padding: 0;
 }
 
-nav {
-    margin: 0 20px;
-    display: flex;
-    justify-content: space-between;
-}
+
 
 nav>div {
     display: flex;
 }
 
-.company-list-box {
+.company-list-container {
     display: flex;
     align-items: center;
     margin: 0 auto;
@@ -167,13 +182,13 @@ nav>div {
     height: 426px;
 }
 
-.company-list-box>ul {
+.company-list-container>ul {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, 1fr);
 }
 
-.company-list-box>ul>li {
+.company-list-container>ul>li {
     border-right: 1px solid gray;
     border-bottom: 1px solid gray;
 }
@@ -192,17 +207,6 @@ nav>div {
 .list-12,
 .list-18 {
     border-left: 1px solid gray;
-}
-
-.newspaper {
-    width: 24px;
-    height: 24px;
-}
-
-.news-stand-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .date,
@@ -224,14 +228,6 @@ a>img {
 .light-btn {
     position: absolute;
     margin-left: 20px;
-}
-
-.top-news-display-board {
-    overflow: hidden;
-}
-
-.margin-right {
-    margin-right: 10px;
 }
 
 .company-display li {

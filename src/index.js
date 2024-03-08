@@ -15,7 +15,7 @@ function NewsStand() {
     const renderCurrentDate = () => {
         const dateCalculator = new DateCalculator();
         const [year, month, date, day] = dateCalculator.getCurrentDate();
-        const dateHtmlBox = document.querySelector(".date");
+        const dateHtmlBox = document.querySelector(".header__title-container__date");
         dateHtmlBox.innerHTML = `
         ${year}. ${month}. ${date}. ${day}
         `;
@@ -49,16 +49,16 @@ function NewsStand() {
     const reloadPage = () => location.reload();
 
     const setEventHandler = () => {
-        const newStandMainLogo = document.querySelector(".news-stand-box");
+        const newStandMainLogo = document.querySelector(".header__title-container");
         newStandMainLogo.addEventListener("click", reloadPage);
 
-        const updatePageBtn = document.querySelector(".company-list-box");
+        const updatePageBtn = document.querySelector(".company-list-container");
         updatePageBtn.addEventListener("click", checkLocationType);
     };
 
 
     const renderTopNews = (topNewsTemplate) => {
-        const topNewsContainer = Array.from(document.querySelector(".top-news-box").children)
+        const topNewsContainer = Array.from(document.querySelector(".top-news-container").children)
         topNewsContainer.forEach((node, idx) => {
             node.innerHTML = topNewsTemplate[idx]
         });

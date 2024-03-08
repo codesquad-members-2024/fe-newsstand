@@ -9,38 +9,37 @@
 </head>
 
 <body>
-
-    <div class="main">
-        <header class="header-box">
-            <a class="news-stand-box">
-                <img class="newspaper" src="/static/ikon/newspaper.png">
-                <div class="news-stand-message">뉴스스탠드</div>
+    <main class="main">
+        <header>
+            <a class="header__title-container">
+                <img class="header__title-container__img" src="/static/ikon/newspaper.png">
+                <h1 class="header__title-container__title">뉴스스탠드</h1>
             </a>
-            <div class="date"></div>
+            <div class="header__title-container__date"></div>
         </header>
 
-        <div class="top-news-box">
-            <div class="top-news-display-board margin-right"></div>
-            <div class="top-news-display-board"></div>
+        <div class="top-news-container">
+            <div class="top-news-container__board"></div>
+            <div class="top-news-container__board"></div>
         </div>
 
         <nav>
             <div class="subscribe-mode-container">
-                <button class="show-all-company">전체 언론사</button>
-                <button class="show-subscribe-company">내가 구독한 언론사</button>
+                <button class="subscribe-mode-container__show-all-company">전체 언론사</button>
+                <button class="subscribe-mode-container__show-subscribed-company">내가 구독한 언론사</button>
             </div>
-            <div>
-                <img src="/static/ikon/Symbol.png">
-                <img src="/static/ikon/grid-view.png">
+            <div class="sort-mode-container">
+                <a class="sort-mode-container__show-grid-mode"><img src="/static/ikon/Symbol.png"></a>
+                <a class="sort-mode-container__show-list-mode"><img src="/static/ikon/grid-view.png"></a>
             </div>
         </nav>
-        <main class="company-list-box">
+        <main class="company-list-container">
             <a><img class="left-btn" src="/static/ikon/LeftButton.png"></a>
             <ul class="company-display">
             </ul>
             <a><img class="light-btn" src="/static/ikon/RightButton.png"></a>
         </main>
-    </div>
+    </main>
     <script src="src/index.js" type="module"></script>
 </body>
 
