@@ -7,13 +7,12 @@ body {
 .container {
 	min-height: 500px;
 	min-width: 500px;
+  width: 930px;
 }
 
 .header {
 	display: flex;
-  width: 910px;
   height: 84px;
-  padding: 10px;
   position: relative;
 }
 
@@ -21,7 +20,7 @@ body {
   display: flex;
   align-items: center;
   position: absolute;
-  top: 40%;
+  bottom: 0;
   font-size: 1.5rem;
 }
 
@@ -36,18 +35,11 @@ body {
   align-self: flex-end;
 }
 
-.rollingnews {
-  width: 910px;
-  padding: 10px;
-  margin: 0 auto;
-}
-
 .recentnews {
   background-color: #f6f7f9; 
-  margin: 10px;
+  padding: 10px;
   font-size: 30px;
-  padding-left: 10px; 
-  width: 450px;
+  width: 47%;
 }
 
 .rollingnews-content {
@@ -84,6 +76,11 @@ body {
 }
 
 .newsgroup {
+  display: flex;
+  position: relative;
+}
+
+.newsgroup-grid {
   border-top: 1px solid rgba(0, 0, 0, 0.8);
   border-left: 1px solid rgba(0, 0, 0, 0.8);
   display: grid;
@@ -94,28 +91,43 @@ body {
   position: relative;
 }
 
+.newsgroup-grid_logo {
+  border-right: 1px solid rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.8); 
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+  background: white;
+  position: relative;
+}
+
+.newsgroup-grid_logo img {
+  visibility: visible;
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 60%;
+}
+
 .newsgroup button {
   background: none;
   border: none;
   cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  border: 1px solid #fefefe;
+  background-color: white;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .right-btn {
-  position: absolute;
-  z-index: 1;
-  border: 1px solid #fefefe;
-  background-color: white;
-  right: -60px;
-  top: 50%;
+  right: -10%;
 }
 
 .left-btn {
-  position: absolute;
-  z-index: 1;
-  border: 1px solid #fefefe;
-  background-color: white;
-  left: -60px;
-  top: 50%;
+  left: -10%;
 }
 
 .right-btn img {
@@ -136,7 +148,7 @@ body {
   position: relative;
 }
 
-.news_logo .subscribe-btn {
+.newsgroup-grid_logo .subscribe-btn {
   display: none;
   position: absolute; 
   top: 50%; 
@@ -147,14 +159,14 @@ body {
   border-radius: 50px;
 }
 
-.news_logo:hover {
+.newsgroup-grid_logo:hover {
   background: #f6f7f9;
 }
 
-.news_logo:hover img {
+.newsgroup-grid_logo:hover img {
   visibility: hidden;
 }
 
-.news_logo:hover .subscribe-btn {
+.newsgroup-grid_logo:hover .subscribe-btn {
   display: block;
 }

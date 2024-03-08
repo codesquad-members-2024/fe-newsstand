@@ -1,22 +1,27 @@
-document.addEventListener('DOMContentLoaded', function () {
-  let currentPage = 1;
+const leftBtn = document.querySelector('.left-btn');
+const rightBtn = document.querySelector('.right-btn');
+let currentPage = 0;
 
-  function handleRightButtonClick() {
-    if (currentPage < 4) {
-      currentPage++;
-      showLogos(currentPage);
-    }
-  }
-
-  function handleLeftButtonClick() {
-    if (currentPage > 1) {
-      currentPage--;
-      showLogos(currentPage);
-    }
-  }
-
-  // 이벤트 리스너 추가
-  document.querySelector('.right-btn').addEventListener('click', handleRightButtonClick);
-  
-  document.querySelector('.left-btn').addEventListener('click', handleLeftButtonClick);
+rightBtn.addEventListener('click', ()=>{
+  console.log(currentPage);
+  handleRightButtonClick();
 });
+
+leftBtn.addEventListener('click', ()=>{
+  console.log(currentPage);
+  handleLeftButtonClick();
+});
+
+function handleRightButtonClick() {
+  if (currentPage < 3) {
+    currentPage++;
+  }
+  showLogos(currentPage);
+  }
+
+function handleLeftButtonClick() {
+  if (currentPage > 1) {
+    currentPage--;
+  }
+  showLogos(currentPage);
+  }

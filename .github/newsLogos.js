@@ -5,28 +5,13 @@ function shuffle(array) {
 const shuffleLogos = newsLogos.flat();
 shuffle(shuffleLogos);
 
-function createNewsLogo(logoURL) {
-  const newsLogo = document.createElement("div");
-  newsLogo.classList.add("news_logo");
-  newsLogo.style.borderRight = "1px solid rgba(0, 0, 0, 0.8)";
-  newsLogo.style.borderBottom = "1px solid rgba(0, 0, 0, 0.8)";
-  newsLogo.style.padding = "10px";
-  newsLogo.style.fontSize = "30px";
-  newsLogo.style.textAlign = "center";
-  newsLogo.style.background = "white";
-  newsLogo.style.position = "relative";
-
-  const aTag = document.createElement("a");
-  aTag.href = "#";
+function createNewsLogo(logosUrl) {
+  const newsgroupGrid = document.querySelector(".newsgroup-grid");
+  const newsGroupLogo = document.createElement("div");
+  newsGroupLogo.classList.add("newsgroup-grid_logo");
 
   const imgTag = document.createElement("img");
-  imgTag.src = logoURL;
-  imgTag.style.visibility = "visible";
-  imgTag.style.position = "absolute";
-  imgTag.style.top = "50%";
-  imgTag.style.left = "50%";
-  imgTag.style.transform = "translate(-50%, -50%)";
-
+  imgTag.src = logosUrl;
   const spanTag = document.createElement("span");
 
   const subscribeBtn = document.createElement("button");
@@ -34,29 +19,21 @@ function createNewsLogo(logoURL) {
   subscribeBtn.textContent = "+ 구독하기";
 
   spanTag.appendChild(subscribeBtn);
-  aTag.appendChild(imgTag);
-  aTag.appendChild(spanTag);
-  newsLogo.appendChild(aTag);
-
-  return newsLogo;
+  newsGroupLogo.appendChild(imgTag);
+  newsGroupLogo.appendChild(spanTag);
+  newsgroupGrid.appendChild(newsGroupLogo);
 }
 
 function showLogos(page) {
   const logosPerPage = 24;
-  const startIndex = (page - 1) * logosPerPage;
+  const startIndex = page * logosPerPage;
   const endIndex = startIndex + logosPerPage;
-  const logosToShow = shuffleLogos.slice(startIndex, endIndex);
+  const logosUrl = shuffleLogos.slice(startIndex, endIndex);
 
-  const buttonsHTML = document.querySelector('.newsgroup .right-btn').outerHTML + document.querySelector('.newsgroup .left-btn').outerHTML;
-
-  // 버튼 요소들을 제외한 나머지로 빈 문자열로 설정
-  document.querySelector('.newsgroup').innerHTML = buttonsHTML;
-
-  logosToShow.forEach((logoURL) => {
-    const newsLogo = createNewsLogo(logoURL);
-    document.querySelector('.newsgroup').appendChild(newsLogo);
+  document.querySelector(".newsgroup-grid").innerHTML = '';
+  logosUrl.forEach(url => {
+    createNewsLogo(url);
   });
 }
 
-
-showLogos(1);
+showLogos(0);
