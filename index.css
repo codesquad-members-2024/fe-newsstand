@@ -162,7 +162,7 @@ body {
   display: none;
 }
 
-.press-container__logo:hover > .subscribe-button {
+.press-container__logo:hover > .press-container__subscribe-button {
   display: flex;
   align-items: center;
   justify-content: center;

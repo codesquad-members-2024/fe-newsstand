@@ -110,7 +110,6 @@ const renderNewsTitle = async (tag, titles) => {
   current.classList.add("prev");
   next.classList.remove("next");
   next.classList.add("cur");
-  debugger
   tag.appendChild(newNext);
 };
 
