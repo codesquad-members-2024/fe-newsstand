@@ -197,7 +197,7 @@ const renderPressTable = async () => {
 };
 
 renderCurrentDate();
-//renderNewsTitles();
+renderNewsTitles();
 renderPressTable();
 pageLogoIcon.addEventListener("click", pageReload);
 leftArrowButton.addEventListener("click", () => {
@@ -208,4 +208,4 @@ rightArrowButton.addEventListener("click", () => {
   if (pressLogoTableIndex < LAST_PAGE) pressLogoTableIndex++;
   renderPressTable();
 });
-//setInterval(renderNewsTitles, ROLLING_DELAY);
+setInterval(renderNewsTitles, ROLLING_DELAY);
