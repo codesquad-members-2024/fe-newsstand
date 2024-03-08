@@ -18,15 +18,15 @@ const ONE_SECOND = 1000;
 const ROLLING_DELAY = 5000;
 const CHAR_COUNT = 2;
 const RANDOM_SECTOR = 0.5;
-const PREVIOUS_CLASS_NAME = "auto-rolling-text prev";
-const CURRENT_CLASS_NAME = "auto-rolling-text cur";
-const NEXT_CLASS_NAME = "auto-rolling-text next";
+const PREVIOUS_CLASS_NAME = "rolling__text prev";
+const CURRENT_CLASS_NAME = "rolling__text cur";
+const NEXT_CLASS_NAME = "rolling__text next";
 const PRESS_NAME_EXAMPLE = "연합뉴스";
 const LOGO_IMAGE_PATH = "img/PressLogo.png";
 
-const pageLogoIcon = document.querySelector(".title-container > .icon");
-const leftArrowButton = document.querySelector(".left-arrow-button");
-const rightArrowButton = document.querySelector(".right-arrow-button");
+const pageLogoIcon = document.querySelector(".top-container__icon");
+const leftArrowButton = document.querySelector(".press-container__left-arrow");
+const rightArrowButton = document.querySelector(".press-container__right-arrow");
 
 let pressLogoTableIndex = INITIAL_PRESS_LOGO_INDEX;
 let newsTitleIndex = INITIAL_NEWS_TITLE_INDEX;
@@ -49,7 +49,7 @@ const createSubscribeButton = () => {
   plusImage.src = "img/PlusSymbol.svg";
   plusImage.style.cssText = "width: 12px; height: 12px; margin-left: -4px; margin-right: 2px"
   
-  button.classList.add("subscribe-button");
+  button.classList.add("press-container__subscribe-button");
   button.appendChild(plusImage);
   button.appendChild(subscribeText);
 
@@ -61,9 +61,9 @@ const createNewNode = (className, titles) => {
   const pressNameTag = document.createElement("span");
   const newsTitleTag = document.createElement("span");
 
-  pressNameTag.classList.add("press-text");
+  pressNameTag.classList.add("rolling__press-text");
   pressNameTag.textContent += PRESS_NAME_EXAMPLE;
-  newsTitleTag.classList.add("news-title-text");
+  newsTitleTag.classList.add("rolling__news-title-text");
 
   newNode.classList.add(...className.split(" "));
   newNode.appendChild(pressNameTag);
@@ -110,7 +110,7 @@ const renderNewsTitle = async (tag, titles) => {
   current.classList.add("prev");
   next.classList.remove("next");
   next.classList.add("cur");
-
+  debugger
   tag.appendChild(newNext);
 };
 
@@ -130,7 +130,7 @@ const addImagesIntoTable = (settings, table) => {
       height:${cell.height}px;
       background:url(${LOGO_IMAGE_PATH}) ${cell.left}px ${cell.top}px;
     `;
-    newDivTag.classList.add("logo-cell");
+    newDivTag.classList.add("press-container__logo");
     newDivTag.appendChild(newImageTag);
     newDivTag.appendChild(subscribeButton);
 
@@ -153,7 +153,7 @@ const setVisibilityOfArrowButtons = () => {
 };
 
 const renderCurrentDate = () => {
-  const currentDateTag = document.querySelector(".currentDate");
+  const currentDateTag = document.querySelector(".top-container__date-text");
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth() + INCREMENT;
@@ -169,7 +169,7 @@ const renderCurrentDate = () => {
 
 const renderNewsTitles = async () => {
   const textBoxes = Array.from(
-    document.querySelectorAll(".auto-rolling-textbox")
+    document.querySelectorAll(".rolling__text-box")
   );
   const titlesPath = "data/news.json";
   const response = await fetch(titlesPath);
@@ -186,7 +186,7 @@ const renderNewsTitles = async () => {
 };
 
 const renderPressTable = async () => {
-  const pressTable = document.querySelector(".press-table");
+  const pressTable = document.querySelector(".press-container__logo-table");
   const settingPath = "data/pressLogoTable.json";
   const response = await fetch(settingPath);
   const settings = await response.json();
