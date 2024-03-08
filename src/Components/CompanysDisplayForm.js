@@ -39,8 +39,8 @@ export class CompanysDisplayForm {
         const logoTemplate = this.#companyData[this.currenPageNum].map((cur, idx) => {
             return `
             <li class="list-${idx}">
-            <div class = "subscribe-container"><button>구독하기</button></div>
-            <img src = "static/company-logo/grid-${cur}.png">
+            <img class = "logo-img" src = "static/company-logo/grid-${cur}.png">
+            <button class = "subscribe"> + 구독하기</button>
             </li>
             `;
         });

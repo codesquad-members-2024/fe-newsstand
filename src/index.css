@@ -5,7 +5,7 @@ body {
     padding: 0;
 }
 
-a {
+a, button{
     text-decoration: none;
     color: black;
     cursor: pointer;
@@ -41,18 +41,23 @@ a {
     text-align: right;
 }
 
-.all-company {
+.show-all-company {
     font-weight: bold;
     margin-right: 10px;
+    font-size: 15px;
 }
 
+.show-all-company, .show-subscribe-company {
+    border: none;
+    background-color: white;
+}
 
 .top-news-box {
     margin-bottom: 20px;
     margin: 0 20px 30px 20px;
     display: flex;
     justify-content: space-between;
-    height: 50px;
+    height: 45px;
 }
 
 .company-name {
@@ -122,12 +127,9 @@ a {
     animation-delay: 2s;
 }
 
-.first-top-news:hover{
+.first-top-news:hover, .second-top-news:hover{
     animation-play-state: paused;
-}
-
-.second-top-news:hover{
-    animation-play-state: paused;
+    z-index: 1;
 }
 
 img {
@@ -162,11 +164,13 @@ nav>div {
 
 .company-display {
     width: 960px;
+    height: 426px;
 }
 
 .company-list-box>ul {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
 }
 
 .company-list-box>ul>li {
@@ -203,7 +207,7 @@ nav>div {
 
 .date,
 .detail,
-.subscribe-company {
+.show-subscribe-company {
     opacity: 0.5
 }
 
@@ -230,6 +234,25 @@ a>img {
     margin-right: 10px;
 }
 
-.subscribe-container {
+.company-display li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subscribe {
     display: none;
+    border: 1px solid gray;
+    border-radius: 10px;
+    color: #8b8989;
+    background-color: white;
+}
+
+.company-display li:hover{
+    .subscribe {
+        display: inline;
+    }
+    .logo-img{
+        display: none;
+    }
 }

@@ -1,9 +1,10 @@
 export class TopNewsForm {
-    #firstTopNewsData;
-    #secondTopNewsData;
+    #topNewsData;
     constructor() {
-        this.#firstTopNewsData = [];
-        this.#secondTopNewsData = [];
+        this.#topNewsData = [
+            { newsData: [], className: "first-top-news" },
+            { newsData: [], className: "second-top-news" },
+        ];
     }
 
     async initData() {
@@ -14,8 +15,7 @@ export class TopNewsForm {
         const news = await fetch("/topNews.json");
         const data = await news.json();
         this.spliceCompanyString(data);
-        this.#firstTopNewsData.push(...data.splice(0, 5));
-        this.#secondTopNewsData.push(...data);
+        this.#topNewsData.forEach(cur => cur.newsData.push(...data.splice(0, 5)))
     }
 
     spliceCompanyString(data) {
@@ -26,54 +26,33 @@ export class TopNewsForm {
     }
 
     updateNewsData() {
-        const firstData = this.#firstTopNewsData.shift();
-        this.#firstTopNewsData.push(firstData);
-        const secondData = this.#secondTopNewsData.shift();
-        this.#secondTopNewsData.push(secondData);
+        this.#topNewsData.forEach(curNews => {
+            const data = curNews.newsData.shift();
+            curNews.newsData.push(data);    
+        })
     }
 
     getTopNewsTemplate() {
         this.updateNewsData();
-        const [firstNewsCur, firstNewsNext] = [
-            this.#firstTopNewsData[0],
-            this.#firstTopNewsData[1],
-        ];
-        const [secondNewsCur, secondNewsNext] = [
-            this.#secondTopNewsData[0],
-            this.#secondTopNewsData[1],
-        ];
-        const firstTopNewsTemplate = `
-            <div class="first-top-news">
-                <div class="company-name">${firstNewsCur.press}</div>
-                <div class="detail"><a href="${firstNewsCur.link}">
-                        ${firstNewsCur.title}
+        const [firstTopNewsTemplate, secondTopNewsTemplate] = this.#topNewsData.map((curNews, idx) => {
+            const [newsCur, newsNext] = [curNews.newsData[0], curNews.newsData[1]];
+            return `
+            <div class="${curNews.className}">
+                <div class="company-name">${newsCur.press}</div>
+                <div class="detail"><a href="${newsCur.link}">
+                        ${newsCur.title}
                     </a>
                 </div>
             </div>
-            <div class="first-top-news">
-                <div class="company-name">${firstNewsNext.press}</div>
-                <div class="detail"><a href="${firstNewsNext.link}">
-                        ${firstNewsNext.title}
+            <div class="${curNews.className}">
+                <div class="company-name">${newsNext.press}</div>
+                <div class="detail"><a href="${newsNext.link}">
+                        ${newsNext.title}
                     </a>
                 </div>
             </div>
-        `;
-        const secondTopNewsTemplate = `
-            <div class="second-top-news">
-                <div class="company-name">${secondNewsCur.press}</div>
-                <div class="detail"><a href="${secondNewsCur.link}">
-                        ${secondNewsCur.title}
-                    </a>
-                </div>
-            </div>
-            <div class="second-top-news">
-                <div class="company-name">${secondNewsNext.press}</div>
-                <div class="detail"><a href="${secondNewsNext.link}">
-                        ${secondNewsNext.title}
-                    </a>
-                </div>
-            </div>
-        `;
+            `
+        })
         return [firstTopNewsTemplate, secondTopNewsTemplate];
     }
 }
