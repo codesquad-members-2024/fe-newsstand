@@ -12,15 +12,16 @@ leftBtn.addEventListener('click', ()=>{
   handleLeftButtonClick();
 });
 
+
 function handleRightButtonClick() {
-  if (currentPage < 3) {
+  if (currentPage < newsLogos.length) {
     currentPage++;
   }
   showLogos(currentPage);
   }
 
 function handleLeftButtonClick() {
-  if (currentPage > 1) {
+  if (currentPage > 0) {
     currentPage--;
   }
   showLogos(currentPage);
