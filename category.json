@@ -1,0 +1,392 @@
+[
+    {
+        "category": 1,
+        "data": [
+            {
+                "press": "경향신문언론사 선정",
+                "href": "https://www.khan.co.kr/politics/politics-general/article/202403090700001",
+                "title": "일단 묻고 지하로 가자구요?[뉴스레터 점선면]",
+                "time": "15시간 전"
+            },
+            {
+                "press": "세계일보",
+                "href": "http://www.segye.com/newsView/20240309506930?OutUrl=naver",
+                "title": "‘뉴스룸 하차’ 강지영 아나운서, 4월 결혼설…예비 신랑은 금융계 종사자",
+                "time": "1시간 전"
+            },
+            {
+                "press": "조선일보",
+                "href": "https://www.chosun.com/international/international_general/2024/03/09/QOLH63K33ZGDFJ6TC3TTLPCERE/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+                "title": "美 대선 바이든·트럼프 ‘또 대결’ [원샷 국제뉴스]",
+                "time": "12시간 전"
+            },
+            {
+                "press": "서울신문언론사 선정",
+                "href": "https://www.seoul.co.kr/news/politics/congress/2024/03/08/20240308001004&wlog_tag3=naver",
+                "title": "친명당 된 민주 ‘3가지 킬러문항’… ①본선 경쟁력②중도 확장③내홍 수습[...",
+                "time": "1면 1단"
+            },
+            {
+                "press": "경향신문",
+                "href": "https://www.khan.co.kr/economy/economy-general/article/202403071600001",
+                "title": "네이버·카카오 포털 뉴스도 ‘총선 체제’",
+                "time": "2일 전"
+            },
+            {
+                "press": "경향신문언론사 선정",
+                "href": "https://www.khan.co.kr/national/national-general/article/202403090800011",
+                "title": "‘대구 이슬람사원’ 건립 첩첩산중…이번엔 건축주·시공업체 소송전[정리뉴...",
+                "time": "14시간 전"
+            },
+            {
+                "press": "세계일보언론사 선정",
+                "href": "http://www.segye.com/newsView/20240307517103?OutUrl=naver",
+                "title": "“이미 기술 넘어갔을 수도”… 반도체 인재 ‘마이크론 이직’ 뒤늦은 제동 ...",
+                "time": "A2면 1단"
+            },
+            {
+                "press": "세계일보",
+                "href": "http://www.segye.com/newsView/20240309502885?OutUrl=naver",
+                "title": "주차장 차단기 앞 버젓이 ‘길막’…“뉴스에서만 보던 일이 나에게”",
+                "time": "35분 전"
+            },
+            {
+                "press": "국민일보언론사 선정",
+                "href": "https://www.kmib.co.kr/article/view.asp?arcid=0019874449&code=61111111&cp=nv",
+                "title": "설훈 “文, 갑 속에 든 칼…지금 참고 있을 것”",
+                "time": "11시간 전"
+            },
+            {
+                "press": "중앙일보언론사 선정",
+                "href": "https://www.joongang.co.kr/article/25234015",
+                "title": "배우 나탈리 포트먼, '20대女 불륜' 남편과 11년 만에 이혼",
+                "time": "11시간 전"
+            }
+        ]
+    },
+    {
+        "category": 2,
+        "data": [
+            {
+                "press": "TV조선언론사 선정",
+                "href": "https://news.tvchosun.com/site/data/html_dir/2024/03/09/2024030990080.html",
+                "title": "[뉴스야?!] 0표 받은 조국혁신당?",
+                "time": "2시간 전"
+            },
+            {
+                "press": "뉴시스",
+                "href": "http://www.newsis.com/view/?id=NISX20240309_0002654629&cID=10601&pID=10600",
+                "title": "'뉴스룸 하차' JTBC 강지영 아나운서, 4월 결혼설",
+                "time": "3시간 전"
+            },
+            {
+                "press": "KBS언론사 선정",
+                "href": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=7908884&ref=A",
+                "title": "홍록기 결국 파산…코로나19로 웨딩 사업 악화 [이런뉴스]",
+                "time": "1일 전"
+            },
+            {
+                "press": "YTN",
+                "href": "https://www.ytn.co.kr/_ln/0134_202403081340167893",
+                "title": "日 만화 '드래곤볼' 작가 도리야마 아키라 별세 [지금이뉴스]",
+                "time": "1일 전"
+            },
+            {
+                "press": "연합뉴스",
+                "href": "https://www.yna.co.kr/view/AKR20240309024700011?input=1195m",
+                "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
+                "time": "12시간 전"
+            },
+            {
+                "press": "뉴시스언론사 선정",
+                "href": "http://www.newsis.com/view/?id=NISX20240307_0002652734&cID=10406&pID=13100",
+                "title": "AI가 만든 19금 사진, 가짜뉴스 괜찮나…구글·MS는 망신",
+                "time": "8시간 전"
+            },
+            {
+                "press": "KBS언론사 선정",
+                "href": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=7909013&ref=A",
+                "title": "오늘 세계여성의날, 인권위원장의 걱정 [이런뉴스]",
+                "time": "1일 전"
+            },
+            {
+                "press": "YTN언론사 선정",
+                "href": "https://www.ytn.co.kr/_ln/0134_202403081558005181",
+                "title": "폭행·협박 당한 이천수...원희룡 \"절대 용납 않겠다\" [지금이뉴스]",
+                "time": "1일 전"
+            },
+            {
+                "press": "YTN언론사 선정",
+                "href": "https://www.ytn.co.kr/_ln/0103_202403082317019120",
+                "title": "'전공의 블랙리스트' 사주 의심 문건까지...의협 \"가짜뉴스\"",
+                "time": "23시간 전"
+            },
+            {
+                "press": "연합뉴스언론사 선정",
+                "href": "https://www.yna.co.kr/view/AKR20240308094000011?input=1195m",
+                "title": "[연합뉴스 이 시각 헤드라인] - 14:30",
+                "time": "1일 전"
+            }
+        ]
+    },
+    {
+        "category": 3,
+        "data": [
+            {
+                "press": "매일경제",
+                "href": "https://www.mk.co.kr/article/10960385",
+                "title": "‘뉴스룸 하차’ 강지영 아나, 4월 결혼설",
+                "time": "4시간 전"
+            },
+            {
+                "press": "한국경제언론사 선정",
+                "href": "https://www.hankyung.com/article/2024030860507",
+                "title": "\"엄마·아빠 둘 다 비만이면 빼박\"…중년 된 자녀 분석해보니 [1분뉴스]",
+                "time": "1일 전"
+            },
+            {
+                "press": "아시아경제언론사 선정",
+                "href": "https://view.asiae.co.kr/article/2024030810241147148",
+                "title": "\"AI 모델계 롤스로이스\"…괴물 LLM 또 나왔다 [AI 한입뉴스]",
+                "time": "8시간 전"
+            },
+            {
+                "press": "서울경제언론사 선정",
+                "href": "",
+                "title": "[속보] 의협 \"'블랙리스트 작성' 내부 문건…명백한 가짜뉴스이며 조작된 것\"",
+                "time": "1일 전"
+            },
+            {
+                "press": "이데일리",
+                "href": "http://www.edaily.co.kr/news/newspath.asp?newsid=01095526638821680",
+                "title": "[카드뉴스]2024년 3월 둘째 주 ‘띠별 운세’",
+                "time": "22시간 전"
+            },
+            {
+                "press": "조세일보언론사 선정",
+                "href": "http://www.joseilbo.com/news/news_read.php?uid=511627&class=32&grp=",
+                "title": "뉴스타파, 김건희 주가조작 추가 정황 공개",
+                "time": "1일 전"
+            },
+            {
+                "press": "헤럴드경제언론사 선정",
+                "href": "http://news.heraldcorp.com/view.php?ud=20240308050612",
+                "title": "밸류업 핵심은 배당확대라는데 왜 지주회사 주가는 지지부진? [투자뉴스 뒤풀...",
+                "time": "1일 전"
+            },
+            {
+                "press": "한국경제언론사 선정",
+                "href": "https://www.hankyung.com/article/202403086171i",
+                "title": "혼란 키우는 가짜뉴스…의협 \"전공의 블랙리스트 작성 지시 공문은 가짜\"",
+                "time": "1일 전"
+            },
+            {
+                "press": "아시아경제언론사 선정",
+                "href": "https://view.asiae.co.kr/article/2024030808004762944",
+                "title": "한동훈 수원 유세장에 나타난 주진우…지지자들 \"가짜뉴스 내쫓아라\"",
+                "time": "1일 전"
+            },
+            {
+                "press": "머니투데이언론사 선정",
+                "href": "http://news.mt.co.kr/mtview.php?no=2024030908485251440",
+                "title": "완도 길고양이 '36마리 집단 폐사' 원인…독극물 아니었다",
+                "time": "13시간 전"
+            }
+        ]
+    },
+    {
+        "category": 5,
+        "data": [
+            {
+                "press": "엑스포츠뉴스",
+                "href": "https://www.xportsnews.com/article/1832753",
+                "title": "'뉴스룸 하차' JTBC 강지영 아나운서, 4월 결혼설",
+                "time": "4시간 전"
+            },
+            {
+                "press": "텐아시아",
+                "href": "https://tenasia.hankyung.com/article/2024030866944",
+                "title": "에픽하이 타블로, 9일 JTBC 뉴스룸 출격",
+                "time": "1일 전"
+            },
+            {
+                "press": "스포츠경향",
+                "href": "http://sports.khan.co.kr/news/sk_index.html?art_id=202403080915003&sec_id=540401&pt=nv",
+                "title": "유덕화·양조위, ‘뉴스룸’ 3월10일 뜬다",
+                "time": "1일 전"
+            },
+            {
+                "press": "스포츠동아",
+                "href": "https://sports.donga.com/article/all/20240307/123868292/1",
+                "title": "‘이효리의 레드카펫’ 종영? KBS ‘확인불가’ [연예뉴스 HOT]",
+                "time": "1일 전"
+            },
+            {
+                "press": "스포츠월드",
+                "href": "https://www.sportsworldi.com/newsView/20240309503644",
+                "title": "[금주의 핫뉴스] 트와이스·르세라핌 빌보드 차트 접수…K팝 열풍 계속",
+                "time": "12시간 전"
+            },
+            {
+                "press": "뉴스엔",
+                "href": "https://www.newsen.com/news_view.php?uid=202403082017121310",
+                "title": "웨이션브이 텐, 팬콘 잘 다녀올게요~ 굿나잇^^(출국)[뉴스엔TV]",
+                "time": "1일 전"
+            },
+            {
+                "press": "뉴스인사이드",
+                "href": "http://www.newsinside.kr/news/articleView.html?idxno=1701531",
+                "title": "[뉴스인사이드- 뉴스 톡톡]",
+                "time": "1일 전"
+            },
+            {
+                "press": "스포츠동아",
+                "href": "https://sports.donga.com/article/all/20240307/123868259/1",
+                "title": "뷔, 팬 이벤트 ‘프렌즈 파티’ 16일 개최 [연예뉴스 HOT]",
+                "time": "1일 전"
+            },
+            {
+                "press": "OSEN",
+                "href": "http://www.osen.co.kr/article/G1112290367",
+                "title": "에픽하이 타블로 \"데뷔 20주년 콘서트 잘될 줄 몰라··영화로도 제작\" ('뉴스...",
+                "time": "3시간 전"
+            },
+            {
+                "press": "MK스포츠",
+                "href": "https://www.mk.co.kr/article/10959206",
+                "title": "‘무간도’ 20년 만에 재회…유덕화X양조위, ‘뉴스룸’ 뜬다",
+                "time": "2일 전"
+            }
+        ]
+    },
+    {
+        "category": 7,
+        "data": [
+            {
+                "press": "여성조선",
+                "href": "http://woman.chosun.com/news/articleView.html?idxno=114625",
+                "title": "3월의 트렌드 뉴스 ①",
+                "time": "14시간 전"
+            },
+            {
+                "press": "중앙SUNDAY",
+                "href": "",
+                "title": "[뉴스분석] 제3지대 변수…총선 판도 흔들다",
+                "time": "T1면 TOP"
+            },
+            {
+                "press": "맥스무비",
+                "href": "http://news.maxmovie.com/436899",
+                "title": "홍콩의 전설, 양조위·유덕화 '뉴스룸' 출연, 어떤 이야기 꺼낼까",
+                "time": "1일 전"
+            },
+            {
+                "press": "시사IN언론사 선정",
+                "href": "https://www.sisain.co.kr/news/articleView.html?idxno=52512",
+                "title": "김용남·신장식 대동단결? “한동훈은 휴대전화 비밀번호 공개하라!” [김은지...",
+                "time": "1일 전"
+            },
+            {
+                "press": "매경이코노미",
+                "href": "https://www.mk.co.kr/article/10959607",
+                "title": "3000억원 시대 연 5대 로펌 [카드뉴스]",
+                "time": "1일 전"
+            },
+            {
+                "press": "시사저널언론사 선정",
+                "href": "http://www.sisajournal.com/news/articleView.html?idxno=285143",
+                "title": "설훈 \"文, 당 위중해지면 그냥 있겠나…꾹꾹 참고 있을 것\"",
+                "time": "8시간 전"
+            },
+            {
+                "press": "매경이코노미",
+                "href": "https://www.mk.co.kr/article/10959592",
+                "title": "“짧지만 강하다”…대세는 숏폼 [카드뉴스]",
+                "time": "1일 전"
+            },
+            {
+                "press": "한겨레21언론사 선정",
+                "href": "https://h21.hani.co.kr/arti/economy/economy_general/55204.html",
+                "title": "환경단체로 알고 기부했는데 벌목단체였다?",
+                "time": "11시간 전"
+            },
+            {
+                "press": "한경비즈니스언론사 선정",
+                "href": "https://magazine.hankyung.com/business/article/202403032966b",
+                "title": "이강인 ‘가짜뉴스’ 만들어 억대 수입...도 넘은 유튜버들",
+                "time": "6일 전"
+            },
+            {
+                "press": "위클리오늘",
+                "href": "http://www.weeklytoday.com/news/articleView.html?idxno=613276",
+                "title": "[카드뉴스] 안양시, '시립치매전문요양원' 건립",
+                "time": "2일 전"
+            }
+        ]
+    },
+    {
+        "category": 6,
+        "data": [
+            {
+                "press": "부산일보언론사 선정",
+                "href": "https://www.busan.com/view/busan/view.php?code=2024030715211983412",
+                "title": "[논설위원의 뉴스 요리] “이젠 녹색이야”",
+                "time": "13시간 전"
+            },
+            {
+                "press": "대전일보언론사 선정",
+                "href": "https://www.daejonilbo.com/news/articleView.html?idxno=2118093",
+                "title": "[뉴스 즉설]야권 대장주 이재명-조국, 불편한 동거 누가 이득?",
+                "time": "17시간 전"
+            },
+            {
+                "press": "경기일보언론사 선정",
+                "href": "https://www.kyeonggi.com/article/20240309580060",
+                "title": "'2024 경기국제보트쇼' 북적 [포토뉴스]",
+                "time": "4시간 전"
+            },
+            {
+                "press": "국제신문언론사 선정",
+                "href": "http://www.kookje.co.kr/news2011/asp/newsbody.asp?code=0300&key=20240308.99099002045",
+                "title": "[카드뉴스]부산근교 봄꽃 축제",
+                "time": "1일 전"
+            },
+            {
+                "press": "VOA",
+                "href": "https://www.voakorea.com/a/7519484.html",
+                "title": "[뉴스 따라잡기] '푸틴 5선 확실시' 러시아 대통령 선거",
+                "time": "22시간 전"
+            },
+            {
+                "press": "인천일보",
+                "href": "https://www.incheonilbo.com/news/articleView.html?idxno=1237970",
+                "title": "타블로, 9일 JTBC뉴스룸 전격 출연",
+                "time": "13시간 전"
+            },
+            {
+                "press": "강원일보",
+                "href": "https://www.kwnews.co.kr/page/view/2024030810114770272",
+                "title": "[포토뉴스]정선군새마을회, 회장단 이·취임식",
+                "time": "1일 전"
+            },
+            {
+                "press": "금강일보",
+                "href": "https://www.ggilbo.com/news/articleView.html?idxno=1018229",
+                "title": "'이강인 가짜 뉴스' 6940만 조회수로 7억 돈벌이",
+                "time": "9시간 전"
+            },
+            {
+                "press": "영남일보",
+                "href": "https://www.yeongnam.com/web/view.php?key=20240309010001125",
+                "title": "[포토뉴스]투표지분류기 점검하는 대구시선관위",
+                "time": "6시간 전"
+            },
+            {
+                "press": "대전일보언론사 선정",
+                "href": "https://www.daejonilbo.com/news/articleView.html?idxno=2117987",
+                "title": "[뉴스 즉설]친문의 역습 '조국 오픈런', 이재명의 민주당 '급당황'?",
+                "time": "1일 전"
+            }
+        ]
+    }
+]

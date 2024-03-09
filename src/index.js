@@ -73,7 +73,7 @@ function NewsStand() {
     }
 
     const main = async() => {
-        const curPageNum = companysDisplayForm.main();
+        const curPageNum = await companysDisplayForm.main();
         await topNewsForm.initData()
         pageDisabled(curPageNum);
         renderTopNews(topNewsForm.getTopNewsTemplate())

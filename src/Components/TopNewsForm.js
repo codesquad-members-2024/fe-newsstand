@@ -1,3 +1,4 @@
+import jsonParse from "../jsonParse.js";
 export class TopNewsForm {
     #topNewsData;
     constructor() {
@@ -8,33 +9,30 @@ export class TopNewsForm {
     }
 
     async initData() {
-        await this.parseJson();
+        const newsData = await jsonParse.parseJson("category");
+        const modifyList = this.spliceCompanyString(newsData[0].data);
+        this.#topNewsData.forEach(cur => cur.newsData = modifyList.splice(0, 5));
     }
 
-    async parseJson() {
-        const news = await fetch("/topNews.json");
-        const data = await news.json();
-        this.spliceCompanyString(data);
-        this.#topNewsData.forEach(cur => cur.newsData.push(...data.splice(0, 5)))
-    }
-
-    spliceCompanyString(data) {
-        data.forEach((element) => {
+    spliceCompanyString(newsData) {
+        const modifyList = newsData.map((element) => {
             const pressName = element.press.split("언론사")[0].trim();
             element.press = pressName;
+            return element
         });
+        return modifyList
     }
 
     updateNewsData() {
         this.#topNewsData.forEach(curNews => {
-            const data = curNews.newsData.shift();
-            curNews.newsData.push(data);    
+            const preNewsData = curNews.newsData.shift();
+            curNews.newsData.push(preNewsData);    
         })
     }
 
     getTopNewsTemplate() {
         this.updateNewsData();
-        const [firstTopNewsTemplate, secondTopNewsTemplate] = this.#topNewsData.map((curNews, idx) => {
+        const [firstTopNewsTemplate, secondTopNewsTemplate] = this.#topNewsData.map((curNews) => {
             const [newsCur, newsNext] = [curNews.newsData[0], curNews.newsData[1]];
             return `
             <div class="${curNews.className}">
