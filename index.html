@@ -8,41 +8,33 @@
 <body>
   <div class="basic-display">
     <div class="top-container">
-      <div class="title-container">
-        <img class="icon" src="img/newsStandLogo.svg" />
-        <span class="title">뉴스스탠드</span>
+      <div class="top-container__title">
+        <img class="top-container__icon" src="img/newsStandLogo.svg" />
+        <span class="top-container__title-text">뉴스스탠드</span>
       </div>
-      <div class="date-container">
-        <span class="currentDate"></span>
+      <div class="top-container__date">
+        <span class="top-container__date-text"></span>
       </div>
     </div>
-    <div class="auto-rolling-container">
-      <div class="auto-rolling-textbox">
-        <div class="auto-rolling-text prev"></div>
-        <div class="auto-rolling-text cur"></div>
-        <div class="auto-rolling-text next"></div>
-      </div>
-      <div class="auto-rolling-textbox">
-        <div class="auto-rolling-text prev"></div>
-        <div class="auto-rolling-text cur"></div>
-        <div class="auto-rolling-text next"></div>
-      </div>
+    <div class="rolling-container">
+      <div class="rolling__text-box"></div>
+      <div class="rolling__text-box"></div>
     </div>
     <div class="press-container">
-      <ul class="press-menu">
-        <li class="press-textbox">
-          <span id="all-press">전체 언론사</span>
-          <span id="subscribed-press">내가 구독한 언론사</span>
+      <ul class="press-container__menu">
+        <li class="press-container__press-menu">
+          <span class="press-container__all-press">전체 언론사</span>
+          <span class="press-container__subscribed-press">내가 구독한 언론사</span>
         </li>
-        <li class="press-view-icon">
-          <img class="icon" src="img/list-view.svg" />
-          <img class="icon" src="img/grid-view.svg" />
+        <li class="press-container__view-menu">
+          <img class="press-container__view-icon" src="img/list-view.svg" />
+          <img class="press-container__view-icon" src="img/grid-view.svg" />
         </li>
       </ul>
-      <div class="press-table"></div>
+      <div class="press-container__logo-table"></div>
+      <img class="press-container__left-arrow" src="img/LeftButton.svg" />
+      <img class="press-container__right-arrow" src="img/RightButton.svg" />
     </div>
-    <img class="left-arrow-button" src="img/LeftButton.svg" />
-    <img class="right-arrow-button" src="img/RightButton.svg" />
   </div>
   <script src="runIndex.js"></script>
 </body>
