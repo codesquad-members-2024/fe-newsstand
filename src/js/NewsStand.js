@@ -1,3 +1,6 @@
+import renderNewsTitles from "./NewsTitleRenderer.js";
+import renderGridView from "./PressTableRenderer.js";
+
 const WEEK = [
   "일요일",
   "월요일",
@@ -9,6 +12,9 @@ const WEEK = [
 ];
 const INCREMENT = 1;
 const CHAR_COUNT = 2;
+const ROLLING_DELAY = 5000;
+
+const pageReload = () => { location.reload() }
 
 const renderCurrentDate = () => {
   const currentDateTag = document.querySelector(".top-container__date-text");
@@ -25,4 +31,14 @@ const renderCurrentDate = () => {
     .padStart(CHAR_COUNT, "0")}. ${day}`;
 };
 
-export default renderCurrentDate;
+const renderIndex = () => {
+  const pageLogoIcon = document.querySelector(".top-container__icon");
+
+  renderCurrentDate();
+  renderNewsTitles();
+  renderGridView();
+  pageLogoIcon.addEventListener("click", pageReload);
+  setInterval(renderNewsTitles, ROLLING_DELAY);
+}
+
+renderIndex();

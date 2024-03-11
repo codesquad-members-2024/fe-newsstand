@@ -38,7 +38,7 @@ const addCellsIntoTable = (json) => {
   json.cells = cells;
 };
 
-const initializePressTable = () => {
+const crawlLogos = () => {
   const path = "src/data/pressLogoTable.json";
   const pressLogoTableFile = fs.readFileSync(path, "utf-8");
   const pressLogoTable =
@@ -52,4 +52,4 @@ const initializePressTable = () => {
   fs.writeFileSync(path, JSON.stringify(pressLogoTable));
 };
 
-export default initializePressTable;
+export default crawlLogos;

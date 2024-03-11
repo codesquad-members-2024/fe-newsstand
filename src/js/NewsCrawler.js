@@ -36,7 +36,7 @@ const crawlNewsTitles = async (json) => {
   json.titles = titles;
 };
 
-const initializeNews = async () => {
+const crawlNews = async () => {
   const path = "src/data/news.json";
   const newsFile = fs.readFileSync(path, "utf-8");
   const newsTitles = newsFile === "" ? {} : JSON.parse(newsFile);
@@ -53,4 +53,4 @@ const initializeNews = async () => {
   fs.writeFileSync(path, JSON.stringify(newsTitles));
 };
 
-export default initializeNews;
+export default crawlNews;
