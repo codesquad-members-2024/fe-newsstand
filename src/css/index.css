@@ -124,11 +124,6 @@ body {
   display: flex;
 }
 
-.press-container__view-icon {
-  width: 24px;
-  height: 24px;
-}
-
 .press-container__view-icon + .press-container__view-icon {
   margin-left: 8px;
 }
