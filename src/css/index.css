@@ -133,7 +133,7 @@ body {
   margin-left: 8px;
 }
 
-.press-container__logo-table {
+.press-container__view {
   height: 388px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);

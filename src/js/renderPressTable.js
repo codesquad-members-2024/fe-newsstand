@@ -67,7 +67,7 @@ const setVisibilityOfArrowButtons = () => {
 };
 
 const renderPressTable = async () => {
-  const pressTable = document.querySelector(".press-container__logo-table");
+  const pressTable = document.querySelector(".press-container__view");
   const settingPath = "src/data/pressLogoTable.json";
   const response = await fetch(settingPath);
   const settings = await response.json();
