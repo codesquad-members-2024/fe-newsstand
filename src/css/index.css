@@ -1,0 +1,22 @@
+@import './reset.css';
+@import './components/header.css';
+@import './components/nav.css';
+@import './components/main.css';
+
+@font-face {
+  font-family: 'Pretendard'; /* 사용하고 싶은 font-family명을 지정 */
+  src: url('../assets/font/PretendardVariable.ttf') format('opentype'); /* 폰트파일 불러오기 */
+}
+
+body * {
+  /* outline: solid 1px; */
+  font-family: 'Pretendard';
+  color: #14212b;
+}
+
+.root-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
