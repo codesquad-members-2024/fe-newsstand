@@ -3,3 +3,4 @@ image
 node_modules
 eslint.js
 cli-engine.js
+launch.json

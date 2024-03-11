@@ -1,32 +1,5 @@
-// const axios = require("axios");
-// const cheerio = require("cheerio");
 const pupppeteer = require("puppeteer");
 const fs = require("fs");
-
-// const getHTML = async (url) => {
-//   try {
-//     return await axios.get(url);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
-// const parsing = async (url) => {
-//   const html = await getHTML(url);
-//   const $ = cheerio.load(html.data);
-//   const $news_logo = $(
-//     ".MediaSubscriptionView-module__news_thumb___IA4y2 > img"
-//   );
-//   console.log($news_logo);
-
-//   const newsLogos = [];
-//   $news_logo.each((idx, element) => {
-//     const src = $(element).attr("src");
-//     console.log(src);
-//   });
-// };
-
-// parsing("https://www.naver.com/");
 
 async function main() {
   const browser = await pupppeteer.launch({ headless: false });
@@ -42,7 +15,7 @@ async function main() {
     const imgSrc = await eh.$eval("img", function (el) {
       return el.src;
     });
-    const imgObj = { img: imgSrc };
+    const imgObj = { src: imgSrc };
     imgSrcArr.push(imgObj);
   }
 
@@ -54,7 +27,7 @@ async function main() {
     const imgSrc = await eh.$eval("img", function (el) {
       return el.src;
     });
-    const imgObj = { img: imgSrc };
+    const imgObj = { src: imgSrc };
     imgSrcArr.push(imgObj);
   }
 
@@ -66,7 +39,7 @@ async function main() {
     const imgSrc = await eh.$eval("img", function (el) {
       return el.src;
     });
-    const imgObj = { img: imgSrc };
+    const imgObj = { src: imgSrc };
     imgSrcArr.push(imgObj);
   }
 

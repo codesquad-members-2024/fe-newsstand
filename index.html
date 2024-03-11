@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-thin-straight/css/uicons-thin-straight.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-straight/css/uicons-regular-straight.css'>
     <title>뉴스스탠드</title>
 </head>
 <body>
     <div class="newsStand">
         <header class="top-area flexbox-space-between center-alignment">
             <div class="logo">
-                <img src="./image/Title.jpg" alt="logo"></img>
+                <img src="./image/Title.jpg" class="newsStand-logo pointer"></img>
             </div>
-            <div class="date">2023. 02. 10. 금요일</div>
+            <div class="date"></div>
         </header>
         
         <section class="auto-rolling-area flexbox-space-between center-alignment">
@@ -33,14 +35,14 @@
                 <span class="off">내가 구독한 언론사</span>
             </div>
             <div class="viewer">
-                <img src="./image/list-view.png" alt="">
-                <img src="./image/grid-view.png" alt="">
+                <i class="fi fi-rr-rectangle-list pointer"></i>
+                <i class="fi fi-rs-apps on pointer"></i>
             </div>
         </section>
 
         <main class="press-grid center-alignment">
             <i class="fi fi-ts-angle-right right-button"></i>
-            <i class="fi fi-ts-angle-left left-button"></i>
+            <i class="fi fi-ts-angle-left left-button hidden"></i>
         </main>
     </div>
     <script type="module" src="main.js"></script>

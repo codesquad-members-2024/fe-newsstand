@@ -9,6 +9,10 @@
   margin-right: auto;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .top-area {
   width: 930px;
   height: 49px;
@@ -78,7 +82,17 @@
   color: rgba(135, 146, 152, 1);
 }
 
-main {
+.viewer i {
+  font-size: 20px;
+  color: #879298;
+  margin: 5px;
+}
+
+.viewer .on {
+  color: #4362d0;
+}
+
+.press-grid {
   width: 930px;
   height: 388px;
   display: grid;
@@ -95,6 +109,38 @@ main {
   align-items: center;
   border-bottom: 1px solid rgba(210, 218, 224, 1);
   border-right: 1px solid rgba(210, 218, 224, 1);
+  height: auto;
+  height: 97px;
+}
+
+.press-logo {
+  max-width: 50%;
+  object-fit: contain;
+}
+
+.press-box .subs {
+  display: none;
+}
+
+.press-box:hover .subs {
+  display: block;
+  font-size: 13px;
+  text-align: center;
+  line-height: 24px;
+  color: #879298;
+  width: 72px;
+  height: 24px;
+  padding: auto;
+  border: 1px solid rgba(210, 218, 224, 1);
+  border-radius: 50px;
+}
+
+.press-box:hover .press-logo {
+  display: none;
+}
+
+.subs :hover {
+  display: block;
 }
 
 body {
@@ -123,4 +169,8 @@ body {
 .right-button:hover,
 .left-button:hover {
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.hidden {
+  display: none;
 }
