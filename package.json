@@ -4,7 +4,7 @@
   "description": "뉴스스탠드 기본화면",
   "main": "initialize.js",
   "scripts": {
-    "start": "node initialize.js"
+    "start": "node src/js/initialize.js"
   },
   "keywords": [],
   "author": "",
