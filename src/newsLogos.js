@@ -1,4 +1,5 @@
 const PAGE_SIZE = 24;
+let recentNews = 0;
 
 function shuffle(array) {
   array.sort(() => Math.random() - 0.5);
@@ -32,7 +33,6 @@ function createNewsLogo(index) {
 function showLogos(page) {
   const startIndex = page * PAGE_SIZE;
   const endIndex = startIndex + PAGE_SIZE;
-  const logosUrl = shuffleLogos.slice(startIndex, endIndex);
 
   document.querySelector(".newsgroup-grid").innerHTML = '';
   for (let index = 0; index < PAGE_SIZE; index++) {
