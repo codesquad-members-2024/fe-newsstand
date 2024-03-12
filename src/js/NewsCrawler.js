@@ -1,56 +1,53 @@
 import fs from "fs";
-import axios from "axios";
-import cheerio from "cheerio";
+import puppeteer from "puppeteer";
 
-const NO_ELEMENT = 0;
-const INCREMENT = 1;
-const URL =
-  "https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZxYUdjU0FtdHZHZ0pMVWlnQVAB?hl=ko&gl=KR&ceid=KR%3Ako";
-const USER_AGENT_CHROME =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3";
+const crawlByPuppeteer = async () => {
+  const browser = await puppeteer.launch({ headless: false });
+  const page = await browser.newPage();
+  const newsStandButtonSelector = ".ContentHeaderView-module__tab_text___IuWnG";
 
-const isEmpty = (json) => {
-  return Object.keys(json).length === NO_ELEMENT;
-};
+  await page.goto('https://naver.com/');
+  await page.setViewport({width: 1280, height: 1024});
+  await page.click('.ContentPagingView-module__btn_view_list___j7eNR');
+  const newsStandButton = await page.waitForSelector(newsStandButtonSelector);
+  let ariaSelected = await isAriaSelected(page, newsStandButtonSelector);
+  const newsStandText = await getTextContent(page, newsStandButtonSelector);
+  let current = await getTextContent(page, ".ContentPagingView-module__content_page___ZM2wA > span.current");
+  let logoAlt = await page.$eval(".MediaNewsView-module__news_logo___LwMpl > img", element => element.getAttribute("alt"));
+  const news = [];
 
-const parseStringFromDate = (date) => {
-  return `${date.getFullYear()}-${
-    date.getMonth() + INCREMENT
-  }-${date.getDate()}`;
-};
+  page.click(".ContentPagingView-module__btn_next___ZBhby");
+  while (ariaSelected) {
+    if (logoAlt !== await page.$eval(".MediaNewsView-module__news_logo___LwMpl > img", element => element.getAttribute("alt"))) {
+      logoAlt = await page.$eval(".MediaNewsView-module__news_logo___LwMpl > img", element => element.getAttribute("alt"));
 
-const crawlNewsTitles = async (json) => {
-  const response = await axios.get(URL, {
-    headers: {
-      "User-Agent": USER_AGENT_CHROME,
-    },
-  });
-  const doc = response.data;
-  let $ = cheerio.load(doc);
-  const titles = [];
+      const pressName = logoAlt;
+      const logoImageSrc = await page.$eval(".MediaNewsView-module__news_logo___LwMpl > img", element => element.getAttribute("src"));
+      const editedTime = await page.$eval(".MediaNewsView-module__time___fBQhP", element => element.textContent);
+      const category = await page.$$eval(".MediaOptionView-module__link_item___thVcT", elements => {
+        return elements.find(element => element.getAttribute("aria-selected") === "true").textContent;
+      });
+      const thumbnailHref = await page.$eval(".MediaNewsView-module__desc_left___jU94v > a", element => element.getAttribute("href"));
+      const headlineTitle = await page.$eval(".MediaNewsView-module__desc_title___IObEv", element => element.textContent);
+      const headlineHref = await page.$eval(".MediaNewsView-module__desc_title___IObEv", element => element.getAttribute("href"));
+      const sideNews = await page.$$eval(".MediaNewsView-module__desc_list___uQ3r1 > li > a", elements => {
+        return elements.map(element => {
+          return { title: element.textContent, href: element.getAttribute("href") };
+        });
+      });
+      news.push({ pressName: pressName, logoImageSrc: logoImageSrc, editedTime: editedTime, category: category, headline: { thumbnailHref: thumbnailHref, title: headlineTitle, href: headlineHref }, sideNews: sideNews });
+      
+      page.click(".ContentPagingView-module__btn_next___ZBhby");
+    }
 
-  $(".gPFEn").each((i, element) => {
-    titles.push($(element).text());
-  });
-
-  json.titles = titles;
-};
-
-const crawlNews = async () => {
-  const path = "src/data/news.json";
-  const newsFile = fs.readFileSync(path, "utf-8");
-  const newsTitles = newsFile === "" ? {} : JSON.parse(newsFile);
-  const currentDate = new Date();
-
-  if (
-    isEmpty(newsTitles) ||
-    newsTitles.date !== parseStringFromDate(currentDate)
-  ) {
-    newsTitles.date = parseStringFromDate(currentDate);
-    await crawlNewsTitles(newsTitles);
+    ariaSelected = await isAriaSelected(page, newsStandButtonSelector);
   }
 
-  fs.writeFileSync(path, JSON.stringify(newsTitles));
-};
+
+  fs.writeFileSync("src/data/news.json", JSON.stringify(news));
+  browser.close();
+}
+
+crawlByPuppeteer();
 
 export default crawlNews;
