@@ -117,8 +117,8 @@ const creatCompanyNewsJson = async (page) => {
 }
 
 const crawling = async () => {
-    await creatCompanyInfoJson(await getNewPage());
     await creatCategoetInfoJson(await getNewPage());
+    await creatCompanyInfoJson(await getNewPage());
     await creatCompanyNewsJson(await getNewPage());
 };
 

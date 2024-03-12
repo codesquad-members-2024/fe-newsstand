@@ -97,10 +97,15 @@ function NewsStand() {
         renderCompanyLogo();
     }
 
+    const renderNav = (navTemplate) => {
+        const navContainer = document.querySelector(".list")
+        navContainer.innerHTML = navTemplate
+    }
+
     const showListModeComponent = () => {
         gridModeContainer.style.display = "none"
         listModeContainer.style.display = "flex"
-        gridModeForm.getListModeTemplate()
+        renderNav(gridModeForm.getListNavTemplate("종합/경제"))
 
     }
 
