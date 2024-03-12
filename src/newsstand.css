@@ -43,8 +43,8 @@ header {
   overflow: hidden;
 }
 
-.rollingnews-content-left,
-.rollingnews-content-right {
+.rollingnews-left,
+.rollingnews-right {
   background-color: #f6f7f9; 
   padding: 10px;
   font-size: 30px;
@@ -60,8 +60,8 @@ header {
   }
 }
 
-.rollingnews-content-left b,
-.rollingnews-content-right b{
+.rollingnews-left b,
+.rollingnews-right b{
   display: flex;
   font-size: 16px; 
   color: #111; 
@@ -69,8 +69,8 @@ header {
   animation: roll 5s linear infinite;
 }
 
-.rollingnews-content-left span,
-.rollingnews-content-right span {
+.rollingnews-left span,
+.rollingnews-right span {
   font-size: 14px;
   margin-left: 10px; 
   color: #666; 

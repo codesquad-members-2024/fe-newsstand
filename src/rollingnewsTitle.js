@@ -1,5 +1,5 @@
 function createRollingNews(position, index) {
-  const rollingNewsPosition = document.querySelector('.rollingnews-content-' + position);
+  const rollingNewsPosition = document.querySelector('.rollingnews-' + position);
   rollingNewsPosition.innerHTML = '';
 
   const bTag = document.createElement('b');

@@ -30,22 +30,35 @@ function createNewsLogo(index) {
   newsgroupGrid.appendChild(newsGroupLogo);
 }
 
-function showLogos(page) {
-  const startIndex = page * PAGE_SIZE;
-  const endIndex = startIndex + PAGE_SIZE;
+function showGrid(page) {
+  document.querySelector(".newsgroup-grid").style.visibility = "visible";
+
+  console.log('show grid ' + page);
 
   document.querySelector(".newsgroup-grid").innerHTML = '';
   for (let index = 0; index < PAGE_SIZE; index++) {
     createNewsLogo(page * PAGE_SIZE + index);
   }
-
+  
   document.querySelector(".left-btn").style.visibility = "visible";
   document.querySelector(".right-btn").style.visibility = "visible";
 
   if (page === 0)
     document.querySelector(".left-btn").style.visibility = "hidden";
   else if (page === (newsLogos.length) - 1)
-  document.querySelector(".right-btn").style.visibility = "hidden";
+    document.querySelector(".right-btn").style.visibility = "hidden";
 }
 
-showLogos(0);
+function showList(page) {
+  document.querySelector(".newsgroup-grid").style.visibility = "hidden";
+  document.querySelector(".newsgroup-grid").innerHTML = '';
+  document.querySelector(".left-btn").style.visibility = "hidden";
+  document.querySelector(".right-btn").style.visibility = "hidden";
+
+  const newsGroupList = document.querySelector(".newsgroup-list");
+
+  // newsGroupList.style.border = "1px solid rgba(0, 0, 0, 0.8)";
+
+}
+
+showGrid(0);
