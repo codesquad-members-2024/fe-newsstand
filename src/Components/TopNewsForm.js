@@ -37,7 +37,7 @@ export class TopNewsForm {
             return `
             <div class="${curNews.className}">
                 <div class="company-name">${newsCur.press}</div>
-                <div class="detail"><a href="${newsCur.link}">
+                <div class="detail"><a href="${newsCur.href}">
                         ${newsCur.title}
                     </a>
                 </div>

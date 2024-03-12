@@ -35,14 +35,14 @@ export class CompanysDisplayForm {
     }
 
     getLogoTemplat = () => {
-        const logoTemplate = this.#companyData[this.currenPageNum].map((cur, idx) => {
-            return `
+        const logoTemplate = this.#companyData[this.currenPageNum].reduce((acc, cur, idx) => {
+            return acc + `
             <li class="list-${idx}">
             <img class = "logo-img" src = "${cur.img}" alt = ${cur.companyName}>
             <button class = "subscribe"> + 구독하기</button>
             </li>
             `;
-        });
-        return logoTemplate.join("");
+        }, "");
+        return logoTemplate;
     };
 }
