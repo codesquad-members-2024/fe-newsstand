@@ -1,23 +1,22 @@
-export class GetRandomCompany {
-    #randomNumber;
+import jsonParse from "../jsonParse.js";
+export class CompanysDisplayForm {
+    #randomImg;
     #companyData;
     constructor() {
         this.currenPageNum = 0;
         this.#companyData = [];
-        this.#randomNumber = new Array(96)
-            .fill()
-            .map((_, idx) => idx)
-            .sort(() => Math.random() - 0.5);
     }
 
-    main() {
+    async main() {
+        const newsData = await jsonParse.parseJson("topNews")
+        this.#randomImg = newsData.sort(() => Math.random() - 0.5)
         this.splitIntoChunks();
         return this.currenPageNum
     }
 
     splitIntoChunks() {
-        while (this.#randomNumber.length !== 0) {
-            this.#companyData.push(this.#randomNumber.splice(0, 24));
+        while (this.#randomImg.length !== 0) {
+            this.#companyData.push(this.#randomImg.splice(0, 24));
         }
     }
 
@@ -36,13 +35,14 @@ export class GetRandomCompany {
     }
 
     getLogoTemplat = () => {
-        const logoTemplate = this.#companyData[this.currenPageNum].map((cur, idx) => {
-            return `
+        const logoTemplate = this.#companyData[this.currenPageNum].reduce((acc, cur, idx) => {
+            return acc + `
             <li class="list-${idx}">
-            <img src = "static/company-logo/grid-${cur}.png">
+            <img class = "logo-img" src = "${cur.img}" alt = ${cur.companyName}>
+            <button class = "subscribe"> + 구독하기</button>
             </li>
             `;
-        });
-        return logoTemplate.join("");
+        }, "");
+        return logoTemplate;
     };
 }
