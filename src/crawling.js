@@ -2,8 +2,7 @@ import puppeteer from "puppeteer";
 import { setTimeout } from "node:timers/promises";
 import fs from "fs";
 
-const LOGO = "https://naver.com";
-const CATEGORY_QUERY_ID = [1, 2, 3, 5, 7, 6];
+const NAVER_URL = "https://naver.com";
 const companyNameList = []
 
 async function getNewPage() {
@@ -38,7 +37,7 @@ const getLogo = async (page) => {
 
 const creatCompanyInfoJson = async (page) => {
     const data = [];
-    await page.goto(LOGO, { waitUntil: "networkidle0" });
+    await page.goto(NAVER_URL, { waitUntil: "networkidle0" });
 
     for (let i = 0; i < 4; i++) {
         data.push(...(await getLogo(page)));
@@ -88,7 +87,7 @@ const crawlingNews = async (page) => {
 const creatCategoetInfoJson = async (page) => {
     const data = [];
     let status = true;
-    await page.goto(LOGO, { waitUntil: "networkidle0" });
+    await page.goto(NAVER_URL, { waitUntil: "networkidle0" });
     await page.click("button.ContentPagingView-module__btn_view_list___j7eNR");
 
     while (status) {
@@ -98,7 +97,7 @@ const creatCategoetInfoJson = async (page) => {
             await setTimeout(500);
         } catch (error) {
             console.error("Error occurred during crawling:", error.message);
-            status = false; // 에러 발생 시 루프 중단
+            status = false;
         }
     }
 

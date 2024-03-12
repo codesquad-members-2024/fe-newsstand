@@ -1,10 +1,37 @@
 [
     {
         "category": "종합/경제 언론사 뉴스",
-        "companyName": "시사오늘",
-        "companySrc": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/816.png",
-        "editDate": "",
-        "subNewsInfo": []
+        "companyName": "뉴스핌",
+        "companySrc": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/914.png",
+        "editDate": "03월 12일 10:04 직접 편집",
+        "mainNewsSrc": "https://www.newspim.com/news/view/20240312000089",
+        "mainNewsImg": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0312%2Farticle_img%2Fnew_main%2F9125%2F100554_001.jpg%22&type=nf312_208&service=navermain",
+        "subNewsInfo": [
+            {
+                "href": "https://www.newspim.com/news/view/20240312000033",
+                "text": "한국인 1명 러시아에서 간첩 혐의로 체포… 외교부 \"영사 조력 제공 중\""
+            },
+            {
+                "href": "https://www.newspim.com/news/view/20240312000003",
+                "text": "주한미군 사령관 \"北 핵 개발저지에서 핵 사용 방지로 전환\""
+            },
+            {
+                "href": "https://www.newspim.com/news/view/20240312000059",
+                "text": "與 \"총괄선대위원장 한동훈 1인 체제…도태우 과거 발언 오늘 논의\""
+            },
+            {
+                "href": "https://www.newspim.com/news/view/20240312000175",
+                "text": "황석영 '철도원 삼대', 부커상 인터내셔널 1차 후보에"
+            },
+            {
+                "href": "https://www.newspim.com/news/view/20240304001072",
+                "text": "격렬한 '붓질'의 화가 신민주 \"그리스신화처럼 내 작업도 '미궁' 탐험\""
+            },
+            {
+                "href": "https://www.newspim.com/news/view/20240118000538",
+                "text": "[갤럭시 언팩] 아이폰 유저가 직접 써 본 갤럭시S24 기능 이모저모 영상"
+            }
+        ]
     },
     {
         "category": "종합/경제 언론사 뉴스",

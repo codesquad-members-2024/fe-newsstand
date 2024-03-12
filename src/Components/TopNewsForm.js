@@ -9,9 +9,8 @@ export class TopNewsForm {
     }
 
     async initData() {
-        const newsData = await jsonParse.parseJson("category");
-        const modifyList = this.spliceCompanyString(newsData[0].data);
-        this.#topNewsData.forEach(cur => cur.newsData = modifyList.splice(0, 5));
+        const newsData = await jsonParse.parseJson("company");
+        this.#topNewsData.forEach(cur => cur.newsData = newsData.splice(0, 5));
     }
 
     spliceCompanyString(newsData) {
@@ -44,7 +43,7 @@ export class TopNewsForm {
             </div>
             <div class="${curNews.className}">
                 <div class="company-name">${newsNext.press}</div>
-                <div class="detail"><a href="${newsNext.link}">
+                <div class="detail"><a href="${newsNext.href}">
                         ${newsNext.title}
                     </a>
                 </div>

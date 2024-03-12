@@ -1,12 +1,15 @@
 import { CompanysDisplayForm } from "./Components/CompanysDisplayForm.js";
 import { DateCalculator } from "./Components/DateCalculator.js";
 import { TopNewsForm } from "./Components/TopNewsForm.js";
+import { GridModeForm } from "./Components/gridModeForm.js";
 import { FIRST_PAGE_NUM, LAST_PAGE_NUM, TOP_NEWS_DELAY_TIME } from "./contants.js";
 
 function NewsStand() {
     const status = {subscribeStatus: false, listMode: false}
     const companysDisplayForm = new CompanysDisplayForm();
     const topNewsForm = new TopNewsForm()
+    const gridModeForm = GridModeForm()
+    
     const gridModeContainer = document.querySelector(".company-list-container")
     const listModeContainer = document.querySelector(".list-mode-main-container")
     const renderCompanyLogo = () => {
@@ -16,7 +19,7 @@ function NewsStand() {
     };
 
     const renderCurrentDate = () => {
-        const dateCalculator = new DateCalculator();
+        const dateCalculator = DateCalculator();
         const [year, month, date, day] = dateCalculator.getCurrentDate();
         const dateHtmlBox = document.querySelector(".header__title-container__date");
         dateHtmlBox.innerHTML = `
@@ -92,14 +95,12 @@ function NewsStand() {
         const curPageNum = await companysDisplayForm.main();
         pageDisabled(curPageNum);
         renderCompanyLogo();
-        setInterval(() => {
-            renderTopNews(topNewsForm.getTopNewsTemplate())
-        }, TOP_NEWS_DELAY_TIME);
     }
 
     const showListModeComponent = () => {
         gridModeContainer.style.display = "none"
         listModeContainer.style.display = "flex"
+        gridModeForm.getListModeTemplate()
 
     }
 
@@ -111,13 +112,16 @@ function NewsStand() {
     const main = async() => {
         renderCurrentDate();
         await topNewsForm.initData()
-        renderTopNews(topNewsForm.getTopNewsTemplate())
+        await gridModeForm.initData()
         activateMode("sort-mode-container__show-grid-mode")
-        setEventHandler();
         isDisplayVisible()
-        console.log(status)
+        renderTopNews(topNewsForm.getTopNewsTemplate())
+        setInterval(() => {
+            renderTopNews(topNewsForm.getTopNewsTemplate())
+        }, TOP_NEWS_DELAY_TIME);
     };
-
+    
+    setEventHandler();
     return { main };
 }
 
