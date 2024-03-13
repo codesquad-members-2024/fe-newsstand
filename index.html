@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>뉴스스탠드</title>
     <link rel="stylesheet" href="src/index.css">
+    <script src="src/index.js" defer type="module"></script>
 </head>
 
 <body>
@@ -33,50 +34,32 @@
                 <img class="sort-mode-container__show-grid-mode" src="/static/ikon/list-view-on.png">
             </div>
         </nav>
-        <main class="company-list-container">
+        <main class="company-list-container active">
             <a><img class="left-btn" src="/static/ikon/LeftButton.png"></a>
             <ul class="company-display">
             </ul>
             <a><img class="light-btn" src="/static/ikon/RightButton.png"></a>
         </main>
 
-        <main class="list-mode-main-container">
-            <a><img class="left-btn" src="/static/ikon/LeftButton.png"></a>
+        <main class="list-mode-main-container active">
+            <a><img class="list-view-left-btn" src="/static/ikon/LeftButton.png"></a>
             <div class="list-mode-container">
-                <nav class="category-Container">
-                    <div class="category">종합/경제</div>
-                    <div class="category">방송/통신</div>
-                    <div class="category">IT</div>
-                    <div class="category">영자지</div>
-                    <div class="category">스포츠/연예</div>
-                    <div class="category">매거진/전문지</div>
-                    <div class="category">지역</div>
-                </nav>
+                <div class="wrap">
+                    <div class="list">
+                    </div>
+                </div>
+
                 <div class="news-display">
                     <div class="main-news-container">
-                        <div class="main-news-header">
-                            <div class="company-name">서울경제</div>
-                            <div class="edit-date">2023.02.10. 18:27편집</div>
-                            <button class="subscribe-btn">+ 구독하기</button>
-                        </div>
-                        <img class="main-news-img"></img>
-                        <div class="main-news-title">또 국민연금의 몽니...현대 지주사 불발</div>
                     </div>
                     <div class="sub-news-container">
-                        <div class="sub-news">또 국민연금의 몽니...현대 지주사 불발</div>
-                        <div class="sub-news">또 국민연금의 몽니...현대 지주사 불발</div>
-                        <div class="sub-news">또 국민연금의 몽니...현대 지주사 불발</div>
-                        <div class="sub-news">또 국민연금의 몽니...현대 지주사 불발</div>
-                        <div class="sub-news">또 국민연금의 몽니...현대 지주사 불발</div>
-                        <div class="sub-news">또 국민연금의 몽니...현대 지주사 불발</div>
-                        <div class="sub-news edit-company-name">서울경제 언론사에서 직접 편집한 뉴스입니다.</div>
                     </div>
                 </div>
             </div>
-            <a><img class="light-btn" src="/static/ikon/RightButton.png"></a>
+            <a><img class="list-view-light-btn" src="/static/ikon/RightButton.png"></a>
         </main>
     </div>
-    <script src="src/index.js" type="module"></script>
+
 </body>
 
 </html>

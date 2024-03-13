@@ -2,9 +2,11 @@ import puppeteer from "puppeteer";
 import { setTimeout } from "node:timers/promises";
 import fs from "fs";
 
-const LOGO = "https://naver.com";
-const CATEGORY_QUERY_ID = [1, 2, 3, 5, 7, 6];
-const companyNameList = []
+const util = {
+    NAVER_URL: "https://naver.com",
+    companiesNameList: [],
+    NAVER_LOGO_PAGE: {FIRST_PAGE: 0, LAST_PAGE: 4}
+}
 
 async function getNewPage() {
     const browser = await puppeteer.launch({ headless: false });
@@ -36,20 +38,20 @@ const getLogo = async (page) => {
     return newsLogos;
 };
 
-const creatCompanyInfoJson = async (page) => {
+const creatCompaniesInfoJson = async (page) => {
     const data = [];
-    await page.goto(LOGO, { waitUntil: "networkidle0" });
+    await page.goto(util.NAVER_URL, { waitUntil: "networkidle0" });
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = util.NAVER_LOGO_PAGE.FIRST_PAGE; i < util.NAVER_LOGO_PAGE.LAST_PAGE; i++) {
         data.push(...(await getLogo(page)));
         page.click(".ContentPagingView-module__btn_next___ZBhby");
     }
-    creatJson("topNews", data);
-    data.forEach(item => companyNameList.push(item.companyName));
+    creatJson("companiesInfo", data);
+    data.forEach(item => util.companiesNameList.push(item.companyName));
 };
 
-const getCategoryData = async (page) => {
-    const newsLogos = await page.evaluate(() => {
+const getCompaniesNewsData = async (page) => {
+    const newsData = await page.evaluate(() => {
         return Array.from(document.querySelectorAll(".news_area"), (e) => {
             const pressElement = e.querySelector("a.info.press");
             const hrefElement = e.querySelector("div.news_contents > a.dsc_thumb");
@@ -62,18 +64,20 @@ const getCategoryData = async (page) => {
             return { press, href, title, time };
         });
     });
-    return newsLogos;
+    return newsData;
 };
 
-const crawlingNews = async (page) => {
-    const pageInfo = await page.evaluate(() => {
+const getCategoryNewsData = async (page) => {
+    const newsData = await page.evaluate(() => {
         return {
             category: document.querySelector(".ContentPagingView-module__point___U2tUD").innerText,
             companyName: document.querySelector(".MediaNewsView-module__news_logo___LwMpl > img")?.getAttribute("alt"),
-            companySrc: document.querySelector(".MediaNewsView-module__news_logo___LwMpl > img")?.getAttribute("src"),
+            companyHref: document.querySelector(".MediaNewsView-module__news_logo___LwMpl")?.getAttribute("href"),
+            companyImg: document.querySelector(".MediaNewsView-module__news_logo___LwMpl > img")?.getAttribute("src"),
             editDate: document.querySelector(".MediaNewsView-module__news_text___hi3Xf").innerText,
             mainNewsSrc: document.querySelector(".MediaNewsView-module__link_thumb___rmMr4")?.getAttribute("href"),
             mainNewsImg: document.querySelector("a.MediaNewsView-module__link_thumb___rmMr4 > span > img")?.getAttribute("src"),
+            mainNewsTitle: document.querySelector(".MediaNewsView-module__desc_title___IObEv")?.innerText,
             subNewsInfo: Array.from(document.querySelectorAll(".MediaNewsView-module__link_item___x0z7x"), (e) => {
                 return {
                     href: e.href,
@@ -82,45 +86,45 @@ const crawlingNews = async (page) => {
             }),
         };
     });
-    return pageInfo;
+    return newsData;
 };
 
-const creatCategoetInfoJson = async (page) => {
+const creatCategoryInfoJson = async (page) => {
     const data = [];
     let status = true;
-    await page.goto(LOGO, { waitUntil: "networkidle0" });
+    await page.goto(util.NAVER_URL, { waitUntil: "networkidle0" });
     await page.click("button.ContentPagingView-module__btn_view_list___j7eNR");
 
     while (status) {
         try {
-            data.push(await crawlingNews(page));
+            data.push(await getCategoryNewsData(page));
             await page.click("button.ContentPagingView-module__btn_next___ZBhby");
             await setTimeout(500);
         } catch (error) {
             console.error("Error occurred during crawling:", error.message);
-            status = false; // 에러 발생 시 루프 중단
+            status = false;
         }
     }
 
     creatJson("category", data);
 };
 
-const creatCompanyNewsJson = async (page) => {
+const creatCompaniesNewsInfoJson = async (page) => {
     const data = []
-    for (const companyName of companyNameList) {
+    for (const companyName of util.companiesNameList) {
         await page.goto(
             `https://search.naver.com/search.naver?where=news&query=${companyName}&sm=tab_clk.jou&sort=0&photo=0&field=0&pd=0&ds=&de=&docid=&related=0&mynews=0&office_type=&office_section_code=&news_office_checked=&nso=&is_sug_officeid=1&office_category=0&service_area=0`,
             { waitUntil: "networkidle0" }
         );
-        data.push(...(await getCategoryData(page)));
+        data.push(...(await getCompaniesNewsData(page)));
     }
-    creatJson("company", data);
+    creatJson("companiesNewsInfo", data);
 }
 
 const crawling = async () => {
-    await creatCompanyInfoJson(await getNewPage());
-    await creatCategoetInfoJson(await getNewPage());
-    await creatCompanyNewsJson(await getNewPage());
+    // await creatCompaniesInfoJson(await getNewPage());
+    // await creatCompaniesNewsInfoJson(await getNewPage());
+    await creatCategoryInfoJson(await getNewPage());
 };
 
 crawling();
