@@ -5,20 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="./newsstand.css">
+  <link rel="stylesheet" href="./src/newsstand.css">
 </head>
 
 <body>
   <div class="container">
     <header>
       <div class="newsstand">
-        <button id="refresh-btn">
+        <button class="refresh-btn">
           <img src="https://gist.github.com/assets/131264106/7f100f2b-10ba-46fd-b7b6-c71fe8389c43">
         </button>
         <span>뉴스스탠드</span>
       </div>
-      <div id="date">
-        <script src="newsstand.js"></script>
+      <div class="date">
       </div>
     </header>
     <div class="rollingnews">
@@ -55,19 +54,39 @@
       </button>
 
       <button class="list-left-btn">
-        <img src="https://gist.github.com/assets/131264106/b92afd07-3579-49d0-8ed7-d89da42591d0"></img> 
+        <img src="https://gist.github.com/assets/131264106/b92afd07-3579-49d0-8ed7-d89da42591d0"></img>
       </button>
-      <div class="newsgroup-list"></div>
+      <div class="newsgroup-list">
+        <div class="newsgroup-list-header">
+          <button class="newsgroup-list-cat">종합/경제</button>
+          <button class="newsgroup-list-cat">방송통신</button>
+          <button class="newsgroup-list-cat">IT</button>
+          <button class="newsgroup-list-cat">영자지</button>
+          <button class="newsgroup-list-cat">스포츠/연예</button>
+        </div>
+        <div class="newsgroup-list-area">
+          <div class="newsgroup-list-top">
+            <p>연합뉴스</p>
+            <span>2023.03.13 편집</span>
+            <button class="subscribe-btn">+ 구독하기</button>
+          </div>
+          <div class="newsgroup-list-desc">
+            <img src="https://www.figma.com/file/SJHhyw3G0A4qDSWMIo9Ths/image/2d27e6b5ee62babffb9c750aab65ee9aa300a11f"></img>
+            <p>또 국민연금 논란</p>
+          </div>
+        </div>
+      </div>
       <button class="list-right-btn">
         <img src="https://gist.github.com/assets/131264106/b32f556f-e0e0-4cbd-871e-795fbaeac9f9"></img>
       </button>
     </div>
   </div>
-  <script src="data.js"></script>
-  <script src="newsLogos.js"></script>
-  <script src="rollingnewsTitle.js"></script>
-  <script src="paging.js"></script>
-  <!-- <script type="module" src="./main.js"></script> -->
+  <script src="./src/data.js"></script>
+  <script src="./src/newsLogos.js"></script>
+  <script src="./src/rollingnewsTitle.js"></script>
+  <script src="./src/paging.js"></script>
+  <script type="module" src="./src/main.js"></script>
   </div>
 </body>
+
 </html>

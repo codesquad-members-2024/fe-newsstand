@@ -1,3 +1,7 @@
+// import { rollingnewsTitle } from "./data.js";
+
+let recentNews = 0;
+
 function createRollingNews(position, index) {
   const rollingNewsPosition = document.querySelector('.rollingnews-' + position);
   rollingNewsPosition.innerHTML = '';
@@ -19,4 +23,4 @@ function rollingNews() {
 
 const interval = setInterval(rollingNews, 5000);
 
-rollingNews();
+// export default rollingNews;

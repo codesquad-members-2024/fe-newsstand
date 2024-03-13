@@ -1,5 +1,10 @@
-const leftBtn = document.querySelector('.grid-left-btn');
-const rightBtn = document.querySelector('.grid-right-btn');
+// import { showGrid, showList } from "./newsLogos";
+
+const gridLeftBtn = document.querySelector('.grid-left-btn'); // grid btn
+const gridRightBtn = document.querySelector('.grid-right-btn');
+const listLeftBtn = document.querySelector('.list-left-btn'); // list btn
+const listRightBtn = document.querySelector('.list-right-btn');
+
 const listViewBtn = document.querySelector('.list-view-btn');
 const gridViewBtn = document.querySelector('.grid-view-btn');
 
@@ -22,11 +27,11 @@ function gridViewClick() {
   showGrid(currentPage);
 }
 
-rightBtn.addEventListener('click', ()=>{
+gridRightBtn.addEventListener('click', ()=>{
   handleRightButtonClick();
 });
 
-leftBtn.addEventListener('click', ()=>{
+gridLeftBtn.addEventListener('click', ()=>{
   handleLeftButtonClick();
 });
 

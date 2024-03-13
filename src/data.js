@@ -11,6 +11,12 @@ const rollingnewsTitle = [
   "\"尹 지지율 40.2%…국민의힘 41.9%, 민주당 43.1%\"[리얼미터]"
 ];
 
+const listImg = [
+"https://www.figma.com/file/SJHhyw3G0A4qDSWMIo9Ths/image/6e64c86ea480d1a2922e94cb3e9431fa4685a1a0",
+"https://www.figma.com/file/SJHhyw3G0A4qDSWMIo9Ths/image/2d27e6b5ee62babffb9c750aab65ee9aa300a11f",
+"https://www.figma.com/file/SJHhyw3G0A4qDSWMIo9Ths/image/c5bfa7355e16800a64814c0f81b8fe1e7c5ff808"
+]; 
+
 const newsLogos = [
   ["https://s.pstatic.net/static/newsstand/2020/logo/light/0604/032.png",
   "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/293.png",
