@@ -1,4 +1,4 @@
-const rollingnewsTitle = [
+export const rollingnewsTitle = [
   "전공의 행정처분 '속도'…의대 교수들 '집단대응' 논의 본격화",
   "대통령실 \"의료개혁 관철 변함없어…언제까지 인내할 순 없다\"",
   "이변 없었던 아카데미…'오펜하이머' 작품상 등 7관왕 싹쓸이",
@@ -17,7 +17,7 @@ const listImg = [
 "https://www.figma.com/file/SJHhyw3G0A4qDSWMIo9Ths/image/c5bfa7355e16800a64814c0f81b8fe1e7c5ff808"
 ]; 
 
-const newsLogos = [
+export const newsLogos = [
   ["https://s.pstatic.net/static/newsstand/2020/logo/light/0604/032.png",
   "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/293.png",
   "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/366.png",

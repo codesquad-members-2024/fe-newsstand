@@ -1,13 +1,12 @@
-// import { newsLogos } from "./data.js";
+import { newsLogos } from "./data.js";
 
 const PAGE_SIZE = 24;
+const shuffleLogos = shuffle(newsLogos.flat());
 
 function shuffle(array) {
   array.sort(() => Math.random() - 0.5);
+  return array;
 }
-
-const shuffleLogos = newsLogos.flat();
-shuffle(shuffleLogos);
 
 function createNewsLogo(index) {
   const newsgroupGrid = document.querySelector(".newsgroup-grid");
@@ -62,5 +61,4 @@ function showList(page) {
   document.querySelector(".list-right-btn").style.visibility = "visible";
 }
 
-showGrid(0);
-
+export { showGrid, showList };

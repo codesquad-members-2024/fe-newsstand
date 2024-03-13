@@ -1,4 +1,4 @@
-// import { rollingnewsTitle } from "./data.js";
+import { rollingnewsTitle } from "./data.js";
 
 let recentNews = 0;
 
@@ -16,11 +16,8 @@ function createRollingNews(position, index) {
   rollingNewsPosition.appendChild(bTag);
 }
 
-function rollingNews() {
-  createRollingNews('left', recentNews++);
-  createRollingNews('right', recentNews++);
+function rollingNews(position) {
+  createRollingNews(position, recentNews++);
 }
 
-const interval = setInterval(rollingNews, 5000);
-
-// export default rollingNews;
+export default rollingNews;
