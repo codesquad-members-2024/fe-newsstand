@@ -1,6 +1,7 @@
 const FIRST_PAGE = 0;
 const LAST_PAGE = 3;
 const LOGO_COUNT_PER_PAGE = 24;
+const LOGO_TABLE_PAGE_COUNT = 4;
 const INITIAL_GRID_VIEW_INDEX = 0;
 const RANDOM_SECTOR = 0.5;
 const LOGO_IMAGE_PATH = "src/img/PressLogo.png";
@@ -36,10 +37,10 @@ const shuffle = (array) => {
 }
 
 const initializeLogos = async () => {
-  const settingPath = "src/data/pressLogoTable.json";
-  const cells = await fetch(settingPath).then((response) => response.json()).then((json) => json.cells);
+  const newsPath = "src/data/news.json";
+  const logoInfo = await fetch(newsPath).then((response) => response.json()).then((news) => news.map((newsElement) => { return { src: newsElement.logoImageSrc, name: newsElement.pressName } }));
 
-  logos = shuffle(cells);
+  logos = shuffle(logoInfo);
 }
 
 const createSubscribeButton = () => {
@@ -63,13 +64,9 @@ const addImagesIntoTable = (table) => {
     const newImageTag = document.createElement("img");
     const subscribeButton = createSubscribeButton();
     const cellIndex = gridViewIndex * LOGO_COUNT_PER_PAGE + index;
-    const cell = logos[cellIndex];
 
-    newImageTag.style.cssText = `
-      width:${cell.width}px;
-      height:${cell.height}px;
-      background:url(${LOGO_IMAGE_PATH}) ${cell.left}px ${cell.top}px;
-    `;
+    newImageTag.setAttribute("src", logos[cellIndex].src);
+    newImageTag.setAttribute("name", logos[cellIndex].name);
     newDivTag.classList.add("press-container__logo");
     newDivTag.appendChild(newImageTag);
     newDivTag.appendChild(subscribeButton);
@@ -99,9 +96,34 @@ const renderGridView = async () => {
   setVisibilityOfArrowButtons();
 };
 
+const renderCategory = () => {
+  const div = document.createElement("div");
+  const firstCategory = document.createElement("div");
+  const firstCategoryFirstBox = document.createElement("div");
+  const firstCategoryLastBox = document.createElement("div");
+  const firstText = '종합/경제';
+  const lastText = '1 / 81';
+  const broadcast = document.createElement("div");
+
+  div.classList.add("press-container__category-tab");
+  firstCategoryFirstBox.innerHTML += firstText;
+  firstCategoryLastBox.innerHTML += lastText;
+  firstCategory.classList.add('press-container__active-category');
+  firstCategory.appendChild(firstCategoryFirstBox);
+  firstCategory.appendChild(firstCategoryLastBox);
+  broadcast.innerHTML += "방송/통신";
+  broadcast.classList.add("press-container__category");
+  div.appendChild(firstCategory);
+  div.appendChild(broadcast);
+
+  return div;
+}
+
 const renderListView = async () => {
-  
+  const newDiv = renderCategory();
+
   pressTable.innerHTML = "";
+  pressTable.appendChild(newDiv);
   setVisibilityOfArrowButtons();
 }
 
@@ -109,12 +131,12 @@ gridViewIcon.addEventListener("click", () => {
   fillIcon(gridViewIcon, ACTIVE_FILL_PROPERTY);
   fillIcon(listViewIcon, INACTIVE_FILL_PROPERTY);
   renderGridView();
-})
+});
 listViewIcon.addEventListener("click", () => {
   fillIcon(listViewIcon, ACTIVE_FILL_PROPERTY);
   fillIcon(gridViewIcon, INACTIVE_FILL_PROPERTY);
   renderListView();
-})
+});
 
 leftArrowButton.addEventListener("click", () => {
   if (isIconActive(gridViewIcon)) {

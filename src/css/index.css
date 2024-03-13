@@ -138,6 +138,9 @@ body {
 
 .press-container__logo {
   height: 97.13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   outline: 1px solid #d2dae0;
 }
 
@@ -151,7 +154,7 @@ body {
 .press-container__subscribe-button {
   width: 50%;
   height: 30%;
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #d2dae0;
   border-radius: 50px;
   color: #879298;
@@ -165,8 +168,7 @@ body {
 }
 
 .press-container__logo > img {
-  width: 24px;
-  height: 40px;
+  height: 2cqmin;
 }
 
 .press-container__logo:hover > img {
@@ -196,7 +198,7 @@ body {
 
 .press-container__category {
   height: 40px;
-  padding: 0px 16px 0px 16px;
+  padding: 0px 16px;
   display: flex;
   align-items: center;
   color: #879298;
