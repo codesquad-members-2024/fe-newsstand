@@ -1,15 +1,26 @@
 const INITIAL_NEWS_TITLE_INDEX = 1;
-const MAX_NEWS_TITLE_INDEX = 10;
 const NO_ELEMENT = 0;
 const ONE_SECOND = 1000;
 const PREVIOUS_CLASS_NAME = "rolling__text prev";
 const CURRENT_CLASS_NAME = "rolling__text cur";
 const NEXT_CLASS_NAME = "rolling__text next";
-const PRESS_NAME_EXAMPLE = "연합뉴스";
 
 let newsTitleIndex = INITIAL_NEWS_TITLE_INDEX;
 
 const isEmptyNode = (node) => node.childElementCount === NO_ELEMENT;
+
+const parseTitles = async (path) => {
+  const response = await fetch(path);
+  const titles = await response.json().then((json) =>
+    json.map((newsElement) => {
+      return {
+        pressName: newsElement.pressName,
+        headline: newsElement.headline,
+      };
+    }).flat());
+
+  return titles;
+}
 
 const createNewNode = (className, titles) => {
   const newNode = document.createElement("div");
@@ -17,16 +28,16 @@ const createNewNode = (className, titles) => {
   const newsTitleTag = document.createElement("span");
 
   pressNameTag.classList.add("rolling__press-text");
-  pressNameTag.textContent += PRESS_NAME_EXAMPLE;
+  pressNameTag.textContent += titles[newsTitleIndex].pressName;
   newsTitleTag.classList.add("rolling__news-title-text");
 
   newNode.classList.add(...className.split(" "));
   newNode.appendChild(pressNameTag);
-  newsTitleTag.textContent += titles[newsTitleIndex];
+  newsTitleTag.textContent += titles[newsTitleIndex].headline.title;
   newNode.appendChild(newsTitleTag);
 
   newsTitleIndex++;
-  if (newsTitleIndex === MAX_NEWS_TITLE_INDEX)
+  if (newsTitleIndex === titles.length)
     newsTitleIndex = INITIAL_NEWS_TITLE_INDEX;
   return newNode;
 };
@@ -66,15 +77,11 @@ const renderNewsTitle = async (tag, titles) => {
   next.classList.remove("next");
   next.classList.add("cur");
   tag.appendChild(newNext);
-}; 
+};
 
 const renderNewsTitles = async () => {
-  const textBoxes = Array.from(
-    document.querySelectorAll(".rolling__text-box")
-  );
-  const titlesPath = "src/data/news.json";
-  const response = await fetch(titlesPath);
-  const titles = await response.json().then((json) => json.titles);
+  const textBoxes = Array.from(document.querySelectorAll(".rolling__text-box"));
+  const titles = await parseTitles("src/data/news.json");
 
   if (textBoxes.some((textBox) => isEmptyNode(textBox))) {
     textBoxes.forEach((textBox) => {
