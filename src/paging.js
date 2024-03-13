@@ -1,5 +1,5 @@
-const leftBtn = document.querySelector('.left-btn');
-const rightBtn = document.querySelector('.right-btn');
+const leftBtn = document.querySelector('.grid-left-btn');
+const rightBtn = document.querySelector('.grid-right-btn');
 const listViewBtn = document.querySelector('.list-view-btn');
 const gridViewBtn = document.querySelector('.grid-view-btn');
 

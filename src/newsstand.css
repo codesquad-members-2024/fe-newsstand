@@ -133,6 +133,13 @@ header {
   width: 60%;
 }
 
+.newsgroup-list {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  width: 930px;
+  height: 368px;
+  position: relative;
+}
+
 .newsgroup button {
   background: none;
   border: none;
@@ -145,19 +152,20 @@ header {
   transform: translateY(-50%);
 }
 
-.right-btn {
+.grid-right-btn,
+.list-right-btn {
   right: -10%;
 }
 
-.left-btn {
+.grid-left-btn,
+.list-left-btn {
   left: -10%;
 }
 
-.right-btn img {
-  height: 40px;
-}
-
-.left-btn img {
+.grid-right-btn img,
+.grid-left-btn img,
+.list-right-btn img,
+.list-left-btn img{
   height: 40px;
 }
 

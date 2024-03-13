@@ -31,7 +31,11 @@ function createNewsLogo(index) {
 }
 
 function showGrid(page) {
-  document.querySelector(".newsgroup-grid").style.visibility = "visible";
+  document.querySelector(".newsgroup-grid").style.display = "";
+  document.querySelector(".newsgroup-list").style.display = "none";
+  
+  document.querySelector(".list-left-btn").style.visibility = "hidden"; // 버튼은 hidden, grid list는 none
+  document.querySelector(".list-right-btn").style.visibility = "hidden";
 
   console.log('show grid ' + page);
 
@@ -40,25 +44,33 @@ function showGrid(page) {
     createNewsLogo(page * PAGE_SIZE + index);
   }
   
-  document.querySelector(".left-btn").style.visibility = "visible";
-  document.querySelector(".right-btn").style.visibility = "visible";
+  document.querySelector(".grid-left-btn").style.visibility = "visible";
+  document.querySelector(".grid-right-btn").style.visibility = "visible";
 
   if (page === 0)
-    document.querySelector(".left-btn").style.visibility = "hidden";
+    document.querySelector(".grid-left-btn").style.visibility = "hidden";
   else if (page === (newsLogos.length) - 1)
-    document.querySelector(".right-btn").style.visibility = "hidden";
+    document.querySelector(".grid-right-btn").style.visibility = "hidden";
 }
 
 function showList(page) {
-  document.querySelector(".newsgroup-grid").style.visibility = "hidden";
+  document.querySelector(".newsgroup-grid").style.display = "none";
   document.querySelector(".newsgroup-grid").innerHTML = '';
-  document.querySelector(".left-btn").style.visibility = "hidden";
-  document.querySelector(".right-btn").style.visibility = "hidden";
+  document.querySelector(".newsgroup-list").style.display = "";
+
+  document.querySelector(".grid-left-btn").style.visibility = 'hidden';
+  document.querySelector(".grid-right-btn").style.visibility = "hidden";
+
+  document.querySelector(".list-left-btn").style.visibility = "visible";
+  document.querySelector(".list-right-btn").style.visibility = "visible";
 
   const newsGroupList = document.querySelector(".newsgroup-list");
+  const listHeader = document.createElement("div");
+  listHeader.classList.add("newsgroup-list-header");
+  const listArea = document.createElement("div");
+  listArea.classList.add("newsgroup-list-area");
 
-  // newsGroupList.style.border = "1px solid rgba(0, 0, 0, 0.8)";
-
+  newsGroupList.append(listHeader, listArea);
 }
 
 showGrid(0);
