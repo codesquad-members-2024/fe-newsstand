@@ -11,19 +11,23 @@ const PRESS_LOGO_SELECTOR = ".MediaNewsView-module__news_logo___LwMpl > img";
 const NEXT_PAGE_SELECTOR = ".ContentPagingView-module__btn_next___ZBhby";
 const EDITED_TIME_SELECTOR = ".MediaNewsView-module__time___fBQhP";
 const CATEGORY_SELECTOR = ".MediaOptionView-module__link_item___thVcT";
-const THUMBNAIL_SELECTOR = ".MediaNewsView-module__desc_left___jU94v > a";
+const THUMBNAIL_SELECTOR = ".MediaNewsView-module__link_thumb___rmMr4 > span > img";
 const HEADLINE_SELECTOR = ".MediaNewsView-module__desc_title___IObEv";
 
 const isAriaSelected = async (page, selector) => {
-  return await crawlAttribute(page, selector, "aria-selected");
+  return await crawlAttribute(page, selector, "aria-selected") === "true";
 };
 
 const crawlAttribute = async (page, selector, attribute) => {
-  return await page.$eval(
-    selector,
-    (element, attribute) => element.getAttribute(attribute),
-    attribute
-  );
+  try {
+    return await page.$eval(
+      selector,
+      (element, attribute) => element.getAttribute(attribute),
+      attribute
+    );
+  } catch (error) {
+    return "";
+  }
 };
 
 const crawlText = async (page, selector) => {
@@ -54,7 +58,7 @@ const crawlAndConvertSeperateNews = async (page) => {
   const logoImageSrc = await crawlAttribute(page, PRESS_LOGO_SELECTOR, "src");
   const editedTime = await crawlText(page, EDITED_TIME_SELECTOR);
   const category = await crawlActiveCategory(page);
-  const thumbnailHref = await crawlAttribute(page, THUMBNAIL_SELECTOR, "href");
+  const thumbnailSrc = await crawlAttribute(page, THUMBNAIL_SELECTOR, "src");
   const headlineTitle = await crawlText(page, HEADLINE_SELECTOR);
   const headlineHref = await crawlAttribute(page, HEADLINE_SELECTOR, "href");
   const sideNews = await crawlSideNews(page);
@@ -65,7 +69,7 @@ const crawlAndConvertSeperateNews = async (page) => {
     editedTime: editedTime,
     category: category,
     headline: {
-      thumbnailHref: thumbnailHref,
+      thumbnailSrc: thumbnailSrc,
       title: headlineTitle,
       href: headlineHref,
     },
@@ -82,7 +86,7 @@ const crawlNewsList = async (page) => {
   while (ariaSelected) {
     const renderedLogoName = await crawlAttribute(page, PRESS_LOGO_SELECTOR, "alt");
 
-    if (logoAlt !== renderedLogoName) {
+    if (logoAlt !== renderedLogoName && ariaSelected) {
       logoAlt = renderedLogoName;
       news.push(await crawlAndConvertSeperateNews(page));
       page.click(NEXT_BUTTON_SELECTOR);
