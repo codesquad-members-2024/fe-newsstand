@@ -97,7 +97,7 @@ function ListViewForm() {
         const navTemplate = categoryList.reduce((acc, cur, idx) => {
             return (acc + `
             <div class="item" id = "${cur.category}">
-            <span>${cur.category}</span>
+            <span>${cur.category}</span><div class = "totalPage">1/82</div>
             </div>
             `);
         }, "");
@@ -105,29 +105,36 @@ function ListViewForm() {
     };
 
     const isEndOfPage = () => {
-        if(curPageIdxInfo.curCategoryTotalNum === curPageIdxInfo.curCategoryDataIdx){
-            const prevCategoryData = categoryList.shift()
-            categoryList.push(prevCategoryData)
-            curPageIdxInfo.curCategoryDataIdx = 0
-            curPageIdxInfo.curCategoryTotalNum = categoryList[curPageIdxInfo.curCategoryIdx].data.length
-            const escapedId = categoryList[curPageIdxInfo.curCategoryIdx].category.replace('/', '\\/');
-            const allNav = document.querySelectorAll(".item")
-            const selectCategory = document.querySelector(`#${escapedId}`);
-            allNav.forEach(curCategory => curCategory.classList.remove("test"))
-            selectCategory.classList.add('test');
-        } else if (curPageIdxInfo.curCategoryDataIdx < 0) {
-            const prevCategoryData = categoryList.pop()
-            categoryList.unshift(prevCategoryData)
-            curPageIdxInfo.curCategoryDataIdx = 0
-            curPageIdxInfo.curCategoryTotalNum = categoryList[curPageIdxInfo.curCategoryIdx].data.length
-            const escapedId = categoryList[curPageIdxInfo.curCategoryIdx].category.replace('/', '\\/');
-            const allNav = document.querySelectorAll(".item")
-            const selectCategory = document.querySelector(`#${escapedId}`);
-            allNav.forEach(curCategory => curCategory.classList.remove("test"))
-            selectCategory.classList.add('test');
+        if(curPageIdxInfo.curCategoryTotalNum === curPageIdxInfo.curCategoryDataIdx) {
+            sortCategoryList(categoryList[curPageIdxInfo.curCategoryIdx + 1].category)
+        } else if (curPageIdxInfo.curCategoryDataIdx < 0) { 
+            sortCategoryList(categoryList[categoryList.length - 1].category)
         }
+        swicthNavAnimation(categoryList[curPageIdxInfo.curCategoryIdx].category)
     }
 
+    const swicthNavAnimation = (id) => {
+        const escapedId = id.replace('/', '\\/');
+        const allNav = document.querySelectorAll(".item")
+        const selectCategory = document.querySelector(`#${escapedId}`);
+        allNav.forEach(curCategory => curCategory.classList.remove("nav-animation"))
+        selectCategory.classList.add('nav-animation');
+    }
+
+    const sortCategoryList = (id) => {
+        while(categoryList[0].category !== id) {
+            const prevCategoryData = categoryList.shift()
+            categoryList.push(prevCategoryData)
+        }
+        curPageIdxInfo.curCategoryDataIdx = 0
+        curPageIdxInfo.curCategoryTotalNum = categoryList[curPageIdxInfo.curCategoryIdx].data.length
+    }
+
+    const switchCategory = (id) => {
+        swicthNavAnimation(id)
+        sortCategoryList(id)
+        renderNews()
+    }
     const updatePageNum = (targetName) => {
         switch (targetName) {
             case "list-view-left-btn":
@@ -146,21 +153,6 @@ function ListViewForm() {
         updatePageNum(event.target.className);
         renderNews()
     };
-
-    const switchCategory = (id) => {
-        const escapedId = id.replace('/', '\\/');
-        const allNav = document.querySelectorAll(".item")
-        const selectCategory = document.querySelector(`#${escapedId}`);
-        allNav.forEach(curCategory => curCategory.classList.remove("test"))
-        selectCategory.classList.add('test');
-        while(categoryList[0].category !== id) {
-            const prevCategoryData = categoryList.shift()
-            categoryList.push(prevCategoryData)
-        }
-        curPageIdxInfo.curCategoryDataIdx = 0
-        curPageIdxInfo.curCategoryTotalNum = categoryList[curPageIdxInfo.curCategoryIdx].data.length
-        renderNews()
-    }
     
     const setEventHandler = () => {
         const updatePageBtn = document.querySelector(".list-mode-main-container");
@@ -171,8 +163,6 @@ function ListViewForm() {
             if (e.target.tagName === "SPAN") return switchCategory(e.target.closest(".item").id)
             return switchCategory(e.target.id)
         });  
-
-        
     }
     setEventHandler()
     return { main };

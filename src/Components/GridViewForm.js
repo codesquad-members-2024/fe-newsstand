@@ -4,7 +4,7 @@ function GridViewForm () {
     let currenPageNum = 0;
     const companyData = [];
 
-    const main =  async () => {
+    const main = async () => {
         await initData()
         renderGridView()
     }

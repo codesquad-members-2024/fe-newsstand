@@ -374,6 +374,7 @@ a>img {
 }
 
 .item {
+    display: flex;
     position:relative;
     padding: 15px 10px;
     font-size: 14px;
@@ -382,21 +383,25 @@ a>img {
     transition: padding .5s ease;
 }
 
-.test span {
+.totalPage {
+    display: none;
+    left: 50px;
+}
+
+.nav-animation span, .totalPage {
     position:relative;
     z-index:2;
 }
-
-.test {
-    padding-right: 100px;
+.nav-animation {
+    padding-right: 70px;
     background:rgba(196, 211, 255, 0.735);
 }
 
-.test span {
+.nav-animation span {
     color: #fff;
 }
 
-.test::after {
+.nav-animation::after {
     content: '';
     position: absolute;
     top: 0;
