@@ -4,16 +4,25 @@ const LOGO_COUNT_PER_PAGE = 24;
 const INITIAL_VIEW_INDEX = 0;
 const RANDOM_SECTOR = 0.5;
 const NO_ELEMENT = 0;
+
 const ACTIVE_FILL_PROPERTY = "#4362D0";
 const INACTIVE_FILL_PROPERTY = "#879298";
 const NEWS_PATH = "src/data/news.json";
 
+const pressContainer = document.querySelector(".press-container");
 const pressTable = document.querySelector(".press-container__view");
 const leftArrowButton = document.querySelector(".press-container__left-arrow");
 const rightArrowButton = document.querySelector(".press-container__right-arrow");
-const viewIcons = Array.from(document.querySelectorAll(".press-container__view-icon"));
-const gridViewIcon = viewIcons.find((icon) => icon.attributes.getNamedItem("title").nodeValue === "grid-view");
-const listViewIcon = viewIcons.find((icon) => icon.attributes.getNamedItem("title").nodeValue === "list-view");
+
+const viewIconNodes = Array.from(document.querySelectorAll(".press-container__view-icon"));
+const viewIcons = viewIconNodes.reduce((icons, icon) => {
+  const title = icon.getAttribute("title");
+  if (title === "grid-view") icons.gridViewIcon = icon;
+  if (title === "list-view") icons.listViewIcon = icon;
+  return icons;
+}, {});
+const { gridViewIcon, listViewIcon } = viewIcons;
+
 const news = [];
 const categories = [];
 
@@ -22,22 +31,58 @@ let listViewIndex = INITIAL_VIEW_INDEX;
 let logos = [];
 
 const isIconActive = (icon) => {
-  const activeValue = icon.querySelector("path").attributes.getNamedItem("fill").nodeValue;
+  const activeValue = icon
+    .querySelector("path")
+    .attributes.getNamedItem("fill").nodeValue;
 
   return activeValue === ACTIVE_FILL_PROPERTY;
-}
+};
 
 const fillIcon = (icon, fillProperty) => {
   const path = icon.querySelector("path");
 
   path.setAttribute("fill", fillProperty);
-}
+};
+
+const activateGridView = () => {
+  fillIcon(gridViewIcon, ACTIVE_FILL_PROPERTY);
+  fillIcon(listViewIcon, INACTIVE_FILL_PROPERTY);
+  renderGridView();
+};
+
+const activateListView = () => {
+  fillIcon(listViewIcon, ACTIVE_FILL_PROPERTY);
+  fillIcon(gridViewIcon, INACTIVE_FILL_PROPERTY);
+  renderListView(listViewIndex);
+};
+
+const renderPreviousPage = () => {
+  if (isIconActive(gridViewIcon)) {
+    gridViewIndex = gridViewIndex > FIRST_PAGE ? --gridViewIndex : gridViewIndex;
+    renderGridView();
+  }
+  if (isIconActive(listViewIcon)) {
+    listViewIndex = listViewIndex > INITIAL_VIEW_INDEX ? --listViewIndex : listViewIndex;
+    renderListView(listViewIndex);
+  }
+};
+
+const renderNextPage = () => {
+  if (isIconActive(gridViewIcon)) {
+    gridViewIndex = gridViewIndex < LAST_PAGE ? ++gridViewIndex : gridViewIndex;
+    renderGridView();
+  }
+  if (isIconActive(listViewIcon)) {
+    listViewIndex = listViewIndex < news.length - 1 ? ++listViewIndex : listViewIndex; 
+    renderListView(listViewIndex);
+  }
+};
 
 const shuffle = (array) => {
-  const result = array
+  const result = array;
 
   return result.sort(() => Math.random() - RANDOM_SECTOR);
-}
+};
 
 const initializeNews = async () => {
   const newsList = await fetch(NEWS_PATH).then((response) => response.json());
@@ -47,25 +92,27 @@ const initializeNews = async () => {
   });
   initializeLogos();
   initializeCategories();
-}
+};
 
 const initializeLogos = () => {
-  const logoInfo = news.map((newsElement) => { return { src: newsElement.logoImageSrc, name: newsElement.pressName } });
+  const logoInfo = news.map((newsElement) => {
+    return { src: newsElement.logoImageSrc, name: newsElement.pressName };
+  });
 
   logos = shuffle(logoInfo);
-}
+};
 
 const initializeCategories = () => {
   const categoryList = news.map((newsElement) => newsElement.category);
   const categoryNames = new Set([]);
-  
-  categoryList.forEach((category) => {
-    categoryNames.add(category);
-  });
-  categoryNames.forEach((category) => {
-    categories.push({ categoryName: category, count:categoryList.filter((name) => name === category).length });
-  });
-}
+
+  categoryList.forEach((category) => categoryNames.add(category));
+  categoryNames.forEach((category) =>
+    categories.push({
+      categoryName: category,
+      count: categoryList.filter((name) => name === category).length,
+    }));
+};
 
 const createSubscribeButton = () => {
   const button = document.createElement("button");
@@ -73,14 +120,15 @@ const createSubscribeButton = () => {
   const subscribeText = document.createTextNode("구독하기");
 
   plusImage.src = "src/img/PlusSymbol.svg";
-  plusImage.style.cssText = "width: 12px; height: 12px; margin-left: -4px; margin-right: 2px";
-  
+  plusImage.style.cssText =
+    "width: 12px; height: 12px; margin-left: -4px; margin-right: 2px";
+
   button.classList.add("press-container__subscribe-button");
   button.appendChild(plusImage);
   button.appendChild(subscribeText);
 
   return button;
-}
+};
 
 const addImagesIntoTable = (table) => {
   Array.from({ length: LOGO_COUNT_PER_PAGE }).forEach((_, index) => {
@@ -121,20 +169,27 @@ const renderGridView = async () => {
 
 const renderActiveCategory = (category) => {
   return `<div class="press-container__active-category"><div>${category.categoryName}</div><div>1 / ${category.count}</div></div>`;
-}
+};
 
 const renderInactiveCategory = (category) => {
-  return `<div class="press-container__category">${category.categoryName}</div>`
-}
+  return `<div class="press-container__category">${category.categoryName}</div>`;
+};
 
 const renderCategoryTab = (activeCategory) => {
   const div = document.createElement("div");
 
   div.classList.add("press-container__category-tab");
-  div.innerHTML = categories.reduce((acc, cur) => acc + (cur === activeCategory ? renderActiveCategory(cur) : renderInactiveCategory(cur)), "");
+  div.innerHTML = categories.reduce(
+    (acc, cur) =>
+      acc +
+      (cur === activeCategory
+        ? renderActiveCategory(cur)
+        : renderInactiveCategory(cur)),
+    ""
+  );
 
   return div;
-}
+};
 
 const renderNewsInfo = (index) => {
   const newsInfo = document.createElement("div");
@@ -152,14 +207,49 @@ const renderNewsInfo = (index) => {
   newsInfo.appendChild(subscribeButton);
 
   return newsInfo;
-}
+};
 
-// ToDo
+const renderSideNews = (index, element) => {
+  news[index].sideNews.forEach((newsElement) => {
+    const title = document.createElement("a");
+
+    title.setAttribute("class", "press-container__sidenews-title");
+    title.setAttribute("href", newsElement.href);
+    title.innerHTML = newsElement.title;
+    element.appendChild(title);
+  });
+};
+
 const renderNewsContent = (index) => {
-  const container = document.createElement("div");
+  const container = document.createElement("div"); // flex
 
+  container.setAttribute("class", "press-container__news-content");
+  const leftDiv = document.createElement("div");
+  leftDiv.setAttribute("class", "press-container__headline");
+  const rightDiv = document.createElement("div");
+  rightDiv.setAttribute("class", "press-container__sidenews");
+
+  const thumbnail = document.createElement("img");
+  const headlineTitle = document.createElement("span");
+
+  renderSideNews(index, rightDiv);
+  const noteMessage = document.createElement("span");
+
+  thumbnail.setAttribute("src", news[index].headline.thumbnailSrc);
+  thumbnail.setAttribute("href", news[index].headline.href);
+  thumbnail.setAttribute("class", "press-container__headline-thumbnail");
+  headlineTitle.innerHTML = news[index].headline.title;
+  headlineTitle.setAttribute("class", "press-container__headline-title");
+  leftDiv.appendChild(thumbnail);
+  leftDiv.appendChild(headlineTitle);
+
+  noteMessage.innerHTML = `${news[index].pressName} 언론사에서 직접 편집한 뉴스입니다.`;
+  rightDiv.appendChild(noteMessage);
+
+  container.appendChild(leftDiv);
+  container.appendChild(rightDiv);
   return container;
-}
+};
 
 const renderDetailedNews = (index) => {
   const detailedNews = document.createElement("div");
@@ -171,7 +261,7 @@ const renderDetailedNews = (index) => {
   detailedNews.appendChild(newsContents);
 
   return detailedNews;
-}
+};
 
 const renderListView = async (index) => {
   if (news.length === NO_ELEMENT) await initializeNews();
@@ -182,40 +272,15 @@ const renderListView = async (index) => {
   pressTable.innerHTML = "";
   pressTable.appendChild(categoryTab);
   pressTable.appendChild(detailedNews);
-  
+
   setVisibilityOfArrowButtons();
-}
+};
 
-gridViewIcon.addEventListener("click", () => {
-  fillIcon(gridViewIcon, ACTIVE_FILL_PROPERTY);
-  fillIcon(listViewIcon, INACTIVE_FILL_PROPERTY);
-  renderGridView();
-});
-listViewIcon.addEventListener("click", () => {
-  fillIcon(listViewIcon, ACTIVE_FILL_PROPERTY);
-  fillIcon(gridViewIcon, INACTIVE_FILL_PROPERTY);
-  renderListView(listViewIndex);
-});
-
-leftArrowButton.addEventListener("click", () => {
-  if (isIconActive(gridViewIcon)) {
-    gridViewIndex = gridViewIndex > FIRST_PAGE ? --gridViewIndex : gridViewIndex;
-    renderGridView();
-  }
-  if (isIconActive(listViewIcon)) {
-    listViewIndex = listViewIndex > INITIAL_VIEW_INDEX ? --listViewIndex : listViewIndex;
-    renderListView(listViewIndex);
-  }
-});
-rightArrowButton.addEventListener("click", () => {
-  if (isIconActive(gridViewIcon)) {
-    gridViewIndex = gridViewIndex < LAST_PAGE ? ++gridViewIndex : gridViewIndex;
-    renderGridView();
-  }
-  if (isIconActive(listViewIcon)) {
-    listViewIndex = listViewIndex < news.length - 1 ? ++listViewIndex : listViewIndex; 
-    renderListView(listViewIndex);
-  }
+pressContainer.addEventListener("click", (e) => {
+  if (e.target === gridViewIcon) activateGridView();
+  if (e.target === listViewIcon) activateListView();
+  if (e.target === leftArrowButton) renderPreviousPage();
+  if (e.target === rightArrowButton) renderNextPage();
 });
 
 export default renderGridView;
