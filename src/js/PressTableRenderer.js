@@ -62,7 +62,7 @@ const renderPreviousPage = () => {
     renderGridView();
   }
   if (isIconActive(listViewIcon)) {
-    listViewIndex = listViewIndex > INITIAL_VIEW_INDEX ? --listViewIndex : listViewIndex;
+    listViewIndex = listViewIndex === INITIAL_VIEW_INDEX ? news.length - 1 : --listViewIndex;
     renderListView(listViewIndex);
   }
 };
@@ -73,7 +73,7 @@ const renderNextPage = () => {
     renderGridView();
   }
   if (isIconActive(listViewIcon)) {
-    listViewIndex = listViewIndex < news.length - 1 ? ++listViewIndex : listViewIndex; 
+    listViewIndex = listViewIndex === news.length - 1 ? INITIAL_VIEW_INDEX : ++listViewIndex; 
     renderListView(listViewIndex);
   }
 };
@@ -110,9 +110,18 @@ const initializeCategories = () => {
   categoryNames.forEach((category) =>
     categories.push({
       categoryName: category,
+      firstIndex: categoryList.findIndex((name) => name === category),
       count: categoryList.filter((name) => name === category).length,
     }));
 };
+
+const isInCategoryRange = (category, index) => {
+  return category.firstIndex <= index && category.firstIndex + category.count > index;
+}
+
+const findActiveCategory = (index) => {
+  return categories.find((categoryElement) => isInCategoryRange(categoryElement, index));
+}
 
 const createSubscribeButton = () => {
   const button = document.createElement("button");
@@ -167,15 +176,16 @@ const renderGridView = async () => {
   setVisibilityOfArrowButtons();
 };
 
-const renderActiveCategory = (category) => {
-  return `<div class="press-container__active-category"><div>${category.categoryName}</div><div>1 / ${category.count}</div></div>`;
+const renderActiveCategory = (category, index) => {
+  return `<div class="press-container__active-category"><div>${category.categoryName}</div><div>${index - category.firstIndex + 1} / ${category.count}</div></div>`;
 };
 
 const renderInactiveCategory = (category) => {
   return `<div class="press-container__category">${category.categoryName}</div>`;
 };
 
-const renderCategoryTab = (activeCategory) => {
+const renderCategoryTab = (index) => {
+  const activeCategory = findActiveCategory(index);
   const div = document.createElement("div");
 
   div.classList.add("press-container__category-tab");
@@ -183,7 +193,7 @@ const renderCategoryTab = (activeCategory) => {
     (acc, cur) =>
       acc +
       (cur === activeCategory
-        ? renderActiveCategory(cur)
+        ? renderActiveCategory(cur, index)
         : renderInactiveCategory(cur)),
     ""
   );
