@@ -220,34 +220,34 @@ const renderSideNews = (index, element) => {
   });
 };
 
+function createElementWithClass(elementType, className) {
+  const element = document.createElement(elementType);
+  element.setAttribute("class", className);
+  return element;
+}
+
 const renderNewsContent = (index) => {
-  const container = document.createElement("div"); // flex
-
-  container.setAttribute("class", "press-container__news-content");
-  const leftDiv = document.createElement("div");
-  leftDiv.setAttribute("class", "press-container__headline");
-  const rightDiv = document.createElement("div");
-  rightDiv.setAttribute("class", "press-container__sidenews");
-
-  const thumbnail = document.createElement("img");
-  const headlineTitle = document.createElement("span");
-
-  renderSideNews(index, rightDiv);
+  const container = createElementWithClass("div", "press-container__news-content");
+  const headline = createElementWithClass("div", "press-container__headline");
+  const sideNews = createElementWithClass("div", "press-container__sidenews");
+  const thumbnail = createElementWithClass("img", "press-container__headline-thumbnail");
+  const headlineTitle = createElementWithClass("a", "press-container__headline-title");
   const noteMessage = document.createElement("span");
 
   thumbnail.setAttribute("src", news[index].headline.thumbnailSrc);
   thumbnail.setAttribute("href", news[index].headline.href);
-  thumbnail.setAttribute("class", "press-container__headline-thumbnail");
   headlineTitle.innerHTML = news[index].headline.title;
-  headlineTitle.setAttribute("class", "press-container__headline-title");
-  leftDiv.appendChild(thumbnail);
-  leftDiv.appendChild(headlineTitle);
+  headlineTitle.setAttribute("href", news[index].headline.href);
 
+  renderSideNews(index, sideNews);
+  
   noteMessage.innerHTML = `${news[index].pressName} 언론사에서 직접 편집한 뉴스입니다.`;
-  rightDiv.appendChild(noteMessage);
+  sideNews.appendChild(noteMessage);
+  headline.appendChild(thumbnail);
+  headline.appendChild(headlineTitle);
+  container.appendChild(headline);
+  container.appendChild(sideNews);
 
-  container.appendChild(leftDiv);
-  container.appendChild(rightDiv);
   return container;
 };
 

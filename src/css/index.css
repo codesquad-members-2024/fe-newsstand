@@ -261,6 +261,8 @@ body {
   height: 38.75px;
   font-size: 16px;
   margin-top: 16px;
+  color: #14212b;
+  text-decoration: none;
 }
 
 .press-container__sidenews {
