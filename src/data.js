@@ -2,104 +2,105 @@ export const listCat = [
   {
     url: "https://www.figma.com/file/SJHhyw3G0A4qDSWMIo9Ths/image/6e64c86ea480d1a2922e94cb3e9431fa4685a1a0",
     description: [
-      "경제 - 또 국민연금의 몽니... 현대百 지주사 불발",
+      "또 국민연금의 몽니... 현대百 지주사 불발",
       "전공의 행정처분 '속도'…의대 교수들 '집단대응' 논의 본격화",
-      "대통령실 \"의료개혁 관철 변함없어…언제까지 인내할 순 없다\"",
+      '대통령실 "의료개혁 관철 변함없어…언제까지 인내할 순 없다"',
       "이변 없었던 아카데미…'오펜하이머' 작품상 등 7관왕 싹쓸이",
       "'탁구게이트' 이강인·손흥민 함께 태국전…주민규 첫 태극마크",
       "野, '이종섭 호주 출국' 일제히 비난…\"개구멍으로 도망시켜\"",
       "與 선대위 '한동훈 원톱' 유력검토…'비례는 인요한 지휘' 거론",
-    ]
+    ],
   },
   {
     url: "https://www.figma.com/file/SJHhyw3G0A4qDSWMIo9Ths/image/c5bfa7355e16800a64814c0f81b8fe1e7c5ff808",
     description: [
-      "방송통신 - 봇물처럼 터지는 공공요금 인상... 꼭 지금이어야 하나",
+      "봇물처럼 터지는 공공요금 인상... 꼭 지금이어야 하나",
       "전공의 행정처분 '속도'…의대 교수들 '집단대응' 논의 본격화",
-      "대통령실 \"의료개혁 관철 변함없어…언제까지 인내할 순 없다\"",
+      '대통령실 "의료개혁 관철 변함없어…언제까지 인내할 순 없다"',
       "이변 없었던 아카데미…'오펜하이머' 작품상 등 7관왕 싹쓸이",
       "'탁구게이트' 이강인·손흥민 함께 태국전…주민규 첫 태극마크",
       "野, '이종섭 호주 출국' 일제히 비난…\"개구멍으로 도망시켜\"",
       "與 선대위 '한동훈 원톱' 유력검토…'비례는 인요한 지휘' 거론",
-    ]
+    ],
   },
   {
-    url: "https://cdn.bloter.net/news/photo/202403/613440_218810_3139.png",
+    url: "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0314%2Farticle_img%2Fnew_main%2F9026%2F162552_001.png%22&type=nf312_208&service=navermain",
     description: [
-      "IT - [사외이사 분석]KT, ‘정치권 외풍’의 역사…경영 쇄신은 ‘진행중’",
+      "삼성, 아이패드 OLED 구동칩 전량 공급",
       "전공의 행정처분 '속도'…의대 교수들 '집단대응' 논의 본격화",
-      "대통령실 \"의료개혁 관철 변함없어…언제까지 인내할 순 없다\"",
+      '대통령실 "의료개혁 관철 변함없어…언제까지 인내할 순 없다"',
       "이변 없었던 아카데미…'오펜하이머' 작품상 등 7관왕 싹쓸이",
       "'탁구게이트' 이강인·손흥민 함께 태국전…주민규 첫 태극마크",
       "野, '이종섭 호주 출국' 일제히 비난…\"개구멍으로 도망시켜\"",
       "與 선대위 '한동훈 원톱' 유력검토…'비례는 인요한 지휘' 거론",
-    ]
+    ],
   },
   {
     url: "https://f1.econotimes.com/2024/03/y8rv5l4365_th_1024x0.jpg",
     description: [
-      "영자지 - With bitcoin hitting new highs, it’ll likely reach the US$100,000 milestone before 2024 is out",
+      "With bitcoin hitting new highs, it’ll likely reach the US$100,000 milestone before 2024 is out",
       "전공의 행정처분 '속도'…의대 교수들 '집단대응' 논의 본격화",
-      "대통령실 \"의료개혁 관철 변함없어…언제까지 인내할 순 없다\"",
+      '대통령실 "의료개혁 관철 변함없어…언제까지 인내할 순 없다"',
       "이변 없었던 아카데미…'오펜하이머' 작품상 등 7관왕 싹쓸이",
       "'탁구게이트' 이강인·손흥민 함께 태국전…주민규 첫 태극마크",
       "野, '이종섭 호주 출국' 일제히 비난…\"개구멍으로 도망시켜\"",
       "與 선대위 '한동훈 원톱' 유력검토…'비례는 인요한 지휘' 거론",
-    ]
+    ],
   },
   {
     url: "https://cdn.spotvnews.co.kr/news/photo/202403/664915_1009758_2741.jpg",
     description: [
-      "스포츠 - '또 안타! 볼넷까지' 이정후, 타율 0.348↑…美 \"당신이 깨닫기 전에 빠져들 것\"",
+      "'또 안타! 볼넷까지' 이정후, 타율 0.348↑…美 \"당신이 깨닫기 전에 빠져들 것\"",
       "전공의 행정처분 '속도'…의대 교수들 '집단대응' 논의 본격화",
-      "대통령실 \"의료개혁 관철 변함없어…언제까지 인내할 순 없다\"",
+      '대통령실 "의료개혁 관철 변함없어…언제까지 인내할 순 없다"',
       "이변 없었던 아카데미…'오펜하이머' 작품상 등 7관왕 싹쓸이",
       "'탁구게이트' 이강인·손흥민 함께 태국전…주민규 첫 태극마크",
       "野, '이종섭 호주 출국' 일제히 비난…\"개구멍으로 도망시켜\"",
       "與 선대위 '한동훈 원톱' 유력검토…'비례는 인요한 지휘' 거론",
-    ]
+    ],
   },
   {
     url: "https://d3ihz389yobwks.cloudfront.net/1710377270868eYuAL.jpg",
     description: [
-      "매거진 - 정호연부터 박진영까지, 주연진 보다 화려한 '닭강정' 카메오들",
+      "정호연부터 박진영까지, 주연진 보다 화려한 '닭강정' 카메오들",
       "전공의 행정처분 '속도'…의대 교수들 '집단대응' 논의 본격화",
-      "대통령실 \"의료개혁 관철 변함없어…언제까지 인내할 순 없다\"",
+      '대통령실 "의료개혁 관철 변함없어…언제까지 인내할 순 없다"',
       "이변 없었던 아카데미…'오펜하이머' 작품상 등 7관왕 싹쓸이",
       "'탁구게이트' 이강인·손흥민 함께 태국전…주민규 첫 태극마크",
       "野, '이종섭 호주 출국' 일제히 비난…\"개구멍으로 도망시켜\"",
       "與 선대위 '한동훈 원톱' 유력검토…'비례는 인요한 지휘' 거론",
-    ]
+    ],
   },
   {
     url: "http://db.kookje.co.kr/news2000/photo/2024/0314/L20240314.22001003652i1.jpg",
     description: [
-      "지역 - 싸고 푸짐한 식당은 옛말…대학가도 고물가 파고",
+      "싸고 푸짐한 식당은 옛말…대학가도 고물가 파고",
       "전공의 행정처분 '속도'…의대 교수들 '집단대응' 논의 본격화",
-      "대통령실 \"의료개혁 관철 변함없어…언제까지 인내할 순 없다\"",
+      '대통령실 "의료개혁 관철 변함없어…언제까지 인내할 순 없다"',
       "이변 없었던 아카데미…'오펜하이머' 작품상 등 7관왕 싹쓸이",
       "'탁구게이트' 이강인·손흥민 함께 태국전…주민규 첫 태극마크",
       "野, '이종섭 호주 출국' 일제히 비난…\"개구멍으로 도망시켜\"",
       "與 선대위 '한동훈 원톱' 유력검토…'비례는 인요한 지휘' 거론",
-    ]
-  }
+    ],
+  },
 ];
 
 export const rollingnewsTitle = [
   "전공의 행정처분 '속도'…의대 교수들 '집단대응' 논의 본격화",
-  "대통령실 \"의료개혁 관철 변함없어…언제까지 인내할 순 없다\"",
+  '대통령실 "의료개혁 관철 변함없어…언제까지 인내할 순 없다"',
   "이변 없었던 아카데미…'오펜하이머' 작품상 등 7관왕 싹쓸이",
   "'탁구게이트' 이강인·손흥민 함께 태국전…주민규 첫 태극마크",
   "野, '이종섭 호주 출국' 일제히 비난…\"개구멍으로 도망시켜\"",
   "與 선대위 '한동훈 원톱' 유력검토…'비례는 인요한 지휘' 거론",
   "'제약사 직원 동원 의혹' 고소인 조사…의협 \"동원지시 없었다\"",
-  "\"계양을 이재명 43%-원희룡 35%…분당갑 안철수 40%-이광재 36%\"",
-  "40만계좌 홍콩ELS 손실 6조…금감원 \"판매사 최대 100% 배상\"",
-  "\"尹 지지율 40.2%…국민의힘 41.9%, 민주당 43.1%\"[리얼미터]"
+  '"계양을 이재명 43%-원희룡 35%…분당갑 안철수 40%-이광재 36%"',
+  '40만계좌 홍콩ELS 손실 6조…금감원 "판매사 최대 100% 배상"',
+  '"尹 지지율 40.2%…국민의힘 41.9%, 민주당 43.1%"[리얼미터]',
 ];
 
 export const newsLogos = [
-  ["https://s.pstatic.net/static/newsstand/2020/logo/light/0604/032.png",
+  [
+    "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/032.png",
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/293.png",
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/366.png",
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/038.png",
@@ -122,8 +123,10 @@ export const newsLogos = [
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/108.png",
     "https://s.pstatic.net/static/newsstand/up/2022/0804/nsd1343054.png",
     "https://s.pstatic.net/static/newsstand/up/2021/0819/nsd151219656.png",
-    "https://s.pstatic.net/static/newsstand/up/2022/0418/nsd164755323.png"],
-  ["https://s.pstatic.net/static/newsstand/2020/logo/light/0604/055.png",
+    "https://s.pstatic.net/static/newsstand/up/2022/0418/nsd164755323.png",
+  ],
+  [
+    "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/055.png",
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/368.png",
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/031.png",
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/008.png",
@@ -147,8 +150,10 @@ export const newsLogos = [
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/925.png",
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/328.png",
     "https://s.pstatic.net/static/newsstand/up/2022/1006/nsd205818702.png",
-    "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/942.png"],
-  ["https://s.pstatic.net/static/newsstand/up/2020/0708/nsd94830278.png",
+    "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/942.png",
+  ],
+  [
+    "https://s.pstatic.net/static/newsstand/up/2020/0708/nsd94830278.png",
     "https://s.pstatic.net/static/newsstand/up/2020/0610/nsd151458769.png",
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/009.png",
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/056.png",
@@ -171,8 +176,10 @@ export const newsLogos = [
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/911.png",
     "https://s.pstatic.net/static/newsstand/up/2024/0229/nsd103734195.png",
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/955.png",
-    "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/094.png"],
-  ["https://s.pstatic.net/static/newsstand/2020/logo/light/0604/117.png",
+    "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/094.png",
+  ],
+  [
+    "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/117.png",
     "https://s.pstatic.net/static/newsstand/up/2020/0903/nsd185255316.png",
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/021.png",
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/139.png",
@@ -194,5 +201,6 @@ export const newsLogos = [
     "https://s.pstatic.net/static/newsstand/up/2020/1019/nsd144531857.png",
     "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/928.png",
     "https://s.pstatic.net/static/newsstand/up/2021/0316/nsd103953129.png",
-    "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/971.png"]
+    "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/971.png",
+  ],
 ];

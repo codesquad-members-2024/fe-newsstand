@@ -74,11 +74,21 @@ function showList(cat) {
   const newsgroupList = document.querySelector(".newsgroup-list");
   newsgroupList.style.display = "";
 
+  const newsgroupListleft = document.querySelector(".newsgroup-list-left");
+  const newsgroupListright = document.querySelector(".newsgroup-list-right");
+  newsgroupListleft.innerHTML = '';
+  newsgroupListright.innerHTML = '';
+
   document.querySelector(".newsgroup-grid").style.display = "none";
   document.querySelector(".grid-left-btn").style.visibility = "hidden";
   document.querySelector(".grid-right-btn").style.visibility = "hidden";
   document.querySelector(".list-left-btn").style.visibility = "visible";
   document.querySelector(".list-right-btn").style.visibility = "visible";
+
+  if (cat === 0)
+    document.querySelector(".list-left-btn").style.visibility = "hidden";
+  else if (cat === listCat.length - 1)
+    document.querySelector(".list-right-btn").style.visibility = "hidden";
 
   createList(cat);
 }

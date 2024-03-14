@@ -155,11 +155,12 @@ header {
 }
 
 .newsgroup-list-area {
-  margin: 1rem;
+  margin: 0 20px;
 }
 
 .newsgroup-list-top {
   display: flex;
+  margin: 5px 20px;
   align-items: center;
 }
 
@@ -177,12 +178,20 @@ header {
   display: flex;
 }
 
+.newsgroup-list-left {
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+  align-items: center;
+}
+
 .newsgroup-list-left img {
   height: 200px;
+  width: 320px;
 }
 
 .newsgroup-list-right {
-  width: 50%;    
+  width: 50%;
   margin-left: 2rem;
 }
 
