@@ -19,6 +19,7 @@ function ListViewForm() {
         await initData();
         renderNav();
         renderNews();
+        switchCategory(categoryList[0].category)
     };
 
     const renderNews = () => {
@@ -44,6 +45,7 @@ function ListViewForm() {
             } 언론사에서 직접 편집한 뉴스입니다.</div>`
         );
     };
+
     const getMainNewsTemplate = () => {
         const curNewsData =
             categoryList[curPageIdxInfo.curCategoryIdx].data[
@@ -70,6 +72,7 @@ function ListViewForm() {
         const newsData = await jsonParse.parseJson("category");
         const modifyData = spliceCompanyString(newsData);
         spliteData(modifyData);
+        curPageIdxInfo.curCategoryTotalNum = categoryList[curPageIdxInfo.curCategoryIdx].data.length
     };
 
     const spliteData = (data) => {
@@ -90,7 +93,7 @@ function ListViewForm() {
         });
     };
 
-    const getNavTemplate = (clickCategory) => {
+    const getNavTemplate = () => {
         const navTemplate = categoryList.reduce((acc, cur, idx) => {
             return (acc + `
             <div class="item" id = "${cur.category}">
@@ -101,6 +104,77 @@ function ListViewForm() {
         return navTemplate;
     };
 
+    const isEndOfPage = () => {
+        if(curPageIdxInfo.curCategoryTotalNum === curPageIdxInfo.curCategoryDataIdx){
+            const prevCategoryData = categoryList.shift()
+            categoryList.push(prevCategoryData)
+            curPageIdxInfo.curCategoryDataIdx = 0
+            curPageIdxInfo.curCategoryTotalNum = categoryList[curPageIdxInfo.curCategoryIdx].data.length
+            const escapedId = categoryList[curPageIdxInfo.curCategoryIdx].category.replace('/', '\\/');
+            const allNav = document.querySelectorAll(".item")
+            const selectCategory = document.querySelector(`#${escapedId}`);
+            allNav.forEach(curCategory => curCategory.classList.remove("test"))
+            selectCategory.classList.add('test');
+        } else if (curPageIdxInfo.curCategoryDataIdx < 0) {
+            const prevCategoryData = categoryList.pop()
+            categoryList.unshift(prevCategoryData)
+            curPageIdxInfo.curCategoryDataIdx = 0
+            curPageIdxInfo.curCategoryTotalNum = categoryList[curPageIdxInfo.curCategoryIdx].data.length
+            const escapedId = categoryList[curPageIdxInfo.curCategoryIdx].category.replace('/', '\\/');
+            const allNav = document.querySelectorAll(".item")
+            const selectCategory = document.querySelector(`#${escapedId}`);
+            allNav.forEach(curCategory => curCategory.classList.remove("test"))
+            selectCategory.classList.add('test');
+        }
+    }
+
+    const updatePageNum = (targetName) => {
+        switch (targetName) {
+            case "list-view-left-btn":
+                curPageIdxInfo.curCategoryDataIdx--
+                break;
+            case "list-view-light-btn":
+                curPageIdxInfo.curCategoryDataIdx++
+                break;
+            default:
+                break;
+        }
+        isEndOfPage()
+    }
+
+    const checkLocationType = (event) => {
+        updatePageNum(event.target.className);
+        renderNews()
+    };
+
+    const switchCategory = (id) => {
+        const escapedId = id.replace('/', '\\/');
+        const allNav = document.querySelectorAll(".item")
+        const selectCategory = document.querySelector(`#${escapedId}`);
+        allNav.forEach(curCategory => curCategory.classList.remove("test"))
+        selectCategory.classList.add('test');
+        while(categoryList[0].category !== id) {
+            const prevCategoryData = categoryList.shift()
+            categoryList.push(prevCategoryData)
+        }
+        curPageIdxInfo.curCategoryDataIdx = 0
+        curPageIdxInfo.curCategoryTotalNum = categoryList[curPageIdxInfo.curCategoryIdx].data.length
+        renderNews()
+    }
+    
+    const setEventHandler = () => {
+        const updatePageBtn = document.querySelector(".list-mode-main-container");
+        updatePageBtn.addEventListener("click", checkLocationType);  
+
+        const categoryContainer = document.querySelector(".list");
+        categoryContainer.addEventListener("click", (e) => {
+            if (e.target.tagName === "SPAN") return switchCategory(e.target.closest(".item").id)
+            return switchCategory(e.target.id)
+        });  
+
+        
+    }
+    setEventHandler()
     return { main };
 }
 

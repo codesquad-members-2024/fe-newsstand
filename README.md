@@ -119,6 +119,9 @@ export default topNewsForm;
  - [ ] css파일을 분리하고 리네임해 가독성을 올린다.
  - [ ] document 부터 탐색하지 않고 탐색시간을 줄일 수 있는 방법을 생각한다.
  - [ ] 코드를 좀더 간결하고 가독성있게 리펙토링한다.
+ - [ ] 페이지 넘기기 기능
+ - [ ] 네비 css 적용
+ - [ ] rAF로 애니메이션 적용
 ```
 import jsonParse from "../util/jsonParse.js";
 function ListViewForm() {
@@ -166,3 +169,5 @@ const listViewForm = new ListViewForm()
 export default listViewForm
 ```
 
+
+1. 

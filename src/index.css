@@ -176,7 +176,7 @@ nav>div {
     display: flex;
 }
 
-.company-list-container {
+.company-grid-container {
     display: flex;
     align-items: center;
     margin: 0 auto;
@@ -188,13 +188,13 @@ nav>div {
     height: 426px;
 }
 
-.company-list-container>ul {
+.company-grid-container>ul {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, 1fr);
 }
 
-.company-list-container>ul>li {
+.company-grid-container>ul>li {
     border-right: 1px solid gray;
     border-bottom: 1px solid gray;
 }
@@ -287,6 +287,7 @@ a>img {
     align-items: center;
     margin: 0 auto;
     position: relative;
+    height: 458px;
 
 }
 
@@ -363,62 +364,53 @@ a>img {
 }
 
 .wrap {
-    width: 980px;
+    width: 960px;
     margin: 0 auto;
-
 }
 
 .list {
-    width: 960px;
     display: flex;
     background: #f3f3f3;
 }
 
-.list div {
-    position: relative;
-    padding: 20px 10px;
+.item {
+    position:relative;
+    padding: 15px 10px;
     font-size: 14px;
-    font-weight: bold;
+    font-weight:bold;
     color: #333;
     transition: padding .5s ease;
+}
 
-    span {
-        position: relative;
-        z-index: 2;
-    }
+.test span {
+    position:relative;
+    z-index:2;
+}
 
-    &:hover {
-        padding-right: 100px;
-        background: rgba(196, 211, 255, 0.735);
+.test {
+    padding-right: 100px;
+    background:rgba(196, 211, 255, 0.735);
+}
 
-        span {
-            color: #fff;
-        }
-    }
+.test span {
+    color: #fff;
+}
 
-    &:hover::after {
-        animation: fill 20s;
-    }
-
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        z-index: 1;
-        background: rgb(40, 86, 223);
-    }
+.test::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    z-index: 1;
+    background:rgb(40, 86, 223);
+    animation: fill 20s;
 }
 
 @keyframes fill {
-    from {
-        width: 0;
-    }
-
-    to {
-        width: 100%;
-    }
+    from {width: 0;}
+    to {width:100%;}
 }
 #list-view__company-logo {
     width: 51px;

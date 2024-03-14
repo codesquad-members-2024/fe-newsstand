@@ -10,7 +10,7 @@ function GridViewForm () {
     }
 
     const setEventHandler = () => {
-        const updatePageBtn = document.querySelector(".company-list-container");
+        const updatePageBtn = document.querySelector(".company-grid-container");
         updatePageBtn.addEventListener("click", checkLocationType);    
     }
 
