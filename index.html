@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./src/css/style.css">
+    <link rel="stylesheet" href="./src/css/pressListStyle.css">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-thin-straight/css/uicons-thin-straight.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-straight/css/uicons-regular-straight.css'>
@@ -18,14 +19,18 @@
             <div class="date"></div>
         </header>
         
-        <section class="auto-rolling-area flexbox-space-between center-alignment">
+        <section class="breaking-news-area flexbox-space-between center-alignment">
             <div class="auto-rolling-news">
                 <span>연합뉴스</span>
-                <a href="#">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</a>
+                <div class="rolling-wrap rolling-box-1">
+                    
+                </div>
             </div>
             <div class="auto-rolling-news">
                 <span>연합뉴스</span>
-                <a href="#">[속보] 與최고위원 본경선, 김병민·김용태·김재원·민영삼</a>
+                <div class="rolling-wrap rolling-box-2">
+                   
+                </div>
             </div>
         </section>
 
@@ -35,16 +40,43 @@
                 <span class="off">내가 구독한 언론사</span>
             </div>
             <div class="viewer">
-                <i class="fi fi-rr-rectangle-list pointer"></i>
-                <i class="fi fi-rs-apps on pointer"></i>
+                <i class="fi fi-rr-rectangle-list viewer-list pointer"></i>
+                <i class="fi fi-rs-apps viewer-grid on pointer"></i>
             </div>
         </section>
 
-        <main class="press-grid center-alignment">
+        <main class="center-alignment">
             <i class="fi fi-ts-angle-right right-button"></i>
+            <div class="press-grid-wrap"></div>
+            <div class="press-list-wrap display-none">
+                <nav class="category">
+                    <div class="category-list selected">
+                        <a href="#" class="category-text">방송/통신</a>
+                        <span class="press-count">1/81</span>
+                    </div>
+                    <div class="category-list"><a href="#" class="category-text">방송/통신</a></div>
+                    <div class="category-list"><a href="#" class="category-text">IT</a></div>
+                    <div class="category-list"><a href="#" class="category-text">영자지</a></div>
+                    <div class="category-list"><a href="#" class="category-text">스포츠/연예</a></div>
+                    <div class="category-list"><a href="#" class="category-text">매거진/전문지</a></div>
+                    <div class="category-list"><a href="#" class="category-text">지역</a></div>
+                </nav>
+                <div class="press-info">
+                    <span>언론사 이미지</span>
+                    <span class="edit-date">2023.02.10 18:27 편집</span>
+                    <button class="subs-btn">+ 구독하기</button>
+                </div>
+                <div class="news-list flexbox-space-between">
+                    <div class="news-list-left">
+                        <img src="#" alt="brandMark">
+                        또 국민연금의 융니....
+                    </div>
+                    <div class="news-list-right">기사리스트</div>
+                </div>
+            </div>
             <i class="fi fi-ts-angle-left left-button hidden"></i>
         </main>
     </div>
-    <script type="module" src="main.js"></script>
+    <script type="module" src="./src/js/main.js"></script>
 </body>
 </html>
