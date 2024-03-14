@@ -141,15 +141,15 @@ function ListViewForm() {
     ];
 
     const main = async () => {
-        await initData();
-        renderNav();
-        renderNews();
-        switchCategory(categoryList[0].category)
+        await initData(); // json 데이터 파싱 및 클로저 변수에 할당
+        renderNav(); // 카테고리를 먼저 그려준다
+        renderNews(); // 카테고리 아래의 뉴스들을 그려준다
+        switchCategory(categoryList[0].category) // 현재 카테고리의 애니메이션을 적용
     };
 
-    const renderNews = () => {};
+    const renderNews = () => {}; // 이 함수에서 getSubNewsTemplate, getMainNewsTemplate의 반환값으로 화면에 스를 그린다.
 
-    const getSubNewsTemplate = () => {};
+    const getSubNewsTemplate = () => {}; 
 
     const getMainNewsTemplate = () => {};
 
@@ -157,23 +157,24 @@ function ListViewForm() {
 
     const initData = async () => {};
 
-    const spliteData = (allNewsInfo) => {};
+    const spliteData = (allNewsInfo) => {}; // json을 파싱한 데이터를 categoryList 변수에 카테고리별로 넣는다 
 
-    const spliceCompanyString = (newsData) => {};
+    const spliceCompanyString = (newsData) => {}; // 크롤링으로 가져온 데이터 언론사 이름에 "종합/경제 언론사 뉴스" 와 같이 불필요한 문자열이있어 "언론사 뉴스" 문자열을 잘라준다.
+    GridViewForm에도 같은 코드가 있어 합치면 좋을것 같다.
 
     const getNavTemplate = () => {};
 
-    const isEndOfPage = () => {}
+    const isEndOfPage = () => {} // 현재 카테고리의 페이지가 마지막이거나 처음일때 다음, 이전 카테고리로 넘어갈지 결정
 
-    const sortCategoryList = (id) => {}
+    const sortCategoryList = (id) => {} // 현재 카테고리 정보에 따라 categoryList 정렬해준다. 현재 카테고리의 index는 항상 0번째 index다.
 
     const switchCategory = (id) => {}
 
-    const updatePageNum = (targetName) => {}
+    const updatePageNum = (targetName) => {} // 화살표 버튼을 눌렀을 때 방향에 따라 페이시 변수를 업데이트 한다.
 
-    const checkLocationType = (event) => {};
+    const checkLocationType = (event) => {}; // 화살표 방향을 확인한다.
     
-    const setEventHandler = () => {}
+    const setEventHandler = () => {} // listViewForm에서 필요한 이벤트 핸들러를 모아둔다.
     setEventHandler()
     return { main };
 }
