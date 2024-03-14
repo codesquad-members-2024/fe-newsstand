@@ -32,6 +32,7 @@ let listViewIndex = INITIAL_VIEW_INDEX;
 let logos = [];
 
 let startAutoRender = null;
+let fillColorInInterval = null;
 
 const isIconActive = (icon) => {
   const activeValue = icon
@@ -185,12 +186,36 @@ const renderGridView = async () => {
 };
 
 const renderActiveCategory = (category, index) => {
-  return `<div class="press-container__active-category"><div>${category.categoryName}</div><div>${index - category.firstIndex + 1} / ${category.count}</div></div>`;
+  return `<div class="press-container__active-category">
+    <div class="press-container__progress-bar">
+      <div>
+        <div class="press-container__progress"></div>
+        <div class="press-container__category-description">
+          <div>${category.categoryName}</div>
+          <div>${index - category.firstIndex + 1} <span style="opacity: 0.7;">/ ${category.count}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
 };
 
 const renderInactiveCategory = (category) => {
   return `<div class="press-container__category">${category.categoryName}</div>`;
 };
+
+const animateActiveCategory = () => {
+  const activeCategory = document.querySelector(".press-container__progress");
+  let width = 0;
+
+  const fillColor = () => {
+    if (width >= 100) clearInterval(fillColorInInterval);
+    else {
+      width += 0.1;
+      activeCategory.style.width = width + "%";
+    }
+  }
+  fillColorInInterval = setInterval(fillColor, PAGE_TURNING_DELAY / 1000);
+}
 
 const renderCategoryTab = (index) => {
   const activeCategory = findActiveCategory(index);
@@ -292,6 +317,7 @@ const renderListView = async (index) => {
   pressTable.appendChild(detailedNews);
 
   setVisibilityOfArrowButtons();
+  animateActiveCategory();
 };
 
 pressContainer.addEventListener("click", (e) => {
