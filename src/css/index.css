@@ -270,6 +270,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .press-container__sidenews > span {
@@ -283,6 +285,8 @@ body {
   font-weight: 500;
   color: #4b5966;
   text-decoration-line: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .press-container__left-arrow {
