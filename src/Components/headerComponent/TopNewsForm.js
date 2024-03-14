@@ -29,7 +29,7 @@ function TopNewsForm() {
 
     const renderTopNews = async() => {
         const topNewsTemplate = await getTopNewsTemplate()
-        const topNewsContainer = Array.from(document.querySelector(".top-news-container").children)
+        const topNewsContainer = [...document.querySelector(".top-news-container").children]
         topNewsContainer.forEach((node, idx) => {
             node.innerHTML = topNewsTemplate[idx]
         });

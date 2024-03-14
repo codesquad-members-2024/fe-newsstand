@@ -1,10 +1,9 @@
 import jsonParse from "../util/jsonParse.js";
+import { navAnimation } from "./navAnimation.js";
 function ListViewForm() {
-    const curPageIdxInfo = {
-        curCategoryIdx: 0,
-        curCategoryDataIdx: 0,
-        curCategoryTotalNum: 0,
-    };
+    let curCategoryIdx = 0
+    let curCategoryDataIdx = 0
+    let curCategoryTotalNum = 0
     const categoryList = [
         { category: "종합/경제", data: [] },
         { category: "방송/통신", data: [] },
@@ -32,8 +31,7 @@ function ListViewForm() {
     };
 
     const getSubNewsTemplate = () => {
-        const curNewsData = categoryList[curPageIdxInfo.curCategoryIdx]
-                            .data[curPageIdxInfo.curCategoryDataIdx].subNewsInfo;
+        const curNewsData = categoryList[curCategoryIdx].data[curCategoryDataIdx].subNewsInfo;
         const subNewsTemplateTe = curNewsData.reduce((acc, cur) => {
             return (acc + `
             <a href = "${cur.href}"><div class="sub-news">${cur.text}</div></a>
@@ -41,19 +39,16 @@ function ListViewForm() {
         }, "");
         return (subNewsTemplateTe +
             `<div class="edit-company-name">${
-                categoryList[curPageIdxInfo.curCategoryIdx].data[curPageIdxInfo.curCategoryDataIdx].companyName
+                categoryList[curCategoryIdx].data[curCategoryDataIdx].companyName
             } 언론사에서 직접 편집한 뉴스입니다.</div>`
         );
     };
 
     const getMainNewsTemplate = () => {
-        const curNewsData =
-            categoryList[curPageIdxInfo.curCategoryIdx].data[
-                curPageIdxInfo.curCategoryDataIdx
-            ];
+        const curNewsData = categoryList[curCategoryIdx].data[curCategoryDataIdx];
         return `
         <div class="main-news-header">
-            <a href = "${curNewsData.companyHref}" ><img  src = "${curNewsData.companyImg}" id="list-view__company-logo"></img></a>
+            <a href = "${curNewsData.companyHref}" ><img src = "${curNewsData.companyImg}" id="list-view__company-logo"></img></a>
             <div class="edit-date">${curNewsData.editDate}</div>
             <button class="subscribe-btn" name = "${curNewsData.companyName}">+ 구독하기</button>
         </div>
@@ -72,12 +67,12 @@ function ListViewForm() {
         const newsData = await jsonParse.parseJson("category");
         const modifyData = spliceCompanyString(newsData);
         spliteData(modifyData);
-        curPageIdxInfo.curCategoryTotalNum = categoryList[curPageIdxInfo.curCategoryIdx].data.length
+        curCategoryTotalNum = categoryList[curCategoryIdx].data.length
     };
 
-    const spliteData = (data) => {
+    const spliteData = (allNewsInfo) => {
         categoryList.forEach((curCategory) => {
-            data.forEach((curNewsData) => {
+            allNewsInfo.forEach((curNewsData) => {
                 if (curNewsData.category.includes(curCategory.category)) {
                     curCategory.data.push(curNewsData);
                 }
@@ -94,10 +89,12 @@ function ListViewForm() {
     };
 
     const getNavTemplate = () => {
-        const navTemplate = categoryList.reduce((acc, cur, idx) => {
+        const navTemplate = categoryList.reduce((acc, cur) => {
             return (acc + `
             <div class="item" id = "${cur.category}">
-            <span>${cur.category}</span><div class = "totalPage">1/82</div>
+            <span>${cur.category}</span>
+            <div class = "item__totalPage">1/${cur.data.length}</div>
+            <div class = "item__after"></div>
             </div>
             `);
         }, "");
@@ -105,20 +102,12 @@ function ListViewForm() {
     };
 
     const isEndOfPage = () => {
-        if(curPageIdxInfo.curCategoryTotalNum === curPageIdxInfo.curCategoryDataIdx) {
-            sortCategoryList(categoryList[curPageIdxInfo.curCategoryIdx + 1].category)
-        } else if (curPageIdxInfo.curCategoryDataIdx < 0) { 
+        if(curCategoryTotalNum === curCategoryDataIdx) {
+            sortCategoryList(categoryList[curCategoryIdx + 1].category)
+        } else if (curCategoryDataIdx < 0) { 
             sortCategoryList(categoryList[categoryList.length - 1].category)
         }
-        swicthNavAnimation(categoryList[curPageIdxInfo.curCategoryIdx].category)
-    }
-
-    const swicthNavAnimation = (id) => {
-        const escapedId = id.replace('/', '\\/');
-        const allNav = document.querySelectorAll(".item")
-        const selectCategory = document.querySelector(`#${escapedId}`);
-        allNav.forEach(curCategory => curCategory.classList.remove("nav-animation"))
-        selectCategory.classList.add('nav-animation');
+        navAnimation.swicthNavAnimation(categoryList[curCategoryIdx].category)
     }
 
     const sortCategoryList = (id) => {
@@ -126,27 +115,28 @@ function ListViewForm() {
             const prevCategoryData = categoryList.shift()
             categoryList.push(prevCategoryData)
         }
-        curPageIdxInfo.curCategoryDataIdx = 0
-        curPageIdxInfo.curCategoryTotalNum = categoryList[curPageIdxInfo.curCategoryIdx].data.length
+        curCategoryDataIdx = 0
+        curCategoryTotalNum = categoryList[curCategoryIdx].data.length
     }
 
     const switchCategory = (id) => {
-        swicthNavAnimation(id)
+        navAnimation.swicthNavAnimation(id)
         sortCategoryList(id)
         renderNews()
     }
     const updatePageNum = (targetName) => {
         switch (targetName) {
             case "list-view-left-btn":
-                curPageIdxInfo.curCategoryDataIdx--
+                curCategoryDataIdx--
                 break;
             case "list-view-light-btn":
-                curPageIdxInfo.curCategoryDataIdx++
+                curCategoryDataIdx++
                 break;
             default:
                 break;
         }
         isEndOfPage()
+        navAnimation.updateCounter(curCategoryDataIdx, curCategoryTotalNum)
     }
 
     const checkLocationType = (event) => {

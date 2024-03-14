@@ -1,11 +1,13 @@
 import jsonParse from "../util/jsonParse.js";
 import { FIRST_PAGE_NUM, LAST_PAGE_NUM } from "../util/contants.js";
+import { GRID_VIEW_BATCHSIZE } from "../util/contants.js";
 function GridViewForm () {
     let currenPageNum = 0;
     const companyData = [];
 
     const main = async () => {
-        await initData()
+        const newsData = await initData()
+        splitIntoChunks(newsData);
         renderGridView()
     }
 
@@ -46,13 +48,14 @@ function GridViewForm () {
     const initData = async() => {
         const newsData = await jsonParse.parseJson("companiesInfo")
         newsData.sort(() => Math.random() - 0.5)
-        splitIntoChunks(newsData);
+        return newsData
+        
     }
 
     const splitIntoChunks = (newsData) => {
         while (newsData.length !== 0) {
-            companyData.push(newsData.splice(0, 24));
-        }
+            companyData.push(newsData.splice(0, GRID_VIEW_BATCHSIZE));
+        }      
     }
 
     const updatePageNum = (targetName) => {

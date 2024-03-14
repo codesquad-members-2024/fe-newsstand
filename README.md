@@ -111,25 +111,25 @@ export default topNewsForm;
 ## ListViewForm.js
  - [X] json 데이터를 파싱해 categoryList에 카테코리 별로 저장
  - [X] main뉴스와 sub뉴스를 나눠 각각 html을 만들고 화면에 그리기
- - [ ] curPageIdxInfo 값으로 화면에 그려줄 데이터 결정
- - [ ] 화살표 버튼을 눌렀을때 curPageIdxInfo 값을 없데이트하고 화면에 다시 데이터를 그려준다.
- - [ ] 카테고리별 데이터 끝에서 다음 카테고리로 넘어간다
- - [ ] rAF로 nav의 애니매이션 구현
+ - [X] curPageIdxInfo 값으로 화면에 그려줄 데이터 결정
+ - [X] 화살표 버튼을 눌렀을때 curPageIdxInfo 값을 없데이트하고 화면에 다시 데이터를 그려준다.
+ - [X] 카테고리별 데이터 끝에서 다음 카테고리로 넘어간다
+ - [ ] rAF로 nav의 애니매이션 구현 // 보류
  - [ ] 20초가 지났을때 다음 데이터로 넘어간다.
  - [ ] css파일을 분리하고 리네임해 가독성을 올린다.
- - [ ] document 부터 탐색하지 않고 탐색시간을 줄일 수 있는 방법을 생각한다.
- - [ ] 코드를 좀더 간결하고 가독성있게 리펙토링한다.
- - [ ] 페이지 넘기기 기능
- - [ ] 네비 css 적용
- - [ ] rAF로 애니메이션 적용
+ - [X] document 부터 탐색하지 않고 탐색시간을 줄일 수 있는 방법을 생각한다.
+ - [X] 코드를 좀더 간결하고 가독성있게 리펙토링한다.
+ - [X] 페이지 넘기기 기능
+ - [X] 네비 css 적용
+
+
 ```
 import jsonParse from "../util/jsonParse.js";
+import { navAnimation } from "./navAnimation.js";
 function ListViewForm() {
-    const curPageIdxInfo = {
-        curCategoryIdx: 0,
-        curCategoryDataIdx: 0,
-        curCategoryTotalNum: 0,
-    };
+    let curCategoryIdx = 0
+    let curCategoryDataIdx = 0
+    let curCategoryTotalNum = 0
     const categoryList = [
         { category: "종합/경제", data: [] },
         { category: "방송/통신", data: [] },
@@ -140,34 +140,49 @@ function ListViewForm() {
         { category: "지역", data: [] },
     ];
 
-    const main = async() => {
-        await initData()
-        renderNav()
-        renderNews()
-    }
+    const main = async () => {
+        await initData();
+        renderNav();
+        renderNews();
+        switchCategory(categoryList[0].category)
+    };
 
-    const renderNews = () => {}
+    const renderNews = () => {};
 
-    const getSubNewsTemplate = () => {}
+    const getSubNewsTemplate = () => {};
 
-    const getMainNewsTemplate = () => {}
+    const getMainNewsTemplate = () => {};
 
-    const renderNav = () => {}
-    
+    const renderNav = () => {};
+
     const initData = async () => {};
 
-    const spliteData = (data) => {};
+    const spliteData = (allNewsInfo) => {};
 
     const spliceCompanyString = (newsData) => {};
 
-    const getNavTemplate = (clickCategory) => {};
+    const getNavTemplate = () => {};
+
+    const isEndOfPage = () => {}
+
+    const sortCategoryList = (id) => {}
+
+    const switchCategory = (id) => {}
+
+    const updatePageNum = (targetName) => {}
+
+    const checkLocationType = (event) => {};
     
+    const setEventHandler = () => {}
+    setEventHandler()
     return { main };
 }
 
-const listViewForm = new ListViewForm()
-export default listViewForm
+const listViewForm = new ListViewForm();
+export default listViewForm;
+
 ```
 
-
-1. 
+## 기타
+ - 피라미터를 받는 함수가 전체적으로 많이 없어 코드의 재사용성이 떨어지는 것 같다.
+ - 클로저 변수를 줄여 변수들을 피라미터로 받아 코드의 재사용성을 높이는 방법을 생각해 봐야 할 것 같다. 

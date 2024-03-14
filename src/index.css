@@ -227,6 +227,7 @@ a>img {
 }
 
 .left-btn {
+    display: none;
     position: absolute;
     left: -55px;
 }
@@ -356,6 +357,7 @@ a>img {
     width: 175px;
     height: 14px;
     margin-bottom: 5px;
+    font-size: 15px;
 }
 
 .edit-company-name {
@@ -380,12 +382,6 @@ a>img {
     font-size: 14px;
     font-weight:bold;
     color: #333;
-    transition: padding .5s ease;
-}
-
-.totalPage {
-    display: none;
-    left: 50px;
 }
 
 .nav-animation span, .totalPage {
@@ -417,9 +413,17 @@ a>img {
     from {width: 0;}
     to {width:100%;}
 }
+
+.item__totalPage {
+    display: none;
+    position: relative;
+    left: 40px;
+}
 #list-view__company-logo {
-    width: 51px;
+    width: 79px;
     height: 20px;
+    margin-top: 3px;
+    object-fit: scale-down;
 }
 
 .subscribe-btn {
@@ -433,4 +437,20 @@ a>img {
 .main-news-src {
     width: 100%;
     height: 100%;
+    object-fit: scale-down;
+}
+
+.list-view-left-btn {
+    position: absolute;
+    left: -55px;
+}
+
+.list-view-light-btn {
+    position: absolute;
+    margin-left: 20px;
+}
+
+.active {
+    display: flex;
+    z-index: 2;
 }
