@@ -1,5 +1,5 @@
 import renderNewsTitles from "./NewsTitleRenderer.js";
-import renderGridView from "./PressTableRenderer.js";
+import activateGridView from "./PressTableRenderer.js";
 
 const WEEK = [
   "일요일",
@@ -36,7 +36,7 @@ const renderIndex = () => {
 
   renderCurrentDate();
   renderNewsTitles();
-  renderGridView();
+  activateGridView();
   pageLogoIcon.addEventListener("click", pageReload);
   setInterval(renderNewsTitles, ROLLING_DELAY);
 }

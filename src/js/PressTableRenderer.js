@@ -4,6 +4,7 @@ const LOGO_COUNT_PER_PAGE = 24;
 const INITIAL_VIEW_INDEX = 0;
 const RANDOM_SECTOR = 0.5;
 const NO_ELEMENT = 0;
+const PAGE_TURNING_DELAY = 20000;
 
 const ACTIVE_FILL_PROPERTY = "#4362D0";
 const INACTIVE_FILL_PROPERTY = "#879298";
@@ -30,6 +31,8 @@ let gridViewIndex = INITIAL_VIEW_INDEX;
 let listViewIndex = INITIAL_VIEW_INDEX;
 let logos = [];
 
+let startAutoRender = null;
+
 const isIconActive = (icon) => {
   const activeValue = icon
     .querySelector("path")
@@ -48,12 +51,17 @@ const activateGridView = () => {
   fillIcon(gridViewIcon, ACTIVE_FILL_PROPERTY);
   fillIcon(listViewIcon, INACTIVE_FILL_PROPERTY);
   renderGridView();
+  if (startAutoRender !== null) {
+    clearInterval(startAutoRender);
+    startAutoRender = null;
+  }
 };
 
 const activateListView = () => {
   fillIcon(listViewIcon, ACTIVE_FILL_PROPERTY);
   fillIcon(gridViewIcon, INACTIVE_FILL_PROPERTY);
   renderListView(listViewIndex);
+  if (startAutoRender === null) startAutoRender = setInterval(renderNextPage, PAGE_TURNING_DELAY);
 };
 
 const renderPreviousPage = () => {
@@ -293,4 +301,4 @@ pressContainer.addEventListener("click", (e) => {
   if (e.target === rightArrowButton) renderNextPage();
 });
 
-export default renderGridView;
+export default activateGridView;
