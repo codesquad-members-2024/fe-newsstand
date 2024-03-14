@@ -1,17 +1,17 @@
 body {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
-	min-height: 500px;
-	min-width: 500px;
+  min-height: 500px;
+  min-width: 500px;
   width: 930px;
 }
 
 header {
-	display: flex;
+  display: flex;
   height: 84px;
   position: relative;
 }
@@ -45,7 +45,7 @@ header {
 
 .rollingnews-left,
 .rollingnews-right {
-  background-color: #f6f7f9; 
+  background-color: #f6f7f9;
   padding: 10px;
   font-size: 30px;
   width: 47%;
@@ -53,18 +53,18 @@ header {
 
 @keyframes roll {
   0% {
-    transform: translateY(100%); 
+    transform: translateY(100%);
   }
   100% {
-    transform: translateY(-100%); 
+    transform: translateY(-100%);
   }
 }
 
 .rollingnews-left b,
-.rollingnews-right b{
+.rollingnews-right b {
   display: flex;
-  font-size: 16px; 
-  color: #111; 
+  font-size: 16px;
+  color: #111;
   white-space: nowrap;
   animation: roll 5s linear infinite;
 }
@@ -72,8 +72,8 @@ header {
 .rollingnews-left span,
 .rollingnews-right span {
   font-size: 14px;
-  margin-left: 10px; 
-  color: #666; 
+  margin-left: 10px;
+  color: #666;
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -88,7 +88,8 @@ header {
   justify-content: space-between; /* 양 옆에 정렬 */
 }
 
-.list-view-btn, .grid-view-btn {
+.list-view-btn,
+.grid-view-btn {
   background: #ffffff;
   border: 0px;
 }
@@ -116,7 +117,7 @@ header {
 
 .newsgroup-grid_logo {
   border-right: 1px solid rgba(0, 0, 0, 0.8);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.8); 
+  border-bottom: 1px solid rgba(0, 0, 0, 0.8);
   padding: 10px;
   font-size: 30px;
   text-align: center;
@@ -127,9 +128,9 @@ header {
 .newsgroup-grid_logo img {
   visibility: visible;
   position: absolute;
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%); 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: 2rem;
 }
 
@@ -141,20 +142,20 @@ header {
 }
 
 .newsgroup-list-header {
-  background-color: #f6f7f9; 
+  background-color: #f6f7f9;
   width: 100%;
   height: 2.5rem;
 }
 
 .newsgroup-list-cat {
   padding: 10px;
-  background-color: #f6f7f9; 
+  font-size: 15px;
+  background-color: #f6f7f9;
   border: 1px solid #f6f7f9;
 }
 
 .newsgroup-list-area {
   margin: 1rem;
-  height: 80%;
 }
 
 .newsgroup-list-top {
@@ -168,13 +169,23 @@ header {
 .newsgroup-list-top .subscribe-btn {
   margin-left: 2rem;
   background: #f6f7f9;
-  border: 1px solid #6E8091;
+  border: 1px solid #6e8091;
   border-radius: 50px;
 }
 
-.newsgroup-list-desc img {
+.newsgroup-list-desc {
+  display: flex;
+}
+
+.newsgroup-list-left img {
   height: 200px;
 }
+
+.newsgroup-list-right {
+  width: 50%;    
+  margin-left: 2rem;
+}
+
 .grid-right-btn,
 .list-right-btn,
 .grid-left-btn,
@@ -203,13 +214,13 @@ header {
 .grid-right-btn img,
 .grid-left-btn img,
 .list-right-btn img,
-.list-left-btn img{
+.list-left-btn img {
   height: 40px;
 }
 
 .news_logo {
   border-right: 1px solid rgba(0, 0, 0, 0.8);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.8); 
+  border-bottom: 1px solid rgba(0, 0, 0, 0.8);
   padding: 10px;
   font-size: 30px;
   text-align: center;
@@ -219,13 +230,13 @@ header {
 
 .newsgroup-grid_logo .subscribe-btn {
   display: none;
-  position: absolute; 
-  top: 50%; 
-  left: 50%; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 72px;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
   background: #ffffff;
-  border: 1px solid #6E8091;
+  border: 1px solid #6e8091;
   border-radius: 50px;
 }
 
