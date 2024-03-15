@@ -1,0 +1,55 @@
+@import "rolling.css";
+@import "gridView.css";
+@import "listView.css";
+@import "button.css";
+
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  min-height: 500px;
+  min-width: 500px;
+  width: 930px;
+}
+
+header {
+  display: flex;
+  height: 84px;
+  position: relative;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  font-size: 1.5rem;
+}
+
+.refresh-btn {
+  background: #ffffff;
+  border: 0px;
+  margin-right: 10px;
+}
+
+.date {
+  margin-left: auto;
+  align-self: flex-end;
+}
+
+.mediacompany {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  justify-content: space-between; /* 양 옆에 정렬 */
+}
+
+.newsgroup {
+  display: flex;
+  position: relative;
+}
