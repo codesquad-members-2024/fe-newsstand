@@ -14,6 +14,7 @@ const ST = Object.freeze({
   CATEGORY: ".MediaOptionView-module__link_item___thVcT",
   THUMBNAIL: ".MediaNewsView-module__link_thumb___rmMr4 > span > img",
   HEADLINE: ".MediaNewsView-module__desc_title___IObEv",
+  SIDENEWS: ".MediaNewsView-module__desc_list___uQ3r1",
 });
 
 const isAriaSelected = async (page, selector) => {
@@ -46,7 +47,7 @@ const crawlActiveCategory = async (page) => {
 
 const crawlSideNews = async (page) => {
   return await page.$$eval(
-    ".MediaNewsView-module__desc_list___uQ3r1 > li > a",
+    ST.SIDENEWS + " > li > a",
     (elements) => {
       return elements.map((element) => {
         return { title: element.textContent, href: element.getAttribute("href") };
@@ -54,6 +55,17 @@ const crawlSideNews = async (page) => {
     }
   );
 };
+
+const waitForNews = async (page) => {
+  await Promise.all([
+    page.waitForSelector(ST.PRESS_LOGO),
+    page.waitForSelector(ST.EDITED_TIME),
+    page.waitForSelector(ST.CATEGORY),
+    page.waitForSelector(ST.THUMBNAIL),
+    page.waitForSelector(ST.HEADLINE),
+    page.waitForSelector(ST.SIDENEWS),
+  ]);
+}
 
 const crawlAndConvertSeperateNews = async (page) => {
   const [pressName, logoImageSrc, editedTime, category, thumbnailSrc, headlineTitle, headlineHref, sideNews] = await Promise.all([
@@ -92,9 +104,11 @@ const crawlNewsList = async (page) => {
 
     if (logoAlt !== renderedLogoName && ariaSelected) {
       logoAlt = renderedLogoName;
+      await waitForNews(page);
       news.push(await crawlAndConvertSeperateNews(page));
       page.click(ST.NEXT_BUTTON);
     }
+    page.waitForSelector(ST.NEWS_STAND);
     ariaSelected = await isAriaSelected(page, ST.NEWS_STAND);
   }
 
