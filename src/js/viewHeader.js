@@ -1,6 +1,6 @@
 const DAYOFWEEK_INDEX = 3;
 
-export function handleReload() {
+function refreshPageOnLogoClick() {
   const newsStandLogo = document.querySelector(".newsStand-logo");
   newsStandLogo.addEventListener("click", (event) => {
     location.reload();
@@ -19,7 +19,8 @@ function getTodayDate() {
   return todayDate;
 }
 
-export function viewDate() {
+export function viewHeader() {
+  refreshPageOnLogoClick();
   const dateEl = document.querySelector(".date");
   const dateStr = getTodayDate();
   dateEl.innerText = dateStr;

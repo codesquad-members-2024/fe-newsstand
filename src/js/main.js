@@ -1,15 +1,15 @@
 import { initPressGridView, switchToGridByViewer } from "./viewPressGrid.js";
-import { handleReload, viewDate } from "./viewHeader.js";
+import { viewHeader } from "./viewHeader.js";
 import { initAndRollNews } from "./viewRollingNews.js";
-import { switchToListByViewer } from "./viewPressList.js";
+import { switchToListByViewer, initPressListView } from "./viewPressList.js";
 
 function main() {
-  handleReload();
-  viewDate();
+  viewHeader();
   initPressGridView();
   initAndRollNews();
   switchToListByViewer();
   switchToGridByViewer();
+  initPressListView();
 }
 
 main();

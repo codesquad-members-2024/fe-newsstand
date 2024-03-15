@@ -1,3 +1,8 @@
+.center {
+  display: flex;
+  align-items: center;
+}
+
 div.display-none {
   display: none;
 }
@@ -19,10 +24,12 @@ div.display-none {
 
 .category {
   height: 40px;
-  display: flex;
-  align-items: center;
   border-bottom: 1px solid rgba(210, 218, 224, 1);
   background-color: rgba(245, 247, 249, 1);
+}
+
+.category-list {
+  height: 100%;
 }
 
 .category-list .category-text {
@@ -44,13 +51,34 @@ div.display-none {
   width: 166px;
   height: 40px;
   background-color: rgba(120, 144, 231, 1);
-  padding-right: 15px;
+  position: relative;
+  z-index: 0;
+}
+
+.selected .progress {
+  position: absolute;
+  height: 100%;
+  background-color: rgba(67, 98, 208, 1);
+  top: 0;
+  left: 0;
+  z-index: 1;
+  animation: progressAnimation 20s linear infinite;
+}
+
+@keyframes progressAnimation {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
 }
 
 .category .selected .category-text {
   font-weight: 700;
   font-size: 14px;
   color: rgba(255, 255, 255, 1);
+  z-index: 2;
 }
 
 .category .selected .category-text:hover {
@@ -61,17 +89,22 @@ div.display-none {
   font-weight: 700;
   font-size: 12px;
   color: rgba(255, 255, 255, 1);
+  z-index: 2;
+  margin-right: 15px;
 }
 
 .press-info {
   height: 24px;
-  display: flex;
-  align-items: center;
   margin: 1rem;
 }
 
 .press-info > span {
   margin-right: 1rem;
+}
+
+.press-info img {
+  width: auto;
+  height: 20px;
 }
 
 .edit-date {
@@ -106,4 +139,51 @@ div.display-none {
 
 .news-list-right {
   width: 530px;
+}
+
+.news-list-left div {
+  width: 320px;
+  height: 200px;
+}
+
+.news-list-left img {
+  width: 320px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.news-list-left a {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  color: rgba(20, 33, 43, 1);
+  text-decoration: none;
+}
+
+.news-list-right ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.news-list-right li {
+  margin-bottom: 0.625rem;
+}
+
+.news-list-right a {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  color: rgba(75, 89, 102, 1);
+  text-decoration: none;
+}
+
+.news-list-right div {
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(135, 146, 152, 1);
+}
+
+.news-list a:hover {
+  text-decoration: underline;
 }

@@ -4,30 +4,31 @@ const LAST_PAGE = 3;
 const FIRST_PAGE = 0;
 
 const logoSrcArr = await getLogoImgSrc();
-const pressGridEl = document.querySelector(".press-grid-wrap");
+const gridWrap = document.querySelector(".press-grid-wrap");
 const nextButton = document.querySelector(".right-button");
 const prevButton = document.querySelector(".left-button");
 const pageData = { currentPage, itemsPerPage };
 
 export async function initPressGridView() {
-  viewPressLogo(pageData, logoSrcArr, pressGridEl);
+  viewPressLogo(pageData, logoSrcArr, gridWrap);
 
-  nextButton.addEventListener("click", gotoNextPage);
+  nextButton.addEventListener("click", gotoNextGridPage);
 
-  prevButton.addEventListener("click", gotoPrevPage);
+  prevButton.addEventListener("click", gotoPrevGridPage);
 }
 
 export function switchToGridByViewer() {
   const girdViewer = document.querySelector(".viewer-grid");
   const listViewer = document.querySelector(".viewer-list");
   const listWrap = document.querySelector(".press-list-wrap");
-  const gridWrap = document.querySelector(".press-grid-wrap");
 
   girdViewer.addEventListener("click", (event) => {
-    girdViewer.classList.add("on");
-    listViewer.classList.remove("on");
-    listWrap.classList.add("display-none");
-    gridWrap.classList.remove("display-none");
+    girdViewer.classList.toggle("on");
+    listViewer.classList.toggle("on");
+    listWrap.classList.toggle("display-none");
+    gridWrap.classList.toggle("display-none");
+
+    renderBtnByGridPage();
   });
 }
 
@@ -59,28 +60,26 @@ const addPressLogoAndBox = (src) => {
   newPressBox.classList.add("press-box");
   newsLogo.classList.add("press-logo");
   subsBtn.classList.add("subs", "pointer");
-  newPressBox.appendChild(newsLogo);
-  newPressBox.appendChild(subsBtn);
-  pressGridEl.appendChild(newPressBox);
+  newPressBox.append(newsLogo, subsBtn);
+  gridWrap.appendChild(newPressBox);
+
+  renderBtnByGridPage();
 };
 
-const gotoNextPage = (event) => {
-  event.preventDefault();
-  pageData.currentPage++;
-  clearPressGrid();
-  viewPressLogo(pageData, logoSrcArr, pressGridEl);
-  if (pageData.currentPage === LAST_PAGE) nextButton.classList.add("hidden");
-  if (pageData.currentPage !== FIRST_PAGE)
-    prevButton.classList.remove("hidden");
+const gotoNextGridPage = (event) => {
+  if (!gridWrap.classList.contains("display-none")) {
+    pageData.currentPage++;
+    clearPressGrid();
+    viewPressLogo(pageData, logoSrcArr, gridWrap);
+  }
 };
 
-const gotoPrevPage = (event) => {
-  event.preventDefault();
-  pageData.currentPage--;
-  clearPressGrid();
-  viewPressLogo(pageData, logoSrcArr, pressGridEl);
-  if (pageData.currentPage !== LAST_PAGE) nextButton.classList.remove("hidden");
-  if (pageData.currentPage === FIRST_PAGE) prevButton.classList.add("hidden");
+const gotoPrevGridPage = (event) => {
+  if (!gridWrap.classList.contains("display-none")) {
+    pageData.currentPage--;
+    clearPressGrid();
+    viewPressLogo(pageData, logoSrcArr, gridWrap);
+  }
 };
 
 function clearPressGrid() {
@@ -88,4 +87,12 @@ function clearPressGrid() {
   for (const pressBox of pressBoxes) {
     pressBox.remove();
   }
+}
+
+function renderBtnByGridPage() {
+  if (pageData.currentPage === LAST_PAGE) nextButton.classList.add("hidden");
+  if (pageData.currentPage !== FIRST_PAGE)
+    prevButton.classList.remove("hidden");
+  if (pageData.currentPage !== LAST_PAGE) nextButton.classList.remove("hidden");
+  if (pageData.currentPage === FIRST_PAGE) prevButton.classList.add("hidden");
 }

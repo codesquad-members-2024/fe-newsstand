@@ -1206,3 +1206,5 @@ const local = [
     ],
   },
 ];
+
+export { economy, broadCast, it, english, sports, magazine, local };

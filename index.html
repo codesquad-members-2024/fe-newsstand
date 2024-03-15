@@ -12,14 +12,14 @@
 </head>
 <body>
     <div class="newsStand">
-        <header class="top-area flexbox-space-between center-alignment">
+        <header class="top-area flex-space margin-side">
             <div class="logo">
                 <img src="./image/Title.jpg" class="newsStand-logo pointer"></img>
             </div>
             <div class="date"></div>
         </header>
         
-        <section class="breaking-news-area flexbox-space-between center-alignment">
+        <section class="breaking-news-area flex-space margin-side">
             <div class="auto-rolling-news">
                 <span>연합뉴스</span>
                 <div class="rolling-wrap rolling-box-1">
@@ -34,8 +34,8 @@
             </div>
         </section>
 
-        <section class="tap-viewer-area flexbox-space-between center-alignment">
-            <div class="tap flexbox-space-between">
+        <section class="tap-viewer-area flex-space margin-side">
+            <div class="tap flex-space">
                 <span class="on">전체 언론사</span>
                 <span class="off">내가 구독한 언론사</span>
             </div>
@@ -45,36 +45,33 @@
             </div>
         </section>
 
-        <main class="center-alignment">
+        <main class="margin-side">
             <i class="fi fi-ts-angle-right right-button"></i>
+            <i class="fi fi-ts-angle-left left-button hidden"></i>
             <div class="press-grid-wrap"></div>
+
             <div class="press-list-wrap display-none">
-                <nav class="category">
-                    <div class="category-list selected">
-                        <a href="#" class="category-text">방송/통신</a>
-                        <span class="press-count">1/81</span>
+                <nav class="category center">
+                    <div class="category-list center selected">
+                        <a href="#" class="category-text">종합/경제</a>
+                        <div class="progress"></div>
                     </div>
-                    <div class="category-list"><a href="#" class="category-text">방송/통신</a></div>
-                    <div class="category-list"><a href="#" class="category-text">IT</a></div>
-                    <div class="category-list"><a href="#" class="category-text">영자지</a></div>
-                    <div class="category-list"><a href="#" class="category-text">스포츠/연예</a></div>
-                    <div class="category-list"><a href="#" class="category-text">매거진/전문지</a></div>
-                    <div class="category-list"><a href="#" class="category-text">지역</a></div>
+                    <div class="category-list center"><a href="#" class="category-text">방송/통신</a></div>
+                    <div class="category-list center"><a href="#" class="category-text">IT</a></div>
+                    <div class="category-list center"><a href="#" class="category-text">영자지</a></div>
+                    <div class="category-list center"><a href="#" class="category-text">스포츠/연예</a></div>
+                    <div class="category-list center"><a href="#" class="category-text">매거진/전문지</a></div>
+                    <div class="category-list center"><a href="#" class="category-text">지역</a></div>
                 </nav>
-                <div class="press-info">
-                    <span>언론사 이미지</span>
-                    <span class="edit-date">2023.02.10 18:27 편집</span>
-                    <button class="subs-btn">+ 구독하기</button>
-                </div>
-                <div class="news-list flexbox-space-between">
-                    <div class="news-list-left">
-                        <img src="#" alt="brandMark">
-                        또 국민연금의 융니....
+                <div class="press-info center"></div>
+                <div class="news-list flex-space">
+                    <div class="news-list-left"></div>
+                    <div class="news-list-right">
+                        <ul></ul>
                     </div>
-                    <div class="news-list-right">기사리스트</div>
                 </div>
             </div>
-            <i class="fi fi-ts-angle-left left-button hidden"></i>
+            
         </main>
     </div>
     <script type="module" src="./src/js/main.js"></script>
