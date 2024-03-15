@@ -1,7 +1,8 @@
 import jsonParse from "../util/jsonParse.js";
 import { FIRST_PAGE_NUM, LAST_PAGE_NUM } from "../util/contants.js";
 import { GRID_VIEW_BATCHSIZE } from "../util/contants.js";
-function GridViewForm () {
+
+export function GridViewForm () {
     let currenPageNum = 0;
     const companyData = [];
 
@@ -88,5 +89,3 @@ function GridViewForm () {
     return {main}
 }
 
-const gridViewForm = new GridViewForm()
-export default gridViewForm

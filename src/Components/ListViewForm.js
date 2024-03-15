@@ -1,6 +1,6 @@
 import jsonParse from "../util/jsonParse.js";
 import { navAnimation } from "./navAnimation.js";
-function ListViewForm() {
+export function ListViewForm() {
     let curCategoryIdx = 0
     let curCategoryDataIdx = 0
     let curCategoryTotalNum = 0
@@ -121,16 +121,16 @@ function ListViewForm() {
 
     const switchCategory = (id) => {
         const curAnimationNav = navAnimation.swicthNavAnimation(id)
-        curAnimationNav.addEventListener("animationend", () => {
-            updatePageNum("list-view-light-btn")
-        });
         sortCategoryList(id)
         renderNews()
+        navAnimation.updateCounter(curCategoryDataIdx, curCategoryTotalNum)
+        curAnimationNav.addEventListener("animationend", () => {
+            updatePageNum("list-view-light-btn");
+            renderNews()
+        });
     }
 
-
     const updatePageNum = (targetName) => {
-        // if(targetName !== "list-view-left-btn" || targetName !== "list-view-left-btn") return;
         switch (targetName) {
             case "list-view-left-btn":
                 curCategoryDataIdx--
@@ -146,13 +146,18 @@ function ListViewForm() {
     }
 
     const checkLocationType = (event) => {
-        updatePageNum(event.target.className);
+        const className = event.target.className
+        updatePageNum(className);
         renderNews()
     };
     
     const setEventHandler = () => {
-        const updatePageBtn = document.querySelector(".list-mode-main-container");
-        updatePageBtn.addEventListener("click", checkLocationType);  
+        const lightBtn = document.querySelector(".list-view-light-btn");
+        lightBtn.addEventListener("click", checkLocationType);  
+
+        const leftBtn = document.querySelector(".list-view-left-btn");
+        leftBtn.addEventListener("click", checkLocationType);  
+
         const categoryContainer = document.querySelector(".list");
         categoryContainer.addEventListener("click", (e) => {
             if (e.target.tagName === "SPAN") return switchCategory(e.target.closest(".item").id)
@@ -160,8 +165,5 @@ function ListViewForm() {
         });
     }
     setEventHandler()
-    return { main, updatePageNum };
+    return { main };
 }
-
-const listViewForm = new ListViewForm();
-export default listViewForm;

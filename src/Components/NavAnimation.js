@@ -1,4 +1,3 @@
-import listViewForm from "./ListViewForm.js";
 export const navAnimation = {
     showTotalPageNum(id) {
         const totalPageContainer = document.querySelector(`#${id} > .item__totalPage`)
