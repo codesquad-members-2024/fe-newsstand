@@ -58,7 +58,7 @@ export const listCat = [
       "野, '이종섭 호주 출국' 일제히 비난…\"개구멍으로 도망시켜\"",
       "與 선대위 '한동훈 원톱' 유력검토…'비례는 인요한 지휘' 거론",
     ],
-  },
+  }, 
   {
     url: "https://d3ihz389yobwks.cloudfront.net/1710377270868eYuAL.jpg",
     description: [
