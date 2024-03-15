@@ -42,6 +42,13 @@ const clickFuntions = {
     }
     showList(currentCat);
   },
+
+  clickCat() {
+    const listCat = document.querySelector(".newsgroup-list-cat");
+    const listCatClick = document.createElement("div");
+    listCatClick.classList.add("newsgroup-list-click");
+    listCat.appendChild(listCatClick);
+  },
 };
 
 function clickEvent() {
@@ -51,6 +58,7 @@ function clickEvent() {
   const gridRightBtn = document.querySelector(".grid-right-btn");
   const listLeftBtn = document.querySelector(".list-left-btn");
   const listRightBtn = document.querySelector(".list-right-btn");
+  const listClick = document.querySelector(".newsgroup-list-click");
 
   gridViewBtn.addEventListener("click", clickFuntions.gridViewClick);
   listViewBtn.addEventListener("click", clickFuntions.listViewClick);
@@ -60,6 +68,8 @@ function clickEvent() {
 
   listRightBtn.addEventListener("click", clickFuntions.listRightButtonClick);
   listLeftBtn.addEventListener("click", clickFuntions.listLeftButtonClick);
+
+  // listClick.addEventListener("click", clickFuntions.clickCat);
 }
 
 export default clickEvent;

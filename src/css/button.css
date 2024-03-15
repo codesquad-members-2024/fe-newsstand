@@ -1,0 +1,42 @@
+.view-btn {
+  display: flex;
+  align-items: center;
+}
+
+.list-view-btn,
+.grid-view-btn {
+  background: #ffffff;
+  border: 0px;
+}
+
+.grid-right-btn,
+.list-right-btn,
+.grid-left-btn,
+.list-left-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  border: 1px solid #fefefe;
+  background-color: white;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.grid-right-btn,
+.list-right-btn {
+  right: -10%;
+}
+
+.grid-left-btn,
+.list-left-btn {
+  left: -10%;
+}
+
+.grid-right-btn img,
+.grid-left-btn img,
+.list-right-btn img,
+.list-left-btn img {
+  height: 40px;
+}

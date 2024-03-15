@@ -20,7 +20,9 @@ function initNewsstand() {
     ".date"
   ).innerHTML = `${date.toLocaleDateString()} ${dayName}`;
 
-  refreshButton.addEventListener("click", location.reload);
+  refreshButton.addEventListener("click", function () {
+    location.reload();
+  });
 }
 
 function main() {
