@@ -341,6 +341,7 @@ a>img {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    
 }
 
 .sub-news, .edit-company-name{
@@ -350,6 +351,9 @@ a>img {
     line-height: 22px;
     margin-left: 20px;
     margin-bottom: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .edit-date {
@@ -453,4 +457,5 @@ a>img {
 .active {
     display: flex;
     z-index: 2;
+    color: white;
 }

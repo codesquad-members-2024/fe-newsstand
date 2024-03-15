@@ -120,11 +120,17 @@ function ListViewForm() {
     }
 
     const switchCategory = (id) => {
-        navAnimation.swicthNavAnimation(id)
+        const curAnimationNav = navAnimation.swicthNavAnimation(id)
+        curAnimationNav.addEventListener("animationend", () => {
+            updatePageNum("list-view-light-btn")
+        });
         sortCategoryList(id)
         renderNews()
     }
+
+
     const updatePageNum = (targetName) => {
+        // if(targetName !== "list-view-left-btn" || targetName !== "list-view-left-btn") return;
         switch (targetName) {
             case "list-view-left-btn":
                 curCategoryDataIdx--
@@ -147,15 +153,14 @@ function ListViewForm() {
     const setEventHandler = () => {
         const updatePageBtn = document.querySelector(".list-mode-main-container");
         updatePageBtn.addEventListener("click", checkLocationType);  
-
         const categoryContainer = document.querySelector(".list");
         categoryContainer.addEventListener("click", (e) => {
             if (e.target.tagName === "SPAN") return switchCategory(e.target.closest(".item").id)
             return switchCategory(e.target.id)
-        });  
+        });
     }
     setEventHandler()
-    return { main };
+    return { main, updatePageNum };
 }
 
 const listViewForm = new ListViewForm();
