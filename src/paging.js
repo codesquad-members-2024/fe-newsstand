@@ -1,5 +1,5 @@
 import { newsLogos, listCat } from "./data.js";
-import { showGrid, showList } from "./logos.js";
+import { showGrid, showList } from "./show.js";
 
 let currentPage = 0;
 let currentCat = 0;

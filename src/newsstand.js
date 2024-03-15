@@ -1,4 +1,4 @@
-import { showGrid } from "./logos.js";
+import { showGrid } from "./show.js";
 import rollingNews from "./rollingnews.js";
 import clickEvent from "./paging.js";
 
