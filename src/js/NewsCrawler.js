@@ -4,15 +4,18 @@ import puppeteer from "puppeteer";
 const URL = "https://naver.com/";
 const BROWSER_WIDTH = 1280;
 const BROWSER_HEIGHT = 1024;
-const NEWS_STAND_BUTTON_SELECTOR = ".ContentHeaderView-module__tab_text___IuWnG";
-const LIST_VIEW_BUTTON_SELECTOR = ".ContentPagingView-module__btn_view_list___j7eNR";
-const NEXT_BUTTON_SELECTOR = ".ContentPagingView-module__btn_next___ZBhby";
-const PRESS_LOGO_SELECTOR = ".MediaNewsView-module__news_logo___LwMpl > img";
-const NEXT_PAGE_SELECTOR = ".ContentPagingView-module__btn_next___ZBhby";
-const EDITED_TIME_SELECTOR = ".MediaNewsView-module__time___fBQhP";
-const CATEGORY_SELECTOR = ".MediaOptionView-module__link_item___thVcT";
-const THUMBNAIL_SELECTOR = ".MediaNewsView-module__link_thumb___rmMr4 > span > img";
-const HEADLINE_SELECTOR = ".MediaNewsView-module__desc_title___IObEv";
+const ST = Object.freeze({
+  NEWS_STAND: ".ContentHeaderView-module__tab_text___IuWnG",
+  LIST_VIEW: ".ContentPagingView-module__btn_view_list___j7eNR",
+  NEXT_BUTTON: ".ContentPagingView-module__btn_next___ZBhby",
+  PRESS_LOGO: ".MediaNewsView-module__news_logo___LwMpl > img",
+  NEXT_PAGE: ".ContentPagingView-module__btn_next___ZBhby",
+  EDITED_TIME: ".MediaNewsView-module__time___fBQhP",
+  CATEGORY: ".MediaOptionView-module__link_item___thVcT",
+  THUMBNAIL: ".MediaNewsView-module__link_thumb___rmMr4 > span > img",
+  HEADLINE: ".MediaNewsView-module__desc_title___IObEv",
+  SIDENEWS: ".MediaNewsView-module__desc_list___uQ3r1",
+});
 
 const isAriaSelected = async (page, selector) => {
   return await crawlAttribute(page, selector, "aria-selected") === "true";
@@ -35,7 +38,7 @@ const crawlText = async (page, selector) => {
 };
 
 const crawlActiveCategory = async (page) => {
-  return await page.$$eval(CATEGORY_SELECTOR, (elements) => {
+  return await page.$$eval(ST.CATEGORY, (elements) => {
     return elements.find(
       (element) => element.getAttribute("aria-selected") === "true"
     ).textContent;
@@ -44,7 +47,7 @@ const crawlActiveCategory = async (page) => {
 
 const crawlSideNews = async (page) => {
   return await page.$$eval(
-    ".MediaNewsView-module__desc_list___uQ3r1 > li > a",
+    ST.SIDENEWS + " > li > a",
     (elements) => {
       return elements.map((element) => {
         return { title: element.textContent, href: element.getAttribute("href") };
@@ -53,15 +56,28 @@ const crawlSideNews = async (page) => {
   );
 };
 
+const waitForNews = async (page) => {
+  await Promise.all([
+    page.waitForSelector(ST.PRESS_LOGO),
+    page.waitForSelector(ST.EDITED_TIME),
+    page.waitForSelector(ST.CATEGORY),
+    page.waitForSelector(ST.THUMBNAIL),
+    page.waitForSelector(ST.HEADLINE),
+    page.waitForSelector(ST.SIDENEWS),
+  ]);
+}
+
 const crawlAndConvertSeperateNews = async (page) => {
-  const pressName = await crawlAttribute(page, PRESS_LOGO_SELECTOR, "alt");
-  const logoImageSrc = await crawlAttribute(page, PRESS_LOGO_SELECTOR, "src");
-  const editedTime = await crawlText(page, EDITED_TIME_SELECTOR);
-  const category = await crawlActiveCategory(page);
-  const thumbnailSrc = await crawlAttribute(page, THUMBNAIL_SELECTOR, "src");
-  const headlineTitle = await crawlText(page, HEADLINE_SELECTOR);
-  const headlineHref = await crawlAttribute(page, HEADLINE_SELECTOR, "href");
-  const sideNews = await crawlSideNews(page);
+  const [pressName, logoImageSrc, editedTime, category, thumbnailSrc, headlineTitle, headlineHref, sideNews] = await Promise.all([
+    crawlAttribute(page, ST.PRESS_LOGO, "alt"),
+    crawlAttribute(page, ST.PRESS_LOGO, "src"),
+    crawlText(page, ST.EDITED_TIME),
+    crawlActiveCategory(page),
+    crawlAttribute(page, ST.THUMBNAIL, "src"),
+    crawlText(page, ST.HEADLINE),
+    crawlAttribute(page, ST.HEADLINE, "href"),
+    crawlSideNews(page)
+  ]);
 
   return {
     pressName: pressName,
@@ -79,19 +95,21 @@ const crawlAndConvertSeperateNews = async (page) => {
 
 const crawlNewsList = async (page) => {
   const news = [];
-  let ariaSelected = await isAriaSelected(page, NEWS_STAND_BUTTON_SELECTOR);
-  let logoAlt = await crawlAttribute(page, PRESS_LOGO_SELECTOR, "alt");
-  await page.click(NEXT_PAGE_SELECTOR);
+  let ariaSelected = await isAriaSelected(page, ST.NEWS_STAND);
+  let logoAlt = await crawlAttribute(page, ST.PRESS_LOGO, "alt");
+  await page.click(ST.NEXT_PAGE);
 
   while (ariaSelected) {
-    const renderedLogoName = await crawlAttribute(page, PRESS_LOGO_SELECTOR, "alt");
+    const renderedLogoName = await crawlAttribute(page, ST.PRESS_LOGO, "alt");
 
     if (logoAlt !== renderedLogoName && ariaSelected) {
       logoAlt = renderedLogoName;
+      await waitForNews(page);
       news.push(await crawlAndConvertSeperateNews(page));
-      page.click(NEXT_BUTTON_SELECTOR);
+      page.click(ST.NEXT_BUTTON);
     }
-    ariaSelected = await isAriaSelected(page, NEWS_STAND_BUTTON_SELECTOR);
+    page.waitForSelector(ST.NEWS_STAND);
+    ariaSelected = await isAriaSelected(page, ST.NEWS_STAND);
   }
 
   return news;
@@ -104,7 +122,7 @@ const crawlNews = async () => {
 
   await page.goto(URL);
   await page.setViewport({ width: BROWSER_WIDTH, height: BROWSER_HEIGHT });
-  await page.click(LIST_VIEW_BUTTON_SELECTOR);
+  await page.click(ST.LIST_VIEW);
   newsResult = await crawlNewsList(page);
 
   fs.writeFileSync("src/data/news.json", JSON.stringify(newsResult));

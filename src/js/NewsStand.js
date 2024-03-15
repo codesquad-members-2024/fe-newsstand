@@ -1,5 +1,5 @@
 import renderNewsTitles from "./NewsTitleRenderer.js";
-import renderGridView from "./PressTableRenderer.js";
+import activateGridView from "./PressTableRenderer.js";
 
 const WEEK = [
   "일요일",
@@ -13,6 +13,18 @@ const WEEK = [
 const INCREMENT = 1;
 const CHAR_COUNT = 2;
 const ROLLING_DELAY = 5000;
+
+const rollingContainer = document.querySelector(".rolling-container");
+
+let rollNewsInInterval = null;
+
+const animateRolling = () => {
+  if (rollNewsInInterval !== null) {
+    clearInterval(rollNewsInInterval);
+    rollNewsInInterval = null;
+  }
+  rollNewsInInterval = setInterval(renderNewsTitles, ROLLING_DELAY);
+}
 
 const pageReload = () => { location.reload() }
 
@@ -36,9 +48,13 @@ const renderIndex = () => {
 
   renderCurrentDate();
   renderNewsTitles();
-  renderGridView();
+  activateGridView();
   pageLogoIcon.addEventListener("click", pageReload);
-  setInterval(renderNewsTitles, ROLLING_DELAY);
+  animateRolling();
 }
 
 renderIndex();
+rollingContainer.addEventListener("mouseover", () => {
+  clearInterval(rollNewsInInterval);
+});
+rollingContainer.addEventListener("mouseout", animateRolling);
