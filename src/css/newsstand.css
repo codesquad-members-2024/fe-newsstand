@@ -1,0 +1,96 @@
+@import "rolling.css";
+@import "gridView.css";
+@import "listView.css";
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  min-height: 500px;
+  min-width: 500px;
+  width: 930px;
+}
+
+header {
+  display: flex;
+  height: 84px;
+  position: relative;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  font-size: 1.5rem;
+}
+
+.refresh-btn {
+  background: #ffffff;
+  border: 0px;
+  margin-right: 10px;
+}
+
+.date {
+  margin-left: auto;
+  align-self: flex-end;
+}
+
+.mediacompany {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  justify-content: space-between; /* 양 옆에 정렬 */
+}
+
+.view-btn {
+  display: flex;
+  align-items: center;
+}
+
+.list-view-btn,
+.grid-view-btn {
+  background: #ffffff;
+  border: 0px;
+}
+
+.newsgroup {
+  display: flex;
+  position: relative;
+}
+
+.grid-right-btn,
+.list-right-btn,
+.grid-left-btn,
+.list-left-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  border: 1px solid #fefefe;
+  background-color: white;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.grid-right-btn,
+.list-right-btn {
+  right: -10%;
+}
+
+.grid-left-btn,
+.list-left-btn {
+  left: -10%;
+}
+
+.grid-right-btn img,
+.grid-left-btn img,
+.list-right-btn img,
+.list-left-btn img {
+  height: 40px;
+}

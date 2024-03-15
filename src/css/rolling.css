@@ -1,0 +1,44 @@
+.rollingnews-content {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.rollingnews-left,
+.rollingnews-right {
+  background-color: #f6f7f9;
+  padding: 10px;
+  font-size: 30px;
+  width: 47%;
+}
+
+@keyframes roll {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.rollingnews-left b,
+.rollingnews-right b {
+  display: flex;
+  font-size: 16px;
+  color: #111;
+  white-space: nowrap;
+  animation: roll 5s linear infinite;
+}
+
+.rollingnews-left span,
+.rollingnews-right span {
+  font-size: 14px;
+  margin-left: 10px;
+  color: #666;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 말줄임*/
+}
