@@ -14,6 +14,18 @@ const INCREMENT = 1;
 const CHAR_COUNT = 2;
 const ROLLING_DELAY = 5000;
 
+const rollingContainer = document.querySelector(".rolling-container");
+
+let rollNewsInInterval = null;
+
+const animateRolling = () => {
+  if (rollNewsInInterval !== null) {
+    clearInterval(rollNewsInInterval);
+    rollNewsInInterval = null;
+  }
+  rollNewsInInterval = setInterval(renderNewsTitles, ROLLING_DELAY);
+}
+
 const pageReload = () => { location.reload() }
 
 const renderCurrentDate = () => {
@@ -38,7 +50,11 @@ const renderIndex = () => {
   renderNewsTitles();
   activateGridView();
   pageLogoIcon.addEventListener("click", pageReload);
-  setInterval(renderNewsTitles, ROLLING_DELAY);
+  animateRolling();
 }
 
 renderIndex();
+rollingContainer.addEventListener("mouseover", () => {
+  clearInterval(rollNewsInInterval);
+});
+rollingContainer.addEventListener("mouseout", animateRolling);

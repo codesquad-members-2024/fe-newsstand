@@ -98,10 +98,15 @@ body {
   font-size: 14px;
   font-weight: var(--def-font-weight);
   color: #4b5966;
+  text-decoration: none;
   margin-right: 20px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.rolling__news-title-text:hover {
+  text-decoration: underline;
 }
 
 .press-container__menu {
@@ -158,7 +163,7 @@ body {
 
 .press-container__subscribe-button {
   width: 72px;
-  height: 24px;
+  height: 20px;
   background-color: #fff;
   border: var(--border);
   border-radius: 50px;
@@ -197,7 +202,6 @@ body {
 
 .press-container__active-category {
   width: 166px;
-  /* padding: 0px 16px;*/
   background-color: #7890e7;
   color: #fff;
   font-weight: var(--bold-font-weight);

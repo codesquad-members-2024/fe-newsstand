@@ -9,6 +9,8 @@ let newsTitleIndex = INITIAL_NEWS_TITLE_INDEX;
 
 const isEmptyNode = (node) => node.childElementCount === NO_ELEMENT;
 
+const hasEmptyNode = (nodes) => nodes.some((node) => isEmptyNode(node));
+
 const parseTitles = async (path) => {
   const response = await fetch(path);
   const titles = await response.json().then((json) =>
@@ -25,7 +27,7 @@ const parseTitles = async (path) => {
 const createNewNode = (className, titles) => {
   const newNode = document.createElement("div");
   const pressNameTag = document.createElement("span");
-  const newsTitleTag = document.createElement("span");
+  const newsTitleTag = document.createElement("a");
 
   pressNameTag.classList.add("rolling__press-text");
   pressNameTag.textContent += titles[newsTitleIndex].pressName;
@@ -34,6 +36,7 @@ const createNewNode = (className, titles) => {
   newNode.classList.add(...className.split(" "));
   newNode.appendChild(pressNameTag);
   newsTitleTag.textContent += titles[newsTitleIndex].headline.title;
+  newsTitleTag.setAttribute("href", titles[newsTitleIndex].headline.href);
   newNode.appendChild(newsTitleTag);
 
   newsTitleIndex++;
@@ -83,7 +86,7 @@ const renderNewsTitles = async () => {
   const textBoxes = Array.from(document.querySelectorAll(".rolling__text-box"));
   const titles = await parseTitles("src/data/news.json");
 
-  if (textBoxes.some((textBox) => isEmptyNode(textBox))) {
+  if (hasEmptyNode(textBoxes)) {
     textBoxes.forEach((textBox) => {
       renderNewsTitle(textBox, titles);
     });
