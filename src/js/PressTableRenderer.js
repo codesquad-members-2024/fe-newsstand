@@ -68,6 +68,7 @@ const renderPreviousPage = () => {
   if (isIconActive(gridViewIcon)) {
     gridViewIndex = gridViewIndex > FIRST_PAGE ? --gridViewIndex : gridViewIndex;
     renderGridView();
+    clearInterval(startAutoRender);
   }
   if (isIconActive(listViewIcon)) {
     listViewIndex = listViewIndex === INITIAL_VIEW_INDEX ? news.length + DECREMENT : --listViewIndex;
@@ -79,6 +80,7 @@ const renderNextPage = () => {
   if (isIconActive(gridViewIcon)) {
     gridViewIndex = gridViewIndex < LAST_PAGE ? ++gridViewIndex : gridViewIndex;
     renderGridView();
+    clearInterval(startAutoRender);
   }
   if (isIconActive(listViewIcon)) {
     listViewIndex = listViewIndex === news.length + DECREMENT ? INITIAL_VIEW_INDEX : ++listViewIndex; 
@@ -194,12 +196,10 @@ const renderGridView = async () => {
 
 const renderActiveCategory = (category, index) => {
   return `<div class="press-container__active-category">
-    <div class="press-container__progress-bar">
-        <div class="press-container__progress"></div>
-        <div class="press-container__category-description">
-          <div>${category.categoryName}</div>
-          <div>${index - category.firstIndex + 1} <span style="opacity: 0.7;">/ ${category.count}</span></div>
-        </div>
+    <div class="press-container__progress"></div>
+    <div class="press-container__category-description">
+      <div>${category.categoryName}</div>
+      <div>${index - category.firstIndex + 1} <span style="opacity: 0.7;">/ ${category.count}</span></div>
     </div>
   </div>`;
 };
