@@ -1,6 +1,6 @@
 
 export const activate = (mode) => {
-    const gridViewContainer = document.querySelector(".company-list-container")
+    const gridViewContainer = document.querySelector(".company-grid-container")
     const listViewContainer = document.querySelector(".list-mode-main-container")
     const listModeContainer = document.querySelector(".sort-mode-container__show-list-mode")
     const gridModeContainer = document.querySelector(".sort-mode-container__show-grid-mode")

@@ -1,7 +1,7 @@
 import dateView from "./Components/headerComponent/DateView.js";
 import topNewsForm from "./Components/headerComponent/TopNewsForm.js";
-import gridViewForm from "./Components/GridViewForm.js";
-import listViewForm from "./Components/ListViewForm.js";
+import { GridViewForm } from "./Components/GridViewForm.js";
+import { ListViewForm } from "./Components/ListViewForm.js";
 import { activate, reloadPage } from "./util/active.js";
 import { INITIAL_VIEW } from "./util/contants.js";
 
@@ -29,8 +29,14 @@ function NewsStand() {
     };
 
     const isDisplayVisible = () => {
-        if(status.listMode === false) gridViewForm.main(status.subscribeStatus)
-        if(status.listMode === true) listViewForm.main(status.subscribeStatus)
+        if(status.listMode === false) {
+            const gridViewForm = new GridViewForm()
+            gridViewForm.main(status.subscribeStatus)
+        }
+        if(status.listMode === true) {
+            const listViewForm = new ListViewForm();
+            listViewForm.main(status.subscribeStatus)
+        }
     }
 
     const main = async() => {

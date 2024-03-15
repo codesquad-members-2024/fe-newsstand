@@ -1,3 +1,5 @@
+@import "reset.css";
+
 html,
 body {
     height: 100%;
@@ -176,7 +178,7 @@ nav>div {
     display: flex;
 }
 
-.company-list-container {
+.company-grid-container {
     display: flex;
     align-items: center;
     margin: 0 auto;
@@ -188,13 +190,13 @@ nav>div {
     height: 426px;
 }
 
-.company-list-container>ul {
+.company-grid-container>ul {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, 1fr);
 }
 
-.company-list-container>ul>li {
+.company-grid-container>ul>li {
     border-right: 1px solid gray;
     border-bottom: 1px solid gray;
 }
@@ -227,6 +229,7 @@ a>img {
 }
 
 .left-btn {
+    display: none;
     position: absolute;
     left: -55px;
 }
@@ -283,7 +286,7 @@ a>img {
 }
 
 .list-mode-main-container {
-    display: none;
+    display: flex;
     align-items: center;
     margin: 0 auto;
     position: relative;
@@ -339,6 +342,7 @@ a>img {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    
 }
 
 .sub-news, .edit-company-name{
@@ -355,6 +359,7 @@ a>img {
     width: 175px;
     height: 14px;
     margin-bottom: 5px;
+    font-size: 15px;
 }
 
 .edit-company-name {
@@ -363,66 +368,64 @@ a>img {
 }
 
 .wrap {
-    width: 980px;
+    width: 960px;
     margin: 0 auto;
-
 }
 
 .list {
-    width: 960px;
     display: flex;
     background: #f3f3f3;
 }
 
-.list div {
-    position: relative;
-    padding: 20px 10px;
+.item {
+    display: flex;
+    position:relative;
+    padding: 15px 10px;
     font-size: 14px;
-    font-weight: bold;
+    font-weight:bold;
     color: #333;
-    transition: padding .5s ease;
+}
 
-    span {
-        position: relative;
-        z-index: 2;
-    }
+.nav-animation span, .totalPage {
+    position:relative;
+    z-index:2;
+}
+.nav-animation {
+    padding-right: 70px;
+    background:rgba(196, 211, 255, 0.735);
+}
 
-    &:hover {
-        padding-right: 100px;
-        background: rgba(196, 211, 255, 0.735);
+.nav-animation span {
+    color: #fff;
+}
 
-        span {
-            color: #fff;
-        }
-    }
-
-    &:hover::after {
-        animation: fill 20s;
-    }
-
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        z-index: 1;
-        background: rgb(40, 86, 223);
-    }
+.nav-animation::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    z-index: 1;
+    background:rgb(40, 86, 223);
+    animation: fill 20s;
 }
 
 @keyframes fill {
-    from {
-        width: 0;
-    }
+    from {width: 0;}
+    to {width:100%;}
+}
 
-    to {
-        width: 100%;
-    }
+.item__totalPage {
+    display: none;
+    position: relative;
+    left: 40px;
 }
 #list-view__company-logo {
-    width: 51px;
+    width: 79px;
     height: 20px;
+    margin-top: 3px;
+    object-fit: scale-down;
 }
 
 .subscribe-btn {
@@ -436,4 +439,21 @@ a>img {
 .main-news-src {
     width: 100%;
     height: 100%;
+    object-fit: scale-down;
+}
+
+.list-view-left-btn {
+    position: absolute;
+    left: -55px;
+}
+
+.list-view-light-btn {
+    position: absolute;
+    margin-left: 20px;
+}
+
+.active {
+    display: flex;
+    z-index: 2;
+    color: white;
 }

@@ -4,7 +4,7 @@ function DateView() {
 
     const renderCurrentDate = () => {
         const curDate = getCurrentDate();
-        const dateContainer = document.querySelector(".header__title-container__date");
+        const dateContainer = document.querySelector("header > .header__title-container__date");
         dateContainer.innerHTML = `
         ${curDate.curYear}. ${curDate.curMonth}. ${curDate.curDate}. ${curDate.curDay}
         `;
