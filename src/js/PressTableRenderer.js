@@ -195,13 +195,11 @@ const renderGridView = async () => {
 const renderActiveCategory = (category, index) => {
   return `<div class="press-container__active-category">
     <div class="press-container__progress-bar">
-      <div>
         <div class="press-container__progress"></div>
         <div class="press-container__category-description">
           <div>${category.categoryName}</div>
           <div>${index - category.firstIndex + 1} <span style="opacity: 0.7;">/ ${category.count}</span></div>
         </div>
-      </div>
     </div>
   </div>`;
 };
@@ -334,8 +332,8 @@ const renderListView = async (index) => {
 };
 
 pressContainer.addEventListener("click", (e) => {
-  if (e.target === gridViewIcon) activateGridView();
-  if (e.target === listViewIcon) activateListView();
+  if (e.target === gridViewIcon || e.target.parentElement === gridViewIcon) activateGridView();
+  if (e.target === listViewIcon || e.target.parentElement === listViewIcon) activateListView();
   if (e.target === leftArrowButton) renderPreviousPage();
   if (e.target === rightArrowButton) renderNextPage();
 });
