@@ -4,7 +4,11 @@ const LOGO_COUNT_PER_PAGE = 24;
 const INITIAL_VIEW_INDEX = 0;
 const RANDOM_SECTOR = 0.5;
 const NO_ELEMENT = 0;
+const DECREMENT = -1;
 const PAGE_TURNING_DELAY = 20000;
+const EMPTY_IN_PERCENTAGE = 0;
+const FULL_IN_PERCENTAGE = 100;
+const FILL_SECTOR = 0.1;
 
 const ACTIVE_FILL_PROPERTY = "#4362D0";
 const INACTIVE_FILL_PROPERTY = "#879298";
@@ -52,17 +56,12 @@ const activateGridView = () => {
   fillIcon(gridViewIcon, ACTIVE_FILL_PROPERTY);
   fillIcon(listViewIcon, INACTIVE_FILL_PROPERTY);
   renderGridView();
-  if (startAutoRender !== null) {
-    clearInterval(startAutoRender);
-    startAutoRender = null;
-  }
 };
 
 const activateListView = () => {
   fillIcon(listViewIcon, ACTIVE_FILL_PROPERTY);
   fillIcon(gridViewIcon, INACTIVE_FILL_PROPERTY);
   renderListView(listViewIndex);
-  if (startAutoRender === null) startAutoRender = setInterval(renderNextPage, PAGE_TURNING_DELAY);
 };
 
 const renderPreviousPage = () => {
@@ -71,7 +70,7 @@ const renderPreviousPage = () => {
     renderGridView();
   }
   if (isIconActive(listViewIcon)) {
-    listViewIndex = listViewIndex === INITIAL_VIEW_INDEX ? news.length - 1 : --listViewIndex;
+    listViewIndex = listViewIndex === INITIAL_VIEW_INDEX ? news.length + DECREMENT : --listViewIndex;
     renderListView(listViewIndex);
   }
 };
@@ -82,7 +81,7 @@ const renderNextPage = () => {
     renderGridView();
   }
   if (isIconActive(listViewIcon)) {
-    listViewIndex = listViewIndex === news.length - 1 ? INITIAL_VIEW_INDEX : ++listViewIndex; 
+    listViewIndex = listViewIndex === news.length + DECREMENT ? INITIAL_VIEW_INDEX : ++listViewIndex; 
     renderListView(listViewIndex);
   }
 };
@@ -123,6 +122,14 @@ const initializeCategories = () => {
       count: categoryList.filter((name) => name === category).length,
     }));
 };
+
+const initializeStartAutoRender = () => {
+  if ( startAutoRender !== null ) {
+    clearInterval(startAutoRender);
+    startAutoRender = null;
+  }
+  startAutoRender = setInterval(renderNextPage, PAGE_TURNING_DELAY);
+}
 
 const isInCategoryRange = (category, index) => {
   return category.firstIndex <= index && category.firstIndex + category.count > index;
@@ -205,16 +212,21 @@ const renderInactiveCategory = (category) => {
 
 const animateActiveCategory = () => {
   const activeCategory = document.querySelector(".press-container__progress");
-  let width = 0;
+  const intervalSector = FULL_IN_PERCENTAGE / FILL_SECTOR;
+  let width = EMPTY_IN_PERCENTAGE;
 
   const fillColor = () => {
-    if (width >= 100) clearInterval(fillColorInInterval);
+    if (width >= FULL_IN_PERCENTAGE) clearInterval(fillColorInInterval);
     else {
-      width += 0.1;
+      width += FILL_SECTOR;
       activeCategory.style.width = width + "%";
     }
   }
-  fillColorInInterval = setInterval(fillColor, PAGE_TURNING_DELAY / 1000);
+  if (fillColorInInterval !== null) {
+    clearInterval(fillColorInInterval);
+    fillColorInInterval = null;
+  }
+  fillColorInInterval = setInterval(fillColor, PAGE_TURNING_DELAY / intervalSector);
 }
 
 const renderCategoryTab = (index) => {
@@ -318,6 +330,7 @@ const renderListView = async (index) => {
 
   setVisibilityOfArrowButtons();
   animateActiveCategory();
+  initializeStartAutoRender();
 };
 
 pressContainer.addEventListener("click", (e) => {
