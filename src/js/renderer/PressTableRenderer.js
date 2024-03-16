@@ -1,8 +1,9 @@
+import Utils from './Utils.js';
+
 const FIRST_PAGE = 0;
 const LAST_PAGE = 3;
 const LOGO_COUNT_PER_PAGE = 24;
 const INITIAL_VIEW_PAGE = 0;
-const RANDOM_SECTOR = 0.5;
 const EMPTY = 0;
 const INCREMENT = 1;
 const DECREMENT = -1;
@@ -46,60 +47,40 @@ let logos = [];
 let startAutoRender = null;
 let fillColorInInterval = null;
 
-const isIconActive = (icon) => {
-  const activeValue = icon
-    .querySelector("path")
-    .attributes.getNamedItem("fill").nodeValue;
-
-  return activeValue === ACTIVE_FILL_PROPERTY;
-};
-
-const fillIcon = (icon, fillProperty) => {
-  const path = icon.querySelector("path");
-
-  path.setAttribute("fill", fillProperty);
-};
-
 const activateGridView = () => {
-  fillIcon(gridViewIcon, ACTIVE_FILL_PROPERTY);
-  fillIcon(listViewIcon, INACTIVE_FILL_PROPERTY);
+  Utils.fillIcon(gridViewIcon, ACTIVE_FILL_PROPERTY);
+  Utils.fillIcon(listViewIcon, INACTIVE_FILL_PROPERTY);
   renderGridView(gridViewPage);
 };
 
 const activateListView = () => {
-  fillIcon(listViewIcon, ACTIVE_FILL_PROPERTY);
-  fillIcon(gridViewIcon, INACTIVE_FILL_PROPERTY);
+  Utils.fillIcon(listViewIcon, ACTIVE_FILL_PROPERTY);
+  Utils.fillIcon(gridViewIcon, INACTIVE_FILL_PROPERTY);
   renderListView(listViewPage);
 };
 
 const renderPreviousPage = () => {
-  if (isIconActive(gridViewIcon)) {
+  if (Utils.isIconActive(gridViewIcon)) {
     gridViewPage = gridViewPage > FIRST_PAGE ? --gridViewPage : gridViewPage;
     renderGridView(gridViewPage);
     clearInterval(startAutoRender);
   }
-  if (isIconActive(listViewIcon)) {
+  if (Utils.isIconActive(listViewIcon)) {
     listViewPage = listViewPage === INITIAL_VIEW_PAGE ? news.length + DECREMENT : --listViewPage;
     renderListView(listViewPage);
   }
 };
 
 const renderNextPage = () => {
-  if (isIconActive(gridViewIcon)) {
+  if (Utils.isIconActive(gridViewIcon)) {
     gridViewPage = gridViewPage < LAST_PAGE ? ++gridViewPage : gridViewPage;
     renderGridView(gridViewPage);
     clearInterval(startAutoRender);
   }
-  if (isIconActive(listViewIcon)) {
+  if (Utils.isIconActive(listViewIcon)) {
     listViewPage = listViewPage === news.length + DECREMENT ? INITIAL_VIEW_PAGE : ++listViewPage;
     renderListView(listViewPage);
   }
-};
-
-const shuffle = (array) => {
-  const result = array;
-
-  return result.sort(() => Math.random() - RANDOM_SECTOR);
 };
 
 const appendChildren = (parent, children) => {
@@ -115,7 +96,7 @@ const initializeNews = async () => {
 };
 
 const initializeLogos = () => {
-  logos = shuffle(
+  logos = Utils.shuffle(
     news.map(({ logoImageSrc: src, pressName: name }) => ({ src, name }))
   );
 };
@@ -142,20 +123,9 @@ const initializeStartAutoRender = () => {
   startAutoRender = setInterval(renderNextPage, PAGE_TURNING_DELAY);
 };
 
-const isInCategoryRange = (category, page) => {
-  return (
-    category.firstIndex <= page &&
-    category.firstIndex + category.count > page
-  );
-};
-
-const findActiveCategory = (page) => {
-  return categories.find((categoryElement) => isInCategoryRange(categoryElement, page));
-};
-
 const createSubscribeButton = () => {
-  const button = createElementWithClass("button", "press-container__subscribe-button");
-  const plusImage = createElementWithClass("img", "press-container__plus-image");
+  const button = Utils.createElementWithClass("button", "press-container__subscribe-button");
+  const plusImage = Utils.createElementWithClass("img", "press-container__plus-image");
   const subscribeText = document.createTextNode("구독하기");
 
   plusImage.src = "src/img/PlusSymbol.svg";
@@ -166,7 +136,7 @@ const createSubscribeButton = () => {
 };
 
 const createLogo = (src, name) => {
-  const logo = createElementWithClass("div", "press-container__logo");
+  const logo = Utils.createElementWithClass("div", "press-container__logo");
   const image = document.createElement("img");
   const subscribeButton = createSubscribeButton();
 
@@ -178,7 +148,7 @@ const createLogo = (src, name) => {
   return logo;
 };
 
-const addImagesIntoTable = (table, page) => {
+const createLogosInTable = (table, page) => {
   Array.from({ length: LOGO_COUNT_PER_PAGE }).forEach((_, index) => {
     const cellIndex = page * LOGO_COUNT_PER_PAGE + index;
     const logo = createLogo(logos[cellIndex].src, logos[cellIndex].name);
@@ -187,21 +157,17 @@ const addImagesIntoTable = (table, page) => {
   });
 };
 
-const updateArrowButtonVisibility = (button, condition) => {
-  button.style.visibility = condition ? "hidden" : "visible";
-};
-
 const toggleArrowVisibility = () => {
-  const isGridViewActive = isIconActive(gridViewIcon);
-  const isListViewActive = isIconActive(listViewIcon);
+  const isGridViewActive = Utils.isIconActive(gridViewIcon);
+  const isListViewActive = Utils.isIconActive(listViewIcon);
 
   if (isGridViewActive) {
-    updateArrowButtonVisibility(leftArrowButton, gridViewPage === FIRST_PAGE);
-    updateArrowButtonVisibility(rightArrowButton, gridViewPage === LAST_PAGE);
+    Utils.updateArrowButtonVisibility(leftArrowButton, gridViewPage === FIRST_PAGE);
+    Utils.updateArrowButtonVisibility(rightArrowButton, gridViewPage === LAST_PAGE);
   }
   if (isListViewActive) {
-    updateArrowButtonVisibility(leftArrowButton, false);
-    updateArrowButtonVisibility(rightArrowButton, false);
+    Utils.updateArrowButtonVisibility(leftArrowButton, false);
+    Utils.updateArrowButtonVisibility(rightArrowButton, false);
   }
 };
 
@@ -210,7 +176,7 @@ const renderGridView = async (page) => {
 
   pressTable.setAttribute("class", "press-container__view grid");
   pressTable.innerHTML = "";
-  addImagesIntoTable(pressTable, page);
+  createLogosInTable(pressTable, page);
   toggleArrowVisibility(page);
 };
 
@@ -248,8 +214,8 @@ const animateActiveCategory = () => {
 }
 
 const renderCategoryTab = (page) => {
-  const activeCategory = findActiveCategory(page);
-  const div = createElementWithClass("div", "press-container__category-tab");
+  const activeCategory = Utils.findActiveCategory(categories, page);
+  const div = Utils.createElementWithClass("div", "press-container__category-tab");
 
   div.innerHTML = categories.reduce(
     (acc, cur) =>
@@ -264,9 +230,9 @@ const renderCategoryTab = (page) => {
 };
 
 const renderNewsInfo = (page) => {
-  const newsInfo = createElementWithClass("div", "press-container__news-info");
+  const newsInfo = Utils.createElementWithClass("div", "press-container__news-info");
   const image = document.createElement("img");
-  const editedTime = createElementWithClass("span", "press-container__edited-time");
+  const editedTime = Utils.createElementWithClass("span", "press-container__edited-time");
   const subscribeButton = createSubscribeButton();
 
   image.src = news[page].logoImageSrc;
@@ -283,7 +249,7 @@ const renderSideNews = (page, container) => {
   const fragment = document.createDocumentFragment();
 
   news[page].sideNews.forEach(({ href, title }) => {
-    const linkElement = createElementWithClass("a", "press-container__sidenews-title");
+    const linkElement = Utils.createElementWithClass("a", "press-container__sidenews-title");
     linkElement.href = href;
     linkElement.textContent = title;
     fragment.appendChild(linkElement);
@@ -292,20 +258,13 @@ const renderSideNews = (page, container) => {
   container.appendChild(fragment);
 };
 
-function createElementWithClass(elementType, className) {
-  const element = document.createElement(elementType);
-  element.setAttribute("class", className);
-
-  return element;
-}
-
 const renderNewsContent = (page) => {
   const { headline, pressName } = news[page];
-  const container = createElementWithClass("div", "press-container__news-content");
-  const headlineContainer = createElementWithClass("div", "press-container__headline");
-  const sideNews = createElementWithClass("div", "press-container__sidenews");
-  const thumbnail = createElementWithClass("img", "press-container__headline-thumbnail");
-  const headlineTitle = createElementWithClass("a", "press-container__headline-title");
+  const container = Utils.createElementWithClass("div", "press-container__news-content");
+  const headlineContainer = Utils.createElementWithClass("div", "press-container__headline");
+  const sideNews = Utils.createElementWithClass("div", "press-container__sidenews");
+  const thumbnail = Utils.createElementWithClass("img", "press-container__headline-thumbnail");
+  const headlineTitle = Utils.createElementWithClass("a", "press-container__headline-title");
   const noteMessage = document.createElement("span");
 
   thumbnail.src = headline.thumbnailSrc;
@@ -315,15 +274,15 @@ const renderNewsContent = (page) => {
   renderSideNews(page, sideNews);
   noteMessage.innerHTML = `${pressName} 언론사에서 직접 편집한 뉴스입니다.`;
 
-  appendChildren(sideNews, [noteMessage]);
-  appendChildren(headlineContainer, [thumbnail, headlineTitle]);
-  appendChildren(container, [headlineContainer, sideNews]);
+  Utils.appendChildren(sideNews, [noteMessage]);
+  Utils.appendChildren(headlineContainer, [thumbnail, headlineTitle]);
+  Utils.appendChildren(container, [headlineContainer, sideNews]);
 
   return container;
 };
 
 const renderDetailedNews = (page) => {
-  const detailedNews = createElementWithClass("div", "press-container__detailed-news");
+  const detailedNews = Utils.createElementWithClass("div", "press-container__detailed-news");
   const newsInfo = renderNewsInfo(page);
   const newsContents = renderNewsContent(page);
 
