@@ -24,9 +24,11 @@ const animateRolling = () => {
     rollNewsInInterval = null;
   }
   rollNewsInInterval = setInterval(renderNewsTitles, ROLLING_DELAY);
-}
+};
 
-const pageReload = () => { location.reload() }
+const pageReload = () => {
+  location.reload();
+};
 
 const renderCurrentDate = () => {
   const currentDateTag = document.querySelector(".top-container__date-text");
@@ -43,7 +45,7 @@ const renderCurrentDate = () => {
     .padStart(CHAR_COUNT, "0")}. ${day}`;
 };
 
-const renderIndex = () => {
+export const renderIndex = () => {
   const pageLogoIcon = document.querySelector(".top-container__icon");
 
   renderCurrentDate();
@@ -51,9 +53,8 @@ const renderIndex = () => {
   activateGridView();
   pageLogoIcon.addEventListener("click", pageReload);
   animateRolling();
-}
+};
 
-renderIndex();
 rollingContainer.addEventListener("mouseover", () => {
   clearInterval(rollNewsInInterval);
 });

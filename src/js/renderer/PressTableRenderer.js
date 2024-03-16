@@ -196,8 +196,8 @@ const toggleArrowVisibility = () => {
   const isListViewActive = isIconActive(listViewIcon);
 
   if (isGridViewActive) {
-    updateArrowButtonVisibility(leftArrowButton, index === FIRST_PAGE);
-    updateArrowButtonVisibility(rightArrowButton, index === LAST_PAGE);
+    updateArrowButtonVisibility(leftArrowButton, gridViewPage === FIRST_PAGE);
+    updateArrowButtonVisibility(rightArrowButton, gridViewPage === LAST_PAGE);
   }
   if (isListViewActive) {
     updateArrowButtonVisibility(leftArrowButton, false);
