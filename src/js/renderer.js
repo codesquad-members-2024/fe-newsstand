@@ -1,4 +1,4 @@
-import { newsLogos, listCat } from "./data.js";
+import { newsLogos, listCat } from "../data/newsdata.js";
 
 const PAGE_SIZE = 24;
 const shuffleLogos = shuffle(newsLogos.flat());
@@ -39,6 +39,7 @@ function createList(index) {
   const pTagleft = document.createElement("p");
   pTagleft.textContent = item.description[0];
   const descDiv = document.createElement("div");
+
   for (let i = 1; i < item.description.length; i++) {
     const pTag = document.createElement("p");
     pTag.textContent = item.description[i];
@@ -50,7 +51,7 @@ function createList(index) {
   listRight.appendChild(descDiv);
 }
 
-function showGrid(page) {
+function renderGrid(page) {
   const newsgroupGrid = document.querySelector(".newsgroup-grid");
   newsgroupGrid.style.display = "";
   newsgroupGrid.innerHTML = "";
@@ -70,14 +71,14 @@ function showGrid(page) {
     document.querySelector(".grid-right-btn").style.visibility = "hidden";
 }
 
-function showList(cat) {
+function renderList(cat) {
   const newsgroupList = document.querySelector(".newsgroup-list");
   newsgroupList.style.display = "";
 
   const newsgroupListleft = document.querySelector(".newsgroup-list-left");
   const newsgroupListright = document.querySelector(".newsgroup-list-right");
-  newsgroupListleft.innerHTML = '';
-  newsgroupListright.innerHTML = '';
+  newsgroupListleft.innerHTML = "";
+  newsgroupListright.innerHTML = "";
 
   document.querySelector(".newsgroup-grid").style.display = "none";
   document.querySelector(".grid-left-btn").style.visibility = "hidden";
@@ -93,4 +94,4 @@ function showList(cat) {
   createList(cat);
 }
 
-export { showGrid, showList };
+export { renderGrid, renderList };

@@ -1,46 +1,46 @@
-import { newsLogos, listCat } from "./data.js";
-import { showGrid, showList } from "./show.js";
+import { newsLogos, listCat } from "../data/newsdata.js";
+import { renderGrid, renderList } from "./renderer.js";
 
 let currentPage = 0;
 let currentCat = 0;
 
-const clickFuntions = {
+const clickHandler = {
   gridViewClick() {
     currentPage = 0;
-    showGrid(currentPage);
+    renderGrid(currentPage);
   },
 
   listViewClick() {
     currentCat = 0;
-    showList(currentCat);
+    renderList(currentCat);
   },
 
   gridRightButtonClick() {
     if (currentPage < newsLogos.length) {
       currentPage++;
     }
-    showGrid(currentPage);
+    renderGrid(currentPage);
   },
 
   gridLeftButtonClick() {
     if (currentPage > 0) {
       currentPage--;
     }
-    showGrid(currentPage);
+    renderGrid(currentPage);
   },
 
   listRightButtonClick() {
     if (currentCat < listCat.length) {
       currentCat++;
     }
-    showList(currentCat);
+    renderList(currentCat);
   },
 
   listLeftButtonClick() {
     if (currentCat > 0) {
       currentCat--;
     }
-    showList(currentCat);
+    renderList(currentCat);
   },
 
   clickCat() {
@@ -58,16 +58,16 @@ function clickEvent() {
   const gridRightBtn = document.querySelector(".grid-right-btn");
   const listLeftBtn = document.querySelector(".list-left-btn");
   const listRightBtn = document.querySelector(".list-right-btn");
-  const listClick = document.querySelector(".newsgroup-list-click");
+  // const listClick = document.querySelector(".newsgroup-list-click");
 
-  gridViewBtn.addEventListener("click", clickFuntions.gridViewClick);
-  listViewBtn.addEventListener("click", clickFuntions.listViewClick);
+  gridViewBtn.addEventListener("click", clickHandler.gridViewClick);
+  listViewBtn.addEventListener("click", clickHandler.listViewClick);
 
-  gridRightBtn.addEventListener("click", clickFuntions.gridRightButtonClick);
-  gridLeftBtn.addEventListener("click", clickFuntions.gridLeftButtonClick);
+  gridRightBtn.addEventListener("click", clickHandler.gridRightButtonClick);
+  gridLeftBtn.addEventListener("click", clickHandler.gridLeftButtonClick);
 
-  listRightBtn.addEventListener("click", clickFuntions.listRightButtonClick);
-  listLeftBtn.addEventListener("click", clickFuntions.listLeftButtonClick);
+  listRightBtn.addEventListener("click", clickHandler.listRightButtonClick);
+  listLeftBtn.addEventListener("click", clickHandler.listLeftButtonClick);
 
   // listClick.addEventListener("click", clickFuntions.clickCat);
 }
