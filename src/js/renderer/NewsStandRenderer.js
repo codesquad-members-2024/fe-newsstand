@@ -27,9 +27,9 @@ const animateRolling = () => {
   rollNewsInInterval = setInterval(renderNewsTitles, ROLLING_DELAY);
 };
 
-const pageReload = () => {
-  location.reload();
-};
+const stopRollingAnimation = () => clearInterval(rollNewsInInterval);
+
+const pageReload = () => location.reload();
 
 const renderCurrentDate = () => {
   const currentDateTag = document.querySelector(".top-container__date-text");
@@ -54,7 +54,5 @@ export const renderIndex = () => {
 };
 
 pageLogoIcon.addEventListener("click", pageReload);
-rollingContainer.addEventListener("mouseover", () => {
-  clearInterval(rollNewsInInterval);
-});
+rollingContainer.addEventListener("mouseover", stopRollingAnimation);
 rollingContainer.addEventListener("mouseout", animateRolling);

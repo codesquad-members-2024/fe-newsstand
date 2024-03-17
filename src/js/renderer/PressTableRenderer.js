@@ -29,7 +29,7 @@ const pressTable = document.querySelector(ST.PRESS_TABLE);
 const leftArrowButton = document.querySelector(ST.LEFT_ARROW);
 const rightArrowButton = document.querySelector(ST.RIGHT_ARROW);
 
-const viewIconNodes = Array.from(document.querySelectorAll(ST.VIEW_ICON));
+const viewIconNodes = [...document.querySelectorAll(ST.VIEW_ICON)];
 const viewIcons = viewIconNodes.reduce((icons, icon) => {
   const title = icon.getAttribute("title");
   if (title === "grid-view") icons.gridViewIcon = icon;
@@ -109,7 +109,7 @@ const initializeCategories = () => {
     return acc;
   }, {});
 
-  Object.values(categoryInfo).forEach(category => categories.push(category));
+  categories.push(...Object.values(categoryInfo));
 };
 
 const initializeStartAutoRender = () => {
@@ -145,8 +145,8 @@ const createLogo = (src, name) => {
 
 const createLogosInTable = (table, page) => {
   Array.from({ length: LOGO_COUNT_PER_PAGE }).forEach((_, index) => {
-    const cellIndex = page * LOGO_COUNT_PER_PAGE + index;
-    const logo = createLogo(logos[cellIndex].src, logos[cellIndex].name);
+    const logoIndex = page * LOGO_COUNT_PER_PAGE + index;
+    const logo = createLogo(logos[logoIndex].src, logos[logoIndex].name);
 
     table.appendChild(logo);
   });
@@ -230,11 +230,9 @@ const renderNewsInfo = (page) => {
   const subscribeButton = createSubscribeButton();
 
   image.src = news[page].logoImageSrc;
-  editedTime.innerHTML = news[page].editedTime;
+  editedTime.textContent = news[page].editedTime;
   subscribeButton.style.cssText = "display:block; margin-left:16px";
-  newsInfo.appendChild(image);
-  newsInfo.appendChild(editedTime);
-  newsInfo.appendChild(subscribeButton);
+  Utils.appendChildren(newsInfo, [image, editedTime, subscribeButton]);
 
   return newsInfo;
 };
@@ -266,7 +264,7 @@ const renderNewsContent = (page) => {
   headlineTitle.innerHTML = headline.title;
 
   renderSideNews(page, sideNews);
-  noteMessage.innerHTML = `${pressName} 언론사에서 직접 편집한 뉴스입니다.`;
+  noteMessage.textContent = `${pressName} 언론사에서 직접 편집한 뉴스입니다.`;
 
   Utils.appendChildren(sideNews, [noteMessage]);
   Utils.appendChildren(headlineContainer, [thumbnail, headlineTitle]);
@@ -280,8 +278,7 @@ const renderDetailedNews = (page) => {
   const newsInfo = renderNewsInfo(page);
   const newsContents = renderNewsContent(page);
 
-  detailedNews.appendChild(newsInfo);
-  detailedNews.appendChild(newsContents);
+  Utils.appendChildren(detailedNews, [newsInfo, newsContents]);
 
   return detailedNews;
 };
@@ -302,8 +299,8 @@ const renderListView = async (page) => {
 pressContainer.addEventListener("click", (e) => {
   if (e.target.closest(ST.VIEW_ICON) === gridViewIcon) activateGridView();
   if (e.target.closest(ST.VIEW_ICON) === listViewIcon) activateListView();
-  if (e.target.closest(ST.LEFT_ARROW) === leftArrowButton) renderPreviousPage();
-  if (e.target.closest(ST.RIGHT_ARROW) === rightArrowButton) renderNextPage();
+  if (e.target.closest(ST.LEFT_ARROW)) renderPreviousPage();
+  if (e.target.closest(ST.RIGHT_ARROW)) renderNextPage();
   if (e.target.closest(ST.CATEGORY)) renderListView(e.target.getAttribute("firstIndex"));
 });
 
