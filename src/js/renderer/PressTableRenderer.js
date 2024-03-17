@@ -21,6 +21,7 @@ const ST = Object.freeze({
   VIEW_ICON: ".press-container__view-icon",
   LEFT_ARROW: ".press-container__left-arrow",
   RIGHT_ARROW: ".press-container__right-arrow",
+  CATEGORY: ".press-container__category",
 });
 
 const pressContainer = document.querySelector(ST.PRESS_CONTAINER);
@@ -184,7 +185,7 @@ const renderActiveCategory = (category, page) => {
 };
 
 const renderInactiveCategory = (category) => {
-  return `<div class="press-container__category">${category.categoryName}</div>`;
+  return `<div class="press-container__category" firstIndex="${category.firstIndex}">${category.categoryName}</div>`;
 };
 
 const animateActiveCategory = () => {
@@ -303,6 +304,7 @@ pressContainer.addEventListener("click", (e) => {
   if (e.target.closest(ST.VIEW_ICON) === listViewIcon) activateListView();
   if (e.target.closest(ST.LEFT_ARROW) === leftArrowButton) renderPreviousPage();
   if (e.target.closest(ST.RIGHT_ARROW) === rightArrowButton) renderNextPage();
+  if (e.target.closest(ST.CATEGORY)) renderListView(e.target.getAttribute("firstIndex"));
 });
 
 export default activateGridView;
