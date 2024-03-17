@@ -83,10 +83,6 @@ const renderNextPage = () => {
   }
 };
 
-const appendChildren = (parent, children) => {
-  children.forEach(child => parent.appendChild(child));
-}
-
 const initializeNews = async () => {
   const newsList = await fetch(NEWS_PATH).then((response) => response.json());
 
@@ -104,7 +100,7 @@ const initializeLogos = () => {
 const initializeCategories = () => {
   categories.length = EMPTY;
 
-  const categoryMap = news.reduce((acc, { category }, index) => {
+  const categoryInfo = news.reduce((acc, { category }, index) => {
     if (!acc[category]) {
       acc[category] = { categoryName: category, firstIndex: index, count: EMPTY };
     }
@@ -112,7 +108,7 @@ const initializeCategories = () => {
     return acc;
   }, {});
 
-  Object.values(categoryMap).forEach(category => categories.push(category));
+  Object.values(categoryInfo).forEach(category => categories.push(category));
 };
 
 const initializeStartAutoRender = () => {
@@ -129,8 +125,7 @@ const createSubscribeButton = () => {
   const subscribeText = document.createTextNode("구독하기");
 
   plusImage.src = "src/img/PlusSymbol.svg";
-  button.appendChild(plusImage);
-  button.appendChild(subscribeText);
+  Utils.appendChildren(button, [plusImage, subscribeText]);
 
   return button;
 };
@@ -142,8 +137,7 @@ const createLogo = (src, name) => {
 
   image.src = src;
   image.setAttribute("name", name);
-  logo.appendChild(image);
-  logo.appendChild(subscribeButton);
+  Utils.appendChildren(logo, [image, subscribeButton]);
 
   return logo;
 };
@@ -174,8 +168,7 @@ const toggleArrowVisibility = () => {
 const renderGridView = async (page) => {
   if (logos.length === EMPTY) await initializeNews();
 
-  pressTable.setAttribute("class", "press-container__view grid");
-  pressTable.innerHTML = "";
+  Utils.clearPressTableContent(pressTable, "grid");
   createLogosInTable(pressTable, page);
   toggleArrowVisibility(page);
 };
@@ -185,7 +178,7 @@ const renderActiveCategory = (category, page) => {
     <div class="press-container__progress"></div>
     <div class="press-container__category-description">
       <div>${category.categoryName}</div>
-      <div>${page - category.firstIndex + 1} <span style="opacity: 0.7;">/ ${category.count}</span></div>
+      <div>${page - category.firstIndex + INCREMENT} <span style="opacity: 0.7;">/ ${category.count}</span></div>
     </div>
   </div>`;
 };
@@ -297,10 +290,8 @@ const renderListView = async (page) => {
   const categoryTab = renderCategoryTab(page);
   const detailedNews = renderDetailedNews(page);
 
-  pressTable.setAttribute("class", "press-container__view list");
-  pressTable.innerHTML = "";
-  pressTable.appendChild(categoryTab);
-  pressTable.appendChild(detailedNews);
+  Utils.clearPressTableContent(pressTable, "list");
+  Utils.appendChildren(pressTable, [categoryTab, detailedNews]);
 
   toggleArrowVisibility();
   animateActiveCategory();

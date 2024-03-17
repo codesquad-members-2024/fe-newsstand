@@ -15,6 +15,7 @@ const CHAR_COUNT = 2;
 const ROLLING_DELAY = 5000;
 
 const rollingContainer = document.querySelector(".rolling-container");
+const pageLogoIcon = document.querySelector(".top-container__icon");
 
 let rollNewsInInterval = null;
 
@@ -46,15 +47,13 @@ const renderCurrentDate = () => {
 };
 
 export const renderIndex = () => {
-  const pageLogoIcon = document.querySelector(".top-container__icon");
-
   renderCurrentDate();
   renderNewsTitles();
   activateGridView();
-  pageLogoIcon.addEventListener("click", pageReload);
   animateRolling();
 };
 
+pageLogoIcon.addEventListener("click", pageReload);
 rollingContainer.addEventListener("mouseover", () => {
   clearInterval(rollNewsInInterval);
 });

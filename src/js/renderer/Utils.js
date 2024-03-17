@@ -66,6 +66,12 @@ const Utils = Object.freeze({
     element.classList.add(...className.split(" "));
 
     return element;
+  },
+
+  clearPressTableContent(pressTable, viewType) {
+    pressTable.classList.remove("press-container__view", "list", "grid");
+    pressTable.classList.add("press-container__view", viewType);
+    pressTable.innerHTML = "";
   }
 });
 
