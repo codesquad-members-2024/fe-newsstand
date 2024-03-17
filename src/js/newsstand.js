@@ -1,4 +1,4 @@
-function initNewsstand() {
+function init() {
   const refreshButton = document.querySelector(".refresh-btn");
 
   const daysOfWeek = [
@@ -21,4 +21,4 @@ function initNewsstand() {
   });
 }
 
-export default initNewsstand;
+export default init;

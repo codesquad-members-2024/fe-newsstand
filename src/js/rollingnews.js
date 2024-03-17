@@ -18,8 +18,12 @@ function createRollingNews(position, index) {
   rollingNewsPosition.appendChild(bTag);
 }
 
-function rollingNews(position) {
-  createRollingNews(position, recentNews++);
+function rollLeftNews() {
+  createRollingNews("left", recentNews++);
 }
 
-export default rollingNews;
+function rollRightNews() {
+  createRollingNews("right", recentNews++);
+}
+
+export { rollLeftNews, rollRightNews };

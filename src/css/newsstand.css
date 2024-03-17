@@ -1,8 +1,7 @@
 @import "rolling.css";
-@import "gridView.css";
-@import "listView.css";
+@import "grid.css";
+@import "list.css";
 @import "button.css";
-
 
 body {
   display: flex;
