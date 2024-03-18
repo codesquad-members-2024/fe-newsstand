@@ -305,15 +305,18 @@ const renderListView = async (page) => {
   initializeStartAutoRender();
 };
 
-pressContainer.addEventListener("click", (e) => {
-  if (e.target.closest(ST.VIEW_ICON) === gridViewIcon) activateGridView();
-  if (e.target.closest(ST.VIEW_ICON) === listViewIcon) activateListView();
-  if (e.target.closest(ST.LEFT_ARROW)) renderPreviousPage();
-  if (e.target.closest(ST.RIGHT_ARROW)) renderNextPage();
-  if (e.target.closest(ST.CATEGORY)) {
-    const firstIndex = Number(e.target.getAttribute("firstIndex"));
+const handleClick = ({ target }) => {
+  if (target.closest(ST.VIEW_ICON) === gridViewIcon) activateGridView();
+  if (target.closest(ST.VIEW_ICON) === listViewIcon) activateListView();
+  if (target.closest(ST.LEFT_ARROW)) renderPreviousPage();
+  if (target.closest(ST.RIGHT_ARROW)) renderNextPage();
+  if (target.closest(ST.CATEGORY)) {
+    const firstIndex = Number(target.getAttribute("firstIndex"));
     renderListView(firstIndex);
-  };  
-});
+  };
+  if (target.closest(ST.SUBSCRIBE_BUTTON)) renderSubscribeSnackBar(pressTable);
+}
+
+pressContainer.addEventListener("click", handleClick);
 
 export default activateGridView;
