@@ -50,7 +50,7 @@ export function ListViewForm() {
         <div class="main-news-header">
             <a href = "${curNewsData.companyHref}" ><img src = "${curNewsData.companyImg}" id="list-view__company-logo"></img></a>
             <div class="edit-date">${curNewsData.editDate}</div>
-            <button class="subscribe-btn" name = "${curNewsData.companyName}">+ 구독하기</button>
+            <button class="subscribe-btn" id = "subscribe" name = "${curNewsData.companyName}">+ 구독하기</button>
         </div>
         <a href = "${curNewsData.mainNewsSrc}" class="main-news-img"><img src="${curNewsData.mainNewsImg}" class="main-news-src"></img></a>
         <div class="main-news-title">${curNewsData.mainNewsTitle}</div>

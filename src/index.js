@@ -4,10 +4,11 @@ import { GridViewForm } from "./Components/GridViewForm.js";
 import { ListViewForm } from "./Components/ListViewForm.js";
 import { activate, reloadPage } from "./util/active.js";
 import { INITIAL_VIEW } from "./util/contants.js";
+import { SubscriptionController } from "./SubscriptionController.js";
 
 function NewsStand() {
     const status = {subscribeStatus: false, listMode: false}
-
+    const subscriptionController = new SubscriptionController()
     const activateMode = (className) => {
         if(className === "sort-mode-container__show-list-mode"){
             status.listMode = true            
@@ -18,6 +19,14 @@ function NewsStand() {
         isDisplayVisible()
     }
 
+    const onSubscribeButtonClick = (target) => {
+        const isSubscribeText = target.innerText
+        const targetPress = target.name
+        if (isSubscribeText.includes("구독하기")) return subscriptionController.subscribe(targetPress)
+        if (isSubscribeText.includes("해지하기")) return subscriptionController.unsubscribe(targetPress)
+        
+    }
+
     const setEventHandler = () => {
         const newStandMainLogo = document.querySelector(".header__title-container");
         newStandMainLogo.addEventListener("click", reloadPage);
@@ -26,15 +35,21 @@ function NewsStand() {
         sortModeBtn.addEventListener("click", (e) => {
             activateMode(e.target.className)
         })
+
+        const subscribeBtn = document.querySelectorAll("main");
+        subscribeBtn.forEach(curContainer => curContainer.addEventListener("click", (e) => {
+            if (e.target.id === "subscribe") return onSubscribeButtonClick(e.target);
+            return;
+        }))
     };
 
     const isDisplayVisible = () => {
         if(status.listMode === false) {
-            const gridViewForm = new GridViewForm()
+            const gridViewForm = new GridViewForm(subscriptionController)
             gridViewForm.main(status.subscribeStatus)
         }
         if(status.listMode === true) {
-            const listViewForm = new ListViewForm();
+            const listViewForm = new ListViewForm(subscriptionController);
             listViewForm.main(status.subscribeStatus)
         }
     }
