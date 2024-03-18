@@ -26,14 +26,20 @@
   }
 }
 
-.newsgroup-list-click {
-  /* content: ""; */
+.newsgroup-list-cat.clicked {
+  position: relative;
+  z-index: 1;
+  background-color: #203fac;
+}
+
+.newsgroup-list-cat.clicked::after {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: -1;
   background-color: #203fac;
   animation: progress 5s linear;
 }
