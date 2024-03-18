@@ -227,6 +227,10 @@ body {
   color: #879298;
 }
 
+.press-container__category:hover {
+  text-decoration: underline;
+}
+
 .press-container__category-description {
   width: 134px;
   height: 40px;
