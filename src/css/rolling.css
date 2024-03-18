@@ -30,6 +30,7 @@
   color: #111;
   white-space: nowrap;
   animation: roll 5s linear infinite;
+  animation-timing-function: cubic-bezier(0.1, -0.6, 0.2, 0); 
 }
 
 .rollingnews-left span,

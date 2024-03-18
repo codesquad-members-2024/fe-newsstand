@@ -65,12 +65,13 @@
   span {
     margin-left: 2rem;
   }
-  .subscribe-btn {
-    margin-left: 2rem;
-    background: #f6f7f9;
-    border: 1px solid #6e8091;
-    border-radius: 50px;
-  }
+}
+
+.newsgroup-list-top .subscribe-btn {
+  margin-left: 2rem;
+  background: #f6f7f9;
+  border: 1px solid #6e8091;
+  border-radius: 50px;
 }
 
 .newsgroup-list-desc {

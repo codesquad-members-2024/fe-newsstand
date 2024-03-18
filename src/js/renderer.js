@@ -50,10 +50,20 @@ function renderGrid(page) {
 }
 
 function createList(index) {
+  const listTop = document.querySelector(".newsgroup-list-top");
   const listLeft = document.querySelector(".newsgroup-list-left");
   const listRight = document.querySelector(".newsgroup-list-right");
 
   const item = listCat[index];
+  
+  const logoImgTag = document.createElement("img");
+  logoImgTag.src = item.logoImageSrc;
+  const spanTag = document.createElement("span");
+  spanTag.textContent = item.editedTime;
+  const subscribeBtn = document.createElement("button");
+  subscribeBtn.classList.add("subscribe-btn");
+  subscribeBtn.textContent = "+ 구독하기";
+
   const imgTag = document.createElement("img");
   imgTag.src = item.url;
   const pTagleft = document.createElement("p");
@@ -66,6 +76,10 @@ function createList(index) {
     descDiv.appendChild(pTag);
   }
 
+  listTop.appendChild(logoImgTag);
+  listTop.appendChild(spanTag);
+  listTop.appendChild(subscribeBtn);
+
   listLeft.appendChild(imgTag);
   listLeft.appendChild(pTagleft);
   listRight.appendChild(descDiv);
@@ -74,9 +88,10 @@ function createList(index) {
 function renderList(cat) {
   const newsgroupList = document.querySelector(".newsgroup-list");
   newsgroupList.style.display = "";
-
+  const newsgroupListTop = document.querySelector(".newsgroup-list-top");
   const newsgroupListleft = document.querySelector(".newsgroup-list-left");
   const newsgroupListright = document.querySelector(".newsgroup-list-right");
+  newsgroupListTop.innerHTML = "";
   newsgroupListleft.innerHTML = "";
   newsgroupListright.innerHTML = "";
 
