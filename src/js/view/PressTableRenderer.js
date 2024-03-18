@@ -1,3 +1,4 @@
+import { renderSubscribeSnackBar, renderUnsubscribeAlert } from './NotificationRenderer.js';
 import Utils from './Utils.js';
 
 const FIRST_PAGE = 0;
@@ -22,6 +23,7 @@ const ST = Object.freeze({
   LEFT_ARROW: ".press-container__left-arrow",
   RIGHT_ARROW: ".press-container__right-arrow",
   CATEGORY: ".press-container__category",
+  SUBSCRIBE_BUTTON: ".press-container__subscribe-button",
 });
 
 const pressContainer = document.querySelector(ST.PRESS_CONTAINER);
@@ -124,12 +126,13 @@ const initializeStartAutoRender = () => {
   startAutoRender = setInterval(renderNextPage, PAGE_TURNING_DELAY);
 };
 
-const createSubscribeButton = () => {
+const createSubscribeButton = (pressName) => {
   const button = Utils.createElementWithClass("button", "press-container__subscribe-button");
   const plusImage = Utils.createElementWithClass("img", "press-container__plus-image");
   const subscribeText = document.createTextNode("구독하기");
 
   plusImage.src = "src/img/PlusSymbol.svg";
+  button.setAttribute("press-name", pressName);
   Utils.appendChildren(button, [plusImage, subscribeText]);
 
   return button;
@@ -138,7 +141,7 @@ const createSubscribeButton = () => {
 const createLogo = (src, name) => {
   const logo = Utils.createElementWithClass("div", "press-container__logo");
   const image = document.createElement("img");
-  const subscribeButton = createSubscribeButton();
+  const subscribeButton = createSubscribeButton(name);
 
   image.src = src;
   image.setAttribute("name", name);
@@ -232,7 +235,7 @@ const renderNewsInfo = (page) => {
   const newsInfo = Utils.createElementWithClass("div", "press-container__news-info");
   const image = document.createElement("img");
   const editedTime = Utils.createElementWithClass("span", "press-container__edited-time");
-  const subscribeButton = createSubscribeButton();
+  const subscribeButton = createSubscribeButton(news[page].pressName);
 
   image.src = news[page].logoImageSrc;
   editedTime.textContent = news[page].editedTime;
@@ -310,7 +313,7 @@ pressContainer.addEventListener("click", (e) => {
   if (e.target.closest(ST.CATEGORY)) {
     const firstIndex = Number(e.target.getAttribute("firstIndex"));
     renderListView(firstIndex);
-  };
+  };  
 });
 
 export default activateGridView;
