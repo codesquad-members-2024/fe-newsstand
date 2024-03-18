@@ -1,5 +1,6 @@
 @import './reset.css';
 @import './components/header.css';
+@import './components/headLineNews.css';
 @import './components/nav.css';
 @import './components/main.css';
 
@@ -18,9 +19,9 @@ li {
   list-style: none;
 }
 
-.root-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+#wrap {
+  margin: 0 auto;
+  max-width: 1300px;
+  min-width: 650px;
+  /* background-color: aliceblue; */
 }

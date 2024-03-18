@@ -1,0 +1,80 @@
+/* ---------------------------------- */
+.headline__container {
+  margin: 2px 98px 2px 98px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+}
+
+/* .nav-contents-container { */
+.headline__contents {
+  display: flex;
+  align-items: center;
+  width: 48%;
+  min-width: 450px;
+  height: 45px;
+  outline: solid 2px #d2dae0;
+  background-color: #f6f7f9;
+  font-size: 18px;
+  /* 롤링 배너 영역 벗어나는 부분 숨기기 */
+  overflow: hidden;
+}
+
+/* .nav-contents-press-name { */
+.headline__press_name {
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* width: 80%; */
+  font-weight: bold;
+  width: 20%;
+}
+
+.headline__news {
+  width: 80%;
+  a {
+    display: block;
+    width: 415px;
+    max-width: 352px;
+    text-decoration: none;
+    white-space: nowrap; /* 텍스트를 한 줄로 표시 */
+    overflow: hidden; /* 내용이 너비를 초과할 경우 숨김 처리 */
+    text-overflow: ellipsis; /* 내용이 너비를 초과할 경우 말줄임표로 표시 */
+  }
+}
+
+.headline__head_line {
+  display: flex;
+  flex-direction: column;
+  /* width: 80%; */
+  font-weight: bold;
+}
+
+.headline__rolling_box {
+  /* overflow: hidden; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .cur_text {
+    /* display: flex; */
+    /* align-items: center; */
+    position: relative;
+    top: 10px;
+    /* top: -25px; */
+    /* transition: var(--rolling-transition); */
+  }
+  .next_text {
+    /* display: flex; */
+    /* align-items: center; */
+    position: relative;
+    top: 30px;
+    /* top: -8px; */
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+/* .nav-contents-headline a, .nav-contents-press-name a { */
