@@ -27,18 +27,17 @@
 }
 
 .newsgroup-list-click {
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background-color: #203fac;
-    animation: progress 5s linear;
-  }
+  /* content: ""; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: #203fac;
+  animation: progress 5s linear;
 }
+
 .newsgroup-list-cat:focus {
   background-color: #7891e8;
   min-width: fit-content;

@@ -45,9 +45,7 @@ const clickHandler = {
 
   clickCat() {
     const listCat = document.querySelector(".newsgroup-list-cat");
-    const listCatClick = document.createElement("div");
-    listCatClick.classList.add("newsgroup-list-click");
-    listCat.appendChild(listCatClick);
+    listCat.innerHTML += '<div class="newsgroup-list-click"></div>';
   },
 };
 
@@ -58,7 +56,7 @@ function clickEvent() {
   const gridRightBtn = document.querySelector(".grid-right-btn");
   const listLeftBtn = document.querySelector(".list-left-btn");
   const listRightBtn = document.querySelector(".list-right-btn");
-  // const listClick = document.querySelector(".newsgroup-list-click");
+  const listClick = document.querySelector(".newsgroup-list-cat");
 
   gridViewBtn.addEventListener("click", clickHandler.gridViewClick);
   listViewBtn.addEventListener("click", clickHandler.listViewClick);
@@ -69,7 +67,7 @@ function clickEvent() {
   listRightBtn.addEventListener("click", clickHandler.listRightButtonClick);
   listLeftBtn.addEventListener("click", clickHandler.listLeftButtonClick);
 
-  // listClick.addEventListener("click", clickFuntions.clickCat);
+  listClick.addEventListener("click", clickHandler.clickCat);
 }
 
 export default clickEvent;
