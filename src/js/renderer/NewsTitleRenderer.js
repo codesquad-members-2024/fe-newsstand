@@ -49,7 +49,7 @@ const initializeRollingNodes = (tag, titles) => {
   return { prev: prev, current: current, next: next, newNext: newNext };
 };
 
-const renderNewsTitle = async (tag, titles) => {
+const renderNewsTitle = (tag, titles) => {
   const { prev, current, next, newNext } = initializeRollingNodes(tag, titles);
 
   tag.removeChild(prev);

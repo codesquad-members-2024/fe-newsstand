@@ -61,26 +61,30 @@ const activateListView = () => {
 };
 
 const renderPreviousPage = () => {
+  let previousPage;
+
   if (Utils.isIconActive(gridViewIcon)) {
-    gridViewPage = gridViewPage > FIRST_PAGE ? --gridViewPage : gridViewPage;
-    renderGridView(gridViewPage);
+    previousPage = gridViewPage > FIRST_PAGE ? gridViewPage + DECREMENT : gridViewPage;
+    renderGridView(previousPage);
     clearInterval(startAutoRender);
   }
   if (Utils.isIconActive(listViewIcon)) {
-    listViewPage = listViewPage === INITIAL_VIEW_PAGE ? news.length + DECREMENT : --listViewPage;
-    renderListView(listViewPage);
+    previousPage = listViewPage === INITIAL_VIEW_PAGE ? news.length + DECREMENT : listViewPage + DECREMENT;
+    renderListView(previousPage);
   }
 };
 
 const renderNextPage = () => {
+  let nextPage;
+
   if (Utils.isIconActive(gridViewIcon)) {
-    gridViewPage = gridViewPage < LAST_PAGE ? ++gridViewPage : gridViewPage;
-    renderGridView(gridViewPage);
+    nextPage = gridViewPage < LAST_PAGE ? gridViewPage + INCREMENT : gridViewPage;
+    renderGridView(nextPage);
     clearInterval(startAutoRender);
   }
   if (Utils.isIconActive(listViewIcon)) {
-    listViewPage = listViewPage === news.length + DECREMENT ? INITIAL_VIEW_PAGE : ++listViewPage;
-    renderListView(listViewPage);
+    nextPage = listViewPage === news.length + DECREMENT ? INITIAL_VIEW_PAGE : listViewPage + INCREMENT;
+    renderListView(nextPage);
   }
 };
 
@@ -169,6 +173,7 @@ const toggleArrowVisibility = () => {
 const renderGridView = async (page) => {
   if (logos.length === EMPTY) await initializeNews();
 
+  gridViewPage = page;
   Utils.clearPressTableContent(pressTable, "grid");
   createLogosInTable(pressTable, page);
   toggleArrowVisibility(page);
@@ -288,6 +293,7 @@ const renderListView = async (page) => {
   const categoryTab = renderCategoryTab(page);
   const detailedNews = renderDetailedNews(page);
 
+  listViewPage = page;
   Utils.clearPressTableContent(pressTable, "list");
   Utils.appendChildren(pressTable, [categoryTab, detailedNews]);
 
@@ -301,7 +307,10 @@ pressContainer.addEventListener("click", (e) => {
   if (e.target.closest(ST.VIEW_ICON) === listViewIcon) activateListView();
   if (e.target.closest(ST.LEFT_ARROW)) renderPreviousPage();
   if (e.target.closest(ST.RIGHT_ARROW)) renderNextPage();
-  if (e.target.closest(ST.CATEGORY)) renderListView(e.target.getAttribute("firstIndex"));
+  if (e.target.closest(ST.CATEGORY)) {
+    const firstIndex = Number(e.target.getAttribute("firstIndex"));
+    renderListView(firstIndex);
+  };
 });
 
 export default activateGridView;
