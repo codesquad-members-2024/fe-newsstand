@@ -345,3 +345,74 @@ body {
   top: -200px;
   left: 980px;
 }
+
+.notification__subscribe-snackbar {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  padding: 16px 24px;
+  background-color: #4362D0;
+}
+
+.notification__unsubscribe-alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  font-weight: 500;
+  border: var(--border);
+}
+
+.notification__unsubscribe-content {
+  width: 320px;
+  height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  color: #5F6E76;
+  border: var(--border);
+}
+
+.notification__unsubscribe-content > span > strong {
+  font-size: 700;
+  color: #14212B;
+}
+
+.notification__unsubscribe-clickable {
+  height: 48px;
+  display: flex;
+  background-color: #F5F7F9;
+}
+
+.notification__unsubscribe-submit {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #5F6E76;
+  border: var(--border);
+}
+
+.notification__unsubscribe-submit:hover {
+  text-decoration: underline;
+}
+
+.notification__unsubscribe-cancel {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #14212B;
+  border: var(--border);
+}
+
+.notification__unsubscribe-cancel:hover {
+  text-decoration: underline;
+}
