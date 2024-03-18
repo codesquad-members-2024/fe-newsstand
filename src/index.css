@@ -451,4 +451,19 @@ a>img {
     color: white;
 }
 
+.main-news-src:hover {
+    animation: zoomIn 1s forwards;
+}
 
+.main-news-container:hover >.main-news-title {
+    text-decoration: underline;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.05);
+    }
+}
