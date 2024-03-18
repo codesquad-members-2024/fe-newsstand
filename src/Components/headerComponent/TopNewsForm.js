@@ -1,5 +1,5 @@
 import jsonParse from "../../util/jsonParse.js";
-import { TOP_NEWS_DELAY_TIME } from "../../util/contants.js";
+import { TOP_NEWS_DELAY_TIME, LIGHT_ANIMATION_END_TIME } from "../../util/contants.js";
 function TopNewsForm() {
     const topNewsData = [
         { newsData: [], className: "first-top-news" },
@@ -35,25 +35,39 @@ function TopNewsForm() {
         });
     }
 
-    const rollingNews = () => {
-        setInterval(() => {
-            renderTopNews()
-        }, TOP_NEWS_DELAY_TIME);
+    const addAnimationClass = () => {
+        const topNewsAnimationContainer = document.querySelectorAll("#top-news-animation")
+        topNewsAnimationContainer.forEach(curNewsContainer => curNewsContainer.classList.add("topNews-animation"))
     }
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    const rollingNews = async () => {
+        let test = setInterval(async () => {
+            addAnimationClass();
+            await delay(LIGHT_ANIMATION_END_TIME);
+            renderTopNews();
+        }, TOP_NEWS_DELAY_TIME);
+
+        const topNewsAnimationContainer = document.querySelector(".top-news-container");
+        topNewsAnimationContainer.addEventListener("mouseover", () => clearInterval(test))
+        topNewsAnimationContainer.addEventListener("mouseleave", rollingNews)
+    };
+
+
 
     const getTopNewsTemplate = async() => {
         updateNewsData();
         const [firstTopNewsTemplate, secondTopNewsTemplate] = topNewsData.map((curNews) => {
             const [newsCur, newsNext] = [curNews.newsData[0], curNews.newsData[1]];
             return `
-            <div class="${curNews.className}">
+            <div class="${curNews.className}" id ="top-news-animation">
                 <div class="company-name">${newsCur.press}</div>
                 <div class="detail"><a href="${newsCur.href}">
                         ${newsCur.title}
                     </a>
                 </div>
             </div>
-            <div class="${curNews.className}">
+            <div class="${curNews.className}" id ="top-news-animation">
                 <div class="company-name">${newsNext.press}</div>
                 <div class="detail"><a href="${newsNext.href}">
                         ${newsNext.title}
@@ -65,7 +79,7 @@ function TopNewsForm() {
         return [firstTopNewsTemplate, secondTopNewsTemplate];
     }
 
-    
+    rollingNews()
     return {initData, renderTopNews, rollingNews };
 }
 

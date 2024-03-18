@@ -43,7 +43,6 @@ function NewsStand() {
         dateView.renderCurrentDate()
         await topNewsForm.initData()
         topNewsForm.renderTopNews()
-        topNewsForm.rollingNews()
         activateMode(INITIAL_VIEW)
     };
     

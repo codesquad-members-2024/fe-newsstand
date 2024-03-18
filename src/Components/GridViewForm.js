@@ -13,7 +13,7 @@ export function GridViewForm () {
     }
 
     const setEventHandler = () => {
-        const updatePageBtn = document.querySelector(".company-grid-container");
+        const updatePageBtn = document.querySelector(".gird-mode-main-container");
         updatePageBtn.addEventListener("click", checkLocationType);    
     }
 
