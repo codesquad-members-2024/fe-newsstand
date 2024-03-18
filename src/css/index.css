@@ -283,6 +283,12 @@ body {
   height: 200px;
 }
 
+.press-container__headline-thumbnail:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: transform .35s;
+}
+
 .press-container__headline-title {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -294,6 +300,10 @@ body {
   text-decoration: none;
   text-overflow: ellipsis;
   white-space: normal;
+}
+
+.press-container__headline-title:hover {
+  text-decoration: underline;
 }
 
 .press-container__sidenews {
@@ -318,6 +328,10 @@ body {
   text-decoration-line: none;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.press-container__sidenews-title:hover {
+  text-decoration: underline;
 }
 
 .press-container__left-arrow {
