@@ -14,4 +14,11 @@ export class SubscriptionController {
             : `<button class = "subscribe" id = "subscribe" name = "${press}"> + 구독하기</button>`;
         return hasSubscription;
     }
+
+    isSubscribeListButton(press) {
+        const hasSubscription = this.subscripteList.has(press)
+            ? `<button class="subscribe-btn" id = "subscribe" name = "${press}">x</button>`
+            : `<button class="subscribe-btn" id = "subscribe" name = "${press}">+ 구독하기</button>`;
+        return hasSubscription;
+    }
 }

@@ -1,6 +1,6 @@
 import jsonParse from "../util/jsonParse.js";
 import { navAnimation } from "./navAnimation.js";
-export function ListViewForm() {
+export function ListViewForm(subscriptionController) {
     let curCategoryIdx = 0
     let curCategoryDataIdx = 0
     let curCategoryTotalNum = 0
@@ -14,7 +14,7 @@ export function ListViewForm() {
         { category: "지역", data: [] },
     ];
 
-    const main = async () => {
+    const main = async (subscribeStatus) => {
         await initData();
         renderNav();
         renderNews();
@@ -50,7 +50,7 @@ export function ListViewForm() {
         <div class="main-news-header">
             <a href = "${curNewsData.companyHref}" ><img src = "${curNewsData.companyImg}" id="list-view__company-logo"></img></a>
             <div class="edit-date">${curNewsData.editDate}</div>
-            <button class="subscribe-btn" id = "subscribe" name = "${curNewsData.companyName}">+ 구독하기</button>
+            ${subscriptionController.isSubscribeListButton(curNewsData.companyName)}
         </div>
         <a href = "${curNewsData.mainNewsSrc}" class="main-news-img"><img src="${curNewsData.mainNewsImg}" class="main-news-src"></img></a>
         <div class="main-news-title">${curNewsData.mainNewsTitle}</div>
@@ -65,6 +65,7 @@ export function ListViewForm() {
 
     const initData = async () => {
         const newsData = await jsonParse.parseJson("category");
+        console.log(newsData)
         const modifyData = spliceCompanyString(newsData);
         spliteData(modifyData);
         curCategoryTotalNum = categoryList[curCategoryIdx].data.length

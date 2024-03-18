@@ -18,11 +18,18 @@ function NewsStand() {
         activate(status.listMode)
         isDisplayVisible()
     }
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-    const onSubscribeButtonClick = (target) => {
+    const onSubscribeButtonClick = async(target) => {
+        const subscribeModal = document.querySelector(".subscribe-modal")
         const isSubscribeText = target.innerText
         const targetPress = target.name
-        if (isSubscribeText.includes("구독하기")) return subscriptionController.subscribe(targetPress)
+        if (isSubscribeText.includes("구독하기"))  {
+            subscriptionController.subscribe(targetPress)
+            subscribeModal.style.display = "flex"
+            await delay(5000)
+            subscribeModal.style.display = "none"
+        }
         if (isSubscribeText.includes("해지하기")) return subscriptionController.unsubscribe(targetPress)
         
     }
