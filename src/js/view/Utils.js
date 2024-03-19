@@ -37,10 +37,24 @@ const Utils = Object.freeze({
     return activeValue === ACTIVE_FILL_PROPERTY;
   },
 
+  isPressMenuActive(pressMenu) {
+    const activeValue = pressMenu.getAttribute("aria-selected");
+
+    return activeValue === "true";
+  },
+
   fillIcon(icon, fillProperty) {
     const path = icon.querySelector("path");
 
     path.setAttribute("fill", fillProperty);
+  },
+
+  setPressMenuAsSelected(pressMenu) {
+    pressMenu.setAttribute("aria-selected", "true");
+  },
+
+  setPressMenuAsUnselected(pressMenu) {
+    pressMenu.setAttribute("aria-selected", "false");
   },
 
   shuffle(array) {

@@ -1,5 +1,5 @@
 import renderNewsTitles from "./NewsTitleRenderer.js";
-import activateGridView from "./PressTableRenderer.js";
+import { activateGridView, updateSubscribedNews } from "./PressTableRenderer.js";
 
 const WEEK = [
   "일요일",
@@ -50,6 +50,7 @@ export const renderIndex = () => {
   renderCurrentDate();
   renderNewsTitles();
   activateGridView();
+  updateSubscribedNews();
   rollingStartHandler();
 };
 

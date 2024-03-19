@@ -1,6 +1,9 @@
-import { addNews, loadNews } from '../api/NewsApi.js';
-import { renderSubscribeSnackBar, renderUnsubscribeAlert } from './NotificationRenderer.js';
-import Utils from './Utils.js';
+import { addNews, loadNews } from "../api/NewsApi.js";
+import {
+  renderSubscribeSnackBar,
+  renderUnsubscribeAlert,
+} from "./NotificationRenderer.js";
+import Utils from "./Utils.js";
 
 const FIRST_PAGE = 0;
 const LAST_PAGE = 3;
@@ -24,7 +27,7 @@ const ST = Object.freeze({
   VIEW_ICON: ".press-container__view-icon",
   LEFT_ARROW: ".press-container__left-arrow",
   RIGHT_ARROW: ".press-container__right-arrow",
-  CATEGORY: ".press-container__category",
+  TAB: ".press-container__tab",
   SUBSCRIBE_BUTTON: ".press-container__subscribe-button",
 });
 
@@ -46,61 +49,142 @@ const { gridViewIcon, listViewIcon } = viewIcons;
 
 const news = [];
 const categories = [];
+const subscribedNews = [];
 
 let gridViewPage = INITIAL_VIEW_PAGE;
+let subscribedGridPage = INITIAL_VIEW_PAGE;
 let listViewPage = INITIAL_VIEW_PAGE;
+let subscribedListPage = INITIAL_VIEW_PAGE;
 let logos = [];
 
 let startAutoRender = null;
 let fillColorInInterval = null;
 
+const findNewsIndex = (newsElement) => {
+  return news.findIndex(({ pressName }) => newsElement.pressName === pressName);
+};
+
 const activateGridView = () => {
   Utils.fillIcon(gridViewIcon, ACTIVE_FILL_PROPERTY);
   Utils.fillIcon(listViewIcon, INACTIVE_FILL_PROPERTY);
-  renderGridView(gridViewPage);
+  if (Utils.isPressMenuActive(allPressMenu)) renderGridView(gridViewPage);
+  if (Utils.isPressMenuActive(subscribedPressMenu))
+    renderGridViewSubscribed(subscribedGridPage);
 };
 
 const activateListView = () => {
   Utils.fillIcon(listViewIcon, ACTIVE_FILL_PROPERTY);
   Utils.fillIcon(gridViewIcon, INACTIVE_FILL_PROPERTY);
-  renderListView(listViewPage);
+  if (Utils.isPressMenuActive(allPressMenu)) renderListView(listViewPage);
+  if (Utils.isPressMenuActive(subscribedPressMenu))
+    renderListViewSubscribed(subscribedListPage);
 };
 
 const activateAllPress = () => {
   Utils.setPressMenuAsSelected(allPressMenu);
   Utils.setPressMenuAsUnselected(subscribedPressMenu);
+  if (Utils.isIconActive(gridViewIcon)) renderGridView(gridViewPage);
+  if (Utils.isIconActive(listViewIcon)) renderListView(listViewPage);
 };
 
 const activateSubscribedPress = () => {
   Utils.setPressMenuAsSelected(subscribedPressMenu);
   Utils.setPressMenuAsUnselected(allPressMenu);
-}
+  if (Utils.isIconActive(gridViewIcon))
+    renderGridViewSubscribed(subscribedGridPage);
+  if (Utils.isIconActive(listViewIcon))
+    renderListViewSubscribed(subscribedListPage);
+};
 
-const renderPreviousPage = () => {
+const handleGridViewIconActivePrevious = () => {
   let previousPage;
 
-  if (Utils.isIconActive(gridViewIcon)) {
-    previousPage = gridViewPage > FIRST_PAGE ? gridViewPage + DECREMENT : gridViewPage;
+  if (Utils.isPressMenuActive(allPressMenu)) {
+    previousPage =
+      gridViewPage > FIRST_PAGE ? gridViewPage + DECREMENT : gridViewPage;
     renderGridView(previousPage);
     clearInterval(startAutoRender);
   }
-  if (Utils.isIconActive(listViewIcon)) {
-    previousPage = listViewPage === INITIAL_VIEW_PAGE ? news.length + DECREMENT : listViewPage + DECREMENT;
+  if (Utils.isPressMenuActive(subscribedPressMenu)) {
+    previousPage =
+      subscribedGridPage > FIRST_PAGE
+        ? subscribedGridPage + DECREMENT
+        : subscribedGridPage;
+    renderGridViewSubscribed(previousPage);
+    clearInterval(startAutoRender);
+  }
+};
+
+const handleListViewIconActivePrevious = () => {
+  let previousPage;
+
+  if (Utils.isPressMenuActive(allPressMenu)) {
+    previousPage =
+      listViewPage > FIRST_PAGE ? listViewPage + DECREMENT : news.length - 1;
     renderListView(previousPage);
+  }
+  if (Utils.isPressMenuActive(subscribedPressMenu)) {
+    previousPage =
+      subscribedListPage > FIRST_PAGE
+        ? subscribedListPage + DECREMENT
+        : subscribedListPage;
+    renderListViewSubscribed(previousPage);
+  }
+};
+
+const renderPreviousPage = () => {
+  if (Utils.isIconActive(gridViewIcon)) {
+    handleGridViewIconActivePrevious();
+  }
+  if (Utils.isIconActive(listViewIcon)) {
+    handleListViewIconActivePrevious();
+  }
+};
+
+const handleGridViewIconActiveNext = () => {
+  let nextPage;
+
+  if (Utils.isPressMenuActive(allPressMenu)) {
+    nextPage =
+      gridViewPage < LAST_PAGE ? gridViewPage + INCREMENT : gridViewPage;
+    renderGridView(nextPage);
+    clearInterval(startAutoRender);
+  }
+  if (Utils.isPressMenuActive(subscribedPressMenu)) {
+    nextPage =
+      subscribedGridPage < LAST_PAGE
+        ? subscribedGridPage + INCREMENT
+        : subscribedGridPage;
+    renderGridViewSubscribed(nextPage);
+    clearInterval(startAutoRender);
+  }
+};
+
+const handleListViewIconActiveNext = () => {
+  let nextPage;
+
+  if (Utils.isPressMenuActive(allPressMenu)) {
+    nextPage =
+      listViewPage === news.length + DECREMENT
+        ? INITIAL_VIEW_PAGE
+        : listViewPage + INCREMENT;
+    renderListView(nextPage);
+  }
+  if (Utils.isPressMenuActive(subscribedPressMenu)) {
+    nextPage =
+      subscribedListPage === subscribedNews.length + DECREMENT
+        ? INITIAL_VIEW_PAGE
+        : subscribedListPage + INCREMENT;
+    renderListViewSubscribed(nextPage);
   }
 };
 
 const renderNextPage = () => {
-  let nextPage;
-
   if (Utils.isIconActive(gridViewIcon)) {
-    nextPage = gridViewPage < LAST_PAGE ? gridViewPage + INCREMENT : gridViewPage;
-    renderGridView(nextPage);
-    clearInterval(startAutoRender);
+    handleGridViewIconActiveNext();
   }
   if (Utils.isIconActive(listViewIcon)) {
-    nextPage = listViewPage === news.length + DECREMENT ? INITIAL_VIEW_PAGE : listViewPage + INCREMENT;
-    renderListView(nextPage);
+    handleListViewIconActiveNext();
   }
 };
 
@@ -138,6 +222,13 @@ const initializeStartAutoRender = () => {
     startAutoRender = null;
   }
   startAutoRender = setInterval(renderNextPage, PAGE_TURNING_DELAY);
+};
+
+const updateSubscribedNews = async () => {
+  subscribedNews.length = 0;
+  const loadedSubscribedNews = await loadNews("subscribe");
+
+  subscribedNews.push(...loadedSubscribedNews);
 };
 
 const createSubscribeButton = (pressName) => {
@@ -197,21 +288,23 @@ const renderGridView = async (page) => {
 };
 
 const renderActiveCategory = (category, page) => {
-  return `<div class="press-container__active-category">
+  return `<div class="press-container__active-tab">
     <div class="press-container__progress"></div>
-    <div class="press-container__category-description">
+    <div class="press-container__tab-description">
       <div>${category.categoryName}</div>
-      <div>${page - category.firstIndex + INCREMENT} <span style="opacity: 0.7;">/ ${category.count}</span></div>
+      <div>${
+        page - category.firstIndex + INCREMENT
+      } <span style="opacity: 0.7;">/ ${category.count}</span></div>
     </div>
   </div>`;
 };
 
 const renderInactiveCategory = (category) => {
-  return `<div class="press-container__category" firstIndex="${category.firstIndex}">${category.categoryName}</div>`;
+  return `<div class="press-container__tab" index="${category.firstIndex}">${category.categoryName}</div>`;
 };
 
-const animateActiveCategory = () => {
-  const activeCategory = document.querySelector(".press-container__progress");
+const animateActiveTab = () => {
+  const activeTab = document.querySelector(".press-container__progress");
   const intervalSector = FULL_IN_PERCENTAGE / FILL_SECTOR;
   let width = EMPTY_IN_PERCENTAGE;
 
@@ -219,21 +312,24 @@ const animateActiveCategory = () => {
     if (width >= FULL_IN_PERCENTAGE) clearInterval(fillColorInInterval);
     else {
       width += FILL_SECTOR;
-      activeCategory.style.width = width + "%";
+      activeTab.style.width = width + "%";
     }
   };
   if (fillColorInInterval !== null) {
     clearInterval(fillColorInInterval);
     fillColorInInterval = null;
   }
-  fillColorInInterval = setInterval(fillColor, PAGE_TURNING_DELAY / intervalSector);
-}
+  fillColorInInterval = setInterval(
+    fillColor,
+    PAGE_TURNING_DELAY / intervalSector
+  );
+};
 
-const renderCategoryTab = (page) => {
+const renderCategoryTabBlock = (page) => {
   const activeCategory = Utils.findActiveCategory(categories, page);
-  const categoryTab = Utils.createElementWithClass("div", "press-container__category-tab");
+  const categoryTabBlock = Utils.createElementWithClass("div", "press-container__category-tab");
 
-  categoryTab.innerHTML = categories.reduce(
+  categoryTabBlock.innerHTML = categories.reduce(
     (acc, cur) =>
       acc +
       (cur === activeCategory
@@ -242,7 +338,7 @@ const renderCategoryTab = (page) => {
     ""
   );
 
-  return categoryTab;
+  return categoryTabBlock;
 };
 
 const renderNewsInfo = (page) => {
@@ -307,7 +403,7 @@ const renderDetailedNews = (page) => {
 
 const renderListView = async (page) => {
   if (news.length === EMPTY) await initializeNews();
-  const categoryTab = renderCategoryTab(page);
+  const categoryTab = renderCategoryTabBlock(page);
   const detailedNews = renderDetailedNews(page);
 
   listViewPage = page;
@@ -315,34 +411,91 @@ const renderListView = async (page) => {
   Utils.appendChildren(pressTable, [categoryTab, detailedNews]);
 
   toggleArrowVisibility();
-  animateActiveCategory();
+  animateActiveTab();
   initializeStartAutoRender();
 };
 
-const subscribeNews = (pressName) => {
-  const newsToAdd = news.find((newsElement) => newsElement.pressName === pressName);
-  
-  addNews(newsToAdd, "subscribe");
-  renderSubscribeSnackBar(pressTable);
+const renderActiveSubscribedNews = (page) => {
+  return `<div class="press-container__active-tab">
+    <div class="press-container__progress"></div>
+    <div class="press-container__tab-description">
+      <div>${subscribedNews[page].pressName}</div>
+    </div>
+  </div>`;
 };
 
-const handleClick = ({ target }) => {
+const renderInactiveSubscribedNews = (page) => {
+  return `<div class="press-container__tab" index="${page}">${subscribedNews[page].pressName}</div>`;
+};
+
+const renderPressTabBlock = (page) => {
+  const activeTab = subscribedNews[page];
+  const pressTabBlock = Utils.createElementWithClass("div", "press-container__tab-block");
+
+  pressTabBlock.innerHTML = subscribedNews.reduce(
+    (acc, cur, index) =>
+      acc +
+      (cur === activeTab
+        ? renderActiveSubscribedNews(index)
+        : renderInactiveSubscribedNews(index)),
+    ""
+  );
+
+  return pressTabBlock;
+};
+
+const renderListViewSubscribed = async (page) => {
+  if (subscribedNews.length === EMPTY) await updateSubscribedNews();
+  const newsPage = findNewsIndex(subscribedNews[page]);
+  const pressTab = renderPressTabBlock(page);
+  const detailedNews = renderDetailedNews(newsPage);
+
+  subscribedListPage = page;
+  Utils.clearPressTableContent(pressTable, "list");
+  Utils.appendChildren(pressTable, [pressTab, detailedNews]);
+
+  toggleArrowVisibility();
+  animateActiveTab();
+  initializeStartAutoRender();
+};
+
+const subscribeNews = async (pressName) => {
+  const newsToAdd = news.find(
+    (newsElement) => newsElement.pressName === pressName
+  );
+
+  addNews(newsToAdd, "subscribe");
+  renderSubscribeSnackBar(pressTable);
+  await updateSubscribedNews();
+};
+
+const unsubscribeNews = async (pressName) => {};
+
+const handleClick = async ({ target }) => {
   if (target.closest(ST.VIEW_ICON) === gridViewIcon) activateGridView();
   if (target.closest(ST.VIEW_ICON) === listViewIcon) activateListView();
   if (target.closest(ST.ALL_PRESS)) activateAllPress();
   if (target.closest(ST.SUBSCRIBED_PRESS)) activateSubscribedPress();
   if (target.closest(ST.LEFT_ARROW)) renderPreviousPage();
   if (target.closest(ST.RIGHT_ARROW)) renderNextPage();
-  if (target.closest(ST.CATEGORY)) {
-    const firstIndex = Number(target.getAttribute("firstIndex"));
-    renderListView(firstIndex);
-  };
-  if (target.closest(ST.SUBSCRIBE_BUTTON)) {
-    const targetNewsName = target.closest(ST.SUBSCRIBE_BUTTON).getAttribute("press-name");
-    subscribeNews(targetNewsName);
+  if (target.closest(ST.TAB)) {
+    if (Utils.isPressMenuActive(allPressMenu)) {
+      const index = Number(target.getAttribute("index"));
+      renderListView(index);
+    }
+    if (Utils.isPressMenuActive(subscribedPressMenu)) {
+      const index = Number(target.getAttribute("index"));
+      renderListViewSubscribed(index);
+    }
   }
-}
+  if (target.closest(ST.SUBSCRIBE_BUTTON)) {
+    const targetNewsName = target
+      .closest(ST.SUBSCRIBE_BUTTON)
+      .getAttribute("press-name");
+    await subscribeNews(targetNewsName);
+  }
+};
 
 pressContainer.addEventListener("click", await handleClick);
 
-export default activateGridView;
+export { activateGridView, updateSubscribedNews };
