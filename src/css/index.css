@@ -118,18 +118,19 @@ body {
 
 .press-container__press-menu {
   display: flex;
+  justify-content: space-between;
+  width: 216px;
   font-size: 16px;
 }
 
-.press-container__press-menu > .press-container__all-press {
+.press-container__press-menu > span[aria-selected="true"] {
   font-weight: var(--bold-font-weight);
   color: #14212b;
 }
 
-.press-container__press-menu > .press-container__subscribed-press {
+.press-container__press-menu > span[aria-selected="false"] {
   font-weight: var(--def-font-weight);
   color: #879298;
-  margin-left: 24px;
 }
 
 .press-container__view-menu {
