@@ -1,3 +1,4 @@
+import { loadNews } from "../api/NewsApi.js";
 import Utils from "./Utils.js";
 
 const INITIAL_NEWS_TITLE_INDEX = 1;
@@ -7,6 +8,12 @@ const CURRENT_CLASS_NAME = "rolling__text cur";
 const NEXT_CLASS_NAME = "rolling__text next";
 
 let newsTitleIndex = INITIAL_NEWS_TITLE_INDEX;
+
+const loadTitles = async () => {
+  const news = await loadNews("news");
+
+  return news.map(({ pressName, headline }) => ({ pressName, headline }));
+};
 
 const createNewNode = (className, titles) => {
   const newNode = Utils.createElementWithClass("div", className);
@@ -46,7 +53,7 @@ const initializeRollingNodes = (tag, titles) => {
   const next = initializeRollingNode(tag, NEXT_CLASS_NAME, titles);
   const newNext = createNewNode(NEXT_CLASS_NAME, titles);
 
-  return { prev: prev, current: current, next: next, newNext: newNext };
+  return { prev, current, next, newNext };
 };
 
 const renderNewsTitle = (tag, titles) => {
@@ -60,7 +67,7 @@ const renderNewsTitle = (tag, titles) => {
 
 const renderNewsTitles = async () => {
   const textBoxes = [...document.querySelectorAll(".rolling__text-box")];
-  const titles = await Utils.parseTitles("src/data/news.json");
+  const titles = await loadTitles();
 
   if (Utils.hasEmptyNode(textBoxes))
     textBoxes.forEach((textBox) => renderNewsTitle(textBox, titles));

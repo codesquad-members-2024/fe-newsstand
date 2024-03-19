@@ -1,5 +1,5 @@
-import fs from "fs";
 import puppeteer from "puppeteer";
+import { addNews } from "../api/NewsApi.js";
 
 const URL = "https://naver.com/";
 const BROWSER_WIDTH = 1280;
@@ -125,7 +125,7 @@ const crawlNews = async () => {
   await page.click(ST.LIST_VIEW);
   newsResult = await crawlNewsList(page);
 
-  fs.writeFileSync("src/data/news.json", JSON.stringify(newsResult));
+  newsResult.forEach((news) => addNews(news, "news"));
   browser.close();
 };
 

@@ -5,7 +5,7 @@
   "main": "src/js/crawler/Crawler.js",
   "scripts": {
     "start": "node src/js/crawler/Crawler.js",
-    "watch": "json-server --watch src/data/subscribedNews.json"
+    "watch": "json-server --watch src/data/news.json"
   },
   "keywords": [],
   "author": "",

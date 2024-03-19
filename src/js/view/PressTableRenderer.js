@@ -1,3 +1,4 @@
+import { loadNews } from '../api/NewsApi.js';
 import { renderSubscribeSnackBar, renderUnsubscribeAlert } from './NotificationRenderer.js';
 import Utils from './Utils.js';
 
@@ -91,7 +92,7 @@ const renderNextPage = () => {
 };
 
 const initializeNews = async () => {
-  const newsList = await fetch(NEWS_PATH).then((response) => response.json());
+  const newsList = await loadNews("news");
 
   news.push(...newsList);
   initializeLogos();
@@ -217,9 +218,9 @@ const animateActiveCategory = () => {
 
 const renderCategoryTab = (page) => {
   const activeCategory = Utils.findActiveCategory(categories, page);
-  const div = Utils.createElementWithClass("div", "press-container__category-tab");
+  const categoryTab = Utils.createElementWithClass("div", "press-container__category-tab");
 
-  div.innerHTML = categories.reduce(
+  categoryTab.innerHTML = categories.reduce(
     (acc, cur) =>
       acc +
       (cur === activeCategory
@@ -228,7 +229,7 @@ const renderCategoryTab = (page) => {
     ""
   );
 
-  return div;
+  return categoryTab;
 };
 
 const renderNewsInfo = (page) => {
