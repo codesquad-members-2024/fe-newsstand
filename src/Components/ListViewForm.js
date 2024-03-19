@@ -10,7 +10,7 @@ export function ListViewForm(subscriptionController) {
         await initData(subscribeStatus);
         renderNav();
         renderNews();
-        switchCategory(categoryList[0].category)
+        switchCategory(categoryList[0].category, subscribeStatus)
     };
 
     const renderNews = () => {
@@ -111,7 +111,7 @@ export function ListViewForm(subscriptionController) {
 
     const isEndOfPage = () => {
         if(curCategoryTotalNum === curCategoryDataIdx) {
-            sortCategoryList(categoryList[curCategoryIdx + 1].category)
+            sortCategoryList(categoryList[curCategoryIdx + 1]?.category)
         } else if (curCategoryDataIdx < 0) { 
             sortCategoryList(categoryList[categoryList.length - 1].category)
         }
@@ -119,6 +119,7 @@ export function ListViewForm(subscriptionController) {
     }
 
     const sortCategoryList = (id) => {
+        console.log(categoryList)
         while(categoryList[0].category !== id) {
             const prevCategoryData = categoryList.shift()
             categoryList.push(prevCategoryData)
@@ -127,11 +128,11 @@ export function ListViewForm(subscriptionController) {
         curCategoryTotalNum = categoryList[curCategoryIdx].data.length
     }
 
-    const switchCategory = (id) => {
+    const switchCategory = (id, subscriptionModel) => {
         const curAnimationNav = navAnimation.swicthNavAnimation(id)
         sortCategoryList(id)
         renderNews()
-        navAnimation.updateCounter(curCategoryDataIdx, curCategoryTotalNum)
+        navAnimation.updateCounter(curCategoryDataIdx, curCategoryTotalNum, subscriptionModel)
         curAnimationNav.addEventListener("animationend", () => {
             updatePageNum("list-view-light-btn");
             renderNews()

@@ -18,6 +18,18 @@ export const activate = (mode) => {
     }
 }
 
+export const subscribeButtonActivate = (subscribeMode) => {
+    const showAllCompanyContainer = document.querySelector(".subscribe-mode-container__show-all-company")
+    const showSubscribeContainer = document.querySelector(".subscribe-mode-container__show-subscribed-company")
+    if(subscribeMode === true){
+        showAllCompanyContainer.style.fontWeight = "normal";
+        showSubscribeContainer.style.fontWeight = "bold"
+    } else {
+        showAllCompanyContainer.style.fontWeight = "bold"
+        showSubscribeContainer.style.fontWeight = "normal"
+    }
+}
+
 export const reloadPage = () => location.reload();
 
 export const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

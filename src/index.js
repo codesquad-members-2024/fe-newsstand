@@ -2,13 +2,14 @@ import dateView from "./Components/headerComponent/DateView.js";
 import topNewsForm from "./Components/headerComponent/TopNewsForm.js";
 import { GridViewForm } from "./Components/GridViewForm.js";
 import { ListViewForm } from "./Components/ListViewForm.js";
-import { activate, reloadPage, delay } from "./util/active.js";
+import { activate, subscribeButtonActivate ,reloadPage } from "./util/active.js";
 import { INITIAL_VIEW } from "./util/contants.js";
-import { SubscriptionController } from "./subscribeMVC/SubscriptionModel.js";
+import { SubscriptionModel } from "./subscribeMVC/SubscriptionModel.js";
+import { onSubscribeButtonClick } from "./subscribeMVC/SubscriptionController.js";
 
 function NewsStand() {
     const status = {subscribeStatus: false, listMode: false}
-    const subscriptionController = new SubscriptionController()
+    const subscriptionModel = new SubscriptionModel()
     const activateMode = (className) => {
         if(className === "sort-mode-container__show-list-mode"){
             status.listMode = true            
@@ -18,22 +19,26 @@ function NewsStand() {
         activate(status.listMode)
         isDisplayVisible()
     }
-    
 
-    const onSubscribeButtonClick = async(target) => {
-        const subscribeModal = document.querySelector(".subscribe-modal")
-        const isSubscribeText = target.innerText
-        const targetPress = target.name
-        if (isSubscribeText.includes("구독하기"))  {
-            subscriptionController.subscribe(targetPress)
-            subscribeModal.style.display = "flex"
-            await delay(1000)
-            subscribeModal.style.display = "none"
-        } else if (isSubscribeText.includes("해지하기")) {
-            subscriptionController.unsubscribe(targetPress)
+    const initSubscribeButtonClick = (className) => {
+        if(className === "subscribe-mode-container__show-subscribed-company"){
+            status.subscribeStatus = true
+            status.listMode = true            
+        } else {
+            status.subscribeStatus = false
+            status.listMode = false
         }
+        activate(status.listMode)
+        subscribeButtonActivate(status.subscribeStatus)
+        isDisplayVisible()
+    }
+
+    const goToListView = async(target) => {
+        await onSubscribeButtonClick(target, subscriptionModel)
+        status.listMode = true
         status.subscribeStatus = true
         activateMode("sort-mode-container__show-list-mode")
+        subscribeButtonActivate(status.subscribeStatus)
     }
 
     const setEventHandler = () => {
@@ -45,20 +50,25 @@ function NewsStand() {
             activateMode(e.target.className)
         })
 
+        const subscribeMode = document.querySelector(".subscribe-mode-container")
+        subscribeMode.addEventListener("click", (e) => {
+            initSubscribeButtonClick(e.target.className)
+        })
+
         const subscribeBtn = document.querySelectorAll("main");
         subscribeBtn.forEach(curContainer => curContainer.addEventListener("click", (e) => {
-            if (e.target.id === "subscribe") return onSubscribeButtonClick(e.target);
+            if (e.target.id === "subscribe" || e.target.id === "unsubscribe") return goToListView(e.target);
             return;
         }))
     };
 
     const isDisplayVisible = () => {
         if(status.listMode === false) {
-            const gridViewForm = new GridViewForm(subscriptionController)
+            const gridViewForm = new GridViewForm(subscriptionModel)
             gridViewForm.main(status.subscribeStatus)
         }
         if(status.listMode === true) {
-            const listViewForm = new ListViewForm(subscriptionController);
+            const listViewForm = new ListViewForm(subscriptionModel);
             listViewForm.main(status.subscribeStatus)
         }
     }
@@ -71,8 +81,7 @@ function NewsStand() {
     };
     
     setEventHandler();
-    return { main };
+    return { main};
 }
-
 const newsStand = NewsStand();
 newsStand.main();

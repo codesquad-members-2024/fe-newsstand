@@ -368,6 +368,9 @@ a>img {
 .list {
     display: flex;
     background: #f3f3f3;
+    overflow: scroll;
+    overflow: auto;
+    white-space: nowrap;
 }
 
 .item {
@@ -422,6 +425,7 @@ a>img {
 }
 
 .subscribe-btn {
+    display: flex;
     padding: 2px 7px;
     border: 1px solid gray;
     border-radius: 10px;
@@ -492,4 +496,44 @@ a>img {
     border: 1px solid rgb(194, 192, 192);
     box-shadow: 0px 0px 2px gray;
     color: gray;
+}
+
+.unsubscribe-container {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 280px;
+    height: 80px;
+    border: 1px solid rgb(194, 192, 192);
+    border-bottom: none;
+    box-shadow: 0px 0px 2px gray;
+    color: gray;
+}
+
+.answer-container {
+    display: flex;
+    background: #F5F7F9;
+}
+
+.yes-btn, .no-btn {
+    border: 1px solid gray;
+    width: 141px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.5;
+}
+
+.yes-btn:hover {
+    text-decoration: underline;
+}
+.no-btn:hover {
+    text-decoration: underline;
+}
+
+.yes-btn {
+    border-right: none;
 }
