@@ -1,19 +1,23 @@
+import { activateSubscribedPress } from './PressTable.js';
 import Utils from "./Utils.js";
 
 const SNACKBAR_DELAY = 5000;
 
 const removeSnackBar = (pressTable, snackBar) => {
-  setTimeout(() => {
-    pressTable.removeChild(snackBar);
-  }, SNACKBAR_DELAY);
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      pressTable.removeChild(snackBar);
+      activateSubscribedPress();
+    }, SNACKBAR_DELAY);
+  });
 }
 
-export const renderSubscribeSnackBar = (pressTable) => {
+export const renderSubscribeSnackBar = async (pressTable) => {
   const snackBar = Utils.createElementWithClass("div", "notification__subscribe-snackbar");
 
   snackBar.textContent = "내가 구독한 언론사에 추가되었습니다.";
   pressTable.appendChild(snackBar);
-  removeSnackBar(pressTable, snackBar);
+  await removeSnackBar(pressTable, snackBar);
 }
 
 export const renderUnsubscribeAlert = (pressTable, pressName) => {

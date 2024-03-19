@@ -31,6 +31,7 @@ const ST = Object.freeze({
   SUBSCRIPTION_TOGGLE_BUTTON: ".press-container__subscription-toggle-button",
   UNSUBSCRIBE_ALERT: ".notification__unsubscribe-alert",
   UNSUBSCRIBE_SUBMIT: ".notification__unsubscribe-submit",
+  UNSUBSCRIBE_CANCEL: ".notification__unsubscribe-cancel",
 });
 
 const pressContainer = document.querySelector(ST.PRESS_CONTAINER);
@@ -109,7 +110,6 @@ const handleGridViewIconActivePrevious = () => {
     previousPage =
       gridViewPage > FIRST_PAGE ? gridViewPage + DECREMENT : gridViewPage;
     renderGridView(previousPage);
-    clearInterval(startAutoRender);
   }
   if (Utils.isPressMenuActive(subscribedPressMenu)) {
     previousPage =
@@ -117,7 +117,6 @@ const handleGridViewIconActivePrevious = () => {
         ? subscribedGridPage + DECREMENT
         : subscribedGridPage;
     renderGridViewSubscribed(previousPage);
-    clearInterval(startAutoRender);
   }
 };
 
@@ -154,7 +153,6 @@ const handleGridViewIconActiveNext = () => {
     nextPage =
       gridViewPage < LAST_PAGE ? gridViewPage + INCREMENT : gridViewPage;
     renderGridView(nextPage);
-    clearInterval(startAutoRender);
   }
   if (Utils.isPressMenuActive(subscribedPressMenu)) {
     nextPage =
@@ -162,7 +160,6 @@ const handleGridViewIconActiveNext = () => {
         ? subscribedGridPage + INCREMENT
         : subscribedGridPage;
     renderGridViewSubscribed(nextPage);
-    clearInterval(startAutoRender);
   }
 };
 
@@ -285,13 +282,30 @@ const createLogosInTable = (table, page) => {
   });
 };
 
+const createSubscribedLogosInTable = (table, page) => {
+  Array.from({ length: LOGO_COUNT_PER_PAGE }).forEach((_, index) => {
+    const logoIndex = page * LOGO_COUNT_PER_PAGE + index;
+    const subscribedNewsPage = subscribedNews[logoIndex];
+    const logo = subscribedNewsPage !== undefined
+      ? createLogo(subscribedNewsPage.logoImageSrc, subscribedNewsPage.pressName)
+      : Utils.createElementWithClass("div", "press-container__logo");
+
+    table.appendChild(logo);
+  });
+}
+
 const toggleArrowVisibility = () => {
   const isGridViewActive = Utils.isIconActive(gridViewIcon);
   const isListViewActive = Utils.isIconActive(listViewIcon);
+  const isSubscribedPressActive = Utils.isPressMenuActive(subscribedPressMenu);
 
-  if (isGridViewActive) {
+  if (isGridViewActive && !isSubscribedPressActive) {
     Utils.updateArrowButtonVisibility(leftArrowButton, gridViewPage === FIRST_PAGE);
     Utils.updateArrowButtonVisibility(rightArrowButton, gridViewPage === LAST_PAGE);
+  }
+  if (isGridViewActive && isSubscribedPressActive) {
+    Utils.updateArrowButtonVisibility(leftArrowButton, subscribedGridPage === FIRST_PAGE);
+    Utils.updateArrowButtonVisibility(rightArrowButton, subscribedGridPage === LAST_PAGE);
   }
   if (isListViewActive) {
     Utils.updateArrowButtonVisibility(leftArrowButton, false);
@@ -300,6 +314,7 @@ const toggleArrowVisibility = () => {
 };
 
 const renderGridView = async (page) => {
+  clearInterval(startAutoRender);
   if (logos.length === EMPTY) await initializeNews();
 
   gridViewPage = page;
@@ -307,6 +322,16 @@ const renderGridView = async (page) => {
   createLogosInTable(pressTable, page);
   toggleArrowVisibility();
 };
+
+const renderGridViewSubscribed = async (page) => {
+  clearInterval(startAutoRender);
+  if (subscribedNews.length === EMPTY) await updateSubscribedNews();
+  
+  subscribedGridPage = page;
+  Utils.clearPressTableContent(pressTable, "grid");
+  createSubscribedLogosInTable(pressTable, page);
+  toggleArrowVisibility();
+}
 
 const renderActiveCategory = (category, page) => {
   return `<div class="press-container__active-tab">
@@ -488,7 +513,7 @@ const subscribeNews = async (pressName) => {
   );
 
   await addNews(newsToAdd, "subscribe");
-  renderSubscribeSnackBar(pressTable);
+  await renderSubscribeSnackBar(pressTable);
   await updateSubscribedNews();
 };
 
@@ -532,7 +557,15 @@ const handleUnsubscribeSubmitClick = async (target) => {
 
   await unsubscribeNews(pressName);
   pressTable.removeChild(alert);
-  renderListViewSubscribed(FIRST_PAGE);
+  Utils.isIconActive(gridViewIcon)
+    ? renderGridViewSubscribed(subscribedGridPage)
+    : renderListViewSubscribed(subscribedListPage);
+}
+
+const handleUnsubscribeCancelClick = () => {
+  const alert = pressTable.querySelector(ST.UNSUBSCRIBE_ALERT);
+
+  pressTable.removeChild(alert);
 }
 
 const handleClick = async ({ target }) => {
@@ -544,8 +577,9 @@ const handleClick = async ({ target }) => {
   if (target.closest(ST.TAB)) handleTabClick(target);
   if (target.closest(ST.SUBSCRIPTION_TOGGLE_BUTTON)) await handleSubscriptionClick(target);
   if (target.closest(ST.UNSUBSCRIBE_SUBMIT)) await handleUnsubscribeSubmitClick(target);
+  if (target.closest(ST.UNSUBSCRIBE_CANCEL)) handleUnsubscribeCancelClick();
 };
 
 pressContainer.addEventListener("click", await handleClick);
 
-export { activateGridView, updateSubscribedNews };
+export { activateGridView, updateSubscribedNews, activateSubscribedPress };
