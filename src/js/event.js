@@ -49,40 +49,51 @@ const clickHandler = {
     setTimeout(() => {
       listCat.classList.remove("clicked");
     }, 5000);
-  }
+  },
 };
 
 function clickEvent() {
-  document.querySelector(".newsgroup").addEventListener("click", function(event) {
-    const button = event.target.closest("button");
-    if(button) {
-        switch(button.className) {
-            case "grid-right-btn":
-                clickHandler.gridRightButtonClick();
-                break;
-            case "grid-left-btn":
-                clickHandler.gridLeftButtonClick();
-                break;
-            case "list-right-btn":
-                clickHandler.listRightButtonClick();
-                break;
-            case "list-left-btn":
-                clickHandler.listLeftButtonClick();
-                break;
-            default:
-                break;
+  document.querySelector(".newsgroup").addEventListener("click", function (event) {
+      const button = event.target.closest("button");
+      if (button) {
+        switch (button.className) {
+          case "grid-right-btn":
+            clickHandler.gridRightButtonClick();
+            break;
+          case "grid-left-btn":
+            clickHandler.gridLeftButtonClick();
+            break;
+          case "list-right-btn":
+            clickHandler.listRightButtonClick();
+            break;
+          case "list-left-btn":
+            clickHandler.listLeftButtonClick();
+            break;
+          default:
+            break;
         }
-    }
-  });
-  
+      }
+    });
+
   const [listViewBtn, gridViewBtn] = document.querySelectorAll(".view-btn > button");
   const listClick = document.querySelectorAll(".newsgroup-list-cat");
+  const subscribeBtns = document.querySelectorAll(".subscribe-btn");
 
   gridViewBtn.addEventListener("click", clickHandler.gridViewClick);
   listViewBtn.addEventListener("click", clickHandler.listViewClick);
 
   listClick.forEach((button) => {
     button.addEventListener("click", clickHandler.clickCat);
+  });
+
+  subscribeBtns.forEach((subscribeBtn) => {
+    subscribeBtn.addEventListener("click", function () {
+      if (subscribeBtn.innerText === "+ 구독하기") {
+        subscribeBtn.innerText = "+ 해지하기";
+      } else {
+        subscribeBtn.innerText = "+ 구독하기";
+      }
+    });
   });
 }
 

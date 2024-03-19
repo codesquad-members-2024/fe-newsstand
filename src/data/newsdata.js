@@ -116,7 +116,7 @@ export const listCat = [
       "Seoul issues weather advisory as yellow dust sweeps Korean Peninsula",
       "Samsung to secure $6 billion U.S. subsidy for Taylor plant and beyond",
       "5 rescued, 1 missing from capsized fishing boat off Pohang",
-      "박용우 소속팀 알 아인, 아챔에서 호날두 소속팀 꺾고 4강 진출",
+      "5 rescued, 1 missing from capsized fishing boat off Pohang"
     ],
   },
   {
