@@ -19,7 +19,7 @@ const pageLogoIcon = document.querySelector(".top-container__icon");
 
 let rollNewsInInterval = null;
 
-const animateRolling = () => {
+const rollingStartHandler = () => {
   if (rollNewsInInterval !== null) {
     clearInterval(rollNewsInInterval);
     rollNewsInInterval = null;
@@ -27,9 +27,9 @@ const animateRolling = () => {
   rollNewsInInterval = setInterval(renderNewsTitles, ROLLING_DELAY);
 };
 
-const stopRollingAnimation = () => clearInterval(rollNewsInInterval);
+const rollingStopHandler = () => clearInterval(rollNewsInInterval);
 
-const pageReload = () => location.reload();
+const pageReloadHandler = () => location.reload();
 
 const renderCurrentDate = () => {
   const currentDateTag = document.querySelector(".top-container__date-text");
@@ -50,9 +50,9 @@ export const renderIndex = () => {
   renderCurrentDate();
   renderNewsTitles();
   activateGridView();
-  animateRolling();
+  rollingStartHandler();
 };
 
-pageLogoIcon.addEventListener("click", pageReload);
-rollingContainer.addEventListener("mouseover", stopRollingAnimation);
-rollingContainer.addEventListener("mouseout", animateRolling);
+pageLogoIcon.addEventListener("click", pageReloadHandler);
+rollingContainer.addEventListener("mouseover", rollingStopHandler);
+rollingContainer.addEventListener("mouseout", rollingStartHandler);
