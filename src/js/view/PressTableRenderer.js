@@ -120,14 +120,14 @@ const handleListViewIconActivePrevious = () => {
 
   if (Utils.isPressMenuActive(allPressMenu)) {
     previousPage =
-      listViewPage > FIRST_PAGE ? listViewPage + DECREMENT : news.length - 1;
+      listViewPage > FIRST_PAGE ? listViewPage + DECREMENT : news.length + DECREMENT;
     renderListView(previousPage);
   }
   if (Utils.isPressMenuActive(subscribedPressMenu)) {
     previousPage =
       subscribedListPage > FIRST_PAGE
         ? subscribedListPage + DECREMENT
-        : subscribedListPage;
+        : subscribedNews.length + DECREMENT;
     renderListViewSubscribed(previousPage);
   }
 };
@@ -327,7 +327,7 @@ const animateActiveTab = () => {
 
 const renderCategoryTabBlock = (page) => {
   const activeCategory = Utils.findActiveCategory(categories, page);
-  const categoryTabBlock = Utils.createElementWithClass("div", "press-container__category-tab");
+  const categoryTabBlock = Utils.createElementWithClass("div", "press-container__tab-block");
 
   categoryTabBlock.innerHTML = categories.reduce(
     (acc, cur) =>
