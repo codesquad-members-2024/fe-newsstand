@@ -19,8 +19,6 @@ const INACTIVE_FILL_PROPERTY = "#879298";
 const ST = Object.freeze({
   PRESS_CONTAINER: ".press-container",
   PRESS_TABLE: ".press-container__view",
-  ALL_PRESS: ".press-container__all-press",
-  SUBSCRIBED_PRESS: ".press-container__subscribed-press",
   VIEW_ICON: ".press-container__view-icon",
   LEFT_ARROW: ".press-container__left-arrow",
   RIGHT_ARROW: ".press-container__right-arrow",
@@ -30,8 +28,6 @@ const ST = Object.freeze({
 
 const pressContainer = document.querySelector(ST.PRESS_CONTAINER);
 const pressTable = document.querySelector(ST.PRESS_TABLE);
-const allPressMenu = document.querySelector(ST.ALL_PRESS);
-const subscribedPressMenu = document.querySelector(ST.SUBSCRIBED_PRESS);
 const leftArrowButton = document.querySelector(ST.LEFT_ARROW);
 const rightArrowButton = document.querySelector(ST.RIGHT_ARROW);
 
@@ -65,16 +61,6 @@ const activateListView = () => {
   Utils.fillIcon(gridViewIcon, INACTIVE_FILL_PROPERTY);
   renderListView(listViewPage);
 };
-
-const activateAllPress = () => {
-  Utils.setPressMenuAsSelected(allPressMenu);
-  Utils.setPressMenuAsUnselected(subscribedPressMenu);
-};
-
-const activateSubscribedPress = () => {
-  Utils.setPressMenuAsSelected(subscribedPressMenu);
-  Utils.setPressMenuAsUnselected(allPressMenu);
-}
 
 const renderPreviousPage = () => {
   let previousPage;
@@ -329,8 +315,6 @@ const subscribeNews = (pressName) => {
 const handleClick = ({ target }) => {
   if (target.closest(ST.VIEW_ICON) === gridViewIcon) activateGridView();
   if (target.closest(ST.VIEW_ICON) === listViewIcon) activateListView();
-  if (target.closest(ST.ALL_PRESS)) activateAllPress();
-  if (target.closest(ST.SUBSCRIBED_PRESS)) activateSubscribedPress();
   if (target.closest(ST.LEFT_ARROW)) renderPreviousPage();
   if (target.closest(ST.RIGHT_ARROW)) renderNextPage();
   if (target.closest(ST.CATEGORY)) {
