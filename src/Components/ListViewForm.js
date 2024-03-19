@@ -4,18 +4,10 @@ export function ListViewForm(subscriptionController) {
     let curCategoryIdx = 0
     let curCategoryDataIdx = 0
     let curCategoryTotalNum = 0
-    const categoryList = [
-        { category: "종합/경제", data: [] },
-        { category: "방송/통신", data: [] },
-        { category: "IT", data: [] },
-        { category: "영자지", data: [] },
-        { category: "스포츠/연예", data: [] },
-        { category: "매거진/전문지", data: [] },
-        { category: "지역", data: [] },
-    ];
+    const categoryList = [];
 
     const main = async (subscribeStatus) => {
-        await initData();
+        await initData(subscribeStatus);
         renderNav();
         renderNews();
         switchCategory(categoryList[0].category)
@@ -63,23 +55,38 @@ export function ListViewForm(subscriptionController) {
         navContainer.innerHTML = navTemplate;
     };
 
-    const initData = async () => {
+    const initData = async (subscribeStatus) => {
         const newsData = await jsonParse.parseJson("category");
-        console.log(newsData)
         const modifyData = spliceCompanyString(newsData);
-        spliteData(modifyData);
+        spliteData(modifyData, subscribeStatus);
         curCategoryTotalNum = categoryList[curCategoryIdx].data.length
     };
 
-    const spliteData = (allNewsInfo) => {
-        categoryList.forEach((curCategory) => {
+    const spliteData = (allNewsInfo, subscribeStatus) => {
+        if(subscribeStatus === false) return categoryDataSplite(allNewsInfo)
+        return subscribeDataSplite(allNewsInfo)
+    };
+
+    const subscribeDataSplite = (allNewsInfo) => {
+        const curSubscribeList = subscriptionController.getSubscripeList()
+        curSubscribeList.forEach(curSubscribePress => {
+            const pressNewsData = allNewsInfo.find(curNews => curNews.companyName === curSubscribePress)
+            categoryList.push({ category: curSubscribePress, data: [pressNewsData] })
+        })
+    }
+    
+    const categoryDataSplite = (allNewsInfo) => {
+        const category = ["종합/경제", "방송/통신", "IT", "영자지", "스포츠/연예", "매거진/전문지", "지역"];
+        category.forEach((curCategory) => {
+            const newsData = []
             allNewsInfo.forEach((curNewsData) => {
-                if (curNewsData.category.includes(curCategory.category)) {
-                    curCategory.data.push(curNewsData);
+                if (curNewsData.category.includes(curCategory)) {
+                    newsData.push(curNewsData);
                 }
             });
+            categoryList.push({ category: curCategory, data: [...newsData] })
         });
-    };
+    }
 
     const spliceCompanyString = (newsData) => {
         return newsData.map((curNewsData) => {

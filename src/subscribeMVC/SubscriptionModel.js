@@ -8,6 +8,11 @@ export class SubscriptionController {
     unsubscribe(press) {
         this.subscripteList.delete(press);
     }
+
+    getSubscripeList() {
+        return [...this.subscripteList]
+    }
+
     isSubscribeGridButton(press) {
         const hasSubscription = this.subscripteList.has(press)
             ? `<button class = "subscribe" id = "subscribe" name = "${press}"> + 해지하기</button>`

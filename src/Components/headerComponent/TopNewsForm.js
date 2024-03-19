@@ -1,5 +1,6 @@
 import jsonParse from "../../util/jsonParse.js";
 import { TOP_NEWS_DELAY_TIME, LIGHT_ANIMATION_END_TIME } from "../../util/contants.js";
+import { delay } from "../../util/active.js";
 function TopNewsForm() {
     const topNewsData = [
         { newsData: [], className: "first-top-news" },
@@ -39,7 +40,6 @@ function TopNewsForm() {
         const topNewsAnimationContainer = document.querySelectorAll("#top-news-animation")
         topNewsAnimationContainer.forEach(curNewsContainer => curNewsContainer.classList.add("topNews-animation"))
     }
-    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     const rollingNews = async () => {
         let test = setInterval(async () => {

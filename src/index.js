@@ -2,9 +2,9 @@ import dateView from "./Components/headerComponent/DateView.js";
 import topNewsForm from "./Components/headerComponent/TopNewsForm.js";
 import { GridViewForm } from "./Components/GridViewForm.js";
 import { ListViewForm } from "./Components/ListViewForm.js";
-import { activate, reloadPage } from "./util/active.js";
+import { activate, reloadPage, delay } from "./util/active.js";
 import { INITIAL_VIEW } from "./util/contants.js";
-import { SubscriptionController } from "./SubscriptionController.js";
+import { SubscriptionController } from "./subscribeMVC/SubscriptionModel.js";
 
 function NewsStand() {
     const status = {subscribeStatus: false, listMode: false}
@@ -18,7 +18,7 @@ function NewsStand() {
         activate(status.listMode)
         isDisplayVisible()
     }
-    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    
 
     const onSubscribeButtonClick = async(target) => {
         const subscribeModal = document.querySelector(".subscribe-modal")
@@ -27,11 +27,13 @@ function NewsStand() {
         if (isSubscribeText.includes("구독하기"))  {
             subscriptionController.subscribe(targetPress)
             subscribeModal.style.display = "flex"
-            await delay(5000)
+            await delay(1000)
             subscribeModal.style.display = "none"
+        } else if (isSubscribeText.includes("해지하기")) {
+            subscriptionController.unsubscribe(targetPress)
         }
-        if (isSubscribeText.includes("해지하기")) return subscriptionController.unsubscribe(targetPress)
-        
+        status.subscribeStatus = true
+        activateMode("sort-mode-container__show-list-mode")
     }
 
     const setEventHandler = () => {

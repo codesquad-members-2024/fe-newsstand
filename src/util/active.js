@@ -19,3 +19,5 @@ export const activate = (mode) => {
 }
 
 export const reloadPage = () => location.reload();
+
+export const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
