@@ -14,18 +14,12 @@ function createGrid(index) {
   newsGroupLogo.classList.add("newsgroup-grid_logo");
 
   if (index < shuffleLogos.length) {
-    const imgTag = document.createElement("img");
-    imgTag.src = shuffleLogos[index];
+    const imgTag = `<img src="${shuffleLogos[index]}">`;
+    const subscribeBtn = `<button class="subscribe-btn">+ 구독하기</button>`;
+    const spanTag = `<span>${subscribeBtn}</span>`;
 
-    const subscribeBtn = document.createElement("button");
-    subscribeBtn.classList.add("subscribe-btn");
-    subscribeBtn.textContent = "+ 구독하기";
-
-    const spanTag = document.createElement("span");
-    spanTag.appendChild(subscribeBtn);
-    newsGroupLogo.append(imgTag, spanTag);
+    newsGroupLogo.innerHTML = imgTag + spanTag;
   }
-
   newsgroupGrid.appendChild(newsGroupLogo);
 }
 
@@ -55,19 +49,13 @@ function createList(index) {
   const listRight = document.querySelector(".newsgroup-list-right");
 
   const item = listCat[index];
-  
-  const logoImgTag = document.createElement("img");
-  logoImgTag.src = item.logoImageSrc;
-  const spanTag = document.createElement("span");
-  spanTag.textContent = item.editedTime;
-  const subscribeBtn = document.createElement("button");
-  subscribeBtn.classList.add("subscribe-btn");
-  subscribeBtn.textContent = "+ 구독하기";
 
-  const imgTag = document.createElement("img");
-  imgTag.src = item.url;
-  const pTagleft = document.createElement("p");
-  pTagleft.textContent = item.description[0];
+  const logoImgTag = `<img src="${item.logoImageSrc}">`;
+  const spanTag = `<span>${item.editedTime}</span>`;
+  const subscribeBtn = `<button class="subscribe-btn">+ 구독하기</button>`;
+  const imgTag = `<img src="${item.url}">`;
+  const pTagleft = `<p>${item.description[0]}</p>`;
+
   const descDiv = document.createElement("div");
 
   for (let i = 1; i < item.description.length; i++) {
@@ -76,12 +64,8 @@ function createList(index) {
     descDiv.appendChild(pTag);
   }
 
-  listTop.appendChild(logoImgTag);
-  listTop.appendChild(spanTag);
-  listTop.appendChild(subscribeBtn);
-
-  listLeft.appendChild(imgTag);
-  listLeft.appendChild(pTagleft);
+  listTop.innerHTML = logoImgTag + spanTag + subscribeBtn;
+  listLeft.innerHTML = imgTag + pTagleft;
   listRight.appendChild(descDiv);
 }
 

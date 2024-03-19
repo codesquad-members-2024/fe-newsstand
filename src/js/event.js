@@ -44,7 +44,7 @@ const clickHandler = {
   },
 
   clickCat(event) {
-    const listCat = event.target;
+    const listCat = event.target.closest(".newsgroup-list-cat");
     listCat.classList.add("clicked");
     setTimeout(() => {
       listCat.classList.remove("clicked");
