@@ -1,5 +1,5 @@
-import renderNewsTitles from "./NewsTitleRenderer.js";
-import { activateGridView, updateSubscribedNews } from "./PressTableRenderer.js";
+import renderNewsTitles from "./NewsTitle.js";
+import { activateGridView, updateSubscribedNews } from "./PressTable.js";
 
 const WEEK = [
   "일요일",

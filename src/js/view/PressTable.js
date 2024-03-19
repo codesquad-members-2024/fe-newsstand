@@ -2,7 +2,7 @@ import { addNews, deleteNews, loadNews } from "../api/NewsApi.js";
 import {
   renderSubscribeSnackBar,
   renderUnsubscribeAlert,
-} from "./NotificationRenderer.js";
+} from "./Notification.js";
 import Utils from "./Utils.js";
 
 const FIRST_PAGE = 0;
