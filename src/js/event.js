@@ -63,10 +63,10 @@ function clickEvent() {
             case "grid-left-btn":
                 clickHandler.gridLeftButtonClick();
                 break;
-            case "list-left-btn":
+            case "list-right-btn":
                 clickHandler.listRightButtonClick();
                 break;
-            case "list-right-btn":
+            case "list-left-btn":
                 clickHandler.listLeftButtonClick();
                 break;
             default:
@@ -75,9 +75,9 @@ function clickEvent() {
     }
   });
   
-  const [gridViewBtn, listViewBtn] = document.querySelectorAll(".view-btn > button");
+  const [listViewBtn, gridViewBtn] = document.querySelectorAll(".view-btn > button");
   const listClick = document.querySelectorAll(".newsgroup-list-cat");
-  
+
   gridViewBtn.addEventListener("click", clickHandler.gridViewClick);
   listViewBtn.addEventListener("click", clickHandler.listViewClick);
 
