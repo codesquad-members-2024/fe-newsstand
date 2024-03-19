@@ -49,26 +49,37 @@ const clickHandler = {
     setTimeout(() => {
       listCat.classList.remove("clicked");
     }, 5000);
-  },
+  }
 };
 
 function clickEvent() {
-  const gridViewBtn = document.querySelector(".grid-view-btn");
-  const listViewBtn = document.querySelector(".list-view-btn");
-  const gridLeftBtn = document.querySelector(".grid-left-btn");
-  const gridRightBtn = document.querySelector(".grid-right-btn");
-  const listLeftBtn = document.querySelector(".list-left-btn");
-  const listRightBtn = document.querySelector(".list-right-btn");
+  document.querySelector(".newsgroup").addEventListener("click", function(event) {
+    const button = event.target.closest("button");
+    if(button) {
+        switch(button.className) {
+            case "grid-right-btn":
+                clickHandler.gridRightButtonClick();
+                break;
+            case "grid-left-btn":
+                clickHandler.gridLeftButtonClick();
+                break;
+            case "list-left-btn":
+                clickHandler.listRightButtonClick();
+                break;
+            case "list-right-btn":
+                clickHandler.listLeftButtonClick();
+                break;
+            default:
+                break;
+        }
+    }
+  });
+  
+  const [gridViewBtn, listViewBtn] = document.querySelectorAll(".view-btn > button");
   const listClick = document.querySelectorAll(".newsgroup-list-cat");
-
+  
   gridViewBtn.addEventListener("click", clickHandler.gridViewClick);
   listViewBtn.addEventListener("click", clickHandler.listViewClick);
-
-  gridRightBtn.addEventListener("click", clickHandler.gridRightButtonClick);
-  gridLeftBtn.addEventListener("click", clickHandler.gridLeftButtonClick);
-
-  listRightBtn.addEventListener("click", clickHandler.listRightButtonClick);
-  listLeftBtn.addEventListener("click", clickHandler.listLeftButtonClick);
 
   listClick.forEach((button) => {
     button.addEventListener("click", clickHandler.clickCat);

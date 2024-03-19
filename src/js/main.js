@@ -13,6 +13,7 @@ function main() {
 
   renderGrid(0);
   clickEvent();
+  // window.addEventListener("load", clickEvent);
 }
 
 main();
