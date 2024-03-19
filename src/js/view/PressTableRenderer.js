@@ -1,4 +1,4 @@
-import { loadNews } from '../api/NewsApi.js';
+import { addNews, loadNews } from '../api/NewsApi.js';
 import { renderSubscribeSnackBar, renderUnsubscribeAlert } from './NotificationRenderer.js';
 import Utils from './Utils.js';
 
@@ -16,7 +16,6 @@ const FILL_SECTOR = 0.1;
 
 const ACTIVE_FILL_PROPERTY = "#4362D0";
 const INACTIVE_FILL_PROPERTY = "#879298";
-const NEWS_PATH = "src/data/news.json";
 const ST = Object.freeze({
   PRESS_CONTAINER: ".press-container",
   PRESS_TABLE: ".press-container__view",
@@ -306,6 +305,13 @@ const renderListView = async (page) => {
   initializeStartAutoRender();
 };
 
+const subscribeNews = (pressName) => {
+  const newsToAdd = news.find((newsElement) => newsElement.pressName === pressName);
+  
+  addNews(newsToAdd, "subscribe");
+  renderSubscribeSnackBar(pressTable);
+};
+
 const handleClick = ({ target }) => {
   if (target.closest(ST.VIEW_ICON) === gridViewIcon) activateGridView();
   if (target.closest(ST.VIEW_ICON) === listViewIcon) activateListView();
@@ -315,9 +321,12 @@ const handleClick = ({ target }) => {
     const firstIndex = Number(target.getAttribute("firstIndex"));
     renderListView(firstIndex);
   };
-  if (target.closest(ST.SUBSCRIBE_BUTTON)) renderSubscribeSnackBar(pressTable);
+  if (target.closest(ST.SUBSCRIBE_BUTTON)) {
+    const targetNewsName = target.closest(ST.SUBSCRIBE_BUTTON).getAttribute("press-name");
+    subscribeNews(targetNewsName);
+  }
 }
 
-pressContainer.addEventListener("click", handleClick);
+pressContainer.addEventListener("click", await handleClick);
 
 export default activateGridView;
