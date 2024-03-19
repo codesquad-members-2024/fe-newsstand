@@ -471,29 +471,36 @@ const subscribeNews = async (pressName) => {
 
 const unsubscribeNews = async (pressName) => {};
 
+const handleViewIconClick = (target) => {
+  const viewIcon = target.closest(ST.VIEW_ICON);
+
+  if (viewIcon === gridViewIcon) activateGridView();
+  if (viewIcon === listViewIcon) activateListView();
+};
+
+const handleTabClick = (target) => {
+  const index = Number(target.getAttribute("index"));
+
+  if (Utils.isPressMenuActive(allPressMenu)) renderListView(index);
+  if (Utils.isPressMenuActive(subscribedPressMenu)) renderListViewSubscribed(index);
+}
+
+const handleSubscribeButton = async (target) => {
+  const targetNewsName = target
+    .closest(ST.SUBSCRIBE_BUTTON)
+    .getAttribute("press-name");
+  
+  await subscribeNews(targetNewsName);
+}
+
 const handleClick = async ({ target }) => {
-  if (target.closest(ST.VIEW_ICON) === gridViewIcon) activateGridView();
-  if (target.closest(ST.VIEW_ICON) === listViewIcon) activateListView();
+  if (target.closest(ST.VIEW_ICON)) handleViewIconClick(target);
   if (target.closest(ST.ALL_PRESS)) activateAllPress();
   if (target.closest(ST.SUBSCRIBED_PRESS)) activateSubscribedPress();
   if (target.closest(ST.LEFT_ARROW)) renderPreviousPage();
   if (target.closest(ST.RIGHT_ARROW)) renderNextPage();
-  if (target.closest(ST.TAB)) {
-    if (Utils.isPressMenuActive(allPressMenu)) {
-      const index = Number(target.getAttribute("index"));
-      renderListView(index);
-    }
-    if (Utils.isPressMenuActive(subscribedPressMenu)) {
-      const index = Number(target.getAttribute("index"));
-      renderListViewSubscribed(index);
-    }
-  }
-  if (target.closest(ST.SUBSCRIBE_BUTTON)) {
-    const targetNewsName = target
-      .closest(ST.SUBSCRIBE_BUTTON)
-      .getAttribute("press-name");
-    await subscribeNews(targetNewsName);
-  }
+  if (target.closes(ST.TAB)) handleTabClick(target);
+  if (target.closest(ST.SUBSCRIBE_BUTTON)) await handleSubscribeButton(target);
 };
 
 pressContainer.addEventListener("click", await handleClick);
