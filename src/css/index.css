@@ -162,7 +162,7 @@ body {
   justify-content: center;
 }
 
-.press-container__subscribe-button {
+.press-container__subscription-toggle-button {
   height: 20px;
   background-color: #fff;
   border: var(--border);
@@ -178,7 +178,7 @@ body {
   margin-right: 2px;
 }
 
-.press-container__logo:hover > .press-container__subscribe-button {
+.press-container__logo:hover > .press-container__subscription-toggle-button {
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,4 +1,4 @@
-import { addNews, loadNews } from "../api/NewsApi.js";
+import { addNews, deleteNews, loadNews } from "../api/NewsApi.js";
 import {
   renderSubscribeSnackBar,
   renderUnsubscribeAlert,
@@ -28,7 +28,9 @@ const ST = Object.freeze({
   LEFT_ARROW: ".press-container__left-arrow",
   RIGHT_ARROW: ".press-container__right-arrow",
   TAB: ".press-container__tab",
-  SUBSCRIBE_BUTTON: ".press-container__subscribe-button",
+  SUBSCRIPTION_TOGGLE_BUTTON: ".press-container__subscription-toggle-button",
+  UNSUBSCRIBE_ALERT: ".notification__unsubscribe-alert",
+  UNSUBSCRIBE_SUBMIT: ".notification__unsubscribe-submit",
 });
 
 const pressContainer = document.querySelector(ST.PRESS_CONTAINER);
@@ -63,6 +65,10 @@ let fillColorInInterval = null;
 const findNewsIndex = (newsElement) => {
   return news.findIndex(({ pressName }) => newsElement.pressName === pressName);
 };
+
+const isSubscribed = (name) => {
+  return subscribedNews.some(({ pressName }) => pressName === name);
+}
 
 const activateGridView = () => {
   Utils.fillIcon(gridViewIcon, ACTIVE_FILL_PROPERTY);
@@ -232,25 +238,40 @@ const updateSubscribedNews = async () => {
 };
 
 const createSubscribeButton = (pressName) => {
-  const button = Utils.createElementWithClass("button", "press-container__subscribe-button");
+  const button = Utils.createElementWithClass("button", "press-container__subscription-toggle-button");
   const plusImage = Utils.createElementWithClass("img", "press-container__plus-image");
   const subscribeText = document.createTextNode("구독하기");
 
   plusImage.src = "src/img/PlusSymbol.svg";
   button.setAttribute("press-name", pressName);
+  button.setAttribute("data-action", "subscribe");
   Utils.appendChildren(button, [plusImage, subscribeText]);
 
   return button;
 };
 
+const createUnsubscribeButton = (pressName) => {
+  const button = Utils.createElementWithClass("button", "press-container__subscription-toggle-button");
+  const plusImage = Utils.createElementWithClass("img", "press-container__plus-image");
+
+  plusImage.src = "src/img/PlusSymbol.svg";
+  button.setAttribute("press-name", pressName);
+  button.setAttribute("data-action", "unsubscribe");
+  Utils.appendChildren(button, [plusImage]);
+
+  return button;
+}
+
 const createLogo = (src, name) => {
   const logo = Utils.createElementWithClass("div", "press-container__logo");
   const image = document.createElement("img");
-  const subscribeButton = createSubscribeButton(name);
+  const subscriptionToggleButton = isSubscribed(name) 
+    ? createUnsubscribeButton(name) 
+    : createSubscribeButton(name);
 
   image.src = src;
   image.setAttribute("name", name);
-  Utils.appendChildren(logo, [image, subscribeButton]);
+  Utils.appendChildren(logo, [image, subscriptionToggleButton]);
 
   return logo;
 };
@@ -345,12 +366,14 @@ const renderNewsInfo = (page) => {
   const newsInfo = Utils.createElementWithClass("div", "press-container__news-info");
   const image = document.createElement("img");
   const editedTime = Utils.createElementWithClass("span", "press-container__edited-time");
-  const subscribeButton = createSubscribeButton(news[page].pressName);
+  const subscriptionToggleButton = isSubscribed(news[page].pressName) 
+    ? createUnsubscribeButton(news[page].pressName) 
+    : createSubscribeButton(news[page].pressName);
 
   image.src = news[page].logoImageSrc;
   editedTime.textContent = news[page].editedTime;
-  subscribeButton.style.cssText = "display:block; margin-left:16px";
-  Utils.appendChildren(newsInfo, [image, editedTime, subscribeButton]);
+  subscriptionToggleButton.style.cssText = "display:block; margin-left:16px";
+  Utils.appendChildren(newsInfo, [image, editedTime, subscriptionToggleButton]);
 
   return newsInfo;
 };
@@ -464,12 +487,19 @@ const subscribeNews = async (pressName) => {
     (newsElement) => newsElement.pressName === pressName
   );
 
-  addNews(newsToAdd, "subscribe");
+  await addNews(newsToAdd, "subscribe");
   renderSubscribeSnackBar(pressTable);
   await updateSubscribedNews();
 };
 
-const unsubscribeNews = async (pressName) => {};
+const unsubscribeNews = async (pressName) => {
+  const newsToDelete = subscribedNews.find(
+    (newsElement) => newsElement.pressName === pressName 
+  );
+
+  await deleteNews(newsToDelete.id, "subscribe");
+  await updateSubscribedNews();
+};
 
 const handleViewIconClick = (target) => {
   const viewIcon = target.closest(ST.VIEW_ICON);
@@ -485,12 +515,24 @@ const handleTabClick = (target) => {
   if (Utils.isPressMenuActive(subscribedPressMenu)) renderListViewSubscribed(index);
 }
 
-const handleSubscribeButton = async (target) => {
-  const targetNewsName = target
-    .closest(ST.SUBSCRIBE_BUTTON)
+const handleSubscriptionClick = async (target) => {
+  const button = target.closest(ST.SUBSCRIPTION_TOGGLE_BUTTON);
+  const subscriptionType = button.getAttribute("data-action");
+  const pressName = button.getAttribute("press-name");
+
+  if (subscriptionType === "subscribe") await subscribeNews(pressName);
+  if (subscriptionType === "unsubscribe") renderUnsubscribeAlert(pressTable, pressName);
+}
+
+const handleUnsubscribeSubmitClick = async (target) => {
+  const alert = pressTable.querySelector(ST.UNSUBSCRIBE_ALERT);
+  const pressName = target
+    .closest(ST.UNSUBSCRIBE_SUBMIT)
     .getAttribute("press-name");
-  
-  await subscribeNews(targetNewsName);
+
+  await unsubscribeNews(pressName);
+  pressTable.removeChild(alert);
+  renderListViewSubscribed(FIRST_PAGE);
 }
 
 const handleClick = async ({ target }) => {
@@ -499,8 +541,9 @@ const handleClick = async ({ target }) => {
   if (target.closest(ST.SUBSCRIBED_PRESS)) activateSubscribedPress();
   if (target.closest(ST.LEFT_ARROW)) renderPreviousPage();
   if (target.closest(ST.RIGHT_ARROW)) renderNextPage();
-  if (target.closes(ST.TAB)) handleTabClick(target);
-  if (target.closest(ST.SUBSCRIBE_BUTTON)) await handleSubscribeButton(target);
+  if (target.closest(ST.TAB)) handleTabClick(target);
+  if (target.closest(ST.SUBSCRIPTION_TOGGLE_BUTTON)) await handleSubscriptionClick(target);
+  if (target.closest(ST.UNSUBSCRIBE_SUBMIT)) await handleUnsubscribeSubmitClick(target);
 };
 
 pressContainer.addEventListener("click", await handleClick);

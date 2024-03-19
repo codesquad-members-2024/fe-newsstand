@@ -26,7 +26,7 @@ export const renderUnsubscribeAlert = (pressTable, pressName) => {
       </span>
     </div>
     <div class="notification__unsubscribe-clickable">
-      <div class="notification__unsubscribe-submit">예, 해지합니다
+      <div class="notification__unsubscribe-submit" press-name="${pressName}">예, 해지합니다
       </div>
       <div class="notification__unsubscribe-cancel">아니오
       </div>

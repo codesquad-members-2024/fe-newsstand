@@ -23,3 +23,15 @@ export const addNews = async (news, path) => {
   await fetch(`http://localhost:3000/${path}`, request)
     .then(response => response.json());
 };
+
+export const deleteNews = async (id, path) => {
+  const request = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    }
+  };
+
+  await fetch(`http://localhost:3000/${path}/${id}`, request)
+    .then(response => response.json());
+}
