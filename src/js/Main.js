@@ -1,4 +1,4 @@
-import { renderIndex } from "./view/NewsStandRenderer.js";
+import { renderIndex } from "./view/NewsStand.js";
 
 const main = () => renderIndex();
 
