@@ -1,4 +1,4 @@
-export class SubscriptionModel {
+class SubscriptionModel {
     constructor() {
         this.subscripteList = new Set();
     }
@@ -7,7 +7,6 @@ export class SubscriptionModel {
     }
     unsubscribe(press) {
         this.subscripteList.delete(press);
-        console.log(this.subscripteList)
     }
 
     getSubscripeList() {
@@ -28,3 +27,6 @@ export class SubscriptionModel {
         return hasSubscription;
     }
 }
+
+const subscriptionModel = new SubscriptionModel()
+export default subscriptionModel

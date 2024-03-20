@@ -496,6 +496,7 @@ a>img {
     border: 1px solid rgb(194, 192, 192);
     box-shadow: 0px 0px 2px gray;
     color: gray;
+    padding: 0 15px;
 }
 
 .unsubscribe-container {

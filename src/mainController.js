@@ -1,11 +1,10 @@
 import newsStandStateManager from "./status.js"
+import subscriptionModel from "./subscription/SubscriptionModel.js";
 import { GridViewForm } from "./Components/GridViewForm.js"
 import { ListViewForm } from "./Components/ListViewForm.js"
-import { SubscriptionModel } from "./subscribeMVC/SubscriptionModel.js"
+import { setSubscribeEventHandler } from "./subscription/subscribeController.js";
 
 function MainController() {
-    const subscriptionModel = new SubscriptionModel()
-
     const reloadPage = () => location.reload();
 
     const updateActive = (subscribeMode, viewMode, mainContainerDisplay) => {
@@ -23,7 +22,7 @@ function MainController() {
         renderMainView()
     }
 
-    const navAnimationMap = {
+    const navigationMap = {
         SHOW_All_COMPANY(){
             const status = {isSubscribe: false, isListMode: false}
             const subscribeMode = ["bold", "normal"]
@@ -58,7 +57,11 @@ function MainController() {
 
     const executeNavigation = (event) => {
         const navType = event.target.dataset.navType;
-        navAnimationMap[navType]();
+        if (navigationMap[navType]) {
+            navigationMap[navType]();
+        } else {
+            return;
+        }
     }
 
     const setEventHandler = () => {
@@ -67,12 +70,6 @@ function MainController() {
 
         const mainNavigation = document.querySelector(".main-navigation")
         mainNavigation.addEventListener("click", executeNavigation)
-
-        // const subscribeBtn = document.querySelectorAll("main");
-        // subscribeBtn.forEach(curContainer => curContainer.addEventListener("click", (e) => {
-        //     if (e.target.id === "subscribe" || e.target.id === "unsubscribe") return goToListView(e.target);
-        //     return;
-        // }))
     };
 
     const renderMainView = () => {
@@ -90,9 +87,9 @@ function MainController() {
             listViewForm.main(subscribeStatus)
         }
     }
-
+    setSubscribeEventHandler()
     setEventHandler();
-    return { renderMainView };
+    return { renderMainView, navigationMap };
 }
 const mainController = MainController();
 export default mainController

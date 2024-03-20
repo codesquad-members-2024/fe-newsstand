@@ -1,6 +1,6 @@
 import jsonParse from "../../util/jsonParse.js";
 import { TOP_NEWS_DELAY_TIME, LIGHT_ANIMATION_END_TIME } from "../../util/contants.js";
-import { delay } from "../../util/active.js";
+import { delay } from "../../util/contants.js";
 function TopNewsForm() {
     const topNewsData = [
         { newsData: [], className: "first-top-news" },

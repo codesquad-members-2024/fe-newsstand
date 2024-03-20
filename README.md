@@ -209,7 +209,7 @@ export default listViewForm;
  - [X] 내가 구독한 언론사 탭은 리스트보기가 기본상태로 한다.
  - [X] 리스트 보기에 구독해지 버튼을 누르면 "구독해지하시겠습니까?" 알럿이 뜬다.
  - [X] 예, 아니요 각 버튼에 마우스를 호버하면 밑줄이 생기도록 한다.
- - [ ] "예, 해지하겠습니다." 를 누르면 즉시 구독이 해지되고, 목록의 다음순서 언론사가 바로 나타나도록 한다.
+ - [X] "예, 해지하겠습니다." 를 누르면 즉시 구독이 해지되고, 목록의 다음순서 언론사가 바로 나타나도록 한다.
 
 
 - main.js
@@ -237,3 +237,25 @@ main - mainEventHandlers(status) - GridViewForm
     - `subscribeStatus: 상태유지, listMode: false`
   - 4. 리스트 뷰(subscripbe(unsubscripbe) 유지한 상태)
     - `subscribeStatus: 상태유지, listMode: true`
+
+  - 구독 버튼을 누른다
+    - 클래스에 언론사 등록
+    - 모달 template를 그린다
+    - 모달 창을 띄운다
+    - 5초 후 모달 창을 닫는다
+    - 구독 리스트로 이동
+
+  - 해지 버튼을 누른다
+    - 모달 template를 그린다
+    - 모달 창을 띄운다.
+      - 예를 누르면?
+        - 클래스에 언론사 삭제
+        - 모달 창을 닫는다.
+        - 구독 리스트로 이동
+      - 아니요를 누르면?
+        - 모달 창을 닫는다
+
+ - 필요한 함수
+   - 모달창 띄우는 함수 // showModal()
+   - 모달창을 닫는 함수 // hideModal()
+   - 구독/해지에 따른 template를 가져오는 함수 // getModlaTemplate()
