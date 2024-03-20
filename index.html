@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>뉴스스탠드</title>
-    <link rel="stylesheet" href="src/index.css">
-    <script src="src/index.js" defer type="module"></script>
+    <link rel="stylesheet" href="src//css/index.css">
+    <script src="src/main.js" defer type="module"></script>
 </head>
 
 <body>
@@ -24,24 +24,24 @@
             <div class="top-news-container__board"></div>
         </div>
 
-        <nav>
+        <nav class="main-navigation">
             <div class="subscribe-mode-container">
-                <button class="subscribe-mode-container__show-all-company">전체 언론사</button>
-                <button class="subscribe-mode-container__show-subscribed-company">내가 구독한 언론사</button>
+                <button class="subscribe-mode-container__show-all-company" data-nav-type = "SHOW_All_COMPANY">전체 언론사</button>
+                <button class="subscribe-mode-container__show-subscribed-company" data-nav-type = "SHOW_SUBSCRIBED_COMPANY">내가 구독한 언론사</button>
             </div>
             <div class="sort-mode-container">
-                <img class="sort-mode-container__show-list-mode" src="/static/ikon/list-view-on.png">
-                <img class="sort-mode-container__show-grid-mode" src="/static/ikon/list-view-on.png">
+                <img class="sort-mode-container__show-list-mode" data-nav-type = "SHOW_LIST_MODE" src="/static/ikon/list-view-off.png">
+                <img class="sort-mode-container__show-grid-mode" data-nav-type = "SHOW_GRID_MODE" src="/static/ikon/grid-view-on.png">
             </div>
         </nav>
-        <main class="company-grid-container active">
+        <main class="gird-mode-main-container active">
             <a><img class="left-btn" src="/static/ikon/LeftButton.png"></a>
             <ul class="company-display">
             </ul>
             <a><img class="light-btn" src="/static/ikon/RightButton.png"></a>
         </main>
 
-        <main class="list-mode-main-container active">
+        <main class="list-mode-main-container">
             <a><img class="list-view-left-btn" src="/static/ikon/LeftButton.png"></a>
             <div class="list-mode-container">
                 <div class="wrap">
@@ -58,6 +58,10 @@
             </div>
             <a><img class="list-view-light-btn" src="/static/ikon/RightButton.png"></a>
         </main>
+    </div>
+
+    <div class="subscribe-modal">
+        
     </div>
 
 </body>

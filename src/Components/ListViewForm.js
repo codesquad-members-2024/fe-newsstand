@@ -1,24 +1,16 @@
 import jsonParse from "../util/jsonParse.js";
 import { navAnimation } from "./navAnimation.js";
-export function ListViewForm() {
+export function ListViewForm(subscriptionController) {
     let curCategoryIdx = 0
     let curCategoryDataIdx = 0
     let curCategoryTotalNum = 0
-    const categoryList = [
-        { category: "종합/경제", data: [] },
-        { category: "방송/통신", data: [] },
-        { category: "IT", data: [] },
-        { category: "영자지", data: [] },
-        { category: "스포츠/연예", data: [] },
-        { category: "매거진/전문지", data: [] },
-        { category: "지역", data: [] },
-    ];
+    const categoryList = [];
 
-    const main = async () => {
-        await initData();
+    const main = async (subscribeStatus) => {
+        await initData(subscribeStatus);
         renderNav();
         renderNews();
-        switchCategory(categoryList[0].category)
+        switchCategory(categoryList[0].category, subscribeStatus)
     };
 
     const renderNews = () => {
@@ -50,7 +42,7 @@ export function ListViewForm() {
         <div class="main-news-header">
             <a href = "${curNewsData.companyHref}" ><img src = "${curNewsData.companyImg}" id="list-view__company-logo"></img></a>
             <div class="edit-date">${curNewsData.editDate}</div>
-            <button class="subscribe-btn" name = "${curNewsData.companyName}">+ 구독하기</button>
+            ${subscriptionController.isSubscribeListButton(curNewsData.companyName)}
         </div>
         <a href = "${curNewsData.mainNewsSrc}" class="main-news-img"><img src="${curNewsData.mainNewsImg}" class="main-news-src"></img></a>
         <div class="main-news-title">${curNewsData.mainNewsTitle}</div>
@@ -63,30 +55,38 @@ export function ListViewForm() {
         navContainer.innerHTML = navTemplate;
     };
 
-    const initData = async () => {
+    const initData = async (subscribeStatus) => {
         const newsData = await jsonParse.parseJson("category");
-        const modifyData = spliceCompanyString(newsData);
-        spliteData(modifyData);
+        const modifyData = jsonParse.spliceCompanyString(newsData, 'category');
+        spliteData(modifyData, subscribeStatus);
         curCategoryTotalNum = categoryList[curCategoryIdx].data.length
     };
 
-    const spliteData = (allNewsInfo) => {
-        categoryList.forEach((curCategory) => {
-            allNewsInfo.forEach((curNewsData) => {
-                if (curNewsData.category.includes(curCategory.category)) {
-                    curCategory.data.push(curNewsData);
-                }
-            });
-        });
+    const spliteData = (allNewsInfo, subscribeStatus) => {
+        if(subscribeStatus === false) return categoryDataSplite(allNewsInfo)
+        return subscribeDataSplite(allNewsInfo)
     };
 
-    const spliceCompanyString = (newsData) => {
-        return newsData.map((curNewsData) => {
-            const spliceName = curNewsData.category.split("언론사")[0];
-            curNewsData.category = spliceName;
-            return curNewsData;
+    const subscribeDataSplite = (allNewsInfo) => {
+        const curSubscribeList = subscriptionController.getSubscripeList()
+        curSubscribeList.forEach(curSubscribePress => {
+            const pressNewsData = allNewsInfo.find(curNews => curNews.companyName === curSubscribePress)
+            categoryList.push({ category: curSubscribePress, data: [pressNewsData] })
+        })
+    }
+    
+    const categoryDataSplite = (allNewsInfo) => {
+        const category = ["종합/경제", "방송/통신", "IT", "영자지", "스포츠/연예", "매거진/전문지", "지역"];
+        category.forEach((curCategory) => {
+            const newsData = []
+            allNewsInfo.forEach((curNewsData) => {
+                if (curNewsData.category.includes(curCategory)) {
+                    newsData.push(curNewsData);
+                }
+            });
+            categoryList.push({ category: curCategory, data: [...newsData] })
         });
-    };
+    }
 
     const getNavTemplate = () => {
         const navTemplate = categoryList.reduce((acc, cur) => {
@@ -103,7 +103,7 @@ export function ListViewForm() {
 
     const isEndOfPage = () => {
         if(curCategoryTotalNum === curCategoryDataIdx) {
-            sortCategoryList(categoryList[curCategoryIdx + 1].category)
+            sortCategoryList(categoryList[curCategoryIdx + 1]?.category)
         } else if (curCategoryDataIdx < 0) { 
             sortCategoryList(categoryList[categoryList.length - 1].category)
         }
@@ -111,6 +111,7 @@ export function ListViewForm() {
     }
 
     const sortCategoryList = (id) => {
+        console.log(categoryList)
         while(categoryList[0].category !== id) {
             const prevCategoryData = categoryList.shift()
             categoryList.push(prevCategoryData)
@@ -119,11 +120,11 @@ export function ListViewForm() {
         curCategoryTotalNum = categoryList[curCategoryIdx].data.length
     }
 
-    const switchCategory = (id) => {
+    const switchCategory = (id, subscriptionModel) => {
         const curAnimationNav = navAnimation.swicthNavAnimation(id)
         sortCategoryList(id)
         renderNews()
-        navAnimation.updateCounter(curCategoryDataIdx, curCategoryTotalNum)
+        navAnimation.updateCounter(curCategoryDataIdx, curCategoryTotalNum, subscriptionModel)
         curAnimationNav.addEventListener("animationend", () => {
             updatePageNum("list-view-light-btn");
             renderNews()

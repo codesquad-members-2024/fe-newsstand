@@ -2,19 +2,19 @@ import jsonParse from "../util/jsonParse.js";
 import { FIRST_PAGE_NUM, LAST_PAGE_NUM } from "../util/contants.js";
 import { GRID_VIEW_BATCHSIZE } from "../util/contants.js";
 
-export function GridViewForm () {
+export function GridViewForm (subscribeController) {
     let currenPageNum = 0;
     const companyData = [];
 
-    const main = async () => {
-        const newsData = await initData()
+    const main = async (subscribeStatus) => {
+        const newsData = await initData(subscribeStatus)
         splitIntoChunks(newsData);
         renderGridView()
     }
 
     const setEventHandler = () => {
-        const updatePageBtn = document.querySelector(".company-grid-container");
-        updatePageBtn.addEventListener("click", checkLocationType);    
+        const updatePageBtn = document.querySelector(".gird-mode-main-container");
+        updatePageBtn.addEventListener("click", checkLocationType);
     }
 
     const checkLocationType = (event) => {
@@ -78,7 +78,7 @@ export function GridViewForm () {
             return acc + `
             <li class="list-${idx}">
             <img class = "logo-img" src = "${cur.img}" alt = ${cur.companyName}>
-            <button class = "subscribe"> + 구독하기</button>
+            ${subscribeController.isSubscribeGridButton(cur.companyName)}
             </li>
             `;
         }, "");

@@ -1,10 +1,8 @@
-@import "reset.css";
+@import "/src/css/reset.css";
 
 html,
 body {
     height: 100%;
-    margin: 0;
-    padding: 0;
 }
 
 .main {
@@ -73,13 +71,13 @@ button {
 .subscribe-mode-container__show-all-company {
     font-weight: bold;
     margin-right: 10px;
-    font-size: 15px;
 }
 
 .subscribe-mode-container__show-all-company,
 .subscribe-mode-container__show-subscribed-company {
     border: none;
     background-color: white;
+    font-size: 16px;
 }
 
 .company-name {
@@ -104,6 +102,11 @@ button {
     text-decoration: underline;
 }
 
+.item > span:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .sub-news:hover {
     text-decoration: underline;
 }
@@ -116,14 +119,13 @@ button {
     border: 1px;
     background: #F5F7F9;
     position: relative;
-    animation: firstMoveDown 2.5s infinite;
 }
 
-.second-top-news {
-    animation: secondMoveDown 2.4s infinite;
+.topNews-animation {
+    animation: MoveDown 1s forwards;
 }
 
-@keyframes firstMoveDown {
+@keyframes MoveDown {
     0% {
         top: 0;
     }
@@ -133,30 +135,16 @@ button {
     }
 }
 
-@keyframes secondMoveDown {
-    0% {
-        top: 0;
-    }
-
-    100% {
-        top: -55px;
-    }
-}
-
-.first-top-news:nth-of-type(1),
-.first-top-news:nth-of-type(2) {
+.second-top-news {
     animation-delay: 1s;
 }
 
-.second-top-news:nth-of-type(1),
-.second-top-news:nth-of-type(2) {
-    animation-delay: 2s;
-}
-
-.first-top-news:hover,
-.second-top-news:hover {
-    animation-play-state: paused;
-    z-index: 1;
+.top-news-container:hover {
+    .first-top-news,
+    .second-top-news {
+        animation-play-state: paused;
+        z-index: 1;
+    }
 }
 
 img {
@@ -172,13 +160,11 @@ ul {
     padding: 0;
 }
 
-
-
 nav>div {
     display: flex;
 }
 
-.company-grid-container {
+.gird-mode-main-container {
     display: flex;
     align-items: center;
     margin: 0 auto;
@@ -190,13 +176,13 @@ nav>div {
     height: 426px;
 }
 
-.company-grid-container>ul {
+.gird-mode-main-container>ul {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, 1fr);
 }
 
-.company-grid-container>ul>li {
+.gird-mode-main-container>ul>li {
     border-right: 1px solid gray;
     border-bottom: 1px solid gray;
 }
@@ -274,6 +260,7 @@ a>img {
     border: 1px solid rgb(209, 208, 208);
     width: 960px;
     height: 426px;
+
 }
 
 .list-mode-container>nav {
@@ -286,10 +273,12 @@ a>img {
 }
 
 .list-mode-main-container {
-    display: flex;
+    display: none;
     align-items: center;
     margin: 0 auto;
     position: relative;
+    width: 960px;
+    height: 426px;
 
 }
 
@@ -336,6 +325,7 @@ a>img {
     width: 350px;
     height: 40px;
     margin: 0 auto;
+    color: black;
 }
 
 .sub-news-container {
@@ -352,6 +342,9 @@ a>img {
     line-height: 22px;
     margin-left: 20px;
     margin-bottom: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .edit-date {
@@ -375,6 +368,9 @@ a>img {
 .list {
     display: flex;
     background: #f3f3f3;
+    overflow: scroll;
+    overflow: auto;
+    white-space: nowrap;
 }
 
 .item {
@@ -429,6 +425,7 @@ a>img {
 }
 
 .subscribe-btn {
+    display: flex;
     padding: 2px 7px;
     border: 1px solid gray;
     border-radius: 10px;
@@ -456,4 +453,88 @@ a>img {
     display: flex;
     z-index: 2;
     color: white;
+}
+
+.main-news-src:hover {
+    animation: zoomIn 1s forwards;
+}
+
+.main-news-container:hover >.main-news-title {
+    text-decoration: underline;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.05);
+    }
+}
+
+.subscribe-modal {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(1px);
+    z-index: 2;
+}
+
+.subscribe-container {
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    height: 140px;
+    border: 1px solid rgb(194, 192, 192);
+    box-shadow: 0px 0px 2px gray;
+    color: gray;
+    padding: 0 15px;
+}
+
+.unsubscribe-container {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 280px;
+    height: 80px;
+    border: 1px solid rgb(194, 192, 192);
+    border-bottom: none;
+    box-shadow: 0px 0px 2px gray;
+    color: gray;
+}
+
+.answer-container {
+    display: flex;
+    background: #F5F7F9;
+}
+
+.yes-btn, .no-btn {
+    border: 1px solid gray;
+    width: 141px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.5;
+}
+
+.yes-btn:hover {
+    text-decoration: underline;
+}
+.no-btn:hover {
+    text-decoration: underline;
+}
+
+.yes-btn {
+    border-right: none;
 }
