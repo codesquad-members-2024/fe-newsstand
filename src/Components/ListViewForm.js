@@ -57,7 +57,7 @@ export function ListViewForm(subscriptionController) {
 
     const initData = async (subscribeStatus) => {
         const newsData = await jsonParse.parseJson("category");
-        const modifyData = spliceCompanyString(newsData);
+        const modifyData = jsonParse.spliceCompanyString(newsData, 'category');
         spliteData(modifyData, subscribeStatus);
         curCategoryTotalNum = categoryList[curCategoryIdx].data.length
     };
@@ -87,14 +87,6 @@ export function ListViewForm(subscriptionController) {
             categoryList.push({ category: curCategory, data: [...newsData] })
         });
     }
-
-    const spliceCompanyString = (newsData) => {
-        return newsData.map((curNewsData) => {
-            const spliceName = curNewsData.category.split("언론사")[0];
-            curNewsData.category = spliceName;
-            return curNewsData;
-        });
-    };
 
     const getNavTemplate = () => {
         const navTemplate = categoryList.reduce((acc, cur) => {

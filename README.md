@@ -212,4 +212,17 @@ export default listViewForm;
  - [ ] "예, 해지하겠습니다." 를 누르면 즉시 구독이 해지되고, 목록의 다음순서 언론사가 바로 나타나도록 한다.
 
 
-## 
+- main.js
+  - 날짜, 상단 뉴스 실행(변화 없이 계속 실행되는 컴포넌트)
+  - 초기 상태를 구분하는 함수 실행(status.js에서가서 가져와 실행)
+
+- status.js
+  - 상태를 관리해 main박스에 어떤걸 그려줄지 결정한다. 
+
+- mainEventHandelers.js
+  - 이벤트핸들러를 관리하고 이벤트 콜백을 관리한다.
+
+     - topNewsForm
+     - dateView                  - SubScription
+main - mainEventHandlers(status) - GridViewForm
+                                 - ListViewForm - NavAnimation

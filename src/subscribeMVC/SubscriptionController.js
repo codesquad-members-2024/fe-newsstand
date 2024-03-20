@@ -21,7 +21,3 @@ export const onSubscribeButtonClick = async(target, subscriptionModel) => {
         subscribeModal.style.display = "flex"
     }
 }
-
-const subscribeActive = () => {
-    
-}

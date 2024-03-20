@@ -9,16 +9,8 @@ function TopNewsForm() {
 
     const initData = async() => {
         const newsData = await jsonParse.parseJson("companiesNewsInfo");
-        const processedNewsData = spliceCompanyString(newsData);
+        const processedNewsData = jsonParse.spliceCompanyString(newsData, 'press');
         topNewsData.forEach(cur => cur.newsData = processedNewsData.splice(0, 5));
-    }
-
-    const spliceCompanyString = (newsData) => {
-        return newsData.map((element) => {
-            const pressName = element.press.split("언론사")[0].trim();
-            element.press = pressName;
-            return element;
-        });
     }
 
     const updateNewsData = () => {
