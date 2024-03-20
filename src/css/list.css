@@ -12,7 +12,7 @@
   height: 40px;
 }
 
-.newsgroup-list-cat {
+.newsgroup-list-category {
   position: relative;
   padding: 10px;
   font-size: 15px;
@@ -29,13 +29,13 @@
   }
 }
 
-.newsgroup-list-cat.clicked {
+.newsgroup-list-category.clicked {
   position: relative;
   z-index: 1;
   color: #f6f7f9;
 }
 
-.newsgroup-list-cat.clicked::after {
+.newsgroup-list-category.clicked::after {
   content: "";
   position: absolute;
   top: 0;
@@ -47,7 +47,7 @@
   animation: progress 5s linear;
 }
 
-.newsgroup-list-cat:focus {
+.newsgroup-list-category:focus {
   background-color: #7891e8;
   min-width: fit-content;
   width: 166px;

@@ -1,4 +1,4 @@
-export const listCat = [
+export const listCategory = [
   {
     pressName: "데일리안",
     logoImageSrc:
@@ -116,7 +116,7 @@ export const listCat = [
       "Seoul issues weather advisory as yellow dust sweeps Korean Peninsula",
       "Samsung to secure $6 billion U.S. subsidy for Taylor plant and beyond",
       "5 rescued, 1 missing from capsized fishing boat off Pohang",
-      "5 rescued, 1 missing from capsized fishing boat off Pohang"
+      "5 rescued, 1 missing from capsized fishing boat off Pohang",
     ],
   },
   {

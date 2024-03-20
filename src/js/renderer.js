@@ -1,4 +1,4 @@
-import { newsLogos, listCat } from "../data/newsdata.js";
+import { newsLogos, listCategory } from "../data/newsdata.js";
 
 const PAGE_SIZE = 24;
 const shuffleLogos = shuffle(newsLogos.flat());
@@ -48,7 +48,7 @@ function createList(index) {
   const listLeft = document.querySelector(".newsgroup-list-left");
   const listRight = document.querySelector(".newsgroup-list-right");
 
-  const item = listCat[index];
+  const item = listCategory[index];
 
   const logoImgTag = `<img src="${item.logoImageSrc}">`;
   const spanTag = `<span>${item.editedTime}</span>`;
@@ -69,9 +69,7 @@ function createList(index) {
   listRight.appendChild(descDiv);
 }
 
-function moveCategory() {
-  
-}
+function moveCategory() {}
 
 function renderList(cat) {
   const newsgroupList = document.querySelector(".newsgroup-list");
@@ -91,7 +89,7 @@ function renderList(cat) {
 
   if (cat === 0)
     document.querySelector(".list-left-btn").style.visibility = "hidden";
-  else if (cat === listCat.length - 1)
+  else if (cat === listCategory.length - 1)
     document.querySelector(".list-right-btn").style.visibility = "hidden";
 
   createList(cat);

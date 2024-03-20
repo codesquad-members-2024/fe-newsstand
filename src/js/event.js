@@ -1,8 +1,8 @@
-import { newsLogos, listCat } from "../data/newsdata.js";
+import { newsLogos, listCategory } from "../data/newsdata.js";
 import { renderGrid, renderList } from "./renderer.js";
 
 let currentPage = 0;
-let currentCat = 0;
+let currentCategory = 0;
 
 const clickHandler = {
   gridViewClick() {
@@ -11,8 +11,8 @@ const clickHandler = {
   },
 
   listViewClick() {
-    currentCat = 0;
-    renderList(currentCat);
+    currentCategory = 0;
+    renderList(currentCategory);
   },
 
   gridRightButtonClick() {
@@ -30,21 +30,21 @@ const clickHandler = {
   },
 
   listRightButtonClick() {
-    if (currentCat < listCat.length) {
-      currentCat++;
+    if (currentCategory < listCategory.length) {
+      currentCategory++;
     }
-    renderList(currentCat);
+    renderList(currentCategory);
   },
 
   listLeftButtonClick() {
-    if (currentCat > 0) {
-      currentCat--;
+    if (currentCategory > 0) {
+      currentCategory--;
     }
-    renderList(currentCat);
+    renderList(currentCategory);
   },
 
   clickCat(event) {
-    const listCat = event.target.closest(".newsgroup-list-cat");
+    const listCat = event.target.closest(".newsgroup-list-category");
     listCat.classList.add("clicked");
     setTimeout(() => {
       listCat.classList.remove("clicked");
@@ -56,7 +56,7 @@ function clickEvent() {
   const [listViewBtn, gridViewBtn] =
     document.querySelectorAll(".view-btn > button");
   const newsgroup = document.querySelector(".newsgroup");
-  const listClick = document.querySelectorAll(".newsgroup-list-cat");
+  const listClick = document.querySelectorAll(".newsgroup-list-category");
 
   gridViewBtn.addEventListener("click", clickHandler.gridViewClick);
   listViewBtn.addEventListener("click", clickHandler.listViewClick);
@@ -88,7 +88,8 @@ function clickEvent() {
   });
 
   document.addEventListener("click", function (event) {
-    if (event.target.classList.contains("subscribe-btn")) { // contains DOM에 button에 있을 때
+    if (event.target.classList.contains("subscribe-btn")) {
+      // contains DOM에 button에 있을 때
       const subscribeBtn = event.target;
       if (subscribeBtn.innerText === "+ 구독하기") {
         subscribeBtn.innerText = "+ 해지하기";
