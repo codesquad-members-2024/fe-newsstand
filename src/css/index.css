@@ -118,18 +118,19 @@ body {
 
 .press-container__press-menu {
   display: flex;
+  justify-content: space-between;
+  width: 216px;
   font-size: 16px;
 }
 
-.press-container__press-menu > .press-container__all-press {
+.press-container__press-menu > span[aria-selected="true"] {
   font-weight: var(--bold-font-weight);
   color: #14212b;
 }
 
-.press-container__press-menu > .press-container__subscribed-press {
-  font-weight: var(--def-font-weight);
+.press-container__press-menu > span[aria-selected="false"] {
+  font-weight: var(--bold-font-weight);
   color: #879298;
-  margin-left: 24px;
 }
 
 .press-container__view-menu {
@@ -148,6 +149,7 @@ body {
 }
 
 .press-container__logo {
+  height: 95px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -161,8 +163,7 @@ body {
   justify-content: center;
 }
 
-.press-container__subscribe-button {
-  width: 72px;
+.press-container__subscription-toggle-button {
   height: 20px;
   background-color: #fff;
   border: var(--border);
@@ -171,7 +172,14 @@ body {
   display: none;
 }
 
-.press-container__logo:hover > .press-container__subscribe-button {
+.press-container__plus-image {
+  width: 12px;
+  height: 12px;
+  margin-left: -4px;
+  margin-right: 2px;
+}
+
+.press-container__logo:hover > .press-container__subscription-toggle-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -191,7 +199,7 @@ body {
   border: var(--border);
 }
 
-.press-container__category-tab {
+.press-container__tab-block {
   height: 40px;
   border: var(--border);
   background-color: #f5f7f9;
@@ -200,7 +208,7 @@ body {
   font-weight: var(--def-font-weight);
 }
 
-.press-container__active-category {
+.press-container__active-tab {
   width: 166px;
   background-color: #7890e7;
   color: #fff;
@@ -213,7 +221,7 @@ body {
   background-color: #4362D0;
 }
 
-.press-container__category {
+.press-container__tab {
   height: 40px;
   padding: 0px 16px;
   display: flex;
@@ -221,7 +229,11 @@ body {
   color: #879298;
 }
 
-.press-container__category-description {
+.press-container__tab:hover {
+  text-decoration: underline;
+}
+
+.press-container__tab-description {
   width: 134px;
   height: 40px;
   position: relative;
@@ -273,12 +285,27 @@ body {
   height: 200px;
 }
 
+.press-container__headline-thumbnail:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: transform .35s;
+}
+
 .press-container__headline-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   height: 38.75px;
   font-size: 16px;
   margin-top: 16px;
   color: #14212b;
   text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.press-container__headline-title:hover {
+  text-decoration: underline;
 }
 
 .press-container__sidenews {
@@ -305,14 +332,89 @@ body {
   overflow: hidden;
 }
 
+.press-container__sidenews-title:hover {
+  text-decoration: underline;
+}
+
 .press-container__left-arrow {
-  position: absolute;
-  top: 430px;
-  left: 12%;
+  position: relative;
+  top: -200px;
+  left: -100px;
 }
 
 .press-container__right-arrow {
-  position: absolute;
-  top: 430px;
-  right: 12%;
+  position: relative;
+  top: -200px;
+  left: 980px;
+}
+
+.notification__subscribe-snackbar {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  padding: 16px 24px;
+  background-color: #4362D0;
+}
+
+.notification__unsubscribe-alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  font-weight: 500;
+  border: var(--border);
+}
+
+.notification__unsubscribe-content {
+  width: 320px;
+  height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  color: #5F6E76;
+  border: var(--border);
+}
+
+.notification__unsubscribe-content > span > strong {
+  font-size: 700;
+  color: #14212B;
+}
+
+.notification__unsubscribe-clickable {
+  height: 48px;
+  display: flex;
+  background-color: #F5F7F9;
+}
+
+.notification__unsubscribe-submit {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #5F6E76;
+  border: var(--border);
+}
+
+.notification__unsubscribe-submit:hover {
+  text-decoration: underline;
+}
+
+.notification__unsubscribe-cancel {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #14212B;
+  border: var(--border);
+}
+
+.notification__unsubscribe-cancel:hover {
+  text-decoration: underline;
 }
