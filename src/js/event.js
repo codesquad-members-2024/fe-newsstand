@@ -43,13 +43,13 @@ const clickHandler = {
     renderList(currentCategory);
   },
 
-  clickCat(event) {
+  clickCategory(event) {
     const listCat = event.target.closest(".newsgroup-list-category");
     listCat.classList.add("clicked");
     setTimeout(() => {
       listCat.classList.remove("clicked");
     }, 5000);
-  },
+  }
 };
 
 function clickEvent() {
@@ -62,7 +62,7 @@ function clickEvent() {
   listViewBtn.addEventListener("click", clickHandler.listViewClick);
 
   listClick.forEach((button) => {
-    button.addEventListener("click", clickHandler.clickCat);
+    button.addEventListener("click", clickHandler.clickCategory);
   });
 
   newsgroup.addEventListener("click", function (event) {
@@ -100,4 +100,4 @@ function clickEvent() {
   });
 }
 
-export default clickEvent;
+export { clickEvent, clickHandler };

@@ -1,7 +1,9 @@
 import { newsLogos, listCategory } from "../data/newsdata.js";
+import { clickHandler } from "./event.js";
 
 const PAGE_SIZE = 24;
 const shuffleLogos = shuffle(newsLogos.flat());
+let timer = null;
 
 function shuffle(array) {
   array.sort(() => Math.random() - 0.5);
@@ -24,6 +26,11 @@ function createGrid(index) {
 }
 
 function renderGrid(page) {
+  if (timer) {
+    clearTimeout(timer);
+    timer = null;
+  }
+
   const newsgroupGrid = document.querySelector(".newsgroup-grid");
   newsgroupGrid.style.display = "";
   newsgroupGrid.innerHTML = "";
@@ -69,8 +76,6 @@ function createList(index) {
   listRight.appendChild(descDiv);
 }
 
-function moveCategory() {}
-
 function renderList(cat) {
   const newsgroupList = document.querySelector(".newsgroup-list");
   newsgroupList.style.display = "";
@@ -91,8 +96,14 @@ function renderList(cat) {
     document.querySelector(".list-left-btn").style.visibility = "hidden";
   else if (cat === listCategory.length - 1)
     document.querySelector(".list-right-btn").style.visibility = "hidden";
-
+  
   createList(cat);
+
+  // auto page transition
+  if (cat === listCategory.length - 1)
+    timer = setTimeout(() => clickHandler.listViewClick(), 5000);
+  else
+    timer = setTimeout(() => clickHandler.listRightButtonClick(), 5000);
 }
 
 export { renderGrid, renderList };
