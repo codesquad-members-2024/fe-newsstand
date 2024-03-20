@@ -1,0 +1,45 @@
+{
+  "gridSubs": [
+    {
+      "id": "7681",
+      "pressName": "노컷뉴스",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/079.png"
+    },
+    {
+      "id": "be3f",
+      "pressName": "스포츠서울",
+      "brandMark": "https://s.pstatic.net/static/newsstand/up/2020/0708/nsd94830278.png"
+    },
+    {
+      "id": "38a3",
+      "pressName": "IT조선",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/917.png"
+    },
+    {
+      "id": "577c",
+      "pressName": "독서신문",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/955.png"
+    },
+    {
+      "id": "124b",
+      "pressName": "Arirang TV",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/934.png"
+    },
+    {
+      "id": "b440",
+      "pressName": "IT조선",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/917.png"
+    },
+    {
+      "id": "1035",
+      "pressName": "한경잡앤조이",
+      "brandMark": "https://s.pstatic.net/static/newsstand/up/2020/0615/nsd10319824.png"
+    },
+    {
+      "id": "b57d",
+      "pressName": "코리아타임스",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/040.png"
+    }
+  ],
+  "listSubs": []
+}

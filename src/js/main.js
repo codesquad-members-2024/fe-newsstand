@@ -1,15 +1,16 @@
-import { initPressGridView, switchToGridByViewer } from "./viewPressGrid.js";
-import { viewHeader } from "./viewHeader.js";
-import { initAndRollNews } from "./viewRollingNews.js";
-import { switchToListByViewer, initPressListView } from "./viewPressList.js";
+import { viewHeader } from "./header.js";
+import { initAndRollNews } from "./rollingNews.js";
+import { initViewer, initSubsTap } from "./viewerAndTap.js";
+import { initPressView } from "./pressWrap.js";
+import { subscribeGridPress } from "./gridSubscription.js";
 
 function main() {
   viewHeader();
-  initPressGridView();
   initAndRollNews();
-  switchToListByViewer();
-  switchToGridByViewer();
-  initPressListView();
+  initViewer();
+  initSubsTap();
+  initPressView();
+  subscribeGridPress();
 }
 
 main();

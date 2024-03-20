@@ -1,86 +1,73 @@
-let currentPage = 0;
-const itemsPerPage = 24;
+import { store } from "../../data/store.js";
 const LAST_PAGE = 3;
 const FIRST_PAGE = 0;
 
-const logoSrcArr = await getLogoImgSrc();
-const gridWrap = document.querySelector(".press-grid-wrap");
-const nextButton = document.querySelector(".right-button");
-const prevButton = document.querySelector(".left-button");
-const pageData = { currentPage, itemsPerPage };
+export function initAllPressGridView(pressArr, pageData) {
+  const nextButton = document.querySelector(".right-button");
+  const prevButton = document.querySelector(".left-button");
+  const gridWrap = document.querySelector(".grid");
 
-export async function initPressGridView() {
-  viewPressLogo(pageData, logoSrcArr, gridWrap);
+  viewPressLogo(pageData, pressArr, gridWrap);
 
-  nextButton.addEventListener("click", gotoNextGridPage);
+  nextButton.addEventListener("click", (event) =>
+    gotoNextGridPage(event, pageData, pressArr, gridWrap)
+  );
 
-  prevButton.addEventListener("click", gotoPrevGridPage);
+  prevButton.addEventListener("click", (event) =>
+    gotoPrevGridPage(event, pageData, pressArr, gridWrap)
+  );
 }
 
-export function switchToGridByViewer() {
-  const girdViewer = document.querySelector(".viewer-grid");
-  const listViewer = document.querySelector(".viewer-list");
-  const listWrap = document.querySelector(".press-list-wrap");
-
-  girdViewer.addEventListener("click", (event) => {
-    girdViewer.classList.toggle("on");
-    listViewer.classList.toggle("on");
-    listWrap.classList.toggle("display-none");
-    gridWrap.classList.toggle("display-none");
-
-    renderBtnByGridPage();
-  });
-}
-
-async function getLogoImgSrc() {
+export async function getLogoImgSrc() {
   try {
-    const response = await fetch("./data/logoImg.json");
+    const response = await fetch("./data/gridPress.json");
     const imgData = await response.json();
-    const imgSrcArr = Object.values(imgData).map((obj) => obj.src);
-    const shuffledImgSrcArr = imgSrcArr.sort(() => Math.random() - 0.5);
-    return shuffledImgSrcArr;
+    const shuffledImgData = imgData.sort(() => Math.random() - 0.5);
+    return shuffledImgData;
   } catch (err) {
     console.error("JSON 파일을 가져오는 도중 에러 발생.", err);
   }
 }
 
-function viewPressLogo(pageData, logoSrcArr) {
-  const startIndex = pageData.currentPage * itemsPerPage;
+function viewPressLogo(pageData, logoSrcArr, gridWrap) {
+  const startIndex = pageData.currentPage * pageData.itemsPerPage;
   const endIndex = startIndex + pageData.itemsPerPage;
 
-  logoSrcArr.slice(startIndex, endIndex).forEach(addPressLogoAndBox);
+  const pressBoxesHtml = logoSrcArr
+    .slice(startIndex, endIndex)
+    .map((pressObj) => {
+      return `<div class="press-box">
+    <img class="press-logo" src="${pressObj.brandMark}" alt="${pressObj.pressName}">
+    <span class="subs pointer">+ 구독하기</span>
+  </div>`;
+    })
+    .join("");
+
+  gridWrap.innerHTML = pressBoxesHtml;
+  renderBtnByGridPage(pageData);
 }
 
-const addPressLogoAndBox = (src) => {
-  const newPressBox = document.createElement("div");
-  const newsLogo = document.createElement("img");
-  const subsBtn = document.createElement("span");
-  newsLogo.src = src;
-  subsBtn.innerText = "+ 구독하기";
-  newPressBox.classList.add("press-box");
-  newsLogo.classList.add("press-logo");
-  subsBtn.classList.add("subs", "pointer");
-  newPressBox.append(newsLogo, subsBtn);
-  gridWrap.appendChild(newPressBox);
-
-  renderBtnByGridPage();
-};
-
-const gotoNextGridPage = (event) => {
-  if (!gridWrap.classList.contains("display-none")) {
+function gotoNextGridPage(event, pageData, pressArr, gridWrap) {
+  const state = store.getState();
+  if (state.viewType === "grid" && state.subsType === "off") {
     pageData.currentPage++;
     clearPressGrid();
-    viewPressLogo(pageData, logoSrcArr, gridWrap);
+    viewPressLogo(pageData, pressArr, gridWrap);
+  } else {
+    return;
   }
-};
+}
 
-const gotoPrevGridPage = (event) => {
-  if (!gridWrap.classList.contains("display-none")) {
+function gotoPrevGridPage(event, pageData, pressArr, gridWrap) {
+  const state = store.getState();
+  if (state.viewType === "grid" && state.subsType === "off") {
     pageData.currentPage--;
     clearPressGrid();
-    viewPressLogo(pageData, logoSrcArr, gridWrap);
+    viewPressLogo(pageData, pressArr, gridWrap);
+  } else {
+    return;
   }
-};
+}
 
 function clearPressGrid() {
   const pressBoxes = document.querySelectorAll(".press-box");
@@ -89,7 +76,9 @@ function clearPressGrid() {
   }
 }
 
-function renderBtnByGridPage() {
+function renderBtnByGridPage(pageData) {
+  const nextButton = document.querySelector(".right-button");
+  const prevButton = document.querySelector(".left-button");
   if (pageData.currentPage === LAST_PAGE) nextButton.classList.add("hidden");
   if (pageData.currentPage !== FIRST_PAGE)
     prevButton.classList.remove("hidden");

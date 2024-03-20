@@ -7,7 +7,7 @@ div.display-none {
   display: none;
 }
 
-.press-grid-wrap {
+/* .press-grid-wrap {
   width: 930px;
   height: 388px;
   display: grid;
@@ -19,6 +19,22 @@ div.display-none {
 .press-list-wrap {
   width: 930px;
   height: 388px;
+  border: 1px solid rgba(210, 218, 224, 1);
+} */
+
+.press-wrap {
+  width: 930px;
+  height: 388px;
+}
+
+.press-wrap.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border-top: 1px solid rgba(210, 218, 224, 1);
+  border-left: 1px solid rgba(210, 218, 224, 1);
+}
+
+.press-wrap.list {
   border: 1px solid rgba(210, 218, 224, 1);
 }
 
