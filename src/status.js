@@ -1,8 +1,9 @@
 function NewsStandStateManager() {
     const status = { subscribeStatus: false, listMode: false };
     
-    const setStatus = (key, value) => {
-        status[key] = value;
+    const setStatus = (subscribeBoolean, listModeBoolean) => {
+        status.subscribeStatus = subscribeBoolean;
+        status.listMode = listModeBoolean;
     };
     
     const getStatus = () => {

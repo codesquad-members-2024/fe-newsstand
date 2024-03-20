@@ -223,6 +223,17 @@ export default listViewForm;
   - 이벤트핸들러를 관리하고 이벤트 콜백을 관리한다.
 
      - topNewsForm
-     - dateView                  - SubScription
+     - dateView                 
 main - mainEventHandlers(status) - GridViewForm
-                                 - ListViewForm - NavAnimation
+                  |              - ListViewForm - NavAnimation
+              SubScription
+
+- diplay 4가지 경우의 수
+  - 1. 전체 언론사 뷰(그리드 뷰 기본 상태)
+    - `subscribeStatus: false, listMode: false`
+  - 2. 내가 구독한 언론사 뷰(리스트 뷰 기본 상태)
+    - `subscribeStatus: true, listMode: true`
+  - 3. 그리드 뷰(subscripbe(unsubscripbe) 유지한 상태)
+    - `subscribeStatus: 상태유지, listMode: false`
+  - 4. 리스트 뷰(subscripbe(unsubscripbe) 유지한 상태)
+    - `subscribeStatus: 상태유지, listMode: true`
