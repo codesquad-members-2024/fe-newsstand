@@ -69,6 +69,10 @@ function createList(index) {
   listRight.appendChild(descDiv);
 }
 
+function moveCategory() {
+  
+}
+
 function renderList(cat) {
   const newsgroupList = document.querySelector(".newsgroup-list");
   newsgroupList.style.display = "";

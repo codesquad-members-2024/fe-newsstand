@@ -12,6 +12,10 @@
   padding: 10px;
   font-size: 30px;
   width: 47%;
+  :hover {
+    text-decoration: underline;
+    animation-play-state: paused;
+  }
 }
 
 @keyframes roll {

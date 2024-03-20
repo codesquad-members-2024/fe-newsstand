@@ -20,6 +20,9 @@
   border: 1px solid #f6f7f9;
   transition: background-color 0.3s ease;
 
+  :hover {
+    text-decoration: underline;
+  }
   span {
     position: relative;
     z-index: 2;
@@ -29,7 +32,7 @@
 .newsgroup-list-cat.clicked {
   position: relative;
   z-index: 1;
-  background-color: #203fac;
+  color: #f6f7f9;
 }
 
 .newsgroup-list-cat.clicked::after {
@@ -92,9 +95,19 @@
     height: 200px;
     width: 320px;
   }
+  img:hover {
+    height: 210px;
+    width: 336px;
+  }
+  p:hover {
+    text-decoration: underline;
+  }
 }
 
 .newsgroup-list-right {
   width: 50%;
   margin-left: 2rem;
+  div p:hover {
+    text-decoration: underline;
+  }
 }
