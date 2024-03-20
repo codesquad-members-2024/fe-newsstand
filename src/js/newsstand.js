@@ -1,8 +1,4 @@
-import { showGrid } from "./show.js";
-import rollingNews from "./rollingnews.js";
-import clickEvent from "./paging.js";
-
-function initNewsstand() {
+function init() {
   const refreshButton = document.querySelector(".refresh-btn");
 
   const daysOfWeek = [
@@ -25,12 +21,4 @@ function initNewsstand() {
   });
 }
 
-function main() {
-  initNewsstand();
-  showGrid(0);
-  setInterval(rollingNews("left"), 5000);
-  setTimeout(() => setInterval(rollingNews("right"), 5000), 1000);
-  clickEvent();
-}
-
-main();
+export default init;

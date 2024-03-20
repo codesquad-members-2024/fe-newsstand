@@ -12,7 +12,7 @@
   height: 40px;
 }
 
-.newsgroup-list-cat {
+.newsgroup-list-category {
   position: relative;
   padding: 10px;
   font-size: 15px;
@@ -20,29 +20,37 @@
   border: 1px solid #f6f7f9;
   transition: background-color 0.3s ease;
 
+  :hover {
+    text-decoration: underline;
+  }
   span {
     position: relative;
     z-index: 2;
   }
 }
 
-.newsgroup-list-click {
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background-color: #203fac;
-    animation: progress 5s linear;
-  }
+.newsgroup-list-category.clicked {
+  position: relative;
+  z-index: 1;
+  color: #f6f7f9;
 }
-.newsgroup-list-cat:focus {
+
+.newsgroup-list-category.clicked::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: #203fac;
+  animation: progress 5s linear;
+}
+
+.newsgroup-list-category:focus {
   background-color: #7891e8;
   min-width: fit-content;
-  width: 130px;
+  width: 166px;
 }
 
 @keyframes progress {
@@ -50,7 +58,7 @@
     width: 0;
   }
   to {
-    width: 130px;
+    width: 166px;
   }
 }
 
@@ -65,12 +73,13 @@
   span {
     margin-left: 2rem;
   }
-  .subscribe-btn {
-    margin-left: 2rem;
-    background: #f6f7f9;
-    border: 1px solid #6e8091;
-    border-radius: 50px;
-  }
+}
+
+.newsgroup-list-top .subscribe-btn {
+  margin-left: 2rem;
+  background: #f6f7f9;
+  border: 1px solid #6e8091;
+  border-radius: 50px;
 }
 
 .newsgroup-list-desc {
@@ -86,9 +95,19 @@
     height: 200px;
     width: 320px;
   }
+  img:hover {
+    height: 210px;
+    width: 336px;
+  }
+  p:hover {
+    text-decoration: underline;
+  }
 }
 
 .newsgroup-list-right {
   width: 50%;
   margin-left: 2rem;
+  div p:hover {
+    text-decoration: underline;
+  }
 }

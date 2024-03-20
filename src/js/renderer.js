@@ -1,4 +1,4 @@
-import { newsLogos, listCat } from "./data.js";
+import { newsLogos, listCategory } from "../data/newsdata.js";
 
 const PAGE_SIZE = 24;
 const shuffleLogos = shuffle(newsLogos.flat());
@@ -8,49 +8,22 @@ function shuffle(array) {
   return array;
 }
 
-function createNewsLogo(index) {
+function createGrid(index) {
   const newsgroupGrid = document.querySelector(".newsgroup-grid");
   const newsGroupLogo = document.createElement("div");
   newsGroupLogo.classList.add("newsgroup-grid_logo");
 
   if (index < shuffleLogos.length) {
-    const imgTag = document.createElement("img");
-    imgTag.src = shuffleLogos[index];
+    const imgTag = `<img src="${shuffleLogos[index]}">`;
+    const subscribeBtn = `<button class="subscribe-btn">+ 구독하기</button>`;
+    const spanTag = `<span>${subscribeBtn}</span>`;
 
-    const subscribeBtn = document.createElement("button");
-    subscribeBtn.classList.add("subscribe-btn");
-    subscribeBtn.textContent = "+ 구독하기";
-
-    const spanTag = document.createElement("span");
-    spanTag.appendChild(subscribeBtn);
-    newsGroupLogo.append(imgTag, spanTag);
+    newsGroupLogo.innerHTML = imgTag + spanTag;
   }
-
   newsgroupGrid.appendChild(newsGroupLogo);
 }
 
-function createList(index) {
-  const listLeft = document.querySelector(".newsgroup-list-left");
-  const listRight = document.querySelector(".newsgroup-list-right");
-
-  const item = listCat[index];
-  const imgTag = document.createElement("img");
-  imgTag.src = item.url;
-  const pTagleft = document.createElement("p");
-  pTagleft.textContent = item.description[0];
-  const descDiv = document.createElement("div");
-  for (let i = 1; i < item.description.length; i++) {
-    const pTag = document.createElement("p");
-    pTag.textContent = item.description[i];
-    descDiv.appendChild(pTag);
-  }
-
-  listLeft.appendChild(imgTag);
-  listLeft.appendChild(pTagleft);
-  listRight.appendChild(descDiv);
-}
-
-function showGrid(page) {
+function renderGrid(page) {
   const newsgroupGrid = document.querySelector(".newsgroup-grid");
   newsgroupGrid.style.display = "";
   newsgroupGrid.innerHTML = "";
@@ -61,7 +34,7 @@ function showGrid(page) {
   document.querySelector(".grid-right-btn").style.visibility = "visible";
 
   for (let index = 0; index < PAGE_SIZE; index++) {
-    createNewsLogo(page * PAGE_SIZE + index);
+    createGrid(page * PAGE_SIZE + index);
   }
 
   if (page === 0)
@@ -70,14 +43,43 @@ function showGrid(page) {
     document.querySelector(".grid-right-btn").style.visibility = "hidden";
 }
 
-function showList(cat) {
+function createList(index) {
+  const listTop = document.querySelector(".newsgroup-list-top");
+  const listLeft = document.querySelector(".newsgroup-list-left");
+  const listRight = document.querySelector(".newsgroup-list-right");
+
+  const item = listCategory[index];
+
+  const logoImgTag = `<img src="${item.logoImageSrc}">`;
+  const spanTag = `<span>${item.editedTime}</span>`;
+  const subscribeBtn = `<button class="subscribe-btn">+ 구독하기</button>`;
+  const imgTag = `<img src="${item.url}">`;
+  const pTagleft = `<p>${item.description[0]}</p>`;
+
+  const descDiv = document.createElement("div");
+
+  for (let i = 1; i < item.description.length; i++) {
+    const pTag = document.createElement("p");
+    pTag.textContent = item.description[i];
+    descDiv.appendChild(pTag);
+  }
+
+  listTop.innerHTML = logoImgTag + spanTag + subscribeBtn;
+  listLeft.innerHTML = imgTag + pTagleft;
+  listRight.appendChild(descDiv);
+}
+
+function moveCategory() {}
+
+function renderList(cat) {
   const newsgroupList = document.querySelector(".newsgroup-list");
   newsgroupList.style.display = "";
-
+  const newsgroupListTop = document.querySelector(".newsgroup-list-top");
   const newsgroupListleft = document.querySelector(".newsgroup-list-left");
   const newsgroupListright = document.querySelector(".newsgroup-list-right");
-  newsgroupListleft.innerHTML = '';
-  newsgroupListright.innerHTML = '';
+  newsgroupListTop.innerHTML = "";
+  newsgroupListleft.innerHTML = "";
+  newsgroupListright.innerHTML = "";
 
   document.querySelector(".newsgroup-grid").style.display = "none";
   document.querySelector(".grid-left-btn").style.visibility = "hidden";
@@ -87,10 +89,10 @@ function showList(cat) {
 
   if (cat === 0)
     document.querySelector(".list-left-btn").style.visibility = "hidden";
-  else if (cat === listCat.length - 1)
+  else if (cat === listCategory.length - 1)
     document.querySelector(".list-right-btn").style.visibility = "hidden";
 
   createList(cat);
 }
 
-export { showGrid, showList };
+export { renderGrid, renderList };
