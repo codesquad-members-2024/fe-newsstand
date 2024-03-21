@@ -1,6 +1,7 @@
 import { SUBSCRIBE_MODAL_DELAY, delay } from "../util/contants.js";
 import subscriptionModel from "./SubscriptionModel.js";
 import mainController from "../mainController.js";
+
 const subscribeModal = document.querySelector(".subscribe-modal");
 
 const showModal = () => (subscribeModal.style.display = "flex");
@@ -54,7 +55,9 @@ const handleUnsubscribeResponse = (event, press) => {
     if (className === "yes-btn") {
         subscriptionModel.unsubscribe(press);
         hideModal();
-        mainController.navigationMap.SHOW_SUBSCRIBED_COMPANY();
+        subscriptionModel.getSubscripeList().length === 0
+            ? mainController.navigationMap.SHOW_All_COMPANY()
+            : mainController.navigationMap.SHOW_SUBSCRIBED_COMPANY();
     } else {
         hideModal();
     }

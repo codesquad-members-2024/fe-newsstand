@@ -17,8 +17,8 @@ export const navAnimation = {
         return selectCategory
     },
 
-    updateCounter(curPageNum, totalPageNum, subscribeStatus) {
+    updateCounter(curPageNum, totalPageNum) {
         const activeItem = document.querySelector(".item > .active")
-        activeItem.innerText = subscribeStatus ? `>` : `${curPageNum + 1}/${totalPageNum}`
+        activeItem.innerText = activeItem.innerText === ">" ? `>` : `${curPageNum + 1}/${totalPageNum}`
     },
 };

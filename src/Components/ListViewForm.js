@@ -11,7 +11,7 @@ export function ListViewForm() {
         await initData(subscribeStatus);
         renderNav(subscribeStatus);
         renderNews();
-        switchCategory(categoryList[0].category, subscribeStatus)
+        switchCategory(categoryList[0].category)
     };
 
     const renderNav = (subscribeStatus) => {
@@ -128,11 +128,11 @@ export function ListViewForm() {
         curCategoryTotalNum = categoryList[curCategoryIdx].data.length
     }
 
-    const switchCategory = (id, subscribeStatus) => {
+    const switchCategory = (id) => {
         const curAnimationNav = navAnimation.swicthNavAnimation(id)
         sortCategoryList(id)
         renderNews()
-        navAnimation.updateCounter(curCategoryDataIdx, curCategoryTotalNum, subscribeStatus)
+        navAnimation.updateCounter(curCategoryDataIdx, curCategoryTotalNum, )
         curAnimationNav.addEventListener("animationend", () => {
             updatePageNum("list-view-light-btn");
             renderNews()
@@ -169,6 +169,7 @@ export function ListViewForm() {
 
         const categoryContainer = document.querySelector(".list");
         categoryContainer.addEventListener("click", (e) => {
+            if (e.target.className === "list") return;
             if (e.target.tagName === "SPAN") return switchCategory(e.target.closest(".item").id)
             return switchCategory(e.target.id)
         });

@@ -1,5 +1,4 @@
 import jsonParse from "../util/jsonParse.js";
-import { FIRST_PAGE_NUM, LAST_PAGE_NUM } from "../util/contants.js";
 import { GRID_VIEW_BATCHSIZE } from "../util/contants.js";
 import subscriptionModel from "../subscription/SubscriptionModel.js";
 export function GridViewForm () {
@@ -9,6 +8,7 @@ export function GridViewForm () {
     const companyData = [];
 
     const main = async (subscribeStatus) => {
+        companyData.splice(0);
         const newsData = await initData(subscribeStatus)
         splitIntoChunks(newsData);
         renderGridView()
@@ -30,8 +30,14 @@ export function GridViewForm () {
         const leftBtnBox = document.querySelector(".left-btn");
         const lightBtnBox = document.querySelector(".light-btn");
     
-        if (curPageNum === firstPageNum) leftBtnBox.style.display = "none";
-        if (curPageNum === lastPageNum) lightBtnBox.style.display = "none";
+        if (curPageNum === firstPageNum) {
+            leftBtnBox.style.display = "none";
+            lightBtnBox.style.display = "flex";
+        }
+        if (curPageNum === lastPageNum) {
+            leftBtnBox.style.display = "flex";
+            lightBtnBox.style.display = "none";
+        }
         if (curPageNum === firstPageNum && curPageNum === lastPageNum) {
             leftBtnBox.style.display = "none";
             lightBtnBox.style.display = "none";
@@ -50,14 +56,13 @@ export function GridViewForm () {
 
     const fillNewsData = (subscribePressInfo) => {
         const filledData = [...subscribePressInfo];
-        while (filledData.length % 24 !== 0) {
+        while (filledData.length % GRID_VIEW_BATCHSIZE !== 0) {
             filledData.push({ img: "", companyName: "" });
         }
         return filledData;
     };
     
     const initData = async(subscribeStatus) => {
-        companyData.splice(0);
         const newsData = await jsonParse.parseJson("companiesInfo")
         if (subscribeStatus) {
             const subscribeList = subscriptionModel.getSubscripeList()

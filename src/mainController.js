@@ -7,6 +7,7 @@ import subscriptionModel from "./subscription/SubscriptionModel.js";
 function MainController() {
     const gridViewForm = new GridViewForm()
     const listViewForm = new ListViewForm();
+    
     const reloadPage = () => location.reload();
 
     const updateActive = (subscribeMode, viewMode, mainContainerDisplay) => {
