@@ -48,6 +48,10 @@ header {
   justify-content: space-between; /* 양 옆에 정렬 */
 }
 
+.press-title strong {
+  margin-right: 20px;
+}
+
 .newsgroup {
   display: flex;
   position: relative;

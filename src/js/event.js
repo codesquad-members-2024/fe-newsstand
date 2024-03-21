@@ -1,5 +1,5 @@
 import { newsLogos, listCategory } from "../data/newsdata.js";
-import { renderGrid, renderList } from "./renderer.js";
+import { renderGrid, renderSubMediaGrid, renderList } from "./renderer.js";
 
 let currentPage = 0;
 let currentCategory = 0;
@@ -49,14 +49,17 @@ const clickHandler = {
     setTimeout(() => {
       listCat.classList.remove("clicked");
     }, 5000);
-  }
+  },
 };
 
 function clickEvent() {
-  const [listViewBtn, gridViewBtn] =
-    document.querySelectorAll(".view-btn > button");
+  const [allMedia, subscribedMedia] = document.querySelector(".press-title").children;
+  const [listViewBtn, gridViewBtn] = document.querySelectorAll(".view-btn > button");
   const newsgroup = document.querySelector(".newsgroup");
   const listClick = document.querySelectorAll(".newsgroup-list-category");
+
+  allMedia.addEventListener("click", clickHandler.gridViewClick);
+  subscribedMedia.addEventListener("click", renderSubMediaGrid);
 
   gridViewBtn.addEventListener("click", clickHandler.gridViewClick);
   listViewBtn.addEventListener("click", clickHandler.listViewClick);
@@ -89,15 +92,28 @@ function clickEvent() {
 
   document.addEventListener("click", function (event) {
     if (event.target.classList.contains("subscribe-btn")) {
-      // contains DOM에 button에 있을 때
       const subscribeBtn = event.target;
+      const newsGroupLogo = subscribeBtn.closest(".newsgroup-grid_logo");
+      const imgElement = newsGroupLogo.querySelector("img"); 
+      const imgSrc = imgElement.getAttribute("src");
+
       if (subscribeBtn.innerText === "+ 구독하기") {
         subscribeBtn.innerText = "+ 해지하기";
+        subMediaImg.img = imgSrc;
+        subMediaImg.push({ img: imgSrc });
+        console.log("이미지 URL:", subMediaImg.img, subMediaImg);
+
       } else {
         subscribeBtn.innerText = "+ 구독하기";
+        subMediaImg.img = imgSrc;
+        subMediaImg.pop({ img: imgSrc });
       }
     }
   });
 }
 
-export { clickEvent, clickHandler };
+const subMediaImg = [
+
+]
+
+export { clickHandler, clickEvent };

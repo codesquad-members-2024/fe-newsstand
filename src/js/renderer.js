@@ -40,14 +40,29 @@ function renderGrid(page) {
   document.querySelector(".grid-left-btn").style.visibility = "visible";
   document.querySelector(".grid-right-btn").style.visibility = "visible";
 
-  for (let index = 0; index < PAGE_SIZE; index++) {
-    createGrid(page * PAGE_SIZE + index);
-  }
-
   if (page === 0)
     document.querySelector(".grid-left-btn").style.visibility = "hidden";
   else if (page === newsLogos.length - 1)
     document.querySelector(".grid-right-btn").style.visibility = "hidden";
+
+  for (let index = 0; index < PAGE_SIZE; index++) {
+    createGrid(page * PAGE_SIZE + index);
+  }
+}
+
+function renderSubMediaGrid(page) {
+  const newsgroupGrid = document.querySelector(".newsgroup-grid");
+  newsgroupGrid.style.display = "";
+  newsgroupGrid.innerHTML = "";
+  document.querySelector(".newsgroup-list").style.display = "none";
+  document.querySelector(".list-left-btn").style.visibility = "hidden";
+  document.querySelector(".list-right-btn").style.visibility = "hidden";
+  document.querySelector(".grid-left-btn").style.visibility = "hidden";
+  document.querySelector(".grid-right-btn").style.visibility = "hidden";
+
+  for (let index = 0; index < PAGE_SIZE; index++) {
+    createGrid(page * PAGE_SIZE + index);
+  }
 }
 
 function createList(index) {
@@ -96,14 +111,14 @@ function renderList(cat) {
     document.querySelector(".list-left-btn").style.visibility = "hidden";
   else if (cat === listCategory.length - 1)
     document.querySelector(".list-right-btn").style.visibility = "hidden";
-  
+
   createList(cat);
 
   // auto page transition
-  if (cat === listCategory.length - 1)
+  if (cat === listCategory.length - 1) 
     timer = setTimeout(() => clickHandler.listViewClick(), 5000);
-  else
-    timer = setTimeout(() => clickHandler.listRightButtonClick(), 5000);
+  else 
+  timer = setTimeout(() => clickHandler.listRightButtonClick(), 5000);
 }
 
-export { renderGrid, renderList };
+export { renderGrid, renderSubMediaGrid, renderList };
