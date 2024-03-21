@@ -11,7 +11,7 @@ export function ListViewForm() {
         await initData(subscribeStatus);
         renderNav(subscribeStatus);
         renderNews();
-        switchCategory(categoryList[0].category)
+        switchCategory(categoryList[0].category, subscribeStatus)
     };
 
     const renderNav = (subscribeStatus) => {
@@ -128,11 +128,11 @@ export function ListViewForm() {
         curCategoryTotalNum = categoryList[curCategoryIdx].data.length
     }
 
-    const switchCategory = (id) => {
+    const switchCategory = (id, subscribeStatus) => {
         const curAnimationNav = navAnimation.swicthNavAnimation(id)
         sortCategoryList(id)
         renderNews()
-        navAnimation.updateCounter(curCategoryDataIdx, curCategoryTotalNum, subscriptionModel)
+        navAnimation.updateCounter(curCategoryDataIdx, curCategoryTotalNum, subscribeStatus)
         curAnimationNav.addEventListener("animationend", () => {
             updatePageNum("list-view-light-btn");
             renderNews()

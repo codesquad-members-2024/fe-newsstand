@@ -4,12 +4,15 @@ import { GRID_VIEW_BATCHSIZE } from "../util/contants.js";
 import subscriptionModel from "../subscription/SubscriptionModel.js";
 export function GridViewForm () {
     let currenPageNum = 0;
+    let firstPageNum = 0;
+    let lastPageNum = 0;
     const companyData = [];
 
     const main = async (subscribeStatus) => {
         const newsData = await initData(subscribeStatus)
         splitIntoChunks(newsData);
         renderGridView()
+        pageDisabled(currenPageNum)
     }
 
     const setEventHandler = () => {
@@ -26,17 +29,16 @@ export function GridViewForm () {
     const pageDisabled = (curPageNum) => {
         const leftBtnBox = document.querySelector(".left-btn");
         const lightBtnBox = document.querySelector(".light-btn");
-        switch (curPageNum) {
-            case FIRST_PAGE_NUM:
-                leftBtnBox.style.display = "none";
-                break;
-            case LAST_PAGE_NUM:
-                lightBtnBox.style.display = "none";
-                break;
-            default:
-                leftBtnBox.style.display = "flex";
-                lightBtnBox.style.display = "flex";
-                break;
+    
+        if (curPageNum === firstPageNum) leftBtnBox.style.display = "none";
+        if (curPageNum === lastPageNum) lightBtnBox.style.display = "none";
+        if (curPageNum === firstPageNum && curPageNum === lastPageNum) {
+            leftBtnBox.style.display = "none";
+            lightBtnBox.style.display = "none";
+        } 
+        if (curPageNum !== firstPageNum && curPageNum !== lastPageNum) {
+            leftBtnBox.style.display = "flex";
+            lightBtnBox.style.display = "flex";
         }
     };
 
@@ -46,17 +48,34 @@ export function GridViewForm () {
         companyDisplayBox.innerHTML = logoTemplate;
     };
 
-    const initData = async() => {
+    const fillNewsData = (subscribePressInfo) => {
+        const filledData = [...subscribePressInfo];
+        while (filledData.length % 24 !== 0) {
+            filledData.push({ img: "", companyName: "" });
+        }
+        return filledData;
+    };
+    
+    const initData = async(subscribeStatus) => {
+        companyData.splice(0);
         const newsData = await jsonParse.parseJson("companiesInfo")
-        newsData.sort(() => Math.random() - 0.5)
-        return newsData
-        
+        if (subscribeStatus) {
+            const subscribeList = subscriptionModel.getSubscripeList()
+            const subscribePressInfo = subscribeList.map(curPress => {
+                return newsData.find(curNewsInfo => curPress === curNewsInfo.companyName)
+            })
+            return fillNewsData(subscribePressInfo)
+        } else {
+            newsData.sort(() => Math.random() - 0.5)
+            return newsData    
+        }
     }
 
     const splitIntoChunks = (newsData) => {
         while (newsData.length !== 0) {
             companyData.push(newsData.splice(0, GRID_VIEW_BATCHSIZE));
-        }      
+        }
+        lastPageNum = companyData.length - 1
     }
 
     const updatePageNum = (targetName) => {
@@ -75,14 +94,21 @@ export function GridViewForm () {
 
     const getGridTemplate = () => {
         const logoTemplate = companyData[currenPageNum].reduce((acc, cur, idx) => {
-            return acc + `
-            <li class="list-${idx}">
-            <img class = "logo-img" src = "${cur.img}" alt = ${cur.companyName}>
-            ${subscriptionModel.isSubscribe(cur.companyName) ? 
-                `<button class = "subscribe" id = "unsubscribe" name = "${cur.companyName}"> + 해지하기</button>`
-                : `<button class = "subscribe" id = "subscribe" name = "${cur.companyName}"> + 구독하기</button>`}
-            </li>
-            `;
+            if (cur.img === "" ||  cur.companyName === "") {
+                return acc + `
+                <li class="list-${idx}">
+                </li>
+                `;
+            } else {
+                return acc + `
+                <li class="list-${idx}">
+                <img class = "logo-img" src = "${cur.img}" alt = ${cur.companyName}>
+                ${subscriptionModel.isSubscribe(cur.companyName) ? 
+                    `<button class = "subscribe" id = "unsubscribe" name = "${cur.companyName}"> + 해지하기</button>`
+                    : `<button class = "subscribe" id = "subscribe" name = "${cur.companyName}"> + 구독하기</button>`}
+                </li>
+                `;
+            }
         }, "");
         return logoTemplate;
     };
