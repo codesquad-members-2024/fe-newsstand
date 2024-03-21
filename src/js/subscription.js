@@ -12,7 +12,6 @@ function downloadSubscriptions() {
 }
 
 function uploadSubscription(imgSrc) {
-  // fetch API를 사용하여 서버에 POST 요청을 보낼 수 있음
   fetch("http://localhost:3000/subscriptions", {
     method: "POST",
     headers: {
@@ -32,7 +31,6 @@ function uploadSubscription(imgSrc) {
 }
 
 function deleteSubscription(id) {
-  // fetch API를 사용하여 서버에 DELETE 요청
   fetch(`http://localhost:3000/subscriptions/${id}`, {
     method: "DELETE",
     headers: {

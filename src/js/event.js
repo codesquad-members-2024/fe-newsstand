@@ -101,9 +101,13 @@ function clickEvent() {
     if (event.target.classList.contains("subscribe-btn")) {
       const subscribeBtn = event.target;
       const newsGroupLogo = subscribeBtn.closest(".newsgroup-grid_logo");
-      const imgElement = newsGroupLogo.querySelector("img");
-      const imgSrc = imgElement.getAttribute("src");
+      const newsGroupList = subscribeBtn.closest(".newsgroup-list-top");
 
+      const view = newsGroupLogo ? newsGroupLogo : newsGroupList;
+
+      const imgElement = view.querySelector("img");
+      const imgSrc = imgElement.getAttribute("src");
+      
       console.log(downloadSubscriptions());
 
       if (subscribeBtn.innerText === "+ 구독하기") {
@@ -112,9 +116,8 @@ function clickEvent() {
       } else {
         subscribeBtn.innerText = "+ 구독하기";
         downloadSubscriptions().then((subscriptions) => {
-          // 이미지의 id를 찾기 위해 구독 정보를 순회
           const subscription = subscriptions.find(
-            (sub) => sub.imgSrc === imgSrc
+            (subscription) => subscription.imgSrc === imgSrc
           );
           const imgId = subscription.id;
           deleteSubscription(imgId);
