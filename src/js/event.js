@@ -1,5 +1,10 @@
 import { newsLogos, listCategory } from "../data/newsdata.js";
 import { renderGrid, renderSubMediaGrid, renderList } from "./renderer.js";
+import {
+  uploadSubscription,
+  deleteSubscription,
+  downloadSubscriptions,
+} from "./subscription.js";
 
 let currentPage = 0;
 let currentCategory = 0;
@@ -53,8 +58,10 @@ const clickHandler = {
 };
 
 function clickEvent() {
-  const [allMedia, subscribedMedia] = document.querySelector(".press-title").children;
-  const [listViewBtn, gridViewBtn] = document.querySelectorAll(".view-btn > button");
+  const [allMedia, subscribedMedia] =
+    document.querySelector(".press-title").children;
+  const [listViewBtn, gridViewBtn] =
+    document.querySelectorAll(".view-btn > button");
   const newsgroup = document.querySelector(".newsgroup");
   const listClick = document.querySelectorAll(".newsgroup-list-category");
 
@@ -94,26 +101,27 @@ function clickEvent() {
     if (event.target.classList.contains("subscribe-btn")) {
       const subscribeBtn = event.target;
       const newsGroupLogo = subscribeBtn.closest(".newsgroup-grid_logo");
-      const imgElement = newsGroupLogo.querySelector("img"); 
+      const imgElement = newsGroupLogo.querySelector("img");
       const imgSrc = imgElement.getAttribute("src");
+
+      console.log(downloadSubscriptions());
 
       if (subscribeBtn.innerText === "+ 구독하기") {
         subscribeBtn.innerText = "+ 해지하기";
-        subMediaImg.img = imgSrc;
-        subMediaImg.push({ img: imgSrc });
-        console.log("이미지 URL:", subMediaImg.img, subMediaImg);
-
+        uploadSubscription(imgSrc);
       } else {
         subscribeBtn.innerText = "+ 구독하기";
-        subMediaImg.img = imgSrc;
-        subMediaImg.pop({ img: imgSrc });
+        downloadSubscriptions().then((subscriptions) => {
+          // 이미지의 id를 찾기 위해 구독 정보를 순회
+          const subscription = subscriptions.find(
+            (sub) => sub.imgSrc === imgSrc
+          );
+          const imgId = subscription.id;
+          deleteSubscription(imgId);
+        });
       }
     }
   });
 }
-
-const subMediaImg = [
-
-]
 
 export { clickHandler, clickEvent };
