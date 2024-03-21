@@ -1,6 +1,7 @@
 import jsonParse from "../util/jsonParse.js";
 import { navAnimation } from "./navAnimation.js";
-export function ListViewForm(subscriptionController) {
+import subscriptionModel from "../subscription/SubscriptionModel.js";
+export function ListViewForm() {
     let curCategoryIdx = 0
     let curCategoryDataIdx = 0
     let curCategoryTotalNum = 0
@@ -8,9 +9,28 @@ export function ListViewForm(subscriptionController) {
 
     const main = async (subscribeStatus) => {
         await initData(subscribeStatus);
-        renderNav();
+        renderNav(subscribeStatus);
         renderNews();
-        switchCategory(categoryList[0].category, subscribeStatus)
+        switchCategory(categoryList[0].category)
+    };
+
+    const renderNav = (subscribeStatus) => {
+        const navTemplate = getNavTemplate(subscribeStatus);
+        const navContainer = document.querySelector(".list");
+        navContainer.innerHTML = navTemplate;
+    };
+
+    const getNavTemplate = (subscribeStatus) => {
+        const navTemplate = categoryList.reduce((acc, cur) => {
+            return (acc + `
+            <div class="item" id = "${cur.category}">
+            <span>${cur.category}</span>
+            <div class = "item__totalPage">${subscribeStatus ? `>` : `1/${cur.data.length}`}</div>
+            <div class = "item__after"></div>
+            </div>
+            `);
+        }, "");
+        return navTemplate;
     };
 
     const renderNews = () => {
@@ -20,6 +40,21 @@ export function ListViewForm(subscriptionController) {
         const subNewsTemplate = getSubNewsTemplate();
         mainNewsContainer.innerHTML = mainNewsTemplate;
         subNewsContainer.innerHTML = subNewsTemplate;
+    };
+
+    const getMainNewsTemplate = () => {
+        const curNewsData = categoryList[curCategoryIdx].data[curCategoryDataIdx];
+        return `
+        <div class="main-news-header">
+            <a href = "${curNewsData.companyHref}" ><img src = "${curNewsData.companyImg}" id="list-view__company-logo"></img></a>
+            <div class="edit-date">${curNewsData.editDate}</div>
+            ${subscriptionModel.isSubscribe(curNewsData.companyName) ? 
+                `<button class="subscribe-btn subscribe" id = "unsubscribe" name = "${curNewsData.companyName}">x</button>`
+                : `<button class="subscribe-btn subscribe" id = "subscribe" name = "${curNewsData.companyName}">+ 구독하기</button>`}
+        </div>
+        <a href = "${curNewsData.mainNewsSrc}" class="main-news-img"><img src="${curNewsData.mainNewsImg}" class="main-news-src"></img></a>
+        <div class="main-news-title">${curNewsData.mainNewsTitle}</div>
+        `;
     };
 
     const getSubNewsTemplate = () => {
@@ -36,26 +71,8 @@ export function ListViewForm(subscriptionController) {
         );
     };
 
-    const getMainNewsTemplate = () => {
-        const curNewsData = categoryList[curCategoryIdx].data[curCategoryDataIdx];
-        return `
-        <div class="main-news-header">
-            <a href = "${curNewsData.companyHref}" ><img src = "${curNewsData.companyImg}" id="list-view__company-logo"></img></a>
-            <div class="edit-date">${curNewsData.editDate}</div>
-            ${subscriptionController.isSubscribeListButton(curNewsData.companyName)}
-        </div>
-        <a href = "${curNewsData.mainNewsSrc}" class="main-news-img"><img src="${curNewsData.mainNewsImg}" class="main-news-src"></img></a>
-        <div class="main-news-title">${curNewsData.mainNewsTitle}</div>
-        `;
-    };
-
-    const renderNav = () => {
-        const navTemplate = getNavTemplate();
-        const navContainer = document.querySelector(".list");
-        navContainer.innerHTML = navTemplate;
-    };
-
     const initData = async (subscribeStatus) => {
+        categoryList.splice(0);
         const newsData = await jsonParse.parseJson("category");
         const modifyData = jsonParse.spliceCompanyString(newsData, 'category');
         spliteData(modifyData, subscribeStatus);
@@ -68,7 +85,7 @@ export function ListViewForm(subscriptionController) {
     };
 
     const subscribeDataSplite = (allNewsInfo) => {
-        const curSubscribeList = subscriptionController.getSubscripeList()
+        const curSubscribeList = subscriptionModel.getSubscripeList()
         curSubscribeList.forEach(curSubscribePress => {
             const pressNewsData = allNewsInfo.find(curNews => curNews.companyName === curSubscribePress)
             categoryList.push({ category: curSubscribePress, data: [pressNewsData] })
@@ -88,19 +105,6 @@ export function ListViewForm(subscriptionController) {
         });
     }
 
-    const getNavTemplate = () => {
-        const navTemplate = categoryList.reduce((acc, cur) => {
-            return (acc + `
-            <div class="item" id = "${cur.category}">
-            <span>${cur.category}</span>
-            <div class = "item__totalPage">1/${cur.data.length}</div>
-            <div class = "item__after"></div>
-            </div>
-            `);
-        }, "");
-        return navTemplate;
-    };
-
     const isEndOfPage = () => {
         if(curCategoryTotalNum === curCategoryDataIdx) {
             sortCategoryList(categoryList[curCategoryIdx + 1]?.category)
@@ -111,7 +115,11 @@ export function ListViewForm(subscriptionController) {
     }
 
     const sortCategoryList = (id) => {
-        console.log(categoryList)
+        if (id === undefined) {
+            curCategoryDataIdx = 0
+            curCategoryTotalNum = categoryList[curCategoryIdx].data.length
+            return;
+        }
         while(categoryList[0].category !== id) {
             const prevCategoryData = categoryList.shift()
             categoryList.push(prevCategoryData)
@@ -120,7 +128,7 @@ export function ListViewForm(subscriptionController) {
         curCategoryTotalNum = categoryList[curCategoryIdx].data.length
     }
 
-    const switchCategory = (id, subscriptionModel) => {
+    const switchCategory = (id) => {
         const curAnimationNav = navAnimation.swicthNavAnimation(id)
         sortCategoryList(id)
         renderNews()

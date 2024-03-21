@@ -1,10 +1,11 @@
 import newsStandStateManager from "./status.js"
-import subscriptionModel from "./subscription/SubscriptionModel.js";
 import { GridViewForm } from "./Components/GridViewForm.js"
 import { ListViewForm } from "./Components/ListViewForm.js"
 import { setSubscribeEventHandler } from "./subscription/subscribeController.js";
 
 function MainController() {
+    const gridViewForm = new GridViewForm()
+    const listViewForm = new ListViewForm();
     const reloadPage = () => location.reload();
 
     const updateActive = (subscribeMode, viewMode, mainContainerDisplay) => {
@@ -78,15 +79,10 @@ function MainController() {
     }
 
     const renderViewBasedOnMode = (subscribeStatus, listMode) => {
-        if(listMode === false) {
-            const gridViewForm = new GridViewForm(subscriptionModel)
-            gridViewForm.main(subscribeStatus)
-        }
-        if(listMode === true) {
-            const listViewForm = new ListViewForm(subscriptionModel);
-            listViewForm.main(subscribeStatus)
-        }
+        if(listMode === false) gridViewForm.main(subscribeStatus)
+        if(listMode === true) listViewForm.main(subscribeStatus)
     }
+
     setSubscribeEventHandler()
     setEventHandler();
     return { renderMainView, navigationMap };

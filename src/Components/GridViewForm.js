@@ -1,8 +1,8 @@
 import jsonParse from "../util/jsonParse.js";
 import { FIRST_PAGE_NUM, LAST_PAGE_NUM } from "../util/contants.js";
 import { GRID_VIEW_BATCHSIZE } from "../util/contants.js";
-
-export function GridViewForm (subscribeController) {
+import subscriptionModel from "../subscription/SubscriptionModel.js";
+export function GridViewForm () {
     let currenPageNum = 0;
     const companyData = [];
 
@@ -78,7 +78,9 @@ export function GridViewForm (subscribeController) {
             return acc + `
             <li class="list-${idx}">
             <img class = "logo-img" src = "${cur.img}" alt = ${cur.companyName}>
-            ${subscribeController.isSubscribeGridButton(cur.companyName)}
+            ${subscriptionModel.isSubscribe(cur.companyName) ? 
+                `<button class = "subscribe" id = "unsubscribe" name = "${cur.companyName}"> + 해지하기</button>`
+                : `<button class = "subscribe" id = "subscribe" name = "${cur.companyName}"> + 구독하기</button>`}
             </li>
             `;
         }, "");
