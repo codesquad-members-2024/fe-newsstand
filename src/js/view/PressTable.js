@@ -53,8 +53,6 @@ export const NewsModel = {
   logos: [],
 };
 
-const pressContainer = document.querySelector(ST.PRESS_CONTAINER);
-
 let autoRender = null;
 
 const handleGridViewIconActivePrevious = () => {

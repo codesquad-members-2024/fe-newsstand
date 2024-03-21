@@ -1,7 +1,7 @@
 import {
   AutoRenderHandler,
   Clickable,
-  NewsModel, RenderUtils, ST, Subscription
+  NewsModel, RenderUtils, Subscription
 } from "./PressTable.js";
 import Utils from "./Utils.js";
 
