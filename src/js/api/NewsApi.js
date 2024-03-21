@@ -34,4 +34,4 @@ export const deleteNews = async (id, path) => {
 
   await fetch(`http://localhost:3000/${path}/${id}`, request)
     .then(response => response.json());
-}
+};

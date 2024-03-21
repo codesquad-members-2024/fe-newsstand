@@ -1,5 +1,5 @@
 import { renderIndex } from "./view/NewsStand.js";
 
-const main = () => renderIndex();
+const main = async () => await renderIndex();
 
 main();
