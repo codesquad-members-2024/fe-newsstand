@@ -73,6 +73,7 @@ export function ListViewForm() {
 
     const initData = async (subscribeStatus) => {
         categoryList.splice(0);
+        curCategoryDataIdx = 0
         const newsData = await jsonParse.parseJson("category");
         const modifyData = jsonParse.spliceCompanyString(newsData, 'category');
         spliteData(modifyData, subscribeStatus);
@@ -132,7 +133,7 @@ export function ListViewForm() {
         const curAnimationNav = navAnimation.swicthNavAnimation(id)
         sortCategoryList(id)
         renderNews()
-        navAnimation.updateCounter(curCategoryDataIdx, curCategoryTotalNum, )
+        navAnimation.updateCounter(curCategoryDataIdx, curCategoryTotalNum)
         curAnimationNav.addEventListener("animationend", () => {
             updatePageNum("list-view-light-btn");
             renderNews()
@@ -177,3 +178,5 @@ export function ListViewForm() {
     setEventHandler()
     return { main };
 }
+
+

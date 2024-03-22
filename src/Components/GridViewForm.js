@@ -63,7 +63,7 @@ export function GridViewForm () {
     };
     
     const initData = async(subscribeStatus) => {
-        const newsData = await jsonParse.parseJson("companiesInfo")
+        const newsData = await jsonParse.parseJson("category")
         if (subscribeStatus) {
             const subscribeList = subscriptionModel.getSubscripeList()
             const subscribePressInfo = subscribeList.map(curPress => {
@@ -78,6 +78,7 @@ export function GridViewForm () {
 
     const splitIntoChunks = (newsData) => {
         while (newsData.length !== 0) {
+            if(companyData > 3) break;
             companyData.push(newsData.splice(0, GRID_VIEW_BATCHSIZE));
         }
         lastPageNum = companyData.length - 1
@@ -99,7 +100,7 @@ export function GridViewForm () {
 
     const getGridTemplate = () => {
         const logoTemplate = companyData[currenPageNum].reduce((acc, cur, idx) => {
-            if (cur.img === "" ||  cur.companyName === "") {
+            if (cur.companyImg === "" ||  cur.companyName === "") {
                 return acc + `
                 <li class="list-${idx}">
                 </li>
@@ -107,7 +108,7 @@ export function GridViewForm () {
             } else {
                 return acc + `
                 <li class="list-${idx}">
-                <img class = "logo-img" src = "${cur.img}" alt = ${cur.companyName}>
+                <img class = "logo-img" src = "${cur.companyImg}" alt = ${cur.companyName}>
                 ${subscriptionModel.isSubscribe(cur.companyName) ? 
                     `<button class = "subscribe" id = "unsubscribe" name = "${cur.companyName}"> + 해지하기</button>`
                     : `<button class = "subscribe" id = "subscribe" name = "${cur.companyName}"> + 구독하기</button>`}
