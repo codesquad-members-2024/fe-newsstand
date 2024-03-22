@@ -206,6 +206,11 @@ body {
   display: flex;
   font-size: 14px;
   font-weight: var(--def-font-weight);
+  overflow-x: scroll;
+}
+
+.press-container__tab-block::-webkit-scrollbar{
+  display: none;
 }
 
 .press-container__active-tab {
@@ -227,10 +232,16 @@ body {
   display: flex;
   align-items: center;
   color: #879298;
+  white-space: nowrap;
 }
 
 .press-container__tab:hover {
   text-decoration: underline;
+}
+
+.press-container__tab::selection {
+  background-color: transparent;
+  color: inherit;
 }
 
 .press-container__tab-description {
@@ -242,6 +253,11 @@ body {
   display: flex;
   padding: 0px 16px;
   align-items: center;
+}
+
+.press-container__tab-description > div::selection {
+  background-color: transparent;
+  color: inherit;
 }
 
 .press-container__detailed-news {

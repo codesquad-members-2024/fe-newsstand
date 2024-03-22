@@ -196,6 +196,7 @@ export const Subscription = {
     );
 
     plusImage.src = "src/img/PlusSymbol.svg";
+    plusImage.style.cssText = "position:relative; left: 2px; transform: rotate(45deg);";
     button.setAttribute("press-name", pressName);
     button.setAttribute("data-action", "unsubscribe");
     Utils.appendChildren(button, [plusImage]);
