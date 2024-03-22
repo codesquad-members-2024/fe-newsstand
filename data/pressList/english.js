@@ -1,6 +1,6 @@
 export const english = [
   {
-    pressName: "KBS World",
+    pressName: "KBSWorld",
     brandMark:
       "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/326.png",
     editDate: "03월 15일 14:25 직접 편집",

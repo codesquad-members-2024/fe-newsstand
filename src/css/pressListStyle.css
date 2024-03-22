@@ -160,6 +160,7 @@ div.display-none {
 .news-list-left div {
   width: 320px;
   height: 200px;
+  margin-bottom: 10px;
 }
 
 .news-list-left img {

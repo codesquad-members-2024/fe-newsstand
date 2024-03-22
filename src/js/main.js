@@ -2,7 +2,8 @@ import { viewHeader } from "./header.js";
 import { initAndRollNews } from "./rollingNews.js";
 import { initViewer, initSubsTap } from "./viewerAndTap.js";
 import { initPressView } from "./pressWrap.js";
-import { subscribeGridPress } from "./gridSubscription.js";
+import { handleGridSubsOnClick } from "./gridSubscription.js";
+import { handleListSubsOnClick } from "./listSubscription.js";
 
 function main() {
   viewHeader();
@@ -10,7 +11,8 @@ function main() {
   initViewer();
   initSubsTap();
   initPressView();
-  subscribeGridPress();
+  handleGridSubsOnClick();
+  handleListSubsOnClick();
 }
 
 main();

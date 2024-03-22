@@ -1,11 +1,12 @@
-import { pressData } from "../../data/categoryDictionary.js";
+import { pressData } from "../../../data/categoryDictionary.js";
 import {
   makePressInfoHtml,
   makeMainNewsHtml,
   makeNewsListHtml,
   makeCategoryNavHtml,
-} from "../utils/htmlGenerators.js";
-import { store } from "../../data/store.js";
+} from "../../utils/htmlGenerators.js";
+import { getSubscriptionData } from "../../utils/pressDataApi.js";
+import { store } from "../../../data/store.js";
 
 let currentPage = 1;
 let totalPage = 0;
@@ -24,40 +25,44 @@ export function initAllPressListView() {
   prevButton.classList.remove("hidden");
 
   initializeListView();
+  nextButton.removeEventListener("click", handleNextBtn);
+  nextButton.addEventListener("click", handleNextBtn);
+  prevButton.removeEventListener("click", handlePrevBtn);
+  prevButton.addEventListener("click", handlePrevBtn);
 
-  nextButton.addEventListener("click", () => {
-    gotoNextListPage();
-    resetTimer();
-  });
-  prevButton.addEventListener("click", () => {
-    gotoPrevListPage();
-    resetTimer();
-  });
   categoryNav.addEventListener("click", gotoCategory);
 
+  resetTimer();
+}
+
+function handleNextBtn() {
+  gotoNextListPage();
+  resetTimer();
+}
+
+function handlePrevBtn() {
+  gotoPrevListPage();
   resetTimer();
 }
 
 function initializeListView() {
   currentCategory = pressData[START_INDEX].category;
   totalPage = pressData[START_INDEX].pressList.length;
-  displayListCurrentPage(currentCategory, currentPage);
+  displayListCurrentPage();
 }
 
-function displayListCurrentPage(currentCategory, currentPage) {
+async function displayListCurrentPage() {
   const categoryNav = document.querySelector(".category");
   const pressInfoBox = document.querySelector(".press-info");
   const mainNewsBox = document.querySelector(".news-list-left");
   const newsListBox = document.querySelector(".news-list-right ul");
 
-  const currentPressData = pressData.find(
-    (item) => item.category === currentCategory
-  );
-  const currentPressList = currentPressData.pressList;
-  const currentPressObj = currentPressList[currentPage - 1];
+  const currentPressObj = getCurrentPressObj();
+  const subscribedList = await getSubscriptionData("listSubs");
+  const subsOrUnsubs = decideToSubsOrUnSubs(currentPressObj, subscribedList);
 
   const navBarHtml = makeCategoryNavHtml(pressData);
-  const pressInfoHtml = makePressInfoHtml(currentPressObj);
+  const pressInfoHtml = makePressInfoHtml(currentPressObj, subsOrUnsubs);
   const mainNewsHtml = makeMainNewsHtml(currentPressObj);
   const newsListHtml = makeNewsListHtml(currentPressObj);
 
@@ -66,6 +71,24 @@ function displayListCurrentPage(currentCategory, currentPage) {
   mainNewsBox.innerHTML = mainNewsHtml;
   newsListBox.innerHTML = newsListHtml;
   applyStyleToSelectedCategory();
+}
+
+function getCurrentPressObj() {
+  const currentPressData = pressData.find(
+    (item) => item.category === currentCategory
+  );
+  const currentPressList = currentPressData.pressList;
+  const currentPressObj = currentPressList[currentPage - 1];
+  return currentPressObj;
+}
+
+function decideToSubsOrUnSubs(currentPressObj, subscribedListPress) {
+  const currentPressName = currentPressObj.pressName;
+  const filteredArr = subscribedListPress.filter(
+    (pressObj) => pressObj.pressName === currentPressName
+  );
+  const subsOrUnsubs = filteredArr.length <= 0 ? "+ 구독하기" : "- 해지하기";
+  return subsOrUnsubs;
 }
 
 function applyStyleToSelectedCategory() {

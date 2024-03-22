@@ -1,4 +1,4 @@
-export function makeInnerBoxesInMain() {
+export function makeInnerBoxesInListWrap() {
   return `<nav class="category center"></nav>
   <div class="press-info center"></div>
   <div class="news-list flex-space">
@@ -6,6 +6,13 @@ export function makeInnerBoxesInMain() {
       <div class="news-list-right">
           <ul></ul>
       </div>
+  </div>`;
+}
+
+export function makePressBoxesInGridWrap(pressObj, subsOrUnsubs) {
+  return `<div class="press-box">
+    <img class="press-logo" src="${pressObj.brandMark}" alt="${pressObj.pressName}">
+    <span class="subs pointer">${subsOrUnsubs}</span>
   </div>`;
 }
 
@@ -25,10 +32,10 @@ export function makeCategoryNavHtml(pressData) {
   return allCategoriesHtml;
 }
 
-export function makePressInfoHtml(eachPressObj) {
-  const html = `<span><img src="${eachPressObj.brandMark}"></span>
+export function makePressInfoHtml(eachPressObj, subsOrUnsubs) {
+  const html = `<span><img src="${eachPressObj.brandMark}" alt=${eachPressObj.pressName}></span>
     <span class="edit-date">${eachPressObj.editDate}</span>
-    <button class="subs-btn">+ 구독하기</button>`;
+    <button class="subs-btn pointer">${subsOrUnsubs}</button>`;
   return html;
 }
 
@@ -48,4 +55,20 @@ export function makeNewsListHtml(eachPressObj) {
     .join("");
   newsListHtml += `<div>${eachPressObj.pressName}에서 직접 편집한 뉴스입니다.</div>`;
   return newsListHtml;
+}
+
+export function makePressNavHtml(subsListData) {
+  const selectedCategory = subsListData[subsListData.length - 1].pressName;
+  const restOfCategoryHtml = subsListData
+    .slice(0, subsListData.length - 1)
+    .map((pressObj) => {
+      return `<div class="category-list center"><a href="#" class="category-text">${pressObj.pressName}</a></div>`;
+    })
+    .join("");
+  const selectedCategoryHtml = `<div class="category-list center selected">
+  <a href="#" class="category-text">${selectedCategory}</a>
+  <div class="progress"></div>
+</div>`;
+  const allCategoriesHtml = restOfCategoryHtml + selectedCategoryHtml;
+  return allCategoriesHtml;
 }

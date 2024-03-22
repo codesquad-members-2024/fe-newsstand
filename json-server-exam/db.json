@@ -1,45 +1,242 @@
 {
   "gridSubs": [
     {
-      "id": "7681",
-      "pressName": "노컷뉴스",
-      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/079.png"
+      "id": "169d",
+      "pressName": "문화일보",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/021.png"
     },
     {
-      "id": "be3f",
-      "pressName": "스포츠서울",
-      "brandMark": "https://s.pstatic.net/static/newsstand/up/2020/0708/nsd94830278.png"
+      "id": "fd48",
+      "pressName": "서울신문",
+      "brandMark": "https://s.pstatic.net/static/newsstand/up/2022/0208/nsd16121208.png"
     },
     {
-      "id": "38a3",
-      "pressName": "IT조선",
-      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/917.png"
+      "id": "0fd4",
+      "pressName": "뉴스엔",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/447.png"
     },
     {
-      "id": "577c",
-      "pressName": "독서신문",
-      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/955.png"
+      "id": "0308",
+      "pressName": "TBS",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/981.png"
     },
     {
-      "id": "124b",
+      "id": "17bd",
+      "pressName": "파이낸셜뉴스",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/014.png"
+    },
+    {
+      "id": "2f6f",
       "pressName": "Arirang TV",
       "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/934.png"
     },
     {
-      "id": "b440",
-      "pressName": "IT조선",
-      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/917.png"
+      "id": "3560",
+      "pressName": "인사이트코리아",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/807.png"
     },
     {
-      "id": "1035",
-      "pressName": "한경잡앤조이",
-      "brandMark": "https://s.pstatic.net/static/newsstand/up/2020/0615/nsd10319824.png"
+      "id": "2c38",
+      "pressName": "조선일보",
+      "brandMark": "https://s.pstatic.net/static/newsstand/up/2020/0903/nsd185255316.png"
     },
     {
-      "id": "b57d",
-      "pressName": "코리아타임스",
-      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/040.png"
+      "id": "bc7c",
+      "pressName": "스포츠동아",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/314.png"
+    },
+    {
+      "id": "de35",
+      "pressName": "중앙일보",
+      "brandMark": "https://s.pstatic.net/static/newsstand/up/2021/0824/nsd115034872.png"
+    },
+    {
+      "id": "2bde",
+      "pressName": "프라임경제",
+      "brandMark": "https://s.pstatic.net/static/newsstand/up/2020/0730/nsd13728808.png"
+    },
+    {
+      "id": "a623",
+      "pressName": "톱데일리",
+      "brandMark": "https://s.pstatic.net/static/newsstand/up/2022/0817/nsd14491516.png"
+    },
+    {
+      "id": "e872",
+      "pressName": "데이터뉴스",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/804.png"
+    },
+    {
+      "id": "aa3e",
+      "pressName": "한국일보",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/038.png"
+    },
+    {
+      "id": "12a1",
+      "pressName": "YTN",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/052.png"
+    },
+    {
+      "id": "5e76",
+      "pressName": "헤럴드경제",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/016.png"
+    },
+    {
+      "id": "33a3",
+      "pressName": "헬스조선",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/346.png"
+    },
+    {
+      "id": "db31",
+      "pressName": "뉴데일리",
+      "brandMark": "https://s.pstatic.net/static/newsstand/up/2024/0124/nsd95528325.png"
+    },
+    {
+      "id": "79b9",
+      "pressName": "코리아헤럴드",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/044.png"
+    },
+    {
+      "id": "e4e7",
+      "pressName": "뉴스타파",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/930.png"
+    },
+    {
+      "id": "d66d",
+      "pressName": "동아일보",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/020.png"
+    },
+    {
+      "id": "22f5",
+      "pressName": "오마이뉴스",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/047.png"
+    },
+    {
+      "id": "cb48",
+      "pressName": "티브이데일리",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/440.png"
+    },
+    {
+      "id": "dd77",
+      "pressName": "블로터",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/293.png"
+    },
+    {
+      "id": "7934",
+      "pressName": "OSEN",
+      "brandMark": "https://s.pstatic.net/static/newsstand/up/2020/0610/nsd151458769.png"
     }
   ],
-  "listSubs": []
+  "listSubs": [
+    {
+      "id": "3149",
+      "pressName": "일요시사",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/971.png",
+      "editDate": "03월 13일 22:50 직접 편집",
+      "mainNews": {
+        "thumb": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0313%2Farticle_img%2Fnew_main%2F9194%2F225557_001.jpg%22&type=nf312_208&service=navermain",
+        "title": "제2의 소쿠리 투표 논란? ‘총선 코앞’ 시끄러운 선관위 내막",
+        "link": "https://www.ilyosisa.co.kr/news/article.html?no=242738"
+      },
+      "newsList": [
+        {
+          "title": "5분이면 땡? ‘아무나 만드는’ 딥페이크 만들어 보니…",
+          "link": "https://www.ilyosisa.co.kr/news/article.html?no=242762"
+        },
+        {
+          "title": "경력직 우선? 돌려막기로 끝난 국민의힘 공천 막전막후",
+          "link": "https://www.ilyosisa.co.kr/news/article.html?no=242758"
+        },
+        {
+          "title": "“다른 데 투자가 더 낫다?” 정부 생색용 ‘청년도약계좌’ 속살",
+          "link": "https://www.ilyosisa.co.kr/news/article.html?no=242751"
+        },
+        {
+          "title": "<단독> ‘임용 취소’ 불구…끝나지 않은 광주교대 채용 사태",
+          "link": "https://www.ilyosisa.co.kr/news/article.html?no=242740"
+        },
+        {
+          "title": "<4·10 총선 격전지를 가다> ‘반도체 벨트’ 경기도 화성시",
+          "link": "https://www.ilyosisa.co.kr/news/article.html?no=242761"
+        },
+        {
+          "title": "<정치를 만나다> ‘민주당 스피커’ 강선우 “윤석열 능력?”",
+          "link": "https://www.ilyosisa.co.kr/news/article.html?no=242760"
+        }
+      ]
+    },
+    {
+      "id": "dbd7",
+      "pressName": "머니투데이",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/008.png",
+      "editDate": "03월 15일 14:00 직접 편집",
+      "mainNews": {
+        "thumb": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0315%2Farticle_img%2Fnew_main%2F9017%2F140610_001.jpeg%22&type=nf312_208&service=navermain",
+        "title": "'코인 선봉' 장현국 대표 사임…위메이드 시총 2000억 증발",
+        "link": "https://news.mt.co.kr/mtview.php?no=2024031509252115657&cast=1&STAND=MT_P"
+      },
+      "newsList": [
+        {
+          "title": "\"미국, 삼성에 8조 푼다\"…TSMC보다 보조금 더 받아낸 전략은",
+          "link": "https://news.mt.co.kr/mtview.php?no=2024031510474641095&cast=1&STAND=MT_T"
+        },
+        {
+          "title": "[단독] 대학가 덮친 공사비 분쟁...서울대 세종캠 연내 개교 무산",
+          "link": "https://news.mt.co.kr/mtview.php?no=2024031411010834983&cast=1&STAND=MTS_P"
+        },
+        {
+          "title": "美 물가 충격에 흔들리는 금리인하 전망…금리인상 가능성까지",
+          "link": "https://news.mt.co.kr/mtview.php?no=2024031508122657765&cast=1&STAND=MTS_P"
+        },
+        {
+          "title": "[단독] 제네시스 차주들, 5월부터 원격으로 '오토·카플레이'",
+          "link": "https://news.mt.co.kr/mtview.php?no=2024031414594532556&cast=1&STAND=MTS_P"
+        },
+        {
+          "title": "이탈 전공의, 다른 병원에 겸직근무…고용한 개원의도 처벌",
+          "link": "https://news.mt.co.kr/mtview.php?no=2024031512164146866&cast=1&STAND=MS_P"
+        },
+        {
+          "title": "\"오타니 아내, 그 사람 맞았네\"...깜짝 공개",
+          "link": "https://news.mt.co.kr/mtview.php?no=2024031507445726441&cast=1&STAND=MRH_P"
+        }
+      ]
+    },
+    {
+      "id": "641b",
+      "pressName": "데이터뉴스",
+      "brandMark": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/804.png",
+      "editDate": "03월 15일 14:00 직접 편집",
+      "mainNews": {
+        "thumb": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0315%2Farticle_img%2Fnew_main%2F9220%2F140610_001.png%22&type=nf312_208&service=navermain",
+        "title": "현대제철, 여성 사외이사 뽑는다",
+        "link": "https://www.datanews.co.kr/news/article.html?no=131777"
+      },
+      "newsList": [
+        {
+          "title": "넷마블, AI 연구 10년…게임 몰임감 높인다",
+          "link": "https://www.datanews.co.kr/news/article.html?no=131822"
+        },
+        {
+          "title": "현대모비스, R&D 투자 매년 2000억씩 늘렸다",
+          "link": "https://www.datanews.co.kr/news/article.html?no=131806"
+        },
+        {
+          "title": "돈 벌기 힘들었던 보안 업계…윈스만 웃었다",
+          "link": "https://www.datanews.co.kr/news/article.html?no=131805"
+        },
+        {
+          "title": "김호연 빙그레 회장, 이번에도 제과·빙과 ‘배당킹’",
+          "link": "https://www.datanews.co.kr/news/article.html?no=131823"
+        },
+        {
+          "title": "포스코이앤씨 전중선의 첫 과제 “수익성 하락 막아라”",
+          "link": "https://www.datanews.co.kr/news/article.html?no=131802"
+        },
+        {
+          "title": "잘 나가는 네이버웹툰, 6년만에 흑자…미국 상장도 눈앞",
+          "link": "https://www.datanews.co.kr/news/article.html?no=131542"
+        }
+      ]
+    }
+  ]
 }

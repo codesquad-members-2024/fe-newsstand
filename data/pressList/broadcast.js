@@ -626,7 +626,7 @@ export const broadCast = [
     ],
   },
   {
-    pressName: "SBS Biz",
+    pressName: "SBSBiz",
     brandMark:
       "https://s.pstatic.net/static/newsstand/up/2020/1229/nsd165811867.png",
     editDate: "03월 15일 14:07 직접 편집",
