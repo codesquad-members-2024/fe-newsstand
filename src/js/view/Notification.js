@@ -1,4 +1,4 @@
-import { activateSubscribedPress } from './PressTable.js';
+import { activateSubscribedPress } from './Events.js';
 import Utils from "./Utils.js";
 
 const SNACKBAR_DELAY = 5000;

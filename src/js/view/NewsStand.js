@@ -1,5 +1,6 @@
+import { activateGridView, hadnleRollingStart, handleRollingStop } from "./Events.js";
 import renderNewsTitles from "./NewsTitle.js";
-import { activateGridView, updateSubscribedNews } from "./PressTable.js";
+import { Setup, Subscription } from "./PressTable.js";
 
 const WEEK = [
   "일요일",
@@ -12,24 +13,8 @@ const WEEK = [
 ];
 const INCREMENT = 1;
 const CHAR_COUNT = 2;
-const ROLLING_DELAY = 5000;
 
 const rollingContainer = document.querySelector(".rolling-container");
-const pageLogoIcon = document.querySelector(".top-container__icon");
-
-let rollNewsInInterval = null;
-
-const rollingStartHandler = () => {
-  if (rollNewsInInterval !== null) {
-    clearInterval(rollNewsInInterval);
-    rollNewsInInterval = null;
-  }
-  rollNewsInInterval = setInterval(renderNewsTitles, ROLLING_DELAY);
-};
-
-const rollingStopHandler = () => clearInterval(rollNewsInInterval);
-
-const pageReloadHandler = () => location.reload();
 
 const renderCurrentDate = () => {
   const currentDateTag = document.querySelector(".top-container__date-text");
@@ -46,14 +31,14 @@ const renderCurrentDate = () => {
     .padStart(CHAR_COUNT, "0")}. ${day}`;
 };
 
-export const renderIndex = () => {
+export const renderIndex = async () => {
+  await Setup.initializeNews();
   renderCurrentDate();
   renderNewsTitles();
   activateGridView();
-  updateSubscribedNews();
-  rollingStartHandler();
+  Subscription.updateSubscribedNews();
+  hadnleRollingStart();
 };
 
-pageLogoIcon.addEventListener("click", pageReloadHandler);
-rollingContainer.addEventListener("mouseover", rollingStopHandler);
-rollingContainer.addEventListener("mouseout", rollingStartHandler);
+rollingContainer.addEventListener("mouseover", handleRollingStop);
+rollingContainer.addEventListener("mouseout", hadnleRollingStart);
