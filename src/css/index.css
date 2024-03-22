@@ -404,7 +404,7 @@ a>img {
     width: 0;
     z-index: 1;
     background:rgb(40, 86, 223);
-    animation: fill 5s;
+    animation: fill 20s;
 }
 
 @keyframes fill {
