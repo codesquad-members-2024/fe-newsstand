@@ -52,6 +52,10 @@ header {
   margin-right: 20px;
 }
 
+.press-title span {
+ color: #9c9c9c;
+}
+
 .newsgroup {
   display: flex;
   position: relative;

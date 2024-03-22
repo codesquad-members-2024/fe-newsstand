@@ -1,11 +1,9 @@
 function downloadSubscriptions() {
-  const request = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
+  // const request = {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
   return fetch("http://localhost:3000/subscriptions").then((response) =>
     response.json()
   );

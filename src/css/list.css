@@ -26,6 +26,7 @@
   span {
     position: relative;
     z-index: 2;
+    color: #7a7a7a;
   }
 }
 

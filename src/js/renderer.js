@@ -12,6 +12,10 @@ function shuffle(array) {
 }
 
 function createGrid(index) {
+  const [allMedia, subscribedMedia] = document.querySelector(".press-title").children;
+  allMedia.style.color = "black";
+  subscribedMedia.style.color = "#9c9c9c";
+
   const newsgroupGrid = document.querySelector(".newsgroup-grid");
   const newsGroupLogo = document.createElement("div");
   newsGroupLogo.classList.add("newsgroup-grid_logo");
@@ -57,6 +61,9 @@ function renderGrid(page) {
 }
 
 function createSubMediaGrid(index) {
+  const [allMedia, subscribedMedia] = document.querySelector(".press-title").children;
+  allMedia.style.color = "#9c9c9c";
+  subscribedMedia.style.color = "black";
   return downloadSubscriptions().then((items) => {
     const newsgroupGrid = document.querySelector(".newsgroup-grid");
     const newsGroupLogo = document.createElement("div");
@@ -89,8 +96,7 @@ function renderSubMediaGrid() {
 }
 
 function createList(index) {
-  const [listViewBtn, gridViewBtn] =
-    document.querySelectorAll(".view-btn > button");
+  const [listViewBtn, gridViewBtn] = document.querySelectorAll(".view-btn > button");
   listViewBtn.querySelector("img").src = "./img/list_on.png";
   gridViewBtn.querySelector("img").src = "./img/grid_off.png";
 
