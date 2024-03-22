@@ -38,7 +38,6 @@ function deleteSubscription(id) {
     },
   })
     .then((response) => {
-      console.log(id);
       if (!response.ok) {
         throw new Error("Failed");
       }

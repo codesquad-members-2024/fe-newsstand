@@ -1,5 +1,6 @@
 import { newsLogos, listCategory } from "../data/newsdata.js";
 import { clickHandler } from "./event.js";
+import { downloadSubscriptions } from "./subscription.js";
 
 const PAGE_SIZE = 24;
 const shuffleLogos = shuffle(newsLogos.flat());
@@ -31,7 +32,8 @@ function renderGrid(page) {
     timer = null;
   }
 
-  const [listViewBtn, gridViewBtn] = document.querySelectorAll(".view-btn > button");
+  const [listViewBtn, gridViewBtn] =
+    document.querySelectorAll(".view-btn > button");
   listViewBtn.querySelector("img").src = "./img/list_off.png";
   gridViewBtn.querySelector("img").src = "./img/grid_on.png";
 
@@ -54,7 +56,24 @@ function renderGrid(page) {
   }
 }
 
-function renderSubMediaGrid(page) {
+function createSubMediaGrid(index) {
+  return downloadSubscriptions().then((items) => {
+    const newsgroupGrid = document.querySelector(".newsgroup-grid");
+    const newsGroupLogo = document.createElement("div");
+    newsGroupLogo.classList.add("newsgroup-grid_logo");
+
+    if (index < items.length) {
+      const item = items[index];
+      const imgTag = `<img src="${item.imgSrc}">`;
+      const subscribeBtn = `<button class="subscribe-btn">+ 해지하기</button>`;
+      const spanTag = `<span>${subscribeBtn}</span>`;
+      newsGroupLogo.innerHTML = imgTag + spanTag;
+    }
+    newsgroupGrid.appendChild(newsGroupLogo);
+  });
+}
+
+function renderSubMediaGrid() {
   const newsgroupGrid = document.querySelector(".newsgroup-grid");
   newsgroupGrid.style.display = "";
   newsgroupGrid.innerHTML = "";
@@ -65,12 +84,13 @@ function renderSubMediaGrid(page) {
   document.querySelector(".grid-right-btn").style.visibility = "hidden";
 
   for (let index = 0; index < PAGE_SIZE; index++) {
-    createGrid(page * PAGE_SIZE + index);
+    createSubMediaGrid(index);
   }
 }
 
 function createList(index) {
-  const [listViewBtn, gridViewBtn] = document.querySelectorAll(".view-btn > button");
+  const [listViewBtn, gridViewBtn] =
+    document.querySelectorAll(".view-btn > button");
   listViewBtn.querySelector("img").src = "./img/list_on.png";
   gridViewBtn.querySelector("img").src = "./img/grid_off.png";
 
@@ -123,10 +143,9 @@ function renderList(cat) {
   createList(cat);
 
   // auto page transition
-  if (cat === listCategory.length - 1) 
+  if (cat === listCategory.length - 1)
     timer = setTimeout(() => clickHandler.listViewClick(), 5000);
-  else 
-  timer = setTimeout(() => clickHandler.listRightButtonClick(), 5000);
+  else timer = setTimeout(() => clickHandler.listRightButtonClick(), 5000);
 }
 
 export { renderGrid, renderSubMediaGrid, renderList };

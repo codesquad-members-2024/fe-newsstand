@@ -1,10 +1,6 @@
 import { newsLogos, listCategory } from "../data/newsdata.js";
 import { renderGrid, renderSubMediaGrid, renderList } from "./renderer.js";
-import {
-  uploadSubscription,
-  deleteSubscription,
-  downloadSubscriptions,
-} from "./subscription.js";
+import { uploadSubscription, deleteSubscription, downloadSubscriptions } from "./subscription.js";
 
 let currentPage = 0;
 let currentCategory = 0;
