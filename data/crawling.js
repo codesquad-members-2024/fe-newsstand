@@ -5,14 +5,16 @@ async function getPressImages(page) {
     let images = [];
     let newImages = await page.$$eval('.news_logo', elements => elements.map(element => ({
         src: element.getAttribute('src'),
-        alt: element.getAttribute('alt')
+        alt: element.getAttribute('alt'),
+        isSubscribe: false
     })));
     images.push(...newImages)
     for(let i = 0; i < 3; i++)  {
         await page.click('.ContentPagingView-module__btn_next___ZBhby');
         const newImages = await page.$$eval('.news_logo', elements => elements.map(element => ({
             src: element.getAttribute('src'),
-            alt: element.getAttribute('alt')
+            alt: element.getAttribute('alt'),
+            isSubscribe: false
         })));
         images.push(...newImages);
     }

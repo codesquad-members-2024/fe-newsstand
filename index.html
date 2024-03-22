@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>뉴스 스탠드</title>
     <link href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css" rel="stylesheet">
-
+    <script src="https://kit.fontawesome.com/240a2c8606.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="src/css/index.css">
 </head>
 <body>
@@ -35,14 +35,16 @@
             <div class="inner">
                 <div class="tab-area">
                     <div class="tab-press-list">
-                        <button role="button" class="active">전체 언론사</button>
-                        <button role="button">내가 구독한 언론사</button>
+                        <button role="button" id="pressAll" class="button-tab active">전체 언론사</button>
+                        <button role="button" id="pressSubscribe" class="button-tab">내가 구독한 언론사</button>
                     </div>
                     <div class="tab-view-type">
-                        <button role="button" class="button-tab grid active">
+                        <button role="button" class="button-tab grid active" id="buttonGrid">
+                            <i class="fa-solid fa-border-all"></i>
                             <span class="blind">그리드형</span>
                         </button>
                         <button role="button" class="button-tab">
+                            <i class="fa-solid fa-list"></i>
                             <span class="blind">리스트형</span>
                         </button>
                     </div>
@@ -50,6 +52,11 @@
                 <div id="tabViewType">
                     <div class="swiper grid tab-content">
                         <div class="swiper-container">
+                            <div class="swiper-wrapper1">
+                                <!-- 슬ㄹㅏ이드 -->
+                                <!-- 슬ㄹㅏ이드 -->
+                                <!-- 슬ㄹㅏ이드 -->
+                            </div>
                             <div class="swiper-wrapper1">
                                 <!-- 슬ㄹㅏ이드 -->
                                 <!-- 슬ㄹㅏ이드 -->

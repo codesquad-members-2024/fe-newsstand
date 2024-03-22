@@ -79,8 +79,7 @@ button {
     }
      .rolling-item {
          animation: slideUp 30s linear infinite;
-        /* animation-play-state: paused; */
-         :hover {
+         &:hover {
             animation-play-state: paused;
         }
          b {
@@ -95,12 +94,11 @@ button {
              align-items: center;
              height: 40px;
              .title {
-                 text-overflow: ellipsis;
-                 font-size: 14px;
-                 color: #666;
-                 text-overflow: ellipsis;
-                 white-space: nowrap;
-                 overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 14px;
+                color: #666;
+                white-space: nowrap;
+                overflow: hidden;
             }
         }
     }
@@ -129,16 +127,12 @@ button {
          display: flex;
          align-items: center;
          button {
-             width: 20px;
-             height: 20px;
              margin-right: 10px;
              border: none;
-             background: url('https://code-squad.s3.ap-northeast-2.amazonaws.com/list-view.png') no-repeat center / contain;
+             color:#879298;
+             font-size: 18px;
              &.active {
-                 background-color: gold;
-            }
-             &.grid {
-                 background-image: url('https://code-squad.s3.ap-northeast-2.amazonaws.com/grid-view.png');
+                color: #4362D0;
             }
         }
     }
@@ -182,21 +176,22 @@ button {
      display: grid;
      grid-template-columns: repeat(6, 1fr);
      .swiper-item {
-         position: relative;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         border-right: 1px solid #ebebeb;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px solid #ebebeb;
         border-bottom: 1px solid #ebebeb;
-            &:nth-child(6n) {
-                border-right: none;}
-            &:nth-last-child(-n+6) {
-                border-bottom: none;
-            }
-            
-         &:hover .subscribe {
-             display: flex;
-             opacity: 1;
+        &.dummy a img {opacity: 0;}
+        &:nth-child(6n) {
+            border-right: none;}
+        &:nth-last-child(-n+6) {
+            border-bottom: none;
+        }
+        &:hover .subscribe {
+            display: flex;
+            opacity: 1;
+             /* display: none; */
         }
          .subscribe {
              display: none;

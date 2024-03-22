@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node data/crawling.js"
+    "start": "node data/crawling.js",
+    "dev": "json-server --watch db.json --port 3001"
   },
   "author": "Melissa",
   "license": "ISC",
