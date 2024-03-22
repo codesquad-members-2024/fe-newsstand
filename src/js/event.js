@@ -58,10 +58,8 @@ const clickHandler = {
 };
 
 function clickEvent() {
-  const [allMedia, subscribedMedia] =
-    document.querySelector(".press-title").children;
-  const [listViewBtn, gridViewBtn] =
-    document.querySelectorAll(".view-btn > button");
+  const [allMedia, subscribedMedia] = document.querySelector(".press-title").children;
+  const [listViewBtn, gridViewBtn] = document.querySelectorAll(".view-btn > button");
   const newsgroup = document.querySelector(".newsgroup");
   const listClick = document.querySelectorAll(".newsgroup-list-category");
 

@@ -31,6 +31,10 @@ function renderGrid(page) {
     timer = null;
   }
 
+  const [listViewBtn, gridViewBtn] = document.querySelectorAll(".view-btn > button");
+  listViewBtn.querySelector("img").src = "./img/list_off.png";
+  gridViewBtn.querySelector("img").src = "./img/grid_on.png";
+
   const newsgroupGrid = document.querySelector(".newsgroup-grid");
   newsgroupGrid.style.display = "";
   newsgroupGrid.innerHTML = "";
@@ -66,6 +70,10 @@ function renderSubMediaGrid(page) {
 }
 
 function createList(index) {
+  const [listViewBtn, gridViewBtn] = document.querySelectorAll(".view-btn > button");
+  listViewBtn.querySelector("img").src = "./img/list_on.png";
+  gridViewBtn.querySelector("img").src = "./img/grid_off.png";
+
   const listTop = document.querySelector(".newsgroup-list-top");
   const listLeft = document.querySelector(".newsgroup-list-left");
   const listRight = document.querySelector(".newsgroup-list-right");
