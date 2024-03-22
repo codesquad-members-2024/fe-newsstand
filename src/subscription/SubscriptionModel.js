@@ -13,18 +13,8 @@ class SubscriptionModel {
         return [...this.subscripteList]
     }
 
-    isSubscribeGridButton(press) {
-        const hasSubscription = this.subscripteList.has(press)
-            ? `<button class = "subscribe" id = "unsubscribe" name = "${press}"> + 해지하기</button>`
-            : `<button class = "subscribe" id = "subscribe" name = "${press}"> + 구독하기</button>`;
-        return hasSubscription;
-    }
-
-    isSubscribeListButton(press) {
-        const hasSubscription = this.subscripteList.has(press)
-            ? `<button class="subscribe-btn subscribe" id = "unsubscribe" name = "${press}">x</button>`
-            : `<button class="subscribe-btn subscribe" id = "subscribe" name = "${press}">+ 구독하기</button>`;
-        return hasSubscription;
+    isSubscribe(press) {
+        return this.subscripteList.has(press)
     }
 }
 

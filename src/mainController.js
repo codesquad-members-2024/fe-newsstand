@@ -1,10 +1,13 @@
 import newsStandStateManager from "./status.js"
-import subscriptionModel from "./subscription/SubscriptionModel.js";
 import { GridViewForm } from "./Components/GridViewForm.js"
 import { ListViewForm } from "./Components/ListViewForm.js"
 import { setSubscribeEventHandler } from "./subscription/subscribeController.js";
+import subscriptionModel from "./subscription/SubscriptionModel.js";
 
 function MainController() {
+    const gridViewForm = new GridViewForm()
+    const listViewForm = new ListViewForm();
+    
     const reloadPage = () => location.reload();
 
     const updateActive = (subscribeMode, viewMode, mainContainerDisplay) => {
@@ -22,6 +25,12 @@ function MainController() {
         renderMainView()
     }
 
+    const isSubscribed = () => {
+        const subscribeList = subscriptionModel.getSubscripeList()
+        if (subscribeList.length === 0) return false
+        return true
+    }
+    
     const navigationMap = {
         SHOW_All_COMPANY(){
             const status = {isSubscribe: false, isListMode: false}
@@ -31,6 +40,7 @@ function MainController() {
             updateView(status, subscribeMode, viewMode, mainContainerDisplay)
         },
         SHOW_SUBSCRIBED_COMPANY(){
+            if(!isSubscribed()) return alert("구독한 언론사가 없습니다.")
             const status = {isSubscribe: true, isListMode: true}
             const subscribeMode = ["normal", "bold"]
             const viewMode = ["/static/ikon/list-view-on.png", "/static/ikon/grid-view-off.png"]
@@ -78,15 +88,10 @@ function MainController() {
     }
 
     const renderViewBasedOnMode = (subscribeStatus, listMode) => {
-        if(listMode === false) {
-            const gridViewForm = new GridViewForm(subscriptionModel)
-            gridViewForm.main(subscribeStatus)
-        }
-        if(listMode === true) {
-            const listViewForm = new ListViewForm(subscriptionModel);
-            listViewForm.main(subscribeStatus)
-        }
+        if(listMode === false) gridViewForm.main(subscribeStatus)
+        if(listMode === true) listViewForm.main(subscribeStatus)
     }
+
     setSubscribeEventHandler()
     setEventHandler();
     return { renderMainView, navigationMap };
