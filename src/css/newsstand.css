@@ -48,6 +48,14 @@ header {
   justify-content: space-between; /* 양 옆에 정렬 */
 }
 
+.press-title strong {
+  margin-right: 20px;
+}
+
+.press-title span {
+ color: #9c9c9c;
+}
+
 .newsgroup {
   display: flex;
   position: relative;

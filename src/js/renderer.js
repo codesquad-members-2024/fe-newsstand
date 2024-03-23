@@ -1,7 +1,10 @@
 import { newsLogos, listCategory } from "../data/newsdata.js";
+import { clickHandler } from "./event.js";
+import { downloadSubscriptions } from "./subscription.js";
 
 const PAGE_SIZE = 24;
 const shuffleLogos = shuffle(newsLogos.flat());
+let timer = null;
 
 function shuffle(array) {
   array.sort(() => Math.random() - 0.5);
@@ -9,6 +12,10 @@ function shuffle(array) {
 }
 
 function createGrid(index) {
+  const [allMedia, subscribedMedia] = document.querySelector(".press-title").children;
+  allMedia.style.color = "black";
+  subscribedMedia.style.color = "#9c9c9c";
+
   const newsgroupGrid = document.querySelector(".newsgroup-grid");
   const newsGroupLogo = document.createElement("div");
   newsGroupLogo.classList.add("newsgroup-grid_logo");
@@ -24,6 +31,16 @@ function createGrid(index) {
 }
 
 function renderGrid(page) {
+  if (timer) {
+    clearTimeout(timer);
+    timer = null;
+  }
+
+  const [listViewBtn, gridViewBtn] =
+    document.querySelectorAll(".view-btn > button");
+  listViewBtn.querySelector("img").src = "./img/list_off.png";
+  gridViewBtn.querySelector("img").src = "./img/grid_on.png";
+
   const newsgroupGrid = document.querySelector(".newsgroup-grid");
   newsgroupGrid.style.display = "";
   newsgroupGrid.innerHTML = "";
@@ -33,17 +50,56 @@ function renderGrid(page) {
   document.querySelector(".grid-left-btn").style.visibility = "visible";
   document.querySelector(".grid-right-btn").style.visibility = "visible";
 
-  for (let index = 0; index < PAGE_SIZE; index++) {
-    createGrid(page * PAGE_SIZE + index);
-  }
-
   if (page === 0)
     document.querySelector(".grid-left-btn").style.visibility = "hidden";
   else if (page === newsLogos.length - 1)
     document.querySelector(".grid-right-btn").style.visibility = "hidden";
+
+  for (let index = 0; index < PAGE_SIZE; index++) {
+    createGrid(page * PAGE_SIZE + index);
+  }
+}
+
+function createSubMediaGrid(index) {
+  const [allMedia, subscribedMedia] = document.querySelector(".press-title").children;
+  allMedia.style.color = "#9c9c9c";
+  subscribedMedia.style.color = "black";
+  return downloadSubscriptions().then((items) => {
+    const newsgroupGrid = document.querySelector(".newsgroup-grid");
+    const newsGroupLogo = document.createElement("div");
+    newsGroupLogo.classList.add("newsgroup-grid_logo");
+
+    if (index < items.length) {
+      const item = items[index];
+      const imgTag = `<img src="${item.imgSrc}">`;
+      const subscribeBtn = `<button class="subscribe-btn">+ 해지하기</button>`;
+      const spanTag = `<span>${subscribeBtn}</span>`;
+      newsGroupLogo.innerHTML = imgTag + spanTag;
+    }
+    newsgroupGrid.appendChild(newsGroupLogo);
+  });
+}
+
+function renderSubMediaGrid() {
+  const newsgroupGrid = document.querySelector(".newsgroup-grid");
+  newsgroupGrid.style.display = "";
+  newsgroupGrid.innerHTML = "";
+  document.querySelector(".newsgroup-list").style.display = "none";
+  document.querySelector(".list-left-btn").style.visibility = "hidden";
+  document.querySelector(".list-right-btn").style.visibility = "hidden";
+  document.querySelector(".grid-left-btn").style.visibility = "hidden";
+  document.querySelector(".grid-right-btn").style.visibility = "hidden";
+
+  for (let index = 0; index < PAGE_SIZE; index++) {
+    createSubMediaGrid(index);
+  }
 }
 
 function createList(index) {
+  const [listViewBtn, gridViewBtn] = document.querySelectorAll(".view-btn > button");
+  listViewBtn.querySelector("img").src = "./img/list_on.png";
+  gridViewBtn.querySelector("img").src = "./img/grid_off.png";
+
   const listTop = document.querySelector(".newsgroup-list-top");
   const listLeft = document.querySelector(".newsgroup-list-left");
   const listRight = document.querySelector(".newsgroup-list-right");
@@ -69,8 +125,6 @@ function createList(index) {
   listRight.appendChild(descDiv);
 }
 
-function moveCategory() {}
-
 function renderList(cat) {
   const newsgroupList = document.querySelector(".newsgroup-list");
   newsgroupList.style.display = "";
@@ -93,6 +147,11 @@ function renderList(cat) {
     document.querySelector(".list-right-btn").style.visibility = "hidden";
 
   createList(cat);
+
+  // auto page transition
+  if (cat === listCategory.length - 1)
+    timer = setTimeout(() => clickHandler.listViewClick(), 5000);
+  else timer = setTimeout(() => clickHandler.listRightButtonClick(), 5000);
 }
 
-export { renderGrid, renderList };
+export { renderGrid, renderSubMediaGrid, renderList };

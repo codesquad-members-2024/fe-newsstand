@@ -26,6 +26,7 @@
   span {
     position: relative;
     z-index: 2;
+    color: #7a7a7a;
   }
 }
 
@@ -64,11 +65,12 @@
 
 .newsgroup-list-area {
   margin: 0 20px;
+  height: 328px;
 }
 
 .newsgroup-list-top {
   display: flex;
-  margin: 5px 20px;
+  margin: 20px;
   align-items: center;
   span {
     margin-left: 2rem;
@@ -88,7 +90,7 @@
 
 .newsgroup-list-left {
   display: flex;
-  width: 40%;
+  width: 355px;
   flex-direction: column;
   align-items: center;
   img {

@@ -1,5 +1,6 @@
 import { newsLogos, listCategory } from "../data/newsdata.js";
-import { renderGrid, renderList } from "./renderer.js";
+import { renderGrid, renderSubMediaGrid, renderList } from "./renderer.js";
+import { uploadSubscription, deleteSubscription, downloadSubscriptions } from "./subscription.js";
 
 let currentPage = 0;
 let currentCategory = 0;
@@ -43,7 +44,7 @@ const clickHandler = {
     renderList(currentCategory);
   },
 
-  clickCat(event) {
+  clickCategory(event) {
     const listCat = event.target.closest(".newsgroup-list-category");
     listCat.classList.add("clicked");
     setTimeout(() => {
@@ -53,16 +54,19 @@ const clickHandler = {
 };
 
 function clickEvent() {
-  const [listViewBtn, gridViewBtn] =
-    document.querySelectorAll(".view-btn > button");
+  const [allMedia, subscribedMedia] = document.querySelector(".press-title").children;
+  const [listViewBtn, gridViewBtn] = document.querySelectorAll(".view-btn > button");
   const newsgroup = document.querySelector(".newsgroup");
   const listClick = document.querySelectorAll(".newsgroup-list-category");
+
+  allMedia.addEventListener("click", clickHandler.gridViewClick);
+  subscribedMedia.addEventListener("click", renderSubMediaGrid);
 
   gridViewBtn.addEventListener("click", clickHandler.gridViewClick);
   listViewBtn.addEventListener("click", clickHandler.listViewClick);
 
   listClick.forEach((button) => {
-    button.addEventListener("click", clickHandler.clickCat);
+    button.addEventListener("click", clickHandler.clickCategory);
   });
 
   newsgroup.addEventListener("click", function (event) {
@@ -89,15 +93,32 @@ function clickEvent() {
 
   document.addEventListener("click", function (event) {
     if (event.target.classList.contains("subscribe-btn")) {
-      // contains DOM에 button에 있을 때
       const subscribeBtn = event.target;
+      const newsGroupLogo = subscribeBtn.closest(".newsgroup-grid_logo");
+      const newsGroupList = subscribeBtn.closest(".newsgroup-list-top");
+
+      const view = newsGroupLogo ? newsGroupLogo : newsGroupList;
+
+      const imgElement = view.querySelector("img");
+      const imgSrc = imgElement.getAttribute("src");
+      
+      console.log(downloadSubscriptions());
+
       if (subscribeBtn.innerText === "+ 구독하기") {
         subscribeBtn.innerText = "+ 해지하기";
+        uploadSubscription(imgSrc);
       } else {
         subscribeBtn.innerText = "+ 구독하기";
+        downloadSubscriptions().then((subscriptions) => {
+          const subscription = subscriptions.find(
+            (subscription) => subscription.imgSrc === imgSrc
+          );
+          const imgId = subscription.id;
+          deleteSubscription(imgId);
+        });
       }
     }
   });
 }
 
-export default clickEvent;
+export { clickHandler, clickEvent };
